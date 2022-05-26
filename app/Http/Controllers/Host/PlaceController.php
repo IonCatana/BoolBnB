@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Host;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Place;
 
 class PlaceController extends Controller
 {
@@ -14,7 +15,10 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id; // recuperiamo id utente loggato
+
+        $places = Place::where('user_id', $user_id)->get();
+        return view('host.places.index', compact('places'));
     }
 
     /**
