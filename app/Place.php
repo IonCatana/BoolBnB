@@ -18,4 +18,8 @@ class Place extends Model
         return $this->belongsToMany('App\Sponsorship')
             ->withPivot('end_time');
     }
+    
+    public function visualisations() {
+        return $this->hasMany('App\Visualisation');
+    }
 }
