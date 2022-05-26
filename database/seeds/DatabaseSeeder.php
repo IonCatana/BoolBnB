@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SponsorshipSeeder::class,
             PlaceSeeder::class,
+            AmenitySeeder::class,
         ]);
         
     }
