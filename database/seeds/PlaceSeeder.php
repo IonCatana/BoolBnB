@@ -17,7 +17,6 @@ class PlaceSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-
         $users = User::all();
         $userId = $users->pluck('id')->all();
         $amenities = Amenity::all();
@@ -45,8 +44,9 @@ class PlaceSeeder extends Seeder
             $random_amenities = $faker->randomElements($amenityId, random_int(1, 3));
             $new_place->amenities()->attach($random_amenities);
 
-            // 1 place su 5 deve essere sponsorizzata al momento del seeding
-            if (lcg_value() < .2) {
+            // circa 1 place su 5 deve essere sponsorizzata al momento del seeding
+            define('SPONSORSHIP_PROBABILITY', .2);
+            if (lcg_value() < SPONSORSHIP_PROBABILITY) {
                 $random_sponsorship = $faker->randomElement($sponsorshipId);
                 $new_place->sponsorships()->attach($random_sponsorship);
             }
