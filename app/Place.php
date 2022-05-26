@@ -13,4 +13,9 @@ class Place extends Model
     public function amenities() {
         return $this->belongsToMany('App\Amenity');
     }
+
+    public function sponsorships() {
+        return $this->belongsToMany('App\Sponsorship')
+            ->withPivot('end_time');
+    }
 }
