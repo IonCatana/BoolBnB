@@ -28,7 +28,7 @@ class CreatePlaceSponsorshipTable extends Migration
                 ->on('sponsorships')
                 ->onDelete('cascade'); //TODO verificare
 
-            $table->timestamp('end_time');
+            $table->timestamp('end_time'); // TODO funzione che setta end_time in funzione di created_at
             $table->timestamps();
         });
     }

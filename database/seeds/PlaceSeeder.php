@@ -6,6 +6,7 @@ use App\User;
 use App\Place;
 use Illuminate\Support\Str;
 use App\Amenity;
+use App\Sponsorship;
 
 class PlaceSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class PlaceSeeder extends Seeder
         $userId = $users->pluck('id')->all();
         $amenities = Amenity::all();
         $amenityId = $amenities->pluck('id')->all();
+        $sponsorships = Sponsorship::all();
+        $sponsorshipId = $sponsorships->pluck('id')->all();
 
         for ($i = 0; $i < 10; $i++) {
             $new_place = new Place();
@@ -41,6 +44,12 @@ class PlaceSeeder extends Seeder
 
             $random_amenities = $faker->randomElements($amenityId, random_int(1, 3));
             $new_place->amenities()->attach($random_amenities);
+
+            // 1 place su 5 deve essere sponsorizzata al momento del seeding
+            if (lcg_value() < .2) {
+                $random_sponsorship = $faker->randomElement($sponsorshipId);
+                $new_place->sponsorships()->attach($random_sponsorship);
+            }
         }
     }
 }
