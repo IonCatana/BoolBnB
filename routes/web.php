@@ -20,3 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('host')
+    ->name('host.')
+    ->namespace('Host')
+    ->middleware('auth')
+    ->group(function() {
+
+        Route::resource('places', 'PlaceController');
+        Route::resource('places.messages', 'MessageController')
+            ->only('index', 'show', 'destroy');
+    });
