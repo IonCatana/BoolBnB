@@ -17,10 +17,10 @@ class CreatePlacesTable extends Migration
             $table->id();
             $table->string('title', 200)->required();
             $table->string('slug');
-            $table->tinyInteger('rooms');//TODO nullable?
-            $table->tinyInteger('beds');
-            $table->tinyInteger('bathrooms');
-            $table->smallInteger('square_meters');
+            $table->tinyInteger('rooms')->unsigned();//TODO nullable?
+            $table->tinyInteger('beds')->unsigned();
+            $table->tinyInteger('bathrooms')->unsigned();
+            $table->smallInteger('square_meters')->unsigned();
             //TODO formatazione            
             $table->string('address')->required();
             $table->decimal('lat', 8 , 6)->required();
