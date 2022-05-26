@@ -28,7 +28,7 @@ class PlaceSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $new_place = new Place();
 
-            $new_place->user_id = $faker->randomElement($userId);
+            $new_place->user_id = random_int(1,4);
             $new_place->title =  $faker->colorName();
             $new_place->slug = Str::slug($new_place->title); //TODO function
             $new_place->rooms = $faker->numberBetween(1, 10);
