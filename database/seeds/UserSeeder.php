@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+
         // SUPERUSERS (siamo noi!!)
         User::create([
             'name' => 'Antonio Bove',
@@ -41,12 +42,12 @@ class UserSeeder extends Seeder
         ]);
 
         // URA e UR
-        for ($i = 0, $i < 10, $i++) {
+        for ($i = 0; $i < 10; $i++) {
             User::create([
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make($faker->password),
-                'date_of_birth' => $faker->date('1930-m-d')
+                'date_of_birth' => $faker->dateTimeBetween('-40 years', '-20 years'),
             ]);
         }
     }
