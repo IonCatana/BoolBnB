@@ -25,7 +25,7 @@ class CreatePlaceSponsorshipTable extends Migration
             $table->unsignedBigInteger('sponsorship_id');
             $table->foreign('sponsorship_id')
                 ->references('id')
-                ->on('sponsorship')
+                ->on('sponsorships')
                 ->onDelete('cascade'); //TODO verificare
 
             $table->timestamp('end_time');
