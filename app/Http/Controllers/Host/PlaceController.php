@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Host;
 
+use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
@@ -15,9 +16,10 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id; // recuperiamo id utente loggato
-
+        // recuperiamo id utente loggato
+        $user_id = auth()->user()->id;
         $places = Place::where('user_id', $user_id)->get();
+        
         return view('host.places.index', compact('places'));
     }
 
@@ -28,7 +30,9 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        return view('host.places.create');
+        $amenities = Amenity::all();
+
+        return view('host.places.create', compact('amenities'));
     }
 
     /**
@@ -39,9 +43,22 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO validation
+        $validated = $request->validate([
+            // TODO implementare logica di validazione
+        ]);
 
-        
+        $new_place = new Place();
+        $new_place->fill($validated);
+
+        // TODO coordinate di default aspettando tomtom api
+        $new_place->lat = 0;
+        $new_place->lng = 0;
+
+        $new_place->save();
+
+        $new_place->amenities()->attach('validated[amenities]');
+
+        return redirect()->route('host.places.index');
     }
 
     /**
@@ -52,7 +69,7 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        // non la useremo
     }
 
     /**
@@ -61,9 +78,11 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Place $place)
     {
-        //
+        $amenities = Amenity::all();
+
+        return view('host.places.edit', compact('amenities'));
     }
 
     /**
@@ -73,9 +92,29 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Place $place)
     {
-        //
+        $validated = $request->validate([
+            // TODO validation logic
+        ]);
+
+        if ($validated['title'] != $place->title) {
+            $place->slug = Place::getUniqueSlug($validated['title']);
+        }
+        
+        if ($validated['address'] != $place->address) {
+            // TODO indirizzo cambiato?->cambia le coordinate
+        }
+
+        $place->fill($validated);
+        $place->update();
+
+        // verifico se bisogna agggiornare le relazioni alle amenities
+        array_key_exists('amenities', $validated)
+            ? $place->amenities()->sync($validated['amenities'])
+            : $place->amenities()->detach();
+
+        return redirect()->route('host.places.index'); // sarebbe meglio redirigere sulla show sul frontend??
     }
 
     /**
@@ -84,8 +123,10 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Place $place)
     {
-        //
+        $place->delete();
+
+        return redirect()->route('host.places.index');
     }
 }
