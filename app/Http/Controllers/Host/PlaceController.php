@@ -40,8 +40,20 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO implementare validazione lato server
-        
+        $validated_data = $request->validate([
+            // TODO implementare logica di validazione
+        ]);
+
+        $new_place = new Place();
+        $new_place->fill($validated_data);
+
+        // coordinate via tomtom api
+        $new_place->lat = 0;
+        $new_place->lng = 0;
+
+        $new_place->save();
+
+        return redirect()->route('host.places.index');
     }
 
     /**
