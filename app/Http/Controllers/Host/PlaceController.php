@@ -15,9 +15,10 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id; // recuperiamo id utente loggato
-
+        // recuperiamo id utente loggato
+        $user_id = auth()->user()->id;
         $places = Place::where('user_id', $user_id)->get();
+        
         return view('host.places.index', compact('places'));
     }
 
@@ -39,7 +40,8 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO implementare validazione lato server
+        
     }
 
     /**

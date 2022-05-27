@@ -2,10 +2,17 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
+    protected $guarded = [
+        'lat',
+        'lng',
+    ];
+
+    // relations
     public function user() {
         return $this->belongsTo('App\User');
     }
@@ -21,5 +28,23 @@ class Place extends Model
     
     public function visualisations() {
         return $this->hasMany('App\Visualisation');
+    }
+
+    // utilities
+    public static function getUniqueSlug($title) {
+        $slug_base = Str::slug($title);
+        $slug = $slug_base;
+
+        $existing_place = Place::where('slug', $slug)->first();
+
+        $count = 1;
+        while ($existing_place) {
+
+            $slug = $slug_base . '-' . $count;
+            $existing_place = Place::where('slug', $slug)->first();
+            $count++;
+        }
+        
+        return $slug;
     }
 }
