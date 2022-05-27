@@ -6,6 +6,7 @@ use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\Amenity;
 
 class PlaceController extends Controller
 {
@@ -80,9 +81,10 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        $amenities = Amenity::all();
+        $places = Place::findOrFail($place->id);
+        $amenities = Amenity::all(); //TODO query amenities places????
 
-        return view('host.places.edit', compact('amenities'));
+        return view('host.places.edit', compact('place', 'amenities'));
     }
 
     /**
