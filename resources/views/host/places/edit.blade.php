@@ -8,6 +8,8 @@
                 <form method="POST" action="{{ route('host.places.update', ['place' => $place->id]) }}">
                     @csrf
                     @method('PUT')
+
+                    {{-- Places Name --}}
                     <div class="form-group">
                         <label for="title">Titolo</label>
                         <input type="text" class="form-control" id="title" name="title"
@@ -19,8 +21,10 @@
                             </div>
                         @enderror
                     </div>
+
+                    {{-- Address Places --}}
                     <div class="form-group">
-                        <label for="title">Address</label>
+                        <label for="address">Address</label>
                         <input type="text" class="form-control" id="address" name="address"
                             value="{{ old('title', $place->address) }}">
                         {{-- Error --}}
@@ -30,6 +34,8 @@
                             </div>
                         @enderror
                     </div>
+
+                    {{-- Stanze Rooms, Beds, Bathrooms --}}
                     <div class="form-group">
                         <label for="rooms">Rooms</label>
                         <input type="text" class="form-control" id="rooms" name="rooms"
@@ -63,6 +69,8 @@
                             </div>
                         @enderror
                     </div>
+
+                    {{-- Square Meters --}}
                     <div class="form-group">
                         <label for="square_meters">Square Meters</label>
                         <input type="text" class="form-control" id="square_meters" name="square_meters"
@@ -96,6 +104,7 @@
                             </div>
                         @enderror
                     </div>
+                    
                     {{-- Chechboxes Amenities --}}
                     <div class="form-row">
                         <div class="form-group col-md-12">
