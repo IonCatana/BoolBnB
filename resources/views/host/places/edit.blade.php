@@ -45,26 +45,78 @@
                         <label for="beds">Beds</label>
                         <input type="text" class="form-control" id="beds" name="beds"
                             value="{{ old('beds', $place->beds) }}">
+                        {{-- Error --}}
+                        @error('beds')
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="bathrooms">Bathrooms</label>
                         <input type="text" class="form-control" id="bathrooms" name="bathrooms"
                             value="{{ old('bathrooms', $place->bathrooms) }}">
+                        {{-- Error --}}
+                        @error('bathrooms')
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="square_meters">Square Meters</label>
                         <input type="text" class="form-control" id="square_meters" name="square_meters"
                             value="{{ old('square_meters', $place->square_meters) }}">
+                        {{-- Error --}}
+                        @error('square_meters')
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="lat">Latitude</label>
                         <input type="text" class="form-control" id="lat" name="lat"
                             value="{{ old('lat', $place->lat) }}">
+                        {{-- Error --}}
+                        @error('lat')
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="lng">Longidute</label>
                         <input type="text" class="form-control" id="lng" name="lng"
                             value="{{ old('lng', $place->lng) }}">
+                        {{-- Error --}}
+                        @error('lng')
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        @enderror
+                    </div>
+                    {{-- Chechboxes Amenities --}}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Servizi</label>
+                            <div class="row">
+                                <?php $i = 0; ?>
+                                @foreach ($amenities as $amenity)
+                                    <?php $count = $i += 1; ?>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="amenities[]"
+                                                {{ $place->amenities->contains($amenity) ? 'checked' : '' }}value="{{ $amenity->id }}"
+                                                class="custom-control-input" id="<?php echo 'customCheck' . $count; ?>">
+                                            <label class="custom-control-label"
+                                                for="<?php echo 'customCheck' . $count; ?>">{{ $amenity->name }} <span
+                                                    class="service-icon">{!! $amenity->icon !!}</span></label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Salva</button>
                 </form>
