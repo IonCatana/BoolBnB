@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\User;
 use App\Place;
-use Illuminate\Support\Str;
 use App\Amenity;
 use App\Sponsorship;
 
@@ -30,7 +29,7 @@ class PlaceSeeder extends Seeder
 
             $new_place->user_id = random_int(1,4);
             $new_place->title =  $faker->colorName();
-            $new_place->slug = Str::slug($new_place->title); //TODO function
+            $new_place->slug = Place::getUniqueSlug($new_place->title);
             $new_place->rooms = $faker->numberBetween(1, 10);
             $new_place->beds = $faker->numberBetween(1, 4);
             $new_place->bathrooms = $faker->numberBetween(1, 5);
