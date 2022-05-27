@@ -28,7 +28,7 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        return view('host.places.create');
     }
 
     /**
@@ -39,7 +39,9 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //TODO validation
+
+        
     }
 
     /**
