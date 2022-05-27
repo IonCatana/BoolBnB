@@ -10,14 +10,14 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
+    {
         $this->call([
             UserSeeder::class,
             SponsorshipSeeder::class,
             AmenitySeeder::class,
             PlaceSeeder::class,
-            
+            MessageSeeder::class
+
         ]);
-        
     }
 }
