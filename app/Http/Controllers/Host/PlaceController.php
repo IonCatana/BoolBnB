@@ -65,9 +65,10 @@ class PlaceController extends Controller
         $new_place->lng = 0;
         $new_place->save();
 
-        array_key_exists('amenities', $validated)
-            ? $new_place->amenities()->attach($validated['amenities'])
-            : $new_place->amenities()->attach([]);
+        // ho corretto perche nel caso non ci fossero amenities non facciamo niente
+        if (array_key_exists('amenities', $validated)) {
+            $new_place->amenities()->attach($validated['amenities']);
+        }
 
         return redirect()->route('host.places.index');
     }
@@ -91,7 +92,6 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        $places = Place::findOrFail($place->id);
         $amenities = Amenity::all(); //TODO query amenities places????
         $place->load('amenities');
 
@@ -114,7 +114,8 @@ class PlaceController extends Controller
             'beds' => 'nullable|numeric|min:1|max:4',
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
-            'address' => 'required|max:255'
+            'address' => 'required|max:255',
+            'amenities.*' => 'nullable|exists:amenities,id'
         ]);
 
         if ($validated['title'] != $place->title) {

@@ -116,7 +116,7 @@
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="amenities[]"
-                                                {{ $place->amenities->contains($amenity) ? 'checked' : '' }}value="{{ $amenity->id }}"
+                                                {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
                                                 class="custom-control-input" id="<?php echo 'customCheck' . $count; ?>">
                                             <label class="custom-control-label"
                                                 for="<?php echo 'customCheck' . $count; ?>">{{ $amenity->name }} <span
