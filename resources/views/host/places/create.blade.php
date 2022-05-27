@@ -47,28 +47,11 @@
             @enderror
         </div>
 
-        {{-- indirizzo completo con lat e lng --}}
-        {{-- //TODO implementare tomtom --}}
+        {{-- indirizzo --}}
         <div class="form-group">
             <label for="address">Address</label>
             <input id="address" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
             @error('address')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="lat">Latitude</label>
-            <input id="lat" type="number" class="form-control @error('signs-file') is-invalid @enderror" id="lat" name="lat" placeholder="Address' latitude" value="{{ old('lat') }}">
-            @error('lat')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="lng">Longitude</label>
-            <input id="lng" type="number" class="form-control @error('signs-file') is-invalid @enderror" id="lng" name="lng" placeholder="Address' longitude" value="{{ old('lng') }}">
-            @error('lng')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

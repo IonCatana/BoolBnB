@@ -82,30 +82,10 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="lat">Latitude</label>
-                        <input type="text" class="form-control" id="lat" name="lat"
-                            value="{{ old('lat', $place->lat) }}">
-                        {{-- Error --}}
-                        @error('lat')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="lng">Longidute</label>
-                        <input type="text" class="form-control" id="lng" name="lng"
-                            value="{{ old('lng', $place->lng) }}">
-                        {{-- Error --}}
-                        @error('lng')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    
                     
                     {{-- Chechboxes Amenities --}}
+                    {{-- //TODO da rivedere quando possiamo --}}
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Servizi</label>
