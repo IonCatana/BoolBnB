@@ -4,7 +4,10 @@
     <div>ciao sono index</div>
     <ul>
       @foreach ($places as $place )
-        <li>{{$place->title}}</li>
+        <li>
+          <div>{{$place->title}}</div>
+          <div>{{ $place->id }}</div>
+        </li>
       @endforeach
     </ul>
 @endsection

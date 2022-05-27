@@ -6,7 +6,6 @@ use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
-use App\Amenity;
 
 class PlaceController extends Controller
 {
@@ -83,6 +82,7 @@ class PlaceController extends Controller
     {
         $places = Place::findOrFail($place->id);
         $amenities = Amenity::all(); //TODO query amenities places????
+        $place->load('amenities');
 
         return view('host.places.edit', compact('place', 'amenities'));
     }
@@ -96,8 +96,10 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
+        // TODO more validation logic
         $validated = $request->validate([
-            // TODO validation logic
+            'title' => 'required|max:200',
+            'address' => 'required|max:255'
         ]);
 
         if ($validated['title'] != $place->title) {
