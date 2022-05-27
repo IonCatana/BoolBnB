@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('host.places.store') }}" method="POST" class="container px-5 justify-content md-12">
+    <form name="datas" action="{{ route('host.places.store') }}" method="POST" class="container px-5 justify-content md-12">
         @csrf
 
         {{-- titolo --}}
@@ -95,6 +95,18 @@
                 <option value="false" {{ !old('visible') ?: 'selected'}}>No</option>
             </select>
         </div>
+
+        {{-- upload img --}}
+        <form action="upload" method="POST" name="img-upload" enctype="multipart/form-data" class="form-group bg-white mb-4">
+            @csrf
+            <label for="img">Upload an image of your appartment</label>
+            <input id="img" type="file" name="img" class="@error('signs-file') is-invalid @enderror">
+            <input id="img" type="submit" name="img">
+
+            @error('img')
+                {{ $message }}                
+            @enderror
+        </form>
 
         {{-- submit button --}}
         <button type="submit">Add places</button>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller
 {
@@ -59,6 +60,9 @@ class PlaceController extends Controller
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
+
+        //upload img
+        $img_path = Storage::put('uploads', $validated['img']);
 
         // TODO coordinate di default aspettando tomtom api
         $new_place->lat = 0;
