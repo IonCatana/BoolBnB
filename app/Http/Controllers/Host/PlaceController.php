@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Host;
 
+use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
@@ -29,7 +30,9 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        $amenities = Amenity::all();
+
+        return view('host.places.create', compact('amenities'));
     }
 
     /**
@@ -47,7 +50,7 @@ class PlaceController extends Controller
         $new_place = new Place();
         $new_place->fill($validated_data);
 
-        // coordinate via tomtom api
+        // TODO coordinate di default aspettando tomtom api
         $new_place->lat = 0;
         $new_place->lng = 0;
 
