@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Host;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\Amenity;
 
 class PlaceController extends Controller
 {
@@ -41,7 +42,7 @@ class PlaceController extends Controller
     {
         //TODO validation
 
-        
+
     }
 
     /**
@@ -61,9 +62,12 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Place $place)
     {
-        //
+        $places = Place::findOrFail($place->id);
+        $amenities = Amenity::all(); //TODO query amenities places????
+
+        return view('host.places.edit', compact('place', 'amenities'));
     }
 
     /**
@@ -73,9 +77,10 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Place $place)
     {
-        //
+        //TODO Validation
+      
     }
 
     /**
