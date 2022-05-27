@@ -7,45 +7,45 @@
         {{-- titolo --}}
         <div class="form-group">
             <label for="title">Denomination</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter a descriptive title">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
         </div>
 
         {{-- numero di stanze, letti, bagni e metri quadri --}}
         <div class="form-group">
             <label for="rooms">Number of rooms</label>
-            <input type="number" class="form-control" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has">
+            <input type="number" class="form-control" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
         </div>
 
         <div class="form-group">
             <label for="beds">Number of beds</label>
-            <input type="number" class="form-control" id="beds" name="beds" placeholder="Enter how many beds the apartment has">
+            <input type="number" class="form-control" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
         </div>
 
         <div class="form-group">
             <label for="bathrooms">Number of bathrooms</label>
-            <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has">
+            <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
         </div>
 
         <div class="form-group">
             <label for="square_meters">Square meters</label>
-            <input type="number" class="form-control" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is">
+            <input type="number" class="form-control" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
         </div>
 
         {{-- indirizzo completo con lat e lng --}}
         {{-- //TODO implementare tomtom --}}
         <div class="form-group">
             <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="Indirizzo">
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
         </div>
 
         <div class="form-group">
             <label for="lat">Latitude</label>
-            <input type="number" class="form-control" id="lat" name="lat" placeholder="Latitudine">
+            <input type="number" class="form-control" id="lat" name="lat" placeholder="Address' latitude" value="{{ old('lat') }}">
         </div>
 
         <div class="form-group">
             <label for="lng">Longitude</label>
-            <input type="number" class="form-control" id="lng" name="lng" placeholder="Longitudine">
+            <input type="number" class="form-control" id="lng" name="lng" placeholder="Address' longitude" value="{{ old('lng') }}">
         </div>
 
         {{-- //TODO upload dell'immagine? --}}
@@ -66,8 +66,8 @@
             <label for="visible">Select an option</label>
             <select class="form-select" aria-label="Default select example" name="visible" id="visible">
                 <option selected value="">Select an option</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true" {{ old('visible') ?: "selected"}}>Yes</option>
+                <option value="false" {{ !old('visible') ?: "selected"}}>No</option>
             </select>
         </div>
 
