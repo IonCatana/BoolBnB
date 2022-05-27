@@ -91,8 +91,8 @@
             <label for="visible">Select an option</label>
             <select class="form-select" aria-label="Default select example" name="visible" id="visible">
                 <option selected value="">Select an option</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true" {{ old('visible') ?: 'selected'}}>Yes</option>
+                <option value="false" {{ !old('visible') ?: 'selected'}}>No</option>
             </select>
         </div>
 

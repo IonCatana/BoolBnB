@@ -65,14 +65,9 @@ class PlaceController extends Controller
         $new_place->lng = 0;
         $new_place->save();
 
-        if( array_key_exists('tags', $validated) ){
-            
-            $new_place->amenities()->attach($validated['amenities']); 
-
-        }else{
-
-            $new_place->amenities()->attach([]);
-        }
+        array_key_exists('amenities', $validated)
+            ? $new_place->amenities()->attach($validated['amenities'])
+            : $new_place->amenities()->attach([]);
 
         return redirect()->route('host.places.index');
     }
