@@ -6,6 +6,7 @@ use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\User;
 
 class PlaceController extends Controller
 {
@@ -41,22 +42,37 @@ class PlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
+
         $validated = $request->validate([
-            // TODO implementare logica di validazione
+            'title' => 'required|max:200',
+            'rooms' => 'nullable|numeric|min:1|max:10',
+            'beds' => 'nullable|numeric|min:1|max:4',
+            'bathrooms' => 'nullable|numeric|min:1|max:5',
+            'square_meters' => 'nullable|numeric|min:30|max:200',
+            'address' => 'required|max:255',
+            //TODO immagine da validare?
         ]);
 
         $new_place = new Place();
         $new_place->fill($validated);
+        $new_place->user_id = auth()->user()->id;
+        $new_place->slug = Place::getUniqueSlug($validated['title']);
 
         // TODO coordinate di default aspettando tomtom api
         $new_place->lat = 0;
         $new_place->lng = 0;
-
         $new_place->save();
 
-        $new_place->amenities()->attach('validated[amenities]');
+        if( array_key_exists('tags', $validated) ){
+            
+            $new_place->amenities()->attach($validated['amenities']); 
+
+        }else{
+
+            $new_place->amenities()->attach([]);
+        }
 
         return redirect()->route('host.places.index');
     }
@@ -96,9 +112,13 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        // TODO more validation logic
+
         $validated = $request->validate([
             'title' => 'required|max:200',
+            'rooms' => 'nullable|numeric|min:1|max:10',
+            'beds' => 'nullable|numeric|min:1|max:4',
+            'bathrooms' => 'nullable|numeric|min:1|max:5',
+            'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255'
         ]);
 

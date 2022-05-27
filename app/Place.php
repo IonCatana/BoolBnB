@@ -47,4 +47,5 @@ class Place extends Model
         
         return $slug;
     }
+
 }
