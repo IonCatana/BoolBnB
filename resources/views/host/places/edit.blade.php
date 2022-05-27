@@ -30,7 +30,7 @@
                         {{-- Error --}}
                         @error('address')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -43,7 +43,7 @@
                         {{-- Error --}}
                         @error('rooms')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -54,7 +54,7 @@
                         {{-- Error --}}
                         @error('beds')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -65,7 +65,7 @@
                         {{-- Error --}}
                         @error('bathrooms')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -78,7 +78,7 @@
                         {{-- Error --}}
                         @error('square_meters')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -89,7 +89,7 @@
                         {{-- Error --}}
                         @error('lat')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -100,7 +100,7 @@
                         {{-- Error --}}
                         @error('lng')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
