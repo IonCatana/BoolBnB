@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('host.places.store') }}" method="POST">
+    <form action="{{ route('host.places.store') }}" method="POST" class="container px-5 justify-content md-12">
         @csrf
 
         {{-- titolo --}}
@@ -51,13 +51,13 @@
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
-        {{-- //TODO passare alla view lista di amenities --}}
+        {{-- //TODO check  --}}
         <div class="form-group form-check form-check-inline">
-            {{-- foreach --}}
-            <input class="form-check-input" type="checkbox" id="{{amenities-id}}" value="{{ amenities-id }}" id="{{ amenities-id }}" name="amenities[]" />
-                 {{-- {{ (is_array(old('tags')) && in_array($tag->id, old('tags'))) ? ' checked' : '' }} --}}
-            <label class="form-check-label" for="{{amenities}}">{{Amenities name}}</label>
-            {{-- endforeach --}}
+            @foreach ($amenities as $amenity)
+                <input class="form-check-input" type="checkbox" id="amenities-{{ $amenity->id }}" value="amenities-{{ $amenity->id }}" name="amenities[]" 
+                {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
+                <label class="form-check-label" for="amenities-{{ $amenity->id }}">{{ $amenity->name }}</label>
+            @endforeach
         </div>
 
         {{-- pubblicazione --}}
