@@ -69,7 +69,7 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        // non la useremo
+        // TODO e se invece ci mettessimo le statistiche anziché creare una rotta custom?
     }
 
     /**
