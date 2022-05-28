@@ -90,17 +90,16 @@
                         <div class="form-group col-md-12">
                             <label>Servizi</label>
                             <div class="row">
-                                <?php $i = 0; ?>
-                                @foreach ($amenities as $amenity)
-                                    <?php $count = $i += 1; ?>
+                                @foreach ($amenities as $i => $amenity)
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="amenities[]"
                                                 {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
-                                                class="custom-control-input" id="<?php echo 'customCheck' . $count; ?>">
+                                                class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
+                                                {{-- //TODO install icons dependencies --}}
                                             <label class="custom-control-label"
-                                                for="<?php echo 'customCheck' . $count; ?>">{{ $amenity->name }} <span
-                                                    class="service-icon">{!! $amenity->icon !!}</span></label>
+                                                for="{{ 'custom_check' . '_' . $i }}">{{ $amenity->name }}<i class="{{ $amenity->icon }}"></i>
+                                            </label>
                                         </div>
                                     </div>
                                 @endforeach

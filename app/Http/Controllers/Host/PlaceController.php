@@ -67,9 +67,9 @@ class PlaceController extends Controller
         $new_place->save();
 
         // ho corretto perche nel caso non ci fossero amenities non facciamo niente
-        if (array_key_exists('amenities', $validated)) {
+        // if (array_key_exists('amenities', $validated)) {
             $new_place->amenities()->attach($validated['amenities']);
-        }
+        // }
 
         return redirect()->route('host.places.index');
     }
