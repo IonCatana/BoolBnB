@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,7 @@ Route::prefix('host')
         Route::resource('places.messages', 'MessageController')
             ->only('index', 'show', 'destroy');
     });
+
+Route::options('/{path}', function(){ 
+    return '';
+})->where('path', '.*');

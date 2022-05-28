@@ -49837,8 +49837,9 @@ try {
  */
 
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // questo header ci generava errori CORS nelle chiamate a API esterne
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -49934,10 +49935,30 @@ __webpack_require__.r(__webpack_exports__);
 var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
     Axios = _require["default"];
 
+var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
+
+function fetchCoordinates(event) {
+  var query = encodeURIComponent(event.target.value);
+  Axios.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
+    params: {
+      'key': TOMTOM_API_KEY
+    }
+  }).then(function (res) {
+    var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
+    // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
+
+    var _results$0$position = results[0].position,
+        lat = _results$0$position.lat,
+        lon = _results$0$position.lon;
+    console.log(lat, lon);
+  })["catch"](function (err) {
+    console.log(err);
+  });
+}
+
 var address = document.getElementById('address');
-address.addEventListener('focusout', function (e) {
-  Axios.get('https://api.tomtom.com/search/2/geocode/9390 santa monica boulevard beverly hills california los angeles.json?key=yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj');
-}); // &storeResult={storeResult}&typeahead={typeahead}&limit={limit}&ofs={ofs}&lat={lat}&lon={lon}&countrySet={countrySet}&radius={radius}&topLeft={topLeft}&btmRight={btmRight}&language={language}&extendedPostalCodesFor={extendedPostalCodesFor}&view={view}&mapcodes={mapcodes}&entityTypeSet={entityTypeSet}
+address.addEventListener('focusout', fetchCoordinates); // TODO parte anche quando si schiaccia enter
+// address.addEventListener('keypress', fetchCoordinates);
 
 /***/ }),
 
