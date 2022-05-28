@@ -61,10 +61,10 @@
         {{-- servizi --}}
         {{-- //TODO check  --}}
         <div class="form-group form-check form-check-inline">
-            @foreach ($amenities as $amenity)
-                <input class="form-check-input" type="checkbox" id="amenities-{{ $amenity->id }}" value="amenities-{{ $amenity->id }}" name="amenities[]" 
+            @foreach ($amenities as $i => $amenity)
+                <input class="form-check-input" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[{{ $i }}]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="amenities-{{ $amenity->id }}">{{ $amenity->name }}</label>
+                <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
             @endforeach
         </div>
 

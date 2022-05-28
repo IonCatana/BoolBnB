@@ -36,6 +36,7 @@
                         <td>{{ $place->square_meters }}</td>
                         <td>
                             @foreach ($place->amenities as $item)
+                            {{-- //TODO mettiamoci le icone al posto del amenity->name --}}
                                 {{ $item->name }}
                             @endforeach
                         </td>
