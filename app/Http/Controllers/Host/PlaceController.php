@@ -53,13 +53,18 @@ class PlaceController extends Controller
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
             'amenities.*' => 'nullable|exists:amenities,id',
-            //TODO immagine da validare?
+            'img' => 'nullable|mime:jpg' //ho messo che il formato che può prendere è jpg ma possiamo aggiungerne altri 
         ]);
 
         $new_place = new Place();
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
+
+        if($request['place-img']){
+            $img_path = Storage::put('uploads', $request['place-img']);
+            $new_place->img = $img_path;
+        }
 
         // TODO coordinate di default aspettando tomtom api
         $new_place->lat = 0;
@@ -68,8 +73,12 @@ class PlaceController extends Controller
 
         // ho corretto perche nel caso non ci fossero amenities non facciamo niente
         // if (array_key_exists('amenities', $validated)) {
-            $new_place->amenities()->attach($validated['amenities']);
+            // $new_place->amenities()->attach($validated['amenities']);
         // }
+        //TODO ho rimesso questo perché se lascio la correzione non riesco a inviare il form per provarlo... comunque poi la rivediamo e sistemiamo
+        if (array_key_exists('amenities', $validated)) {
+            $new_place->amenities()->attach($validated['amenities']);
+        }
 
         return redirect()->route('host.places.index');
     }
