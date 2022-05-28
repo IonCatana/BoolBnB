@@ -21,13 +21,13 @@ class CreateAmenityPlaceTable extends Migration
             $table->foreign('place_id')
                 ->references('id')
                 ->on('places')
-                ->onDelete('no action'); // TODO da verificare
+                ->onDelete('cascade'); // TODO da verificare
 
             $table->unsignedBigInteger('amenity_id');
             $table->foreign('amenity_id')
                 ->references('id')
                 ->on('amenities')
-                ->onDelete('no action');
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

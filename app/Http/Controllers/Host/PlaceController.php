@@ -52,6 +52,7 @@ class PlaceController extends Controller
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
+            'amenities.*' => 'nullable|exists:amenities,id',
             //TODO immagine da validare?
         ]);
 
