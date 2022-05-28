@@ -19,6 +19,7 @@
                 <th>Bathrooms</th>
                 <th>Square Meters</th>
                 <th>Amenities</th>
+                <th>Image</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -39,6 +40,9 @@
                             {{-- //TODO mettiamoci le icone al posto del amenity->name --}}
                                 {{ $item->name }}
                             @endforeach
+                        </td>
+                        <td>
+                            <img class="w-75" src="{{ asset('storage/' . $place->img)}}" alt="">
                         </td>
                         <td><a href="{{ route('host.places.show', $place) }}" class="btn btn-info">Show statistics</a>
                         </td>

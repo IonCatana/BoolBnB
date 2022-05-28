@@ -68,6 +68,11 @@
             @endforeach
         </div>
 
+        {{-- upload dell'immagine --}}
+        <div class="form-group">
+            <input type="file" name="place-img">
+        </div>
+
         {{-- pubblicazione --}}
         {{-- //TODO select o button? --}}
         <div class="form-group">
