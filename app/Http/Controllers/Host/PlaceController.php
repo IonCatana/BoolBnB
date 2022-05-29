@@ -52,24 +52,24 @@ class PlaceController extends Controller
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
-            'amenities.*' => 'nullable|exists:amenities,id',
+            'lat' => 'required|numeric|min:-90|max:90',
+            'lon' => 'required|numeric|min:-180|max:180',
+            'amenities.*' => 'nullable|exists:amenities,id|array',
             //TODO immagine da validare?
         ]);
 
         $new_place = new Place();
+
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
 
-        // TODO coordinate di default aspettando tomtom api
-        $new_place->lat = 0;
-        $new_place->lng = 0;
         $new_place->save();
 
         // ho corretto perche nel caso non ci fossero amenities non facciamo niente
-        // if (array_key_exists('amenities', $validated)) {
+        if (array_key_exists('amenities', $validated)) {
             $new_place->amenities()->attach($validated['amenities']);
-        // }
+        }
 
         return redirect()->route('host.places.index');
     }
