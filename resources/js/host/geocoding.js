@@ -22,8 +22,10 @@ function fetchCoordinates(query) {
       // TODO usiamo il primo risultato che di solito è il più preciso
       // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
       const position = results[0].position;
-
-      return position;
+      
+      // assegno i valori ai campi corrispondenti nell'html
+      latitude.value = position.lat;
+      longitude.value = position.lon;
     })
     .catch(err => {
       console.log(err);
@@ -31,23 +33,23 @@ function fetchCoordinates(query) {
 }
 
 
-let position;
 const address = document.getElementById('address');
+const latitude = document.getElementById('latitude');
+const longitude = document.getElementById('longitude');
 
 // quando si toglie il focus dall'input
 address.addEventListener('focusout', e => {
-  console.log(e)
   const query = encodeURIComponent(e.target.value);
-  position = fetchCoordinates(query)
+  fetchCoordinates(query);
 });
 
 // quando si preme enter sull'input
 address.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
-    console.log(e)
-    // e.target.preventDefault();
     const query = encodeURIComponent(e.target.value);
-    position = fetchCoordinates(query);
+    fetchCoordinates(query);
   }
 });
+
+
 

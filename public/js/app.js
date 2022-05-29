@@ -49957,28 +49957,28 @@ function fetchCoordinates(query) {
     var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
     // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
 
-    var position = results[0].position;
-    return position;
+    var position = results[0].position; // assegno i valori ai campi corrispondenti nell'html
+
+    latitude.value = position.lat;
+    longitude.value = position.lon;
   })["catch"](function (err) {
     console.log(err);
   });
 }
 
-var position;
-var address = document.getElementById('address'); // quando si toglie il focus dall'input
+var address = document.getElementById('address');
+var latitude = document.getElementById('latitude');
+var longitude = document.getElementById('longitude'); // quando si toglie il focus dall'input
 
 address.addEventListener('focusout', function (e) {
-  console.log(e);
   var query = encodeURIComponent(e.target.value);
-  position = fetchCoordinates(query);
+  fetchCoordinates(query);
 }); // quando si preme enter sull'input
 
 address.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
-    console.log(e); // e.target.preventDefault();
-
     var query = encodeURIComponent(e.target.value);
-    position = fetchCoordinates(query);
+    fetchCoordinates(query);
   }
 });
 

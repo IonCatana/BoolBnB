@@ -7,11 +7,31 @@
         {{-- titolo --}}
         <div class="form-group">
             <label for="title">Denomination</label>
-            <input id="title" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
+            <input required id="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
 
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror 
+        </div>
+
+        {{-- indirizzo --}}
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input required id="address" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
+            @error('address')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly>
+                </div>
+                <div class="col">
+                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly>
+                </div>
+            </div>
         </div>
 
         {{-- numero di stanze, letti, bagni e metri quadri --}}
@@ -47,15 +67,6 @@
             @enderror
         </div>
 
-        {{-- indirizzo --}}
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input id="address" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
-            @error('address')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
@@ -80,6 +91,6 @@
         </div>
 
         {{-- submit button --}}
-        <button type="submit">Add places</button>
+        <button id="form-submit-button" type="submit">Add places</button>
     </form>
 @endsection
