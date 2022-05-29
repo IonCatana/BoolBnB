@@ -1,12 +1,16 @@
-const createInputs = document.querySelectorAll('input');
-addEventListener('keypress', e => {
-  e.preventDefault();
+const formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(input => {
+  input.addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+      const form = e.target.closest('form');
+      // console.log(e)
+      e.preventDefault();
+    }
+  })
 })
 
-const { default: Axios } = require("axios");
+import Axios from "axios";
 const TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
-
-const position = {};
 
 function fetchCoordinates(query) {
   Axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
@@ -17,8 +21,7 @@ function fetchCoordinates(query) {
       
       // TODO usiamo il primo risultato che di solito è il più preciso
       // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
-      position = results[0].position;
-      console.log(position);
+      const position = results[0].position;
 
       return position;
     })
@@ -28,19 +31,22 @@ function fetchCoordinates(query) {
 }
 
 
-
+let position;
 const address = document.getElementById('address');
 
 // quando si toglie il focus dall'input
 address.addEventListener('focusout', e => {
-  const query = encodeURIComponent(query.target.value);
+  console.log(e)
+  const query = encodeURIComponent(e.target.value);
   position = fetchCoordinates(query)
 });
 
 // quando si preme enter sull'input
 address.addEventListener('keypress', e => {
-  if (e.key === 'enter') {
-    const query = encodeURIComponent(query.target.value);
+  if (e.key === 'Enter') {
+    console.log(e)
+    // e.target.preventDefault();
+    const query = encodeURIComponent(e.target.value);
     position = fetchCoordinates(query);
   }
 });

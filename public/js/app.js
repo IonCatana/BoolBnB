@@ -49771,7 +49771,6 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
-/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49929,24 +49928,28 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./resources/js/host/geocoding.js ***!
   \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      var form = e.target.closest('form'); // console.log(e)
 
-var createInputs = document.querySelectorAll('input');
-addEventListener('keypress', function (e) {
-  e.preventDefault();
+      e.preventDefault();
+    }
+  });
 });
 
-var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
-    Axios = _require["default"];
-
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
-var position = {};
 
 function fetchCoordinates(query) {
-  Axios.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
     params: {
       'key': TOMTOM_API_KEY
     }
@@ -49954,25 +49957,28 @@ function fetchCoordinates(query) {
     var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
     // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
 
-    results[0].position, _readOnlyError("position");
-    console.log(position);
+    var position = results[0].position;
     return position;
   })["catch"](function (err) {
     console.log(err);
   });
 }
 
+var position;
 var address = document.getElementById('address'); // quando si toglie il focus dall'input
 
 address.addEventListener('focusout', function (e) {
-  var query = encodeURIComponent(query.target.value);
-  fetchCoordinates(query), _readOnlyError("position");
+  console.log(e);
+  var query = encodeURIComponent(e.target.value);
+  position = fetchCoordinates(query);
 }); // quando si preme enter sull'input
 
 address.addEventListener('keypress', function (e) {
-  if (e.key === 'enter') {
-    var query = encodeURIComponent(query.target.value);
-    fetchCoordinates(query), _readOnlyError("position");
+  if (e.key === 'Enter') {
+    console.log(e); // e.target.preventDefault();
+
+    var query = encodeURIComponent(e.target.value);
+    position = fetchCoordinates(query);
   }
 });
 
