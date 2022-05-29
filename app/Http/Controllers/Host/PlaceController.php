@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller
 {
@@ -53,16 +54,20 @@ class PlaceController extends Controller
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
             'amenities.*' => 'nullable|exists:amenities,id',
-            'img' => 'nullable|mime:jpg' //ho messo che il formato che può prendere è jpg ma possiamo aggiungerne altri 
+            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
+            //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
+            //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
+
+        // dd($request['img']);
 
         $new_place = new Place();
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
 
-        if($request['place-img']){
-            $img_path = Storage::put('uploads', $request['place-img']);
+        if($validated['img']){
+            $img_path = Storage::put('uploads', $validated['img']);
             $new_place->img = $img_path;
         }
 

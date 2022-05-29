@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('host.places.store') }}" method="POST" class="container px-5 justify-content md-12">
+    <form action="{{ route('host.places.store') }}" method="POST" enctype="multipart/form-data" class="container px-5 justify-content md-12">
         @csrf
 
         {{-- titolo --}}
         <div class="form-group">
             <label for="title">Denomination</label>
-            <input id="title" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
+            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
 
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -17,7 +17,7 @@
         {{-- numero di stanze, letti, bagni e metri quadri --}}
         <div class="form-group">
             <label for="rooms">Number of rooms</label>
-            <input id="rooms" type="number" class="form-control @error('signs-file') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
+            <input id="rooms" type="number" class="form-control @error('rooms') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
             @error('rooms')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label for="beds">Number of beds</label>
-            <input id="beds" type="number" class="form-control @error('signs-file') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
+            <input id="beds" type="number" class="form-control @error('beds') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
             @error('beds')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -33,7 +33,7 @@
 
         <div class="form-group">
             <label for="bathrooms">Number of bathrooms</label>
-            <input id="bathrooms" type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
+            <input id="bathrooms" type="number" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
             @error('bathrooms')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <label for="square_meters">Square meters</label>
-            <input id="square_meters" type="number" class="form-control @error('signs-file') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
+            <input id="square_meters" type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
             @error('square_meters')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -50,13 +50,11 @@
         {{-- indirizzo --}}
         <div class="form-group">
             <label for="address">Address</label>
-            <input id="address" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
+            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-
-        {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
         {{-- //TODO check  --}}
@@ -70,7 +68,11 @@
 
         {{-- upload dell'immagine --}}
         <div class="form-group">
-            <input type="file" name="place-img">
+            {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
+            <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            @error('img')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         {{-- pubblicazione --}}
