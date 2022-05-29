@@ -49932,13 +49932,20 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
+
+var createInputs = document.querySelectorAll('input');
+addEventListener('keypress', function (e) {
+  e.preventDefault();
+});
+
 var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
     Axios = _require["default"];
 
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
+var position = {};
 
-function fetchCoordinates(event) {
-  var query = encodeURIComponent(event.target.value);
+function fetchCoordinates(query) {
   Axios.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
     params: {
       'key': TOMTOM_API_KEY
@@ -49947,18 +49954,27 @@ function fetchCoordinates(event) {
     var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
     // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
 
-    var _results$0$position = results[0].position,
-        lat = _results$0$position.lat,
-        lon = _results$0$position.lon;
-    console.log(lat, lon);
+    results[0].position, _readOnlyError("position");
+    console.log(position);
+    return position;
   })["catch"](function (err) {
     console.log(err);
   });
 }
 
-var address = document.getElementById('address');
-address.addEventListener('focusout', fetchCoordinates); // TODO parte anche quando si schiaccia enter
-// address.addEventListener('keypress', fetchCoordinates);
+var address = document.getElementById('address'); // quando si toglie il focus dall'input
+
+address.addEventListener('focusout', function (e) {
+  var query = encodeURIComponent(query.target.value);
+  fetchCoordinates(query), _readOnlyError("position");
+}); // quando si preme enter sull'input
+
+address.addEventListener('keypress', function (e) {
+  if (e.key === 'enter') {
+    var query = encodeURIComponent(query.target.value);
+    fetchCoordinates(query), _readOnlyError("position");
+  }
+});
 
 /***/ }),
 
