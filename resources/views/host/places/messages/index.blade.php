@@ -2,7 +2,7 @@
 
 @section('content')
     
-    @dd($place);
+    {{-- @dd($place); --}}
 
     {{-- tabella riepilogativa dei places dell'user loggato --}}
     <div class="container">
@@ -34,7 +34,7 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-info" href="{{ route('host.places.messages.show', $msg) }}"> Vedi messaggio</a>
+                            {{-- <a class="btn btn-info" href="{{ route('host.places.messages.show', $place, $msg) }}"> Vedi messaggio</a> --}}
                         </td>
                         <td>
                             {{-- <form class="form-group" action="{{ route('host.places.messages.destroy', $msg) }}"
