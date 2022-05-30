@@ -110,12 +110,13 @@ class PlaceController extends Controller
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
+            'lat' => 'required|numeric|min:-90|max:90',
+            'lon' => 'required|numeric|min:-180|max:180',
             'amenities.*' => 'nullable|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,png,jpg' 
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
-        // dd($validated);
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
