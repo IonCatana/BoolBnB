@@ -28,7 +28,7 @@ Route::prefix('host')
     ->middleware('auth')
     ->group(function() {
 
-        Route::resource('places', 'PlaceController');
+        Route::resource('places', 'PlaceController'); // TODO parametro slug in url ??
         Route::resource('places.messages', 'MessageController')
             ->only('index', 'show', 'destroy');
     });

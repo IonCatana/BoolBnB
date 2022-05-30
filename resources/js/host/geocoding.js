@@ -1,9 +1,9 @@
+// TODO trovargli un'altra casa :)
 const formInputs = document.querySelectorAll('.form-control');
 formInputs.forEach(input => {
   input.addEventListener('keypress', e => {
     if (e.key === 'Enter') {
-      const form = e.target.closest('form');
-      // console.log(e)
+      // const form = e.target.closest('form');
       e.preventDefault();
     }
   })

@@ -6,7 +6,7 @@
 
         {{-- titolo --}}
         <div class="form-group">
-            <label for="title">Denomination</label>
+            <label for="title">Denomination *</label>
             <input required id="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
 
             @error('title')
@@ -16,7 +16,7 @@
 
         {{-- indirizzo --}}
         <div class="form-group">
-            <label for="address">Address</label>
+            <label for="address">Address *</label>
             <input required id="address" type="text" class="form-control @error('signs-file') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
