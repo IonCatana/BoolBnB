@@ -26,10 +26,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col">
-                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly>
+                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
                 </div>
                 <div class="col">
-                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly>
+                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
                 </div>
             </div>
         </div>
