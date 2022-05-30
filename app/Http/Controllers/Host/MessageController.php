@@ -16,11 +16,10 @@ class MessageController extends Controller
      */
     public function index(Place $place)
     {
-        // $messages = Message::where('place_id', $place->id)->get();
         $place->load('messages');
-        $messages = $place->messages();
+        $messages = $place->messages;
 
-        return view ('host.places.messages.index', compact('messages'));
+        return view ('host.places.messages.index', compact('place', 'messages'));
     }
 
     /**
@@ -52,6 +51,7 @@ class MessageController extends Controller
      */
     public function show(Place $place, Message $msg)
     {
+        dd($msg);
         // $msg = Message::where('id', $msg->id);
         return view('host.places.messages.show', compact('place', 'msg'));
     }

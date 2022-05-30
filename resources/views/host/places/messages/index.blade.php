@@ -16,9 +16,6 @@
 
             <tbody class="text-center">
                 @foreach ($messages as $msg)
-
-                {{-- @dd($msg) --}}
-
                     <tr>
                         <td>{{ $msg->sender_name }}</td>
                         <td>{{ $msg->sender_email }}</td>
