@@ -27,7 +27,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        //front-office
     }
 
     /**
@@ -38,7 +38,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //front-office
     }
 
     /**
@@ -49,7 +49,8 @@ class MessageController extends Controller
      */
     public function show(Place $place, Message $message)
     {
-        // return view ('host.places.messages.show');
+        $msg = Message::with([$place->id, $message->id])->get();
+        return view('host.places.messages.show', compact('msg'));
     }
 
     /**
@@ -60,7 +61,7 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -72,7 +73,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -81,8 +82,10 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Place $place, Message $msg)
     {
-        //
+        // $msg->delete();
+
+        // return redirect()->route('host.places.messages.index');
     }
 }

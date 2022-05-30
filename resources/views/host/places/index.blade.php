@@ -52,7 +52,7 @@
                                 <button type="submit" class="btn btn-danger">Elimina post</button>
                             </form>
                         </td>
-                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-warning">View Messages</a></td>
+                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                 @endforeach
                 </tr>

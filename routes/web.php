@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,11 +24,18 @@ Route::prefix('host')
     ->middleware('auth')
     ->group(function() {
 
-        Route::resource('places', 'PlaceController')->except('show'); // TODO parametro slug in url ??
+        Route::resource('places', 'PlaceController')
+            ->except('show')
+            ->scoped([
+            'place' => 'slug'
+        ]);
         Route::resource('places.messages', 'MessageController')
-            ->only('index', 'show', 'destroy');
+            ->only('index', 'show', 'destroy')
+            ->scoped([
+                'place' => 'slug'
+        ]);
     });
 
-Route::options('/{path}', function(){ 
-    return '';
-})->where('path', '.*');
+Route::get('/{any?}', function(){ 
+    return view('guest.app');
+})->where('any', '.*');
