@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h1>Modifica Place</h1>
-                <form method="POST" action="{{ route('host.places.update', ['place' => $place->id]) }}">
+                <form method="POST" action="{{ route('host.places.update', ['place' => $place->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -106,6 +106,16 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- upload dell'immagine --}}
+                    <div class="form-group">
+                        {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
+                        <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        @error('img')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Salva</button>
                 </form>
 
