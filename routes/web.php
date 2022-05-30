@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -40,6 +40,6 @@ Route::prefix('host')
         ]);
     });
 
-Route::options('/{path}', function(){ 
-    return '';
-})->where('path', '.*');
+Route::get('/{any?}', function(){ 
+    return view('guest.app');
+})->where('any', '.*');
