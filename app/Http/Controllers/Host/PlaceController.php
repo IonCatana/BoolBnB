@@ -66,7 +66,7 @@ class PlaceController extends Controller
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
 
-        if($request['img']){
+        if($validated['img']){
             $img_path = Storage::put('uploads', $validated['img']);
             $new_place->img = $img_path;
         }
@@ -122,8 +122,13 @@ class PlaceController extends Controller
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
-            'amenities.*' => 'nullable|exists:amenities,id'
+            'amenities.*' => 'nullable|exists:amenities,id',
+            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
+            //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
+            //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
+
+        // dd($validated['img']);
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
@@ -131,6 +136,12 @@ class PlaceController extends Controller
         
         if ($validated['address'] != $place->address) {
             // TODO indirizzo cambiato?->cambia le coordinate
+        }
+
+        if($validated['img'] != $place->img){
+            $img_path = Storage::put('uploads', $validated['img']);
+            // dd(Storage::put('uploads', $validated['img']));
+            $place->img = $img_path;
         }
 
         $place->fill($validated);
