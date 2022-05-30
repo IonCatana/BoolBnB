@@ -29,6 +29,10 @@ class Place extends Model
         return $this->hasMany('App\Visualisation');
     }
 
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
+
     // utilities
     public static function getUniqueSlug($title) {
         $slug_base = Str::slug($title);

@@ -2,9 +2,7 @@
 
 @section('content')
     
-    {{-- @dd($place); --}}
-
-    {{-- tabella riepilogativa dei places dell'user loggato --}}
+    
     <div class="container">
         <table class="table">
             <thead class="table-dark text-center">
@@ -28,7 +26,7 @@
                         <td>{{ $msg->created_at }}</td>
                         <td>
                             {{-- //TODO tasto interattivo --}}
-                            @if ( ($msg->read) == 0)
+                            @if ( !$msg->read)
                                 {{ 'No' }}
                             @else
                                 {{ 'Yes' }}
