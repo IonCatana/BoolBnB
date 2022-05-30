@@ -5,26 +5,26 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h1>Edit place info</h1>
-                <form method="POST" action="{{ route('host.places.update', ['place' => $place->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     {{-- Places Name --}}
                     <div class="form-group">
-                        <label for="title">Titolo</label>
+                        <label for="title">Title *</label>
                         <input type="text" class="form-control" id="title" name="title"
                             value="{{ old('title', $place->title) }}">
                         {{-- Error --}}
                         @error('title')
                             <div class="alert alert-danger">
-                                {{ message }}
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
 
                     {{-- Address Places --}}
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="address">Address *</label>
                         <input type="text" class="form-control" id="address" name="address"
                             value="{{ old('title', $place->address) }}">
                         {{-- Error --}}
@@ -33,6 +33,17 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}">
+                            </div>
+                            <div class="col">
+                                <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}">
+                            </div>
+                        </div>
                     </div>
 
                     {{-- Stanze Rooms, Beds, Bathrooms --}}
@@ -117,7 +128,7 @@
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
-                    <button type="submit" class="btn btn-primary">Salva</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
 
             </div>

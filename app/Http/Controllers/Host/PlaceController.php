@@ -103,7 +103,6 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-
         $validated = $request->validate([
             'title' => 'required|max:200',
             'rooms' => 'nullable|numeric|min:1|max:10',
@@ -116,6 +115,8 @@ class PlaceController extends Controller
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
+        // dd($validated);
+
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
@@ -135,8 +136,6 @@ class PlaceController extends Controller
         $place->fill($validated);
         $place->update();
         
-        
-
         return redirect()->route('host.places.index'); // sarebbe meglio redirigere sulla show sul frontend??
     }
 
