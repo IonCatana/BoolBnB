@@ -24,7 +24,7 @@ class CreatePlacesTable extends Migration
             //TODO formatazione            
             $table->string('address')->required();
             $table->decimal('lat', 8 , 6)->required();
-            $table->decimal('lng', 9, 6)->required();
+            $table->decimal('lon', 9, 6)->required();
             $table->text('img')->nullable();
             $table->boolean('visible')->default(false);
             $table->timestamps();

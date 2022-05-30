@@ -30,3 +30,14 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+
+
+
+/**
+ * Qui importiamo i diversi file javascript per le funzionalità
+ * custom
+ * 
+ */
+
+import './host/geocoding.js';

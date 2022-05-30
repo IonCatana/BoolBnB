@@ -53,7 +53,9 @@ class PlaceController extends Controller
             'bathrooms' => 'nullable|numeric|min:1|max:5',
             'square_meters' => 'nullable|numeric|min:30|max:200',
             'address' => 'required|max:255',
-            'amenities.*' => 'nullable|exists:amenities,id',
+            'lat' => 'required|numeric|min:-90|max:90',
+            'lon' => 'required|numeric|min:-180|max:180',
+            'amenities.*' => 'nullable|exists:amenities,id|array',
             'img' => 'nullable|file|mimes:jpeg,png,jpg' 
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
@@ -62,6 +64,7 @@ class PlaceController extends Controller
         // dd($request['img']);
 
         $new_place = new Place();
+
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
@@ -71,16 +74,8 @@ class PlaceController extends Controller
             $new_place->img = $img_path;
         }
 
-        // TODO coordinate di default aspettando tomtom api
-        $new_place->lat = 0;
-        $new_place->lng = 0;
         $new_place->save();
 
-        // ho corretto perche nel caso non ci fossero amenities non facciamo niente
-        // if (array_key_exists('amenities', $validated)) {
-            // $new_place->amenities()->attach($validated['amenities']);
-        // }
-        //TODO ho rimesso questo perché se lascio la correzione non riesco a inviare il form per provarlo... comunque poi la rivediamo e sistemiamo
         if (array_key_exists('amenities', $validated)) {
             $new_place->amenities()->attach($validated['amenities']);
         }

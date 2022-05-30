@@ -49765,9 +49765,12 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49796,6 +49799,13 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+/**
+ * Qui importiamo i diversi file javascript per le funzionalità
+ * custom
+ * 
+ */
+
+
 
 /***/ }),
 
@@ -49826,8 +49836,9 @@ try {
  */
 
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // questo header ci generava errori CORS nelle chiamate a API esterne
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -49913,6 +49924,66 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/host/geocoding.js":
+/*!****************************************!*\
+  !*** ./resources/js/host/geocoding.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+// TODO trovargli un'altra casa :)
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+});
+
+var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
+
+function fetchCoordinates(query) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
+    params: {
+      'key': TOMTOM_API_KEY
+    }
+  }).then(function (res) {
+    var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
+    // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
+
+    var position = results[0].position; // assegno i valori ai campi corrispondenti nell'html
+
+    latitude.value = position.lat;
+    longitude.value = position.lon;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+}
+
+var address = document.getElementById('address');
+var latitude = document.getElementById('latitude');
+var longitude = document.getElementById('longitude'); // quando si toglie il focus dall'input
+
+address.addEventListener('focusout', function (e) {
+  var query = encodeURIComponent(e.target.value);
+  fetchCoordinates(query);
+}); // quando si preme enter sull'input
+
+address.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    var query = encodeURIComponent(e.target.value);
+    fetchCoordinates(query);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49931,8 +50002,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

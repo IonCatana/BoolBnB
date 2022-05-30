@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
-    protected $guarded = [
-        'lat',
-        'lng',
-    ];
+    protected $guarded = [];
 
     // relations
     public function user() {
