@@ -66,7 +66,7 @@ class PlaceController extends Controller
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
 
-        if($validated['img']){
+        if(array_key_exists('img', $validated)){
             $img_path = Storage::put('uploads', $validated['img']);
             $new_place->img = $img_path;
         }
@@ -132,10 +132,6 @@ class PlaceController extends Controller
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
-        }
-        
-        if ($validated['address'] != $place->address) {
-            // TODO indirizzo cambiato?->cambia le coordinate
         }
 
         if(array_key_exists('img', $validated)){
