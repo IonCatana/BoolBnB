@@ -44,8 +44,6 @@
                         <td>
                             <img class="w-75" src="{{ asset('storage/' . $place->img)}}" alt="">
                         </td>
-                        <td><a href="{{ route('host.places.show', $place) }}" class="btn btn-info">Show statistics</a>
-                        </td>
                         <td><a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning">Modify place</a></td>
                         <td>
                             <form class="form-group" action="{{ route('host.places.destroy', $place) }}"
