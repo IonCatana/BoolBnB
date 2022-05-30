@@ -138,19 +138,22 @@ class PlaceController extends Controller
             // TODO indirizzo cambiato?->cambia le coordinate
         }
 
-        if($validated['img'] != $place->img){
+        if(array_key_exists('img', $validated)){
+            Storage::delete($place->img);
             $img_path = Storage::put('uploads', $validated['img']);
-            // dd(Storage::put('uploads', $validated['img']));
             $place->img = $img_path;
+            // dd($place->img);
         }
-
-        $place->fill($validated);
-        $place->update();
-
-        // verifico se bisogna agggiornare le relazioni alle amenities
+        
+        // verifico se bisogna aggiornare le relazioni alle amenities
         array_key_exists('amenities', $validated)
             ? $place->amenities()->sync($validated['amenities'])
             : $place->amenities()->detach();
+        
+        $place->fill($validated);
+        $place->update();
+        
+        
 
         return redirect()->route('host.places.index'); // sarebbe meglio redirigere sulla show sul frontend??
     }
