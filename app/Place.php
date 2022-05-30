@@ -30,6 +30,9 @@ class Place extends Model
     }
 
     // utilities
+    /**
+     * Generates a unique slug on this db table
+     */
     public static function getUniqueSlug($title) {
         $slug_base = Str::slug($title);
         $slug = $slug_base;
@@ -47,4 +50,26 @@ class Place extends Model
         return $slug;
     }
 
+    /**
+     * Return the blank or empty attributes as an array
+     * or false if all the attributes are filled
+     * 
+     * @return array || @return false
+     */
+    public function getMissingAttributes() {
+        $attributes = $this->attributesToArray();
+
+        $missing_attributes = [];
+        foreach ($attributes as $key => $attribute) {
+            if (blank($attribute)) {
+                $missing_attributes[] = $key;
+            }
+        }
+                    
+        if (empty($missing_attributes)) {
+            return false;
+        }
+
+        return $missing_attributes;
+    }
 }

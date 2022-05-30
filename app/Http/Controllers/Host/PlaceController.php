@@ -162,27 +162,19 @@ class PlaceController extends Controller
     {
         if (!$place->visible) {
 
-            // controllo se $place ha campi vuoti (per rendere 
-            // visibile è necesario compilare tutti i campi)
-            $attributes = $place->attributesToArray();
-            $missing_attributes = [];
-            foreach ($attributes as $key => $attribute) {
-                if (blank($attribute)) {
-                    $missing_attributes[] = $key;
-                }
-            }
-                        
-            if (!empty($missing_attributes)) {
-                // se campi vuoti: utente vai a riempirli!
-                $amenities = Amenity::all();
-                return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
+            $missing_attributes = $place->getMissingAttributes();
+                                  
+            if (!$missing_attributes) {
+                // se non mancano campi
+                $place->visible = true;
+                $place->update();
+
+                return redirect()->route('host.places.index');
             }
 
-            // se non mancano campi
-            $place->visible = true;
-            $place->update();
-
-            return redirect()->route('host.places.index');
+            // se campi vuoti: utente vai a riempirli!
+            $amenities = Amenity::all();
+            return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
         }
 
         // se era gia visibile la spegniamo
