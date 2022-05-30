@@ -28,7 +28,11 @@ Route::prefix('host')
     ->middleware('auth')
     ->group(function() {
 
-        Route::resource('places', 'PlaceController')->except('show'); // TODO parametro slug in url ??
+        Route::resource('places', 'PlaceController')
+            ->except('show')
+            ->scoped([
+            'place' => 'slug'
+        ]);
         Route::resource('places.messages', 'MessageController')
             ->only('index', 'show', 'destroy');
     });
