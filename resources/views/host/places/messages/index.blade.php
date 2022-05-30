@@ -27,6 +27,7 @@
                         <td>{{ $msg->object }}</td>
                         <td>{{ $msg->created_at }}</td>
                         <td>
+                            {{-- //TODO tasto interattivo --}}
                             @if ( ($msg->read) == 0)
                                 {{ 'No' }}
                             @else
@@ -34,7 +35,7 @@
                             @endif
                         </td>
                         <td>
-                            {{-- <a class="btn btn-info" href="{{ route('host.places.messages.show', $place, $msg) }}"> Vedi messaggio</a> --}}
+                            <a class="btn btn-info" href="{{ route('host.places.messages.show', [$place, $msg] ) }}"> See Details</a>
                         </td>
                         <td>
                             {{-- <form class="form-group" action="{{ route('host.places.messages.destroy', $msg) }}"

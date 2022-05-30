@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        here the text of the message {{ $msg->content }}
+        {{ $msg->content }}
     </div>
 @endsection

@@ -29,11 +29,12 @@ Route::prefix('host')
             ->scoped([
             'place' => 'slug'
         ]);
+        
         Route::resource('places.messages', 'MessageController')
-            ->only('index', 'show', 'destroy');
-        //     ->scoped([
-        //         'place' => 'slug'
-        // ]);
+            ->only('index', 'show', 'destroy')
+            ->scoped([
+                'place' => 'slug'
+        ]);
     });
 
 Route::get('/{any?}', function(){ 
