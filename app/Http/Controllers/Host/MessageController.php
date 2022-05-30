@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Host;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Place;
+use App\Message;
 
 class MessageController extends Controller
 {
@@ -12,9 +14,10 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Place $place)
     {
-        //
+        $messages = Message::where('place_id', $place->id)->get();
+        return view ('host.places.messages.index', compact('messages'));
     }
 
     /**
@@ -44,9 +47,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Place $place, Message $message)
     {
-        //
+        // return view ('host.places.messages.show');
     }
 
     /**

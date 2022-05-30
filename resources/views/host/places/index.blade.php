@@ -20,9 +20,7 @@
                 <th>Square Meters</th>
                 <th>Amenities</th>
                 <th>Image</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th colspan="3">Actions</th>
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
 
@@ -54,6 +52,7 @@
                                 <button type="submit" class="btn btn-danger">Elimina post</button>
                             </form>
                         </td>
+                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-warning">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                 @endforeach
                 </tr>
