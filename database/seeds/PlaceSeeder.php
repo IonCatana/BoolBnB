@@ -37,7 +37,7 @@ class PlaceSeeder extends Seeder
             $new_place->address = $faker->address();
             $new_place->lat = $faker->latitude(35, 47);
             $new_place->lon = $faker->longitude(6, 18);
-            $new_place->img = $faker->imageUrl('houses'); //nullable
+            // $new_place->img = $faker->imageUrl('houses'); //nullable
 
             $new_place->save();
 

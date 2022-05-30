@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
-    protected $guarded = [];
+    protected $guarded = [
+        'img',
+    ];
 
     // relations
     public function user() {

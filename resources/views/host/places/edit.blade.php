@@ -115,6 +115,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
                     <button type="submit" class="btn btn-primary">Salva</button>
                 </form>
