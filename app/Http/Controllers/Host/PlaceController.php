@@ -117,7 +117,6 @@ class PlaceController extends Controller
         ]);
         // dd($validated);
 
-
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
         }
