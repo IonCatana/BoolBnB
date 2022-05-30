@@ -177,18 +177,20 @@ class PlaceController extends Controller
                 // se campi vuoti: utente vai a riempirli!
                 $amenities = Amenity::all();
                 return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
-            } else {
-                $place->visible = true;
-                $place->update();
-
-                return redirect()->route('host.places.index');
             }
 
-        } else {
-            $place->visible = false;
+            // se non mancano campi
+            $place->visible = true;
             $place->update();
 
             return redirect()->route('host.places.index');
         }
+
+        // se era gia visibile la spegniamo
+        $place->visible = false;
+        $place->update();
+
+        return redirect()->route('host.places.index');
+        
     }
 }
