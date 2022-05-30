@@ -93,7 +93,7 @@
                                 @foreach ($amenities as $i => $amenity)
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="amenities[{{ $i }}]"
+                                            <input type="checkbox" name="amenities[]"
                                                 {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
                                                 class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
                                                 {{-- //TODO install icons dependencies --}}
