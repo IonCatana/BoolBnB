@@ -81,17 +81,6 @@ class PlaceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // TODO e se invece ci mettessimo le statistiche anziché creare una rotta custom?
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -99,7 +88,7 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        $amenities = Amenity::all(); //TODO query amenities places????
+        $amenities = Amenity::all();
         $place->load('amenities');
 
         return view('host.places.edit', compact('place', 'amenities'));
@@ -128,8 +117,6 @@ class PlaceController extends Controller
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 
-        // dd($validated['img']);
-
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
         }
@@ -138,7 +125,6 @@ class PlaceController extends Controller
             Storage::delete($place->img);
             $img_path = Storage::put('uploads', $validated['img']);
             $place->img = $img_path;
-            // dd($place->img);
         }
         
         // verifico se bisogna aggiornare le relazioni alle amenities
@@ -165,5 +151,46 @@ class PlaceController extends Controller
         $place->delete();
 
         return redirect()->route('host.places.index');
+    }
+
+   /**
+     * Toggle visibility of the specified resource.
+     *
+     * @param  Place $place
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleVisibility(Place $place)
+    {
+        if (!$place->visible) {
+
+            // controllo se $place ha campi vuoti (per rendere 
+            // visibile è necesario compilare tutti i campi)
+            $attributes = $place->attributesToArray();
+            $missing_attributes = [];
+            foreach ($attributes as $key => $attribute) {
+                if (blank($attribute)) {
+                    $missing_attributes[] = $key;
+                }
+            }
+                        
+            if (!empty($missing_attributes)) {
+                // se campi vuoti: utente vai a riempirli!
+                $amenities = Amenity::all();
+                return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
+            }
+
+            // se non mancano campi
+            $place->visible = true;
+            $place->update();
+
+            return redirect()->route('host.places.index');
+        }
+
+        // se era gia visibile la spegniamo
+        $place->visible = false;
+        $place->update();
+
+        return redirect()->route('host.places.index');
+        
     }
 }

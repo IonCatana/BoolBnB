@@ -33,6 +33,10 @@ Route::prefix('host')
             ->scoped([
             'place' => 'slug'
         ]);
+
+        Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
+            ->name('places.toggleVisibility');
+
         Route::resource('places.messages', 'MessageController')
             ->only('index', 'show', 'destroy')
             ->scoped([

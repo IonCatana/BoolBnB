@@ -4,38 +4,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h1>Edit place info</h1>
-                <form method="POST" action="{{ route('host.places.update', ['place' => $place->id]) }}" enctype="multipart/form-data">
+                <h1>Make your place visible on BoolBnb</h1>
+
+                <h3>Make sure all fields are filled, otherwise {{ $place->title }} wont be made visible on the app</h3>
+
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    {{-- Places Name --}}
-                    <div class="form-group">
-                        <label for="title">Titolo</label>
-                        <input type="text" class="form-control" id="title" name="title"
-                            value="{{ old('title', $place->title) }}">
-                        {{-- Error --}}
-                        @error('title')
-                            <div class="alert alert-danger">
-                                {{ message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    {{-- Address Places --}}
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address"
-                            value="{{ old('title', $place->address) }}">
-                        {{-- Error --}}
-                        @error('address')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
                     {{-- Stanze Rooms, Beds, Bathrooms --}}
+                    @if (in_array('rooms', $missing_attributes))
                     <div class="form-group">
                         <label for="rooms">Rooms</label>
                         <input type="text" class="form-control" id="rooms" name="rooms"
@@ -47,6 +25,9 @@
                             </div>
                         @enderror
                     </div>
+                    @endif
+
+                    @if (in_array('beds', $missing_attributes))
                     <div class="form-group">
                         <label for="beds">Beds</label>
                         <input type="text" class="form-control" id="beds" name="beds"
@@ -58,6 +39,9 @@
                             </div>
                         @enderror
                     </div>
+                    @endif
+
+                    @if (in_array('bathrooms', $missing_attributes))
                     <div class="form-group">
                         <label for="bathrooms">Bathrooms</label>
                         <input type="text" class="form-control" id="bathrooms" name="bathrooms"
@@ -69,7 +53,9 @@
                             </div>
                         @enderror
                     </div>
+                    @endif
 
+                    @if (in_array('square_meters', $missing_attributes))
                     {{-- Square Meters --}}
                     <div class="form-group">
                         <label for="square_meters">Square Meters</label>
@@ -82,31 +68,9 @@
                             </div>
                         @enderror
                     </div>
-                    
-                    
-                    {{-- Chechboxes Amenities --}}
-                    {{-- //TODO da rivedere quando possiamo --}}
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label>Servizi</label>
-                            <div class="row">
-                                @foreach ($amenities as $i => $amenity)
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="amenities[]"
-                                                {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
-                                                class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
-                                                {{-- //TODO install icons dependencies --}}
-                                            <label class="custom-control-label"
-                                                for="{{ 'custom_check' . '_' . $i }}">{{ $amenity->name }}<i class="{{ $amenity->icon }}"></i>
-                                            </label>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+                    @endif
 
+                    @if (in_array('img', $missing_attributes))
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
                         {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
@@ -115,7 +79,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
+                    @endif
 
                     <button type="submit" class="btn btn-primary">Salva</button>
                 </form>
