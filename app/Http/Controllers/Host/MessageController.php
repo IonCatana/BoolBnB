@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Host;
 
 use App\Http\Controllers\Controller;
+use App\Place;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -12,9 +13,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Place $place)
     {
-        //
+        dd($place);
     }
 
     /**

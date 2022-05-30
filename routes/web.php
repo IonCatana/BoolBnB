@@ -34,7 +34,10 @@ Route::prefix('host')
             'place' => 'slug'
         ]);
         Route::resource('places.messages', 'MessageController')
-            ->only('index', 'show', 'destroy');
+            ->only('index', 'show', 'destroy')
+            ->scoped([
+                'place' => 'slug'
+        ]);
     });
 
 Route::options('/{path}', function(){ 
