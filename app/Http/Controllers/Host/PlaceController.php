@@ -61,15 +61,13 @@ class PlaceController extends Controller
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 
-        // dd($request['img']);
-
         $new_place = new Place();
 
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
         $new_place->slug = Place::getUniqueSlug($validated['title']);
 
-        if($validated['img']){
+        if($request['img']){
             $img_path = Storage::put('uploads', $validated['img']);
             $new_place->img = $img_path;
         }
