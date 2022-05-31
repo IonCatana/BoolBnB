@@ -32,7 +32,7 @@ buttons.forEach(element => {
         const form = btn.closest('.delete-form'); 
         console.log(form);
 
-        if(form && confirm('Do you really want to delete this post?') ){ 
+        if(form && confirm('Do you really want to delete this place?') ){ 
 
             form.submit(); 
         }
