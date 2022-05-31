@@ -88,17 +88,6 @@
             @enderror
         </div>
 
-        {{-- pubblicazione --}}
-        {{-- //TODO select o button? --}}
-        <div class="form-group">
-            <label for="visible">Select an option</label>
-            <select class="form-select" aria-label="Default select example" name="visible" id="visible">
-                <option selected value="">Select an option</option>
-                <option value="true" {{ old('visible') ?: 'selected'}}>Yes</option>
-                <option value="false" {{ !old('visible') ?: 'selected'}}>No</option>
-            </select>
-        </div>
-
         {{-- submit button --}}
         <button id="form-submit-button" type="submit">Add places</button>
     </form>
