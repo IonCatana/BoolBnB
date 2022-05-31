@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PlaceController extends Controller
 {
@@ -123,6 +124,12 @@ class PlaceController extends Controller
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
+
+        //Controllo che nessuno user non puoi modificare i dati dei altri!
+        $user_id = Auth::user()->id;
+        if ($user_id != $place->user_id) {
+            return back()->with('error', "You can't do it!"); //TODO da vedere il messaggio di errore
+        }
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
