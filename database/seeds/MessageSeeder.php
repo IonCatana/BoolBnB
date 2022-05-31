@@ -15,12 +15,12 @@ class MessageSeeder extends Seeder
     public function run(Faker $faker)
     {
         $places = Place::all();
-        $place_id = $places->pluck('id')->all();
+        $place_ids = $places->pluck('id')->all();
 
         for ($i = 0; $i < 20; $i++) {
             $new_message = new Message();
 
-            $new_message->place_id = random_int(1, 5);
+            $new_message->place_id = $faker->randomElement($place_ids);
             $new_message->sender_name = $faker->name();
             $new_message->sender_email = $faker->safeEmail();
             $new_message->object = $faker->sentence();

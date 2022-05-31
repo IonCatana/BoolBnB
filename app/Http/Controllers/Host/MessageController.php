@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Host;
 use App\Http\Controllers\Controller;
 use App\Place;
 use Illuminate\Http\Request;
+use App\Message;
 
 class MessageController extends Controller
 {
@@ -15,7 +16,10 @@ class MessageController extends Controller
      */
     public function index(Place $place)
     {
-        dd($place);
+        $place->load('messages');
+        $messages = $place->messages;
+
+        return view ('host.places.messages.index', compact('place', 'messages'));
     }
 
     /**
@@ -25,7 +29,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        //front-office
     }
 
     /**
@@ -36,7 +40,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //front-office
     }
 
     /**
@@ -45,9 +49,11 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Place $place, Message $msg)
     {
-        //
+        dd($msg);
+        // $msg = Message::where('id', $msg->id);
+        return view('host.places.messages.show', compact('place', 'msg'));
     }
 
     /**
@@ -58,7 +64,7 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -70,7 +76,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -79,8 +85,11 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Place $place, Message $message)
     {
-        //
+        // $message->delete();
+
+        // return redirect()->route('host.places.messages.index');
+        // return redirect()->back();
     }
 }

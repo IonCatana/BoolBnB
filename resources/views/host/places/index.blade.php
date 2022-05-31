@@ -59,6 +59,7 @@
                                 <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-success">Visibility:On</a>
                             @endif
                         </td>
+                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                 @endforeach
                 </tr>
