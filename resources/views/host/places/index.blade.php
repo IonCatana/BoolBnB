@@ -44,14 +44,14 @@
                             <img class="w-75" src="{{ asset('storage/' . $place->img)}}" alt="">
                         </td>
                         <td>
-                            <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>
                         
-                            <form class="form-group" action="{{ route('host.places.destroy', $place) }}"
+                            <form class="form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger w-100">Delete</button>
                             </form>
 
                             @if (!$place->visible)
