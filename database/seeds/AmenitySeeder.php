@@ -17,22 +17,22 @@ class AmenitySeeder extends Seeder
             [
                 'name' => 'WiFi',
                 'slug' => '',
-                'icon' => 'fas fa-wifi'
+                'icon' => 'fa-solid fa-wifi'
             ],
             [
                 'name' => 'Parking Slot',
                 'slug' => '',
-                'icon' => 'fas fa-parking' //TODO
+                'icon' => 'fa-solid fa-square-parking'
             ],
             [
                 'name' => 'Swimming Pool',
                 'slug' => '',
-                'icon' => 'fas fa-swimmer'
+                'icon' => 'fa-solid fa-person-swimming'
             ],
             [
                 'name' => 'AC',
                 'slug' => '',
-                'icon' => 'fas fa-fan'
+                'icon' => 'fa-solid fa-wind'
             ],
         ];
         foreach ($amenities as $amenity) {

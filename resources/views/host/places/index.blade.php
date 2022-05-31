@@ -37,11 +37,11 @@
                         <td>
                             @foreach ($place->amenities as $item)
                             {{-- //TODO mettiamoci le icone al posto del amenity->name --}}
-                                {{ $item->name }}
+                                <i class="{{ $item->icon }}"></i>
                             @endforeach
                         </td>
                         <td>
-                            <img class="w-75" src="{{ asset('storage/' . $place->img)}}" alt="">
+                            <img class="img-fluid" src="{{ asset('storage/' . $place->img)}}" alt="">
                         </td>
                         <td>
                             <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>
