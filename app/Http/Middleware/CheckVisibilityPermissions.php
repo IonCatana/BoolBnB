@@ -17,7 +17,18 @@ class CheckVisibilityPermissions
     public function handle($request, Closure $next)
     {
         if ($request->input('visible')) {
-            // getAllAttributes del model e paragona con $request->input()
+
+            $missing_attributes = [];
+            foreach ($request->input() as $attribute => $value) {
+                if (blank($value)) {
+                    $missing_attributes[] = $attribute;
+                }
+            }
+            dd($missing_attributes);
+
+            if (!empty($missing_attributes)) {
+                return redirect()->route('host.places.fillAttributes', compact('missing_attributes'));
+            }
         }
 
         return $next($request);

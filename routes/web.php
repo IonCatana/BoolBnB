@@ -34,7 +34,7 @@ Route::prefix('host')
             'place' => 'slug'
         ]);
 
-        Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
+        Route::get('places/{place:slug}', 'PlaceController@fillAttributes')
             ->name('places.toggleVisibility');
 
         Route::resource('places.messages', 'MessageController')
