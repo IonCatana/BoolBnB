@@ -70,7 +70,7 @@
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
-        {{-- //TODO check  --}}
+        <label class="d-block">Amenities</label>
         <div class="form-group form-check form-check-inline">
             @foreach ($amenities as $i => $amenity)
                 <input class="form-check-input" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
