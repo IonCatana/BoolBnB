@@ -37344,7 +37344,21 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//TODO separare file?
+// prevent default degli input quando si schiaccia invio
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+}); // recupera tutte le checkboxes
+
+var checkboxes = document.querySelectorAll('.form-check-input'); // validazione input text
 // Alert delete
+
 var buttons = document.querySelectorAll('.delete-form [type="submit"]');
 buttons.forEach(function (element) {
   element.addEventListener('click', function (el) {
@@ -37356,6 +37370,28 @@ buttons.forEach(function (element) {
     if (form && confirm('Do you really want to delete this post?')) {
       form.submit();
     }
+  });
+}); // fn js che mostra un alert se non è stata checkata almeno una checkbox
+
+var amenities = document.getElementsByName('amenities[]');
+var hasChecked = false;
+console.log(amenities);
+
+for (var i = 0; i < amenities.lenght; i++) {
+  if (amenities[i].checked) {
+    hasChecked = true;
+    break;
+  }
+}
+
+if (hasChecked == false && amenities.length != 0) {
+  alert('Please, select at least one amenity');
+}
+
+var confirmButtons = document.getElementById('form-submit-button');
+confirmButtons.forEach(function (element) {
+  element.addEventListener('click', function (el) {
+    el.preventDefault();
   });
 });
 
@@ -37372,16 +37408,6 @@ buttons.forEach(function (element) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-// TODO trovargli un'altra casa :)
-var formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(function (input) {
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
-    }
-  });
-});
 
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
@@ -37450,9 +37476,9 @@ address.addEventListener('keypress', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
 
 
 /***/ })

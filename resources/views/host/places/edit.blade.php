@@ -128,7 +128,7 @@
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
                 </form>
 
             </div>

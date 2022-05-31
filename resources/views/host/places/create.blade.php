@@ -70,12 +70,15 @@
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
-        {{-- //TODO check  --}}
+        <label class="d-block">Amenities *</label>
         <div class="form-group form-check form-check-inline">
             @foreach ($amenities as $i => $amenity)
-                <input class="form-check-input" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
+                <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
                 <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
+                @error('amenities[]')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             @endforeach
         </div>
 
