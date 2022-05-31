@@ -128,7 +128,7 @@ class PlaceController extends Controller
         //Controllo che nessuno user non puoi modificare i dati dei altri!
         $user_id = Auth::user()->id;
         if ($user_id != $place->user_id) {
-            return back()->with('error', "You can't do it!"); //TODO da vedere il messaggio di errore
+            return redirect()->route('host.places.index'); //TODO da vedere il messaggio di errore
         }
 
         if ($validated['title'] != $place->title) {
