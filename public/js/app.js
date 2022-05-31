@@ -37270,7 +37270,9 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
+/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
+/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37282,6 +37284,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
+
 
 
 
@@ -37331,6 +37334,30 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/host/form.js":
+/*!***********************************!*\
+  !*** ./resources/js/host/form.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Alert delete
+var buttons = document.querySelectorAll('.delete-form [type="submit"]');
+buttons.forEach(function (element) {
+  element.addEventListener('click', function (el) {
+    el.preventDefault();
+    var btn = el.target;
+    var form = btn.closest('.delete-form');
+    console.log(form);
+
+    if (form && confirm('Do you really want to delete this post?')) {
+      form.submit();
+    }
+  });
+});
 
 /***/ }),
 
