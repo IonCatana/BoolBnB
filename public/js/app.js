@@ -37344,21 +37344,7 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//TODO separare file?
-// prevent default degli input quando si schiaccia invio
-var formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(function (input) {
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
-    }
-  });
-}); // recupera tutte le checkboxes
-
-var checkboxes = document.querySelectorAll('.form-check-input'); // validazione input text
 // Alert delete
-
 var buttons = document.querySelectorAll('.delete-form [type="submit"]');
 buttons.forEach(function (element) {
   element.addEventListener('click', function (el) {
@@ -37370,28 +37356,6 @@ buttons.forEach(function (element) {
     if (form && confirm('Do you really want to delete this place?')) {
       form.submit();
     }
-  });
-}); // fn js che mostra un alert se non è stata checkata almeno una checkbox
-
-var amenities = document.getElementsByName('amenities[]');
-var hasChecked = false;
-console.log(amenities);
-
-for (var i = 0; i < amenities.lenght; i++) {
-  if (amenities[i].checked) {
-    hasChecked = true;
-    break;
-  }
-}
-
-if (hasChecked == false && amenities.length != 0) {
-  alert('Please, select at least one amenity');
-}
-
-var confirmButtons = document.getElementById('form-submit-button');
-confirmButtons.forEach(function (element) {
-  element.addEventListener('click', function (el) {
-    el.preventDefault();
   });
 });
 
