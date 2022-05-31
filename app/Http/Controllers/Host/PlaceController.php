@@ -19,7 +19,7 @@ class PlaceController extends Controller
     {
         // recuperiamo id utente loggato
         $user_id = auth()->user()->id;
-        $places = Place::where('user_id', $user_id)->get();
+        $places = Place::with('amenities')->where('user_id', $user_id)->get();
         
         return view('host.places.index', compact('places'));
     }
@@ -42,7 +42,7 @@ class PlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
         
         $validated = $request->validate([
@@ -89,7 +89,7 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         $amenities = Amenity::all();
-        $place->load('amenities');
+        // $place->load('amenities');
 
         return view('host.places.edit', compact('place', 'amenities'));
     }
