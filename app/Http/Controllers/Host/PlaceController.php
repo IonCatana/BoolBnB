@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class PlaceController extends Controller
 {
     /**
+     * 
+     */
+    public function __construct()
+    {
+        $this->middleware('check.visibility')
+            ->only([
+                'update',
+                'store',
+                'toggleVisibility',
+            ]);
+    }
+
+    /**
      * Display a listing of the resource.
      * * @return \Illuminate\Http\Response
      */
@@ -55,9 +68,10 @@ class PlaceController extends Controller
             'lat' => 'required|numeric|min:-90|max:90',
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities.*' => 'nullable|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
+            'img' => 'nullable|file|mimes:jpeg,png,jpg',
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
+            'visible' => 'boolean',
         ]);
 
         $new_place = new Place();

@@ -80,12 +80,21 @@
         </div>
 
         {{-- upload dell'immagine --}}
+        <label class="d-block">Load an image of your place</label>
         <div class="form-group">
             {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
             <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
             @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+        </div>
+
+        {{-- visibility --}}
+        <label class="d-block">All fields must be filled to make your place visible on the app</label>
+        <div class="form-group form-check form-check-inline d-block">
+            <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+            {{ old('visible') ? ' checked' : '' }}/>
+            <label class="form-check-label mr-3" for="visible">Visible</label>
         </div>
 
         {{-- submit button --}}

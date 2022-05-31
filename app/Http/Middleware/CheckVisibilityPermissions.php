@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Place;
 use Closure;
 
 class CheckVisibilityPermissions
@@ -15,6 +16,10 @@ class CheckVisibilityPermissions
      */
     public function handle($request, Closure $next)
     {
+        if ($request->input('visible')) {
+            // getAllAttributes del model e paragona con $request->input()
+        }
+
         return $next($request);
     }
 }
