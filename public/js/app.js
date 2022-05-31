@@ -37344,7 +37344,21 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//TODO separare file?
+// prevent default degli input quando si schiaccia invio
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+}); // recupera tutte le checkboxes
+
+var checkboxes = document.querySelectorAll('.form-check-input'); // validazione input text
 // Alert delete
+
 var buttons = document.querySelectorAll('.delete-form [type="submit"]');
 buttons.forEach(function (element) {
   element.addEventListener('click', function (el) {
@@ -37357,6 +37371,24 @@ buttons.forEach(function (element) {
       form.submit();
     }
   });
+}); // fn js che mostra un alert se non è stata checkata almeno una checkbox
+
+var submitButtons = document.getElementById('form-submit-button');
+submitButtons.addEventListener('click', function () {
+  var arrayAmenities = document.getElementsByName('amenities[]');
+  var hasChecked = false;
+  console.log(arrayAmenities);
+
+  for (var i = 0; i < arrayAmenities.lenght; i++) {
+    if (arrayAmenities[i].checked) {
+      hasChecked = true;
+      console.log(hasChecked);
+    }
+  }
+
+  if (hasChecked == false) {
+    alert('Please, select at least one amenity');
+  }
 });
 
 /***/ }),
