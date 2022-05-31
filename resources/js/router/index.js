@@ -3,12 +3,14 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import Places from '../pages/Place.index.vue'
+
 const routes = [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: HomePage
-//   },
+  {
+    path: '/places',
+    name: 'place.index',
+    component: Places
+  },
 ]
 
 const router = new VueRouter({
