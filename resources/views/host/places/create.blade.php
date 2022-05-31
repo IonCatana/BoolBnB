@@ -82,24 +82,6 @@
             @endforeach
         </div>
 
-        {{-- fn js che mostra un alert se non è stata checkata almeno una checkbox --}}
-        <script>
-            var amenities = document.getElementsByName('amenities[]');
-            var hasChecked = false;
-
-            for var (var i=0; i < amenities.lenght; i++) {
-                if (amenities[i].checked) {
-                    hasChecked = true;
-                    return true;
-                }
-            }
-            
-            if (!hasChecked) {
-                alert('Please, select at least one amenity');
-                return false;
-            }    
-        </script>
-
         {{-- upload dell'immagine --}}
         <div class="form-group">
             {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
