@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- button per creare nuovo place --}}
-    <div class="container py-2 justify-content-end">
+    <div class="container py-2 justify-content-end mb-4">
         <a href="{{ route('host.places.create') }}">
             <button type="submit" class="btn btn-primary">Create new place</button>
         </a>
