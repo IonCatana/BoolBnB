@@ -44,7 +44,7 @@ class PlaceController extends Controller
      */
     public function store(Request $request, User $user)
     {
-
+        
         $validated = $request->validate([
             'title' => 'required|max:200',
             'rooms' => 'nullable|numeric|min:1|max:10',
@@ -54,7 +54,7 @@ class PlaceController extends Controller
             'address' => 'required|max:255',
             'lat' => 'required|numeric|min:-90|max:90',
             'lon' => 'required|numeric|min:-180|max:180',
-            'amenities.*' => 'nullable|exists:amenities,id|array',
+            'amenities.*' => 'nullable|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,png,jpg' 
             //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
             //TODO decidere la grandezze massima dell'immagine caricabile
