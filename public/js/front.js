@@ -2037,7 +2037,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header_MyHeader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Header/MyHeader.vue */ "./resources/js/components/Header/MyHeader.vue");
-/* harmony import */ var _pages_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/PlacesIndex.vue */ "./resources/js/pages/PlacesIndex.vue");
 //
 //
 //
@@ -2049,13 +2048,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {
-    MyHeader: _components_Header_MyHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PlacesIndex: _pages_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MyHeader: _components_Header_MyHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -38354,7 +38352,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "my_header" } }, [_c("HeaderNavBar")], 1)
+  return _c("div", { attrs: { id: "my_header" } }, [_c("header-nav-bar")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38440,9 +38438,7 @@ var render = function () {
     [
       _c("h1", [_vm._v("APP.VUE")]),
       _vm._v(" "),
-      _c("MyHeader"),
-      _vm._v(" "),
-      _c("PlacesIndex"),
+      _c("my-header"),
       _vm._v(" "),
       _c("router-view"),
     ],
@@ -54323,7 +54319,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -1,11 +1,12 @@
 <template>
   <div id="my_header">
-    <HeaderNavBar />
+    <header-nav-bar />
   </div>
 </template>
 
 <script>
 import HeaderNavBar from "../Header/HeaderNavBar.vue";
+
 export default {
   name: "MyHeader",
   components: {
