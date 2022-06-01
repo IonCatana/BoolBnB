@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <div v-for="place in places" :key="place.id">
-      {{ place.title }}
+    <div>
+      <!-- router link che manda alla show di ogni singolo place -->
+        <ul>
+          <router-link :to="{ name:'places.show', params:{slug:place.slug} }" 
+              tag="li" v-for="place in places" :key="place.id" 
+              class="myLink px-3 py-1 rounded-full text-sm whitespace-nowrap bg-white">
+              {{ place.title }}
+          </router-link>
+        </ul>
     </div>
-  </div>
 </template>
 
 <script>
@@ -20,10 +25,13 @@ export default {
 
   methods: {
     fetchPlaces() {
-      axios.get("/api/places").then((res) => {
-        console.log(res.data);
-        this.places = res.data.places;
-      });
+        axios.get("/api/places")
+        .then((res) => {
+            this.places = res.data.places;
+        })
+        .catch( error => {
+            console.warn(error);
+        })
     },
   },
 
@@ -34,4 +42,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.myLink{
+  cursor: pointer;
+}
+
 </style>
