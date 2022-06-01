@@ -37458,13 +37458,16 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
     isEmpty = _require.isEmpty; //prendo i pulsanti submit dei form create e edit
 
 
-var submitButtons = document.getElementById('form-submit-button'); //quando si preme submit eseguo la fn di verifica
+var submitButtons = document.getElementById('form-submit-button');
+var validationErrors = []; //quando si preme submit eseguo la fn di verifica
 
 submitButtons.addEventListener('click', function () {
-  var title = document.forms["place-form"]["title"].value;
-  if (title == "") alert("Title must be filled out");
-  var address = document.forms["place-form"]["address"].value;
-  if (address == "") alert("Address must be filled out"); // let lat = document.forms["place-form"]["lat"].value;
+  var title = document.forms["place-form"]["title"].value; // if (title == "") 
+  //     alert("Title must be filled out");
+  // let address = document.forms["place-form"]["address"].value;
+  // if (address == "") 
+  //     alert("Address must be filled out");
+  // let lat = document.forms["place-form"]["lat"].value;
   // if (lat == "") 
   //     alert("Latitude must be filled out");
   // let lon = document.forms["place-form"]["lon"].value;
@@ -37474,34 +37477,38 @@ submitButtons.addEventListener('click', function () {
   var rooms = document.forms["place-form"]["rooms"].value;
 
   if (!isEmpty(rooms)) {
-    if (isNaN(rooms) || rooms < 1) alert("Rooms must be a number and greater than 0");
+    if (isNaN(rooms) || rooms < 1) validationErrors.push("- Rooms must be a number and greater than 0");
   }
 
   var beds = document.forms["place-form"]["beds"].value;
 
   if (!isEmpty(beds)) {
-    if (isNaN(beds) || beds < 1) alert("Beds must be a number and greater than 0");
+    if (isNaN(beds) || beds < 1) validationErrors.push("- Beds must be a number and greater than 0");
   }
 
   var baths = document.forms["place-form"]["bathrooms"].value;
 
   if (!isEmpty(baths)) {
-    if (isNaN(baths) || baths < 1) alert("Baths must be a number and greater than 0");
+    if (isNaN(baths) || baths < 1) validationErrors.push("- Bathrooms must be a number and greater than 0");
   }
 
   var squareM = document.forms["place-form"]["square_meters"].value;
 
   if (!isEmpty(squareM)) {
-    if (isNaN(squareM) || squareM < 1) alert("Square meters must be a number and greater than 0");
+    if (isNaN(squareM) || squareM < 1) validationErrors.push("- Square meters must be a number and greater than 0");
   }
 
   var imgInput = document.forms["place-form"]["img"];
   var imgPath = imgInput.value;
   var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
-  if (!allowedExtensions.exec(imgPath)) {
-    alert('Invalid file type');
+  if (!isEmpty(imgPath)) {
+    if (!allowedExtensions.exec(imgPath)) {
+      validationErrors.push('- Invalid file type');
+    }
   }
+
+  if (validationErrors.length > 0) alert(validationErrors.join("\n"));
 }); //visibility
 //prendo il pulsante submit del form visibility
 
