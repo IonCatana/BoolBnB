@@ -37273,6 +37273,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
+/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./host/validation.js */ "./resources/js/host/validation.js");
+/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_host_validation_js__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37284,6 +37286,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
+
 
 
 
@@ -37443,6 +37446,46 @@ address.addEventListener('keypress', function (e) {
 
 /***/ }),
 
+/***/ "./resources/js/host/validation.js":
+/*!*****************************************!*\
+  !*** ./resources/js/host/validation.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//prendo tutti gli input presenti in pagina
+// const formInputs = document.querySelectorAll('.form-control');
+// const forms = document.querySelectorAll('.form-control');
+var submitButtons = document.getElementById('form-submit-button'); //per ogni input eseguo la fn
+
+submitButtons.addEventListener('click', function () {
+  var title = document.forms["place-form"]["title"].value;
+
+  if (title == "") {
+    alert("Title must be filled out");
+  }
+
+  var address = document.forms["place-form"]["address"].value;
+
+  if (address == "") {
+    alert("Address must be filled out");
+  }
+
+  var latitude = document.forms["place-form"]["latitude"].value;
+
+  if (latitude == "") {
+    alert("latitude must be filled out");
+  }
+
+  var longitude = document.forms["place-form"]["longitude"].value;
+
+  if (longitude == "") {
+    alert("longitude must be filled out");
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -37472,9 +37515,9 @@ address.addEventListener('keypress', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\sass\front.scss */"./resources/sass/front.scss");
 
 
 /***/ })
