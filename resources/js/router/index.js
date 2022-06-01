@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import PlacesIndex from '../pages/PlacesIndex.vue';
+import PlacesShow from '../pages/PlacesShow.vue';
 import AdvancedSearch from '../pages/AdvancedSearch.vue';
 
 const routes = [
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'places.index',
     component: PlacesIndex,
+  },
+  {
+    path: '/places_show/:slug',
+    name: 'places.show',
+    component: PlacesShow,
   },
   {
     path: '/advanced_search',
