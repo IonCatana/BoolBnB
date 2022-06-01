@@ -1,14 +1,43 @@
 //create & edit
-
 const { isEmpty } = require("lodash");
 
-//prendo i pulsanti submit dei form create e edit
+let validationErrors = []; //array che contiene gli errori
+
+// Compare alert se non è stata checkata almeno una checkbox delle amenities
 const submitButtons = document.getElementById('form-submit-button');
-let validationErrors = [];
+const checkboxes = document.querySelectorAll("input[type=checkbox]");
+let arrayChecked = [];
+
+checkboxes.forEach(element => {
+
+    if(element.checked){
+        arrayChecked.push(element);
+    }
+
+    element.addEventListener('change', function(el) {
+        if(element.checked){
+            arrayChecked.push(element);
+
+        } else if (!element.checked){
+            arrayChecked.splice(element, 1);
+        }
+    })
+
+})
+
+submitButtons.addEventListener('click', function() {
+    if (arrayChecked.length == 0) {
+        // alert('Please, select at least one amenity');
+        validationErrors.push('- Select at least one amenity');
+    } 
+})
+
+//prendo i pulsanti submit dei form create e edit
+// const submitButtons = document.getElementById('form-submit-button');
 
 //quando si preme submit eseguo la fn di verifica
 submitButtons.addEventListener('click', function() {
-    let title = document.forms["place-form"]["title"].value;
+    // let title = document.forms["place-form"]["title"].value;
     // if (title == "") 
     //     alert("Title must be filled out");
 

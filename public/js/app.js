@@ -37271,10 +37271,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
-/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
-/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./host/validation.js */ "./resources/js/host/validation.js");
-/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_host_validation_js__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37286,7 +37283,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
-
 
 
 
@@ -37344,9 +37340,13 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*!***********************************!*\
   !*** ./resources/js/host/form.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _validation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validation.js */ "./resources/js/host/validation.js");
+/* harmony import */ var _validation_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_validation_js__WEBPACK_IMPORTED_MODULE_0__);
 //input non fanno submit quando gli si da l'enter
 var formInputs = document.querySelectorAll('.form-control');
 formInputs.forEach(function (input) {
@@ -37374,25 +37374,25 @@ buttons.forEach(function (element) {
 
 var submitButtons = document.getElementById('form-submit-button');
 var checkboxes = document.querySelectorAll("input[type=checkbox]");
-var arrayChecked = [];
-checkboxes.forEach(function (element) {
-  if (element.checked) {
-    arrayChecked.push(element);
-  }
+var arrayChecked = []; // checkboxes.forEach(element => {
+//     if(element.checked){
+//         arrayChecked.push(element);
+//     }
+//     element.addEventListener('change', function(el) {
+//         if(element.checked){
+//             arrayChecked.push(element);
+//         } else if (!element.checked){
+//             arrayChecked.splice(element, 1);
+//         }
+//     })
+// })
+// submitButtons.addEventListener('click', function() {
+//     if (arrayChecked.length == 0) {
+//         alert('Please, select at least one amenity');
+//     } 
+// })
 
-  element.addEventListener('change', function (el) {
-    if (element.checked) {
-      arrayChecked.push(element);
-    } else if (!element.checked) {
-      arrayChecked.splice(element, 1);
-    }
-  });
-});
-submitButtons.addEventListener('click', function () {
-  if (arrayChecked.length == 0) {
-    alert('Please, select at least one amenity');
-  }
-});
+
 
 /***/ }),
 
@@ -37455,14 +37455,39 @@ address.addEventListener('keypress', function (e) {
 
 //create & edit
 var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
-    isEmpty = _require.isEmpty; //prendo i pulsanti submit dei form create e edit
+    isEmpty = _require.isEmpty;
 
+var validationErrors = []; //array che contiene gli errori
+// Compare alert se non è stata checkata almeno una checkbox delle amenities
 
 var submitButtons = document.getElementById('form-submit-button');
-var validationErrors = []; //quando si preme submit eseguo la fn di verifica
+var checkboxes = document.querySelectorAll("input[type=checkbox]");
+var arrayChecked = [];
+checkboxes.forEach(function (element) {
+  if (element.checked) {
+    arrayChecked.push(element);
+  }
+
+  element.addEventListener('change', function (el) {
+    if (element.checked) {
+      arrayChecked.push(element);
+    } else if (!element.checked) {
+      arrayChecked.splice(element, 1);
+    }
+  });
+});
+submitButtons.addEventListener('click', function () {
+  if (arrayChecked.length == 0) {
+    // alert('Please, select at least one amenity');
+    validationErrors.push('- Select at least one amenity');
+  }
+}); //prendo i pulsanti submit dei form create e edit
+// const submitButtons = document.getElementById('form-submit-button');
+//quando si preme submit eseguo la fn di verifica
 
 submitButtons.addEventListener('click', function () {
-  var title = document.forms["place-form"]["title"].value; // if (title == "") 
+  // let title = document.forms["place-form"]["title"].value;
+  // if (title == "") 
   //     alert("Title must be filled out");
   // let address = document.forms["place-form"]["address"].value;
   // if (address == "") 
@@ -37473,7 +37498,6 @@ submitButtons.addEventListener('click', function () {
   // let lon = document.forms["place-form"]["lon"].value;
   // if (lon == "") 
   //     alert("Longitude must be filled out");
-
   var rooms = document.forms["place-form"]["rooms"].value;
 
   if (!isEmpty(rooms)) {

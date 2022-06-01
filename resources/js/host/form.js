@@ -34,25 +34,27 @@ const submitButtons = document.getElementById('form-submit-button');
 const checkboxes = document.querySelectorAll("input[type=checkbox]");
 let arrayChecked = [];
 
-checkboxes.forEach(element => {
+// checkboxes.forEach(element => {
 
-    if(element.checked){
-        arrayChecked.push(element);
-    }
+//     if(element.checked){
+//         arrayChecked.push(element);
+//     }
 
-    element.addEventListener('change', function(el) {
-        if(element.checked){
-            arrayChecked.push(element);
+//     element.addEventListener('change', function(el) {
+//         if(element.checked){
+//             arrayChecked.push(element);
 
-        } else if (!element.checked){
-            arrayChecked.splice(element, 1);
-        }
-    })
+//         } else if (!element.checked){
+//             arrayChecked.splice(element, 1);
+//         }
+//     })
 
-})
+// })
 
-submitButtons.addEventListener('click', function() {
-    if (arrayChecked.length == 0) {
-        alert('Please, select at least one amenity');
-    } 
-})
+// submitButtons.addEventListener('click', function() {
+//     if (arrayChecked.length == 0) {
+//         alert('Please, select at least one amenity');
+//     } 
+// })
+
+import './validation.js';
