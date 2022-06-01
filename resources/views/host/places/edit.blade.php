@@ -96,26 +96,39 @@
                     
                     
                     {{-- Chechboxes Amenities --}}                    
-                    <label class="d-block">Amenities</label>
-                    <div class="form-group form-check form-check-inline">
-                        @foreach ($amenities as $i => $amenity)
-                            <input class="form-check-input" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
-                            {{ $place->amenities->contains($amenity) ? 'checked' : '' }}/>
-                            <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
-                        @endforeach
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Servizi</label>
+                            <div class="row">
+                                @foreach ($amenities as $i => $amenity)
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="amenities[]"
+                                                {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
+                                                class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
+                                                {{-- //TODO install icons dependencies --}}
+                                            <label class="custom-control-label"
+                                                for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
 
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
                         {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-                        <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <span>Accepted formats: jpg, jpeg, png, webp</span>
                         @error('img')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
                 </form>
 
             </div>

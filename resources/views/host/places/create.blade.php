@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            <label for="square_meters">Square meters</label>
+            <label for="square_meters">Square meters - min: 20&#13217;</label>
             <input id="square_meters" type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
             @error('square_meters')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -75,7 +75,7 @@
             @foreach ($amenities as $i => $amenity)
                 <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
+                <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
                 @error('amenities[]')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -85,7 +85,8 @@
         {{-- upload dell'immagine --}}
         <div class="form-group">
             {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-            <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            <span>Accepted formats: jpg, jpeg, png, webp</span>
             @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
