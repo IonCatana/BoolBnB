@@ -6598,7 +6598,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  width: 35px;\n  height: 70px;\n}\nimg[data-v-14032ba4] {\n  width: 100%;\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  width: 35px;\n  height: 70px;\n}\nimg[data-v-14032ba4] {\n  width: 100%;\n  height: 100%;\n}\na[data-v-14032ba4] {\n  text-decoration: none;\n}", ""]);
 
 // exports
 
@@ -38532,7 +38532,7 @@ var staticRenderFns = [
           staticClass: "btn btn-outline-success my-2 my-sm-0",
           attrs: { type: "submit" },
         },
-        [_vm._v("\n        Search\n      ")]
+        [_c("a", { attrs: { href: "/advanced_search" } }, [_vm._v("Search")])]
       ),
     ])
   },

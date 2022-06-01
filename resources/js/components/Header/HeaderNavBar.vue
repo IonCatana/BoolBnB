@@ -12,7 +12,7 @@
           aria-label="Search"
         />
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
+          <a href="/advanced_search">Search</a>
         </button>
       </form>
       <div class="right_nav_bar d-flex align-items-center">
@@ -61,5 +61,9 @@ export default {
 img {
   width: 100%;
   height: 100%;
+}
+a{
+  text-decoration: none;
+  
 }
 </style>
