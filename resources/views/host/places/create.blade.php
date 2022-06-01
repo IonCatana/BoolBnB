@@ -17,14 +17,45 @@
         {{-- indirizzo --}}
         <div class="form-group">
             <label for="address">Address *</label>
-            <input required list="matches" id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
-            id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}"
+            <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
+            id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
+            class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" autocomplete="off"
             >
-            <datalist id="matches">
-                <option value="">ciao</option>
-                <option value="">bella</option>
-                <option value="">li</option>
-            </datalist>
+
+           <!-- Button trigger modal -->
+            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button> --}}
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter your places address</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <div class="form-group">
+                            <label for="address-modal" class="">Address</label>
+                            <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                            id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                            >
+
+                            <div id="list-modal" class="list-group"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+              
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

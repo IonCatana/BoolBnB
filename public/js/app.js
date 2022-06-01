@@ -37353,20 +37353,26 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/**
- * 
- * 
- * 
- */
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+
+function setCoordinatesToForm(lat, lon) {
+  document.getElementById('latitude').value = lat;
+  document.getElementById('longitude').value = lon;
+}
+
+function setAddressToForm(address) {
+  document.getElementById('address').value = address;
+}
 
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
-function fetchAddressMatches(_x) {
-  return _fetchAddressMatches.apply(this, arguments);
+function fetchAndSetAddress(_x) {
+  return _fetchAndSetAddress.apply(this, arguments);
 }
 
-function _fetchAddressMatches() {
-  _fetchAddressMatches = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(query) {
+function _fetchAndSetAddress() {
+  _fetchAndSetAddress = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(query) {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -37377,22 +37383,26 @@ function _fetchAddressMatches() {
               }
             }).then(function (res) {
               var results = res.data.results;
-              results.forEach(function (result) {
+              list.textContent = '';
+              results.forEach(function (result, index) {
                 var address = result.address,
                     position = result.position;
-                var option = document.createElement('option');
-                option.value = address.streetName + ',' + address.municipality + ',' + address.country;
-                list.appendChild(option);
-                var pos = {};
-                option.addEventListener('click', function (e) {
-                  console.log(position);
-                  var lat = position.lat,
-                      lon = position.lon;
-                  console.warn(lat, lon);
-                  pos['lat'] = lat;
-                  pos['lon'] = lon;
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', '#');
+                anchor.className = 'list-group-item list-group-item-action';
+                if (index === 0) anchor.classList.add('active');
+                var streetName = address.streetName,
+                    municipality = address.municipality,
+                    country = address.country;
+                if (streetName == null) streetName = 'Unnamed street';
+                var builtAddress = "".concat(streetName, ", ").concat(municipality, ", ").concat(country);
+                anchor.append(builtAddress);
+                list.appendChild(anchor);
+                anchor.addEventListener('click', function (e) {
+                  setCoordinatesToForm(position.lat, position.lon);
+                  setAddressToForm(builtAddress);
+                  $('#exampleModal').modal('hide');
                 });
-                console.log(pos);
               });
             })["catch"](function (err) {
               console.log(err);
@@ -37405,19 +37415,18 @@ function _fetchAddressMatches() {
       }
     }, _callee);
   }));
-  return _fetchAddressMatches.apply(this, arguments);
+  return _fetchAndSetAddress.apply(this, arguments);
 }
 
 var MIN_LENGTH = 4; // arbitrario, corrisponde alla lunghezza di Via_, cosi non inizia a cercare prima che l'utente abbia inserito info specifiche
 
-var address = document.getElementById('address');
-var list = document.getElementById('matches'); // let addressMatches = [];
-
+var address = document.getElementById('address-modal');
+var list = document.getElementById('list-modal');
+var pos = {};
 address.addEventListener('keypress', function (e) {
   if (e.target.value.length > MIN_LENGTH) {
     var query = encodeURIComponent(e.target.value);
-    fetchAddressMatches(query);
-    console.log(pos); // addressMatches.forEach(item => {
+    fetchAndSetAddress(query); // addressMatches.forEach(item => {
     //   console.warn('press')
     //   const { address, position } = item;
     //   const option = document.createElement('option');
@@ -37439,6 +37448,19 @@ address.addEventListener('keypress', function (e) {
 //   });
 // });
 // export default searchMatches;
+// const modal = document.getElementById('exampleModal');
+// modal.addEventListener('shown.bs.modal', e => {
+//   console.log('shown')
+//   address.focus();
+// });
+
+/**
+ * focus sull'input quando mostro la modale
+ */
+
+$(document).on('shown.bs.modal', '#exampleModal', function () {
+  address.focus();
+});
 
 /***/ }),
 
