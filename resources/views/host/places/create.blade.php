@@ -20,7 +20,11 @@
             <input required list="matches" id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
             id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}"
             >
-            <datalist id="matches"></datalist>
+            <datalist id="matches">
+                <option value="">ciao</option>
+                <option value="">bella</option>
+                <option value="">li</option>
+            </datalist>
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

@@ -1,11 +1,13 @@
-import addressMatches from './addressMatches'
-
+// import addressMatches from './addressMatches'
 const list = document.getElementById('matches');
 console.log(list)
 
 const input = document.getElementById('address');
 
 input.addEventListener('keypress', e => {
+  const addressMatches = require('./addressMatches');
+  console.log(addressMatches)
+
   addressMatches.forEach(item => {
     console.warn('press')
     const { address, position } = item;

@@ -12,4 +12,4 @@ require('./bootstrap');
  * 
  */
 
-import './geocoding/setCoordinates.js';
+import './geocoding/addressMatches';
