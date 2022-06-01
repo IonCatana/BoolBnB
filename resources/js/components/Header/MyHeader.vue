@@ -1,5 +1,5 @@
 <template>
-  <div id="my_header">
+  <div id="my_header" class="mb-4">
     <header-nav-bar />
   </div>
 </template>

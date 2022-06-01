@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\Amenity;
 
 class PlaceController extends Controller
 {
@@ -50,9 +51,21 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $place = Place::with(['user', 'amenities'])->where('slug', $slug)->first();
+
+        if($place){
+            return response()->json([
+                'place' => $place,
+                'success' => true,
+            ]);
+        }
+
+        return response()->json([
+            'place' => 'place not found',
+            'success' => false, 
+        ], 404);
     }
 
     /**
@@ -61,9 +74,9 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        
     }
 
     /**
