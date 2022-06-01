@@ -115,6 +115,14 @@
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
+                    {{-- visibility --}}
+                    <label class="d-block">All fields must be filled to make your place visible on the app</label>
+                    <div class="form-group form-check form-check-inline d-block">
+                        <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+                        {{ old('visible') || $place->visible ? ' checked' : '' }}/>
+                        <label class="form-check-label mr-3" for="visible">Visible</label>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
 
