@@ -3,13 +3,18 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Places from '../pages/Place.index.vue'
-
+import PlacesIndex from '../pages/PlacesIndex.vue';
+import AdvancedSearch from '../pages/AdvancedSearch.vue';
 const routes = [
   {
-    path: '/places',
+    path: '/',
     name: 'place.index',
-    component: Places
+    component: PlacesIndex,
+  },
+  {
+    path: '/advanced_search',
+    name: 'advanced.search',
+    component: AdvancedSearch,
   },
 ]
 
