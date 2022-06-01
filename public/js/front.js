@@ -38679,7 +38679,9 @@ var render = function () {
   return _c("div", { attrs: { id: "header_nav_bar" } }, [
     _c("nav", { staticClass: "navbar d-flex justify-content-between" }, [
       _c("div", { staticClass: "logo" }, [
-        _c("img", { attrs: { src: "../../assets/img/Logo.jpg", alt: "" } }),
+        _c("a", { attrs: { href: "/" } }, [
+          _c("img", { attrs: { src: "../../assets/img/Logo.jpg", alt: "" } }),
+        ]),
       ]),
       _vm._v(" "),
       _vm._m(0),
@@ -55197,7 +55199,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -2,7 +2,7 @@
   <div id="header_nav_bar">
     <nav class="navbar d-flex justify-content-between">
       <div class="logo">
-        <img :src="'../../assets/img/Logo.jpg'" alt="" />
+        <a href="/"><img :src="'../../assets/img/Logo.jpg'" alt="" /></a>
       </div>
       <form class="form-inline">
         <input
@@ -62,8 +62,7 @@ img {
   width: 100%;
   height: 100%;
 }
-a{
+a {
   text-decoration: none;
-  
 }
 </style>
