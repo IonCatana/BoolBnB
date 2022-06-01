@@ -15,8 +15,6 @@
       </form>
       <div class="right_nav_bar">qui va "diventa host, button login"</div>
     </nav>
-
-    <router-view></router-view>
   </div>
 </template>
 

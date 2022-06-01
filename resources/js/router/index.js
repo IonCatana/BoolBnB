@@ -9,12 +9,12 @@ import AdvancedSearch from '../pages/AdvancedSearch.vue';
 const routes = [
   {
     path: '/',
-    name: 'place.index',
+    name: 'places.index',
     component: PlacesIndex,
   },
   {
     path: '/advanced_search',
-    name: 'advanced.search',
+    name: 'places.advanced.search',
     component: AdvancedSearch,
   },
 ]

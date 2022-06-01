@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <div v-for="place in places" :key="place.id">
+    <div v-for="place in places" :key="place.id">
       {{ place.title }}
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   methods: {
     fetchPlaces() {
       axios.get("/api/places").then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.places = res.data.places;
       });
     },
