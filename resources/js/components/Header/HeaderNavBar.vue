@@ -58,9 +58,7 @@ export default {
   height: 70px;
 }
 
-.right_nav_bar {
-  
-}
+
 img {
   width: 100%;
   height: 100%;
