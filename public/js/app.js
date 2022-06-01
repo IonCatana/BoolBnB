@@ -37270,7 +37270,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
+/* harmony import */ var _geocoding_setCoordinates_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./geocoding/setCoordinates.js */ "./resources/js/geocoding/setCoordinates.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37334,62 +37334,74 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 /***/ }),
 
-/***/ "./resources/js/host/geocoding.js":
-/*!****************************************!*\
-  !*** ./resources/js/host/geocoding.js ***!
-  \****************************************/
-/*! no exports provided */
+/***/ "./resources/js/geocoding/addressMatches.js":
+/*!**************************************************!*\
+  !*** ./resources/js/geocoding/addressMatches.js ***!
+  \**************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-// TODO trovargli un'altra casa :)
-var formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(function (input) {
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
-    }
-  });
-});
 
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
-function fetchCoordinates(query) {
+function fetchAddressMatches(query) {
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json"), {
     params: {
       'key': TOMTOM_API_KEY
     }
   }).then(function (res) {
-    var results = res.data.results; // TODO usiamo il primo risultato che di solito è il più preciso
-    // potremmo però mostrarli tutti all'utente e lasciare scegliere a lui ???
-
-    var position = results[0].position; // assegno i valori ai campi corrispondenti nell'html
-
-    latitude.value = position.lat;
-    longitude.value = position.lon;
+    return res.data.results;
   })["catch"](function (err) {
     console.log(err);
   });
 }
 
-var address = document.getElementById('address');
-var latitude = document.getElementById('latitude');
-var longitude = document.getElementById('longitude'); // quando si toglie il focus dall'input
+var MIN_LENGTH = 4; // arbitrario, corrisponde alla lunghezza di Via_, cosi non inizia a cercare prima che l'utente abbia inserito info specifiche
 
+var address = document.getElementById('address');
+var searchMatches = [];
+address.addEventListener('keypress', function (e) {
+  if (e.target.value.length > MIN_LENGTH) {
+    var query = encodeURIComponent(e.target.value);
+    searchMatches = fetchAddressMatches(query);
+  }
+});
 address.addEventListener('focusout', function (e) {
   var query = encodeURIComponent(e.target.value);
-  fetchCoordinates(query);
-}); // quando si preme enter sull'input
+  searchMatches = fetchAddressMatches(query);
+});
+/* harmony default export */ __webpack_exports__["default"] = (searchMatches);
 
-address.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    var query = encodeURIComponent(e.target.value);
-    fetchCoordinates(query);
-  }
+/***/ }),
+
+/***/ "./resources/js/geocoding/setCoordinates.js":
+/*!**************************************************!*\
+  !*** ./resources/js/geocoding/setCoordinates.js ***!
+  \**************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addressMatches__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addressMatches */ "./resources/js/geocoding/addressMatches.js");
+
+var list = document.getElementById('matches');
+console.log(list);
+var input = document.getElementById('address');
+input.addEventListener('keypress', function (e) {
+  _addressMatches__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(function (item) {
+    console.warn('press');
+    var address = item.address,
+        position = item.position;
+    var option = document.createElement('option');
+    option.value = address.streetName;
+    console.log(option);
+    list.appendChild(option);
+  });
 });
 
 /***/ }),

@@ -17,7 +17,10 @@
         {{-- indirizzo --}}
         <div class="form-group">
             <label for="address">Address *</label>
-            <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
+            <input required list="matches" id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
+            id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}"
+            >
+            <datalist id="matches"></datalist>
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
