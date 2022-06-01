@@ -102,7 +102,7 @@
                     @if (in_array('img', $missing_attributes))
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
-                        <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <input id="img" type="file" name="img" id="img" class="@error('img') is-invalid @enderror">
                         @error('img')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

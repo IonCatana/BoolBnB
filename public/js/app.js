@@ -37451,47 +37451,68 @@ address.addEventListener('keypress', function (e) {
   !*** ./resources/js/host/validation.js ***!
   \*****************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-//TODO refactoring
-//prendo i pulsanti submit dei form
+//create & edit
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    isEmpty = _require.isEmpty; //prendo i pulsanti submit dei form create e edit
+
+
 var submitButtons = document.getElementById('form-submit-button'); //quando si preme submit eseguo la fn di verifica
-// create and edit input
 
 submitButtons.addEventListener('click', function () {
-  var editTitle = document.forms["edit-form"]["title"].value;
-  if (editTitle == "") alert("Title must be filled out");
-  var editAddress = document.forms["edit-form"]["address"].value;
-  if (editAddress == "") alert("Address must be filled out"); // let editLatitude = document.forms["edit-form"]["lat"].value;
-  // if (editLatitude == "") 
+  var title = document.forms["place-form"]["title"].value;
+  if (title == "") alert("Title must be filled out");
+  var address = document.forms["place-form"]["address"].value;
+  if (address == "") alert("Address must be filled out"); // let lat = document.forms["place-form"]["lat"].value;
+  // if (lat == "") 
   //     alert("Latitude must be filled out");
-  // let editLongitude = document.forms["edit-form"]["lon"].value;
-  // if (editLongitude == "") 
+  // let lon = document.forms["place-form"]["lon"].value;
+  // if (lon == "") 
   //     alert("Longitude must be filled out");
 
-  var editRooms = document.forms["edit-form"]["rooms"].value;
-  if (isNaN(editRooms) || editRooms < 1) alert("Rooms must be a number and greater than 0");
-  var editBeds = document.forms["edit-form"]["beds"].value;
-  if (isNaN(editBeds) || editBeds < 1) alert("Beds must be a number and greater than 0");
-  var editBaths = document.forms["edit-form"]["bathrooms"].value;
-  if (isNaN(editBaths) || editBaths < 1) alert("Baths must be a number and greater than 0");
-  var editSquares = document.forms["edit-form"]["square_meters"].value;
-  if (isNaN(editSquares) || editSquares < 1) alert("Square meters must be a number and greater than 0");
-}); //visibility input visibility-form
+  var rooms = document.forms["place-form"]["rooms"].value;
 
-var visibility = document.getElementById('visibility-btn');
+  if (!isEmpty(rooms)) {
+    if (isNaN(rooms) || rooms < 1) alert("Rooms must be a number and greater than 0");
+  }
+
+  var beds = document.forms["place-form"]["beds"].value;
+
+  if (!isEmpty(beds)) {
+    if (isNaN(beds) || beds < 1) alert("Beds must be a number and greater than 0");
+  }
+
+  var baths = document.forms["place-form"]["bathrooms"].value;
+
+  if (!isEmpty(baths)) {
+    if (isNaN(baths) || baths < 1) alert("Baths must be a number and greater than 0");
+  }
+
+  var squareM = document.forms["place-form"]["square_meters"].value;
+
+  if (!isEmpty(squareM)) {
+    if (isNaN(squareM) || squareM < 1) alert("Square meters must be a number and greater than 0");
+  }
+}); //visibility
+//prendo il pulsante submit del form visibility
+
+var visibility = document.getElementById('visibility-btn'); //quando si preme submit eseguo la fn di verifica
+
 visibility.addEventListener('click', function () {
-  var title = document.forms["edit-form"]["title"].value;
-  if (title == "") alert("Title must be filled out");
-  var address = document.forms["edit-form"]["address"].value;
-  if (address == "") alert("Address must be filled out");
-  var rooms = document.forms["edit-form"]["rooms"].value;
+  // let title = document.forms["visibility-form"]["title"].value;
+  // if (title == "") 
+  //     alert("Title must be filled out");
+  // let address = document.forms["visibility-form"]["address"].value;
+  // if (address == "") 
+  //     alert("Address must be filled out");
+  var rooms = document.forms["visibility-form"]["rooms"].value;
   if (rooms == "") alert("Rooms must be filled out");else if (isNaN(rooms) || rooms < 1) alert("Rooms must be a number and greater than 0");
-  var beds = document.forms["edit-form"]["beds"].value;
+  var beds = document.forms["visibility-form"]["beds"].value;
   if (beds == "") alert("Beds must be filled out");else if (isNaN(beds) || beds < 1) alert("Beds must be a number and greater than 0");
-  var baths = document.forms["edit-form"]["bathrooms"].value;
+  var baths = document.forms["visibility-form"]["bathrooms"].value;
   if (baths == "") alert("Longitude must be filled out");else if (isNaN(baths) || baths < 1) alert("Baths must be a number and greater than 0");
-  var squareM = document.forms["edit-form"]["square_meters"].value;
+  var squareM = document.forms["visibility-form"]["square_meters"].value;
   if (squareM == "") alert("Square meters must be filled out");else if (isNaN(squareM) || squareM < 1) alert("Square meters must be a number and greater than 0");
 });
 

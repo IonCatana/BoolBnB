@@ -1,4 +1,7 @@
-//create $ edit
+//create & edit
+
+const { isEmpty } = require("lodash");
+
 //prendo i pulsanti submit dei form create e edit
 const submitButtons = document.getElementById('form-submit-button');
 
@@ -21,20 +24,29 @@ submitButtons.addEventListener('click', function() {
     //     alert("Longitude must be filled out");
 
     let rooms = document.forms["place-form"]["rooms"].value;
-    if (isNaN(rooms) || rooms < 1)
-        alert("Rooms must be a number and greater than 0");
+    if ( !(isEmpty(rooms) ) ) {
+        if ( isNaN(rooms) || rooms < 1 )
+            alert("Rooms must be a number and greater than 0");
+    }
 
     let beds = document.forms["place-form"]["beds"].value;
-    if (isNaN(beds) || beds < 1) 
+    if ( !(isEmpty(beds) ) ) {
+        if (isNaN(beds) || beds < 1) 
         alert("Beds must be a number and greater than 0");
+    }
 
     let baths = document.forms["place-form"]["bathrooms"].value;
-    if (isNaN(baths) || baths < 1) 
+    if ( !(isEmpty(baths) ) ) {
+        if (isNaN(baths) || baths < 1) 
         alert("Baths must be a number and greater than 0");
+    }
 
     let squareM = document.forms["place-form"]["square_meters"].value;
-    if (isNaN(squareM) || squareM < 1) 
+    if ( !(isEmpty(squareM) ) ) {
+        if (isNaN(squareM) || squareM < 1)
         alert("Square meters must be a number and greater than 0");
+    }
+        
 })
 
 //visibility
