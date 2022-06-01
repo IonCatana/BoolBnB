@@ -102,14 +102,14 @@
                             <label>Servizi</label>
                             <div class="row">
                                 @foreach ($amenities as $i => $amenity)
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="amenities[]"
                                                 {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
                                                 class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
                                                 {{-- //TODO install icons dependencies --}}
                                             <label class="custom-control-label"
-                                                for="{{ 'custom_check' . '_' . $i }}">{{ $amenity->name }}<i class="{{ $amenity->icon }}"></i>
+                                                for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}
                                             </label>
                                         </div>
                                     </div>

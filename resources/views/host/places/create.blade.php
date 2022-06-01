@@ -75,7 +75,7 @@
             @foreach ($amenities as $i => $amenity)
                 <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
+                <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
                 @error('amenities[]')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

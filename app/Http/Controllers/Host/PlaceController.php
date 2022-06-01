@@ -55,7 +55,7 @@ class PlaceController extends Controller
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 
@@ -119,8 +119,7 @@ class PlaceController extends Controller
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,png,jpg,webp' 
-            //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 

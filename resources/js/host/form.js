@@ -9,7 +9,7 @@ formInputs.forEach(input => {
   })
 })
 
-// Alert delete
+// Compare alert quando si clicca sul delete
 const buttons = document.querySelectorAll('.delete-form [type="submit"]');
 
 buttons.forEach(element => {
@@ -29,38 +29,29 @@ buttons.forEach(element => {
     })
 })
 
-// js che mostra un alert se non è stata checkata almeno una checkbox
+// Compare alert se non è stata checkata almeno una checkbox delle amenities
 const submitButtons = document.getElementById('form-submit-button');
 const checkboxes = document.querySelectorAll("input[type=checkbox]");
 let arrayChecked = [];
 
 checkboxes.forEach(element => {
+
     if(element.checked){
         arrayChecked.push(element);
     }
-})
-
-console.log(arrayChecked);
-console.log(arrayChecked.length);
-
-checkboxes.forEach(element => {
 
     element.addEventListener('change', function(el) {
-
         if(element.checked){
             arrayChecked.push(element);
-            console.log(arrayChecked);
 
         } else if (!element.checked){
             arrayChecked.splice(element, 1);
-            console.log(arrayChecked);
         }
     })
 
 })
 
 submitButtons.addEventListener('click', function() {
-    console.log('dentro al button', arrayChecked.length);
     if (arrayChecked.length == 0) {
         alert('Please, select at least one amenity');
     } 

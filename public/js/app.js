@@ -37344,7 +37344,17 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Alert delete
+//input non fanno submit quando gli si da l'enter
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+}); // Compare alert quando si clicca sul delete
+
 var buttons = document.querySelectorAll('.delete-form [type="submit"]');
 buttons.forEach(function (element) {
   element.addEventListener('click', function (el) {
@@ -37357,6 +37367,28 @@ buttons.forEach(function (element) {
       form.submit();
     }
   });
+}); // Compare alert se non è stata checkata almeno una checkbox delle amenities
+
+var submitButtons = document.getElementById('form-submit-button');
+var checkboxes = document.querySelectorAll("input[type=checkbox]");
+var arrayChecked = [];
+checkboxes.forEach(function (element) {
+  if (element.checked) {
+    arrayChecked.push(element);
+  }
+
+  element.addEventListener('change', function (el) {
+    if (element.checked) {
+      arrayChecked.push(element);
+    } else if (!element.checked) {
+      arrayChecked.splice(element, 1);
+    }
+  });
+});
+submitButtons.addEventListener('click', function () {
+  if (arrayChecked.length == 0) {
+    alert('Please, select at least one amenity');
+  }
 });
 
 /***/ }),
@@ -37440,9 +37472,9 @@ address.addEventListener('keypress', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
 
 
 /***/ })
