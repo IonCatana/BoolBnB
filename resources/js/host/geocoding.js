@@ -1,14 +1,3 @@
-// TODO trovargli un'altra casa :)
-const formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(input => {
-  input.addEventListener('keypress', e => {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
-    }
-  })
-})
-
 import Axios from "axios";
 const TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 

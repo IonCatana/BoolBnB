@@ -37270,7 +37270,9 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
+/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
+/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _host_geocoding_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/geocoding.js */ "./resources/js/host/geocoding.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37282,6 +37284,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
+
 
 
 
@@ -37334,6 +37337,62 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 /***/ }),
 
+/***/ "./resources/js/host/form.js":
+/*!***********************************!*\
+  !*** ./resources/js/host/form.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//input non fanno submit quando gli si da l'enter
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+}); // Compare alert quando si clicca sul delete
+
+var buttons = document.querySelectorAll('.delete-form [type="submit"]');
+buttons.forEach(function (element) {
+  element.addEventListener('click', function (el) {
+    el.preventDefault();
+    var btn = el.target;
+    var form = btn.closest('.delete-form');
+    console.log(form);
+
+    if (form && confirm('Do you really want to delete this place?')) {
+      form.submit();
+    }
+  });
+}); // Compare alert se non è stata checkata almeno una checkbox delle amenities
+
+var submitButtons = document.getElementById('form-submit-button');
+var checkboxes = document.querySelectorAll("input[type=checkbox]");
+var arrayChecked = [];
+checkboxes.forEach(function (element) {
+  if (element.checked) {
+    arrayChecked.push(element);
+  }
+
+  element.addEventListener('change', function (el) {
+    if (element.checked) {
+      arrayChecked.push(element);
+    } else if (!element.checked) {
+      arrayChecked.splice(element, 1);
+    }
+  });
+});
+submitButtons.addEventListener('click', function () {
+  if (arrayChecked.length == 0) {
+    alert('Please, select at least one amenity');
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/host/geocoding.js":
 /*!****************************************!*\
   !*** ./resources/js/host/geocoding.js ***!
@@ -37345,16 +37404,6 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-// TODO trovargli un'altra casa :)
-var formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(function (input) {
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
-    }
-  });
-});
 
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 

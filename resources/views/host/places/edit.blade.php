@@ -108,14 +108,15 @@
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
                         {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-                        <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <span>Accepted formats: jpg, jpeg, png, webp</span>
                         @error('img')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
                 </form>
 
             </div>

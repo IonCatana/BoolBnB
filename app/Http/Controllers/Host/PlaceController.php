@@ -47,17 +47,16 @@ class PlaceController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:200',
-            'rooms' => 'nullable|numeric|min:1|max:10',
-            'beds' => 'nullable|numeric|min:1|max:4',
-            'bathrooms' => 'nullable|numeric|min:1|max:5',
-            'square_meters' => 'nullable|numeric|min:30|max:200',
+            'rooms' => 'nullable|numeric|between:1,255',
+            'beds' => 'nullable|numeric|between:1,255',
+            'bathrooms' => 'nullable|numeric|between:1,255',
+            'square_meters' => 'nullable|numeric|between:1,65535',
             'address' => 'required|max:255',
             'lat' => 'required|numeric|min:-90|max:90',
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
-            //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 
@@ -112,16 +111,16 @@ class PlaceController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:200',
-            'rooms' => 'nullable|numeric|min:1|max:10',
-            'beds' => 'nullable|numeric|min:1|max:4',
-            'bathrooms' => 'nullable|numeric|min:1|max:5',
-            'square_meters' => 'nullable|numeric|min:30|max:200',
+            'rooms' => 'nullable|numeric|between:1,255',
+            'beds' => 'nullable|numeric|between:1,255',
+            'bathrooms' => 'nullable|numeric|between:1,255',
+            'square_meters' => 'nullable|numeric|between:1,65535',
             'address' => 'required|max:255',
             'lat' => 'required|numeric|min:-90|max:90',
             'lon' => 'required|numeric|min:-180|max:180',
-            'amenities.*' => 'nullable|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,png,jpg' 
-            //ho messo che può prendere questi formati ma possiamo aggiungerne altri 
+            'amenities' => 'required|array|min:1',
+            'amenities.*' => 'required|min:1|exists:amenities,id',
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
             //TODO decidere la grandezze massima dell'immagine caricabile
         ]);
 
