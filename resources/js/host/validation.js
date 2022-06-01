@@ -1,68 +1,77 @@
-//TODO refactoring
-
-//prendo i pulsanti submit dei form
+//create $ edit
+//prendo i pulsanti submit dei form create e edit
 const submitButtons = document.getElementById('form-submit-button');
 
 //quando si preme submit eseguo la fn di verifica
-
-// create input
 submitButtons.addEventListener('click', function() {
-    let createTitle = document.forms["create-form"]["title"].value;
-    if (createTitle == "") 
-        alert("Title must be filled out");
-    
-    let createAddress = document.forms["create-form"]["address"].value;
-    if (createAddress == "") 
-        alert("Address must be filled out");
-    
-    // let createLatitude = document.forms["create-form"]["lat"].value;
-    // if (createLatitude == "") 
-    //     alert("Latitude must be filled out");
-    
-    // let createLongitude = document.forms["create-form"]["lon"].value;
-    // if (createLongitude == "") 
-    //     alert("Longitude must be filled out");
-})
-
-// edit input
-submitButtons.addEventListener('click', function() {
-    let editTitle = document.forms["edit-form"]["title"].value;
-    if (editTitle == "") 
+    let title = document.forms["place-form"]["title"].value;
+    if (title == "") 
         alert("Title must be filled out");
 
-    let editAddress = document.forms["edit-form"]["address"].value;
-    if (editAddress == "") 
+    let address = document.forms["place-form"]["address"].value;
+    if (address == "") 
         alert("Address must be filled out");
 
-    // let editLatitude = document.forms["edit-form"]["lat"].value;
-    // if (editLatitude == "") 
+    // let lat = document.forms["place-form"]["lat"].value;
+    // if (lat == "") 
     //     alert("Latitude must be filled out");
 
-    // let editLongitude = document.forms["edit-form"]["lon"].value;
-    // if (editLongitude == "") 
+    // let lon = document.forms["place-form"]["lon"].value;
+    // if (lon == "") 
     //     alert("Longitude must be filled out");
 
-    let editRooms = document.forms["edit-form"]["rooms"].value;
-    if (editRooms == "") 
-        alert("Rooms must be filled out");
-    else if (isNaN(editRooms) || editRooms < 1)
+    let rooms = document.forms["place-form"]["rooms"].value;
+    if (isNaN(rooms) || rooms < 1)
         alert("Rooms must be a number and greater than 0");
 
-    let editBeds = document.forms["edit-form"]["beds"].value;
-    if (editBeds == "") 
-        alert("Beds must be filled out");
-    else if (isNaN(editBeds) || editBeds < 1) 
+    let beds = document.forms["place-form"]["beds"].value;
+    if (isNaN(beds) || beds < 1) 
         alert("Beds must be a number and greater than 0");
 
-    let editBaths = document.forms["edit-form"]["bathrooms"].value;
-    if (editBaths == "") 
-        alert("Longitude must be filled out");
-    else if (isNaN(editBaths) || editBaths < 1) 
+    let baths = document.forms["place-form"]["bathrooms"].value;
+    if (isNaN(baths) || baths < 1) 
         alert("Baths must be a number and greater than 0");
 
-    let editSquares = document.forms["edit-form"]["square_meters"].value;
-    if (editSquares == "") 
+    let squareM = document.forms["place-form"]["square_meters"].value;
+    if (isNaN(squareM) || squareM < 1) 
+        alert("Square meters must be a number and greater than 0");
+})
+
+//visibility
+//prendo il pulsante submit del form visibility
+const visibility = document.getElementById('visibility-btn');
+
+//quando si preme submit eseguo la fn di verifica
+visibility.addEventListener('click', function() {
+    // let title = document.forms["visibility-form"]["title"].value;
+    // if (title == "") 
+    //     alert("Title must be filled out");
+
+    // let address = document.forms["visibility-form"]["address"].value;
+    // if (address == "") 
+    //     alert("Address must be filled out");
+
+    let rooms = document.forms["visibility-form"]["rooms"].value;
+    if (rooms == "") 
+        alert("Rooms must be filled out");
+    else if (isNaN(rooms) || rooms < 1)
+        alert("Rooms must be a number and greater than 0");
+
+    let beds = document.forms["visibility-form"]["beds"].value;
+    if (beds == "") 
+        alert("Beds must be filled out");
+    else if (isNaN(beds) || beds < 1) 
+        alert("Beds must be a number and greater than 0");
+
+    let baths = document.forms["visibility-form"]["bathrooms"].value;
+    if (baths == "") 
+        alert("Longitude must be filled out");
+    else if (isNaN(baths) || baths < 1) 
+        alert("Baths must be a number and greater than 0");
+
+    let squareM = document.forms["visibility-form"]["square_meters"].value;
+    if (squareM == "") 
         alert("Square meters must be filled out");
-    else if (isNaN(editSquares) || editSquares < 1) 
+    else if (isNaN(squareM) || squareM < 1) 
         alert("Square meters must be a number and greater than 0");
 })

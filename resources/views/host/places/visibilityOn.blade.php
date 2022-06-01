@@ -8,7 +8,7 @@
 
                 <h3>Make sure all fields are filled, otherwise {{ $place->title }} wont be made visible on the app</h3>
 
-                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="visibility-form">
                     @csrf
                     @method('PUT')
 
@@ -109,7 +109,7 @@
                     </div>
                     @endif
 
-                    <button type="submit" class="btn btn-primary">Salva</button>
+                    <button type="submit" class="btn btn-primary" id="visibility-btn">Salva</button>
                 </form>
 
             </div>
