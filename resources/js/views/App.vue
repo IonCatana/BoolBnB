@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>APP.VUE</h1>    
+      
     <my-header />
     <!-- <router-link to="{name: 'place.index'}">Show all posts</router-link> -->
 
