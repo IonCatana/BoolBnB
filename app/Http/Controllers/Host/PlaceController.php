@@ -20,7 +20,6 @@ class PlaceController extends Controller
             ->only([
                 'update',
                 'store',
-                'toggleVisibility',
             ]);
     }
 
@@ -174,6 +173,7 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
+        dd($place->visible);
         if (!$place->visible) {
 
             $missing_attributes = $place->getMissingAttributes();
@@ -188,7 +188,8 @@ class PlaceController extends Controller
 
             // se campi vuoti: utente vai a riempirli!
             $amenities = Amenity::all();
-            return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
+            return view('host.places.fillAttributes', compact('place', 'amenities', 'missing_attributes'));
+            //TODO come gestisco se la request proviene da create o update? nel caso di create non posso andare a toggleVisibility perche il model ancora non esiste
         }
 
         // se era gia visibile la spegniamo

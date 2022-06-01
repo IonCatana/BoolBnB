@@ -38,13 +38,12 @@ class CheckVisibilityPermissions
                     $missing_attributes[] = $attribute;
                 }
             }
-            dd($missing_attributes);
 
             if (empty($missing_attributes)) {
                 return $next($request);
             }
 
-            return redirect()->route('host.places.fillAttributes', compact('missing_attributes'));
+            return redirect()->route('host.places.toggleVisibility', );
         }
 
         return $next($request);
