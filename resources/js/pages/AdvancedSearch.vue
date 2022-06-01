@@ -16,6 +16,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
         >
+          <i class="fas fa-sort"></i>
           Filter
         </button>
 

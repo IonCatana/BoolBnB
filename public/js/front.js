@@ -1930,6 +1930,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderNavBar"
 });
@@ -1973,6 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -6577,7 +6599,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  border: 1px solid black;\n  width: 100px;\n  height: 50px;\n}\n.right_nav_bar[data-v-14032ba4] {\n  border: 1px solid red;\n  width: 200px;\n}", ""]);
+exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  width: 35px;\n  height: 70px;\n}\nimg[data-v-14032ba4] {\n  width: 100%;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -38478,42 +38500,95 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "header_nav_bar" } }, [
+    _c("nav", { staticClass: "navbar d-flex justify-content-between" }, [
+      _c("div", { staticClass: "logo" }, [
+        _c("img", { attrs: { src: "../../assets/img/Logo.jpg", alt: "" } }),
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "header_nav_bar" } }, [
-      _c("nav", { staticClass: "navbar d-flex justify-content-between" }, [
-        _c("div", { staticClass: "logo" }, [_vm._v("qui va il logo")]),
+    return _c("form", { staticClass: "form-inline" }, [
+      _c("input", {
+        staticClass: "form-control mr-sm-2",
+        attrs: {
+          type: "search",
+          placeholder: "Search",
+          "aria-label": "Search",
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success my-2 my-sm-0",
+          attrs: { type: "submit" },
+        },
+        [_vm._v("\n        Search\n      ")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "right_nav_bar d-flex align-items-center" },
+      [
+        _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+          _vm._v("Become a host "),
+          _c("i", { staticClass: "fas fa-globe" }),
+        ]),
         _vm._v(" "),
-        _c("form", { staticClass: "form-inline" }, [
-          _c("input", {
-            staticClass: "form-control mr-sm-2",
-            attrs: {
-              type: "search",
-              placeholder: "Search",
-              "aria-label": "Search",
+        _c("div", { staticClass: "dropdown dropleft" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-secondary dropdown-toggle",
+              attrs: {
+                href: "#",
+                role: "button",
+                id: "dropdownMenuLink",
+                "data-toggle": "dropdown",
+                "aria-expanded": "false",
+              },
             },
-          }),
+            [_c("i", { staticClass: "far fa-user" })]
+          ),
           _vm._v(" "),
           _c(
-            "button",
+            "div",
             {
-              staticClass: "btn btn-outline-success my-2 my-sm-0",
-              attrs: { type: "submit" },
+              staticClass: "dropdown-menu",
+              attrs: { "aria-labelledby": "dropdownMenuLink" },
             },
-            [_vm._v("\n        Search\n      ")]
+            [
+              _c(
+                "a",
+                { staticClass: "dropdown-item", attrs: { href: "/register" } },
+                [_vm._v("Register")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                { staticClass: "dropdown-item", attrs: { href: "/login" } },
+                [_vm._v("Login")]
+              ),
+            ]
           ),
         ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "right_nav_bar" }, [
-          _vm._v('\n      qui va "diventa host, button login"'),
-        ]),
-      ]),
-    ])
+      ]
+    )
   },
 ]
 render._withStripped = true
@@ -38583,18 +38658,7 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item dropdown" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary ml-4",
-              attrs: {
-                type: "button",
-                "data-toggle": "modal",
-                "data-target": "#exampleModal",
-              },
-            },
-            [_vm._v("\n        Filter\n      ")]
-          ),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -38610,12 +38674,12 @@ var render = function () {
             [
               _c("div", { staticClass: "modal-dialog" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
                     _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -38659,7 +38723,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(4),
                 ]),
               ]),
             ]
@@ -38670,6 +38734,26 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary ml-4",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#exampleModal",
+        },
+      },
+      [
+        _c("i", { staticClass: "fas fa-sort" }),
+        _vm._v("\n        Filter\n      "),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -38812,15 +38896,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.places, function (place) {
-      return _c("div", { key: place.id }, [
-        _vm._v("\n    " + _vm._s(place.title) + "\n  "),
-      ])
-    }),
-    0
-  )
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
