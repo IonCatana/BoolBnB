@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
 
-
 class PlaceController extends Controller
 {
     /**
@@ -22,7 +21,6 @@ class PlaceController extends Controller
             'places' => $places,
             'success' => true, 
         ]);
-        
     }
 
     /**

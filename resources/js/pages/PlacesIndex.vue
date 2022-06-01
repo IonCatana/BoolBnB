@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <div v-for="place in places" :key="place.id">
+    <div v-for="place in places" :key="place.id">
       {{ place.title }}
-    </div> -->
+    </div>
   </div>
 </template>
 

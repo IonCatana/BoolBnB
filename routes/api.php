@@ -19,4 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/places', 'Api\PlaceController@index');
-Route::get('/amenities', 'Api\AmenityController@index');

@@ -1,9 +1,7 @@
 <template>
   <div id="header_nav_bar">
-    <nav class="navbar d-flex justify-content-between">
-      <div class="logo">
-        <img :src="'../../assets/img/Logo.jpg'" alt="" /> 
-      </div>
+    <nav class="navbar">
+      <div class="logo">qui va il logo</div>
       <form class="form-inline">
         <input
           class="form-control mr-sm-2"
@@ -15,28 +13,7 @@
           Search
         </button>
       </form>
-      <div class="right_nav_bar d-flex align-items-center">
-        <a class="dropdown-item" href="#"
-          >Become a host <i class="fas fa-globe"></i
-        ></a>
-        <div class="dropdown dropleft">
-          <a
-            class="btn btn-secondary dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="far fa-user"></i>
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/register">Register</a>
-            <a class="dropdown-item" href="/login">Login</a>
-          </div>
-        </div>
-      </div>
+      <div class="right_nav_bar">qui va "diventa host, button login"</div>
     </nav>
   </div>
 </template>
@@ -53,16 +30,14 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.logo {  
-  width: 35px;
-  height: 70px;
+.logo {
+  border: 1px solid black;
+  width: 100px;
+  height: 50px;
 }
 
 .right_nav_bar {
-  
-}
-img {
-  width: 100%;
-  height: 100%;
+  border: 1px solid red;
+  width: 200px;
 }
 </style>
