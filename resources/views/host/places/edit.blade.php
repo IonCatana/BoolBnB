@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h1>Edit place info</h1>
-                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="place-form">
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="edit-form">
                     @csrf
                     @method('PUT')
 

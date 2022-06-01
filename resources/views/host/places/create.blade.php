@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('host.places.store') }}" method="POST" enctype="multipart/form-data" class="container px-5 justify-content md-12" name="place-form">
+    <form action="{{ route('host.places.store') }}" method="POST" enctype="multipart/form-data" class="container px-5 justify-content md-12" name="create-form">
         @csrf
 
         {{-- titolo --}}

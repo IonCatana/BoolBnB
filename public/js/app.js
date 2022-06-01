@@ -37453,35 +37453,42 @@ address.addEventListener('keypress', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//prendo tutti gli input presenti in pagina
-// const formInputs = document.querySelectorAll('.form-control');
-// const forms = document.querySelectorAll('.form-control');
-var submitButtons = document.getElementById('form-submit-button'); //per ogni input eseguo la fn
+//TODO refactoring
+//prendo i pulsanti submit dei form
+var submitButtons = document.getElementById('form-submit-button'); //quando si preme submit eseguo la fn di verifica
+// create input
 
 submitButtons.addEventListener('click', function () {
-  var title = document.forms["place-form"]["title"].value;
+  var createTitle = document.forms["create-form"]["title"].value;
+  if (createTitle == "") alert("Title must be filled out");
+  var createAddress = document.forms["create-form"]["address"].value;
+  if (createAddress == "") alert("Address must be filled out"); // let createLatitude = document.forms["create-form"]["lat"].value;
+  // if (createLatitude == "") 
+  //     alert("Latitude must be filled out");
+  // let createLongitude = document.forms["create-form"]["lon"].value;
+  // if (createLongitude == "") 
+  //     alert("Longitude must be filled out");
+}); // edit input
 
-  if (title == "") {
-    alert("Title must be filled out");
-  }
+submitButtons.addEventListener('click', function () {
+  var editTitle = document.forms["edit-form"]["title"].value;
+  if (editTitle == "") alert("Title must be filled out");
+  var editAddress = document.forms["edit-form"]["address"].value;
+  if (editAddress == "") alert("Address must be filled out"); // let editLatitude = document.forms["edit-form"]["lat"].value;
+  // if (editLatitude == "") 
+  //     alert("Latitude must be filled out");
+  // let editLongitude = document.forms["edit-form"]["lon"].value;
+  // if (editLongitude == "") 
+  //     alert("Longitude must be filled out");
 
-  var address = document.forms["place-form"]["address"].value;
-
-  if (address == "") {
-    alert("Address must be filled out");
-  }
-
-  var latitude = document.forms["place-form"]["latitude"].value;
-
-  if (latitude == "") {
-    alert("latitude must be filled out");
-  }
-
-  var longitude = document.forms["place-form"]["longitude"].value;
-
-  if (longitude == "") {
-    alert("longitude must be filled out");
-  }
+  var editRooms = document.forms["edit-form"]["rooms"].value;
+  if (editRooms == "") alert("Rooms must be filled out");else if (isNaN(editRooms) || editRooms < 1) alert("Rooms must be a number and greater than 0");
+  var editBeds = document.forms["edit-form"]["beds"].value;
+  if (editBeds == "") alert("Beds must be filled out");else if (isNaN(editBeds) || editBeds < 1) alert("Beds must be a number and greater than 0");
+  var editBaths = document.forms["edit-form"]["bathrooms"].value;
+  if (editBaths == "") alert("Longitude must be filled out");else if (isNaN(editBaths) || editBaths < 1) alert("Baths must be a number and greater than 0");
+  var editSquares = document.forms["edit-form"]["square_meters"].value;
+  if (editSquares == "") alert("Square meters must be filled out");else if (isNaN(editSquares) || editSquares < 1) alert("Square meters must be a number and greater than 0");
 });
 
 /***/ }),
