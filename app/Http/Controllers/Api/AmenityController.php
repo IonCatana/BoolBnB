@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Place;
+use App\Amenity;
 
-
-class PlaceController extends Controller
+class AmenityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,11 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::all();
+        $amenities = Amenity::all();
 
         return response()->json([
-            'places' => $places,
-            'success' => true, 
+            'amenities' => $amenities,
+            'success' => true,
         ]);
         
     }

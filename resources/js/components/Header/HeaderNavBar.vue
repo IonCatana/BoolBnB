@@ -1,6 +1,7 @@
 <template>
   <div id="header_nav_bar">
-    <nav class="navbar">
+    <nav class="navbar d-flex justify-content-between">
+      
       <div class="logo">qui va il logo</div>
       <form class="form-inline">
         <input
@@ -13,7 +14,8 @@
           Search
         </button>
       </form>
-      <div class="right_nav_bar">qui va "diventa host, button login"</div>
+      <div class="right_nav_bar">
+        qui va "diventa host, button login"</div>
     </nav>
   </div>
 </template>
