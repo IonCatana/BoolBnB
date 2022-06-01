@@ -46,8 +46,15 @@ submitButtons.addEventListener('click', function() {
         if (isNaN(squareM) || squareM < 1)
         alert("Square meters must be a number and greater than 0");
     }
-        
-})
+
+    let imgInput = document.forms["place-form"]["img"];
+    let imgPath = imgInput.value;
+    let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+    if (!allowedExtensions.exec(imgPath)) {
+        alert('Invalid file type');
+    }
+});
 
 //visibility
 //prendo il pulsante submit del form visibility
@@ -86,4 +93,12 @@ visibility.addEventListener('click', function() {
         alert("Square meters must be filled out");
     else if (isNaN(squareM) || squareM < 1) 
         alert("Square meters must be a number and greater than 0");
-})
+
+    let imgInput = document.forms["visibility-form"]["img"];
+    let imgPath = imgInput.value;
+    let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+    if (!allowedExtensions.exec(imgPath)) {
+        alert('Invalid file type');
+    }
+});

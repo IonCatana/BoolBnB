@@ -37494,6 +37494,14 @@ submitButtons.addEventListener('click', function () {
   if (!isEmpty(squareM)) {
     if (isNaN(squareM) || squareM < 1) alert("Square meters must be a number and greater than 0");
   }
+
+  var imgInput = document.forms["place-form"]["img"];
+  var imgPath = imgInput.value;
+  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+  if (!allowedExtensions.exec(imgPath)) {
+    alert('Invalid file type');
+  }
 }); //visibility
 //prendo il pulsante submit del form visibility
 
@@ -37514,6 +37522,13 @@ visibility.addEventListener('click', function () {
   if (baths == "") alert("Longitude must be filled out");else if (isNaN(baths) || baths < 1) alert("Baths must be a number and greater than 0");
   var squareM = document.forms["visibility-form"]["square_meters"].value;
   if (squareM == "") alert("Square meters must be filled out");else if (isNaN(squareM) || squareM < 1) alert("Square meters must be a number and greater than 0");
+  var imgInput = document.forms["visibility-form"]["img"];
+  var imgPath = imgInput.value;
+  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+  if (!allowedExtensions.exec(imgPath)) {
+    alert('Invalid file type');
+  }
 });
 
 /***/ }),
