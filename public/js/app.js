@@ -37474,6 +37474,7 @@ address.addEventListener('keypress', function (e) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
@@ -37487,6 +37488,11 @@ __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boo
 __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
 >>>>>>> parent of 28c28b5 (Merge branch 'advanced-search-filter')
+=======
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
+>>>>>>> advanced-search-filter
 
 
 /***/ })

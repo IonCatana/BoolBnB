@@ -44,4 +44,8 @@ img {
   border: 1px solid red;
   width: 200px;
 }
+.right_nav_bar {
+  border: 1px solid red;
+  width: 200px;
+}
 </style>

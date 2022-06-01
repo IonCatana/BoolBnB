@@ -6434,7 +6434,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  border: 1px solid black;\n  width: 100px;\n  height: 50px;\n}\nimg[data-v-14032ba4] {\n  width: 100%;\n  height: 100%;\n}\n.right_nav_bar[data-v-14032ba4] {\n  border: 1px solid red;\n  width: 200px;\n}", ""]);
+exports.push([module.i, ".container[data-v-14032ba4] {\n  width: 100vw;\n  display: flex;\n  justify-content: space-between;\n}\n.logo[data-v-14032ba4] {\n  border: 1px solid black;\n  width: 100px;\n  height: 50px;\n}\nimg[data-v-14032ba4] {\n  width: 100%;\n  height: 100%;\n}\n.right_nav_bar[data-v-14032ba4] {\n  border: 1px solid red;\n  width: 200px;\n}\n.right_nav_bar[data-v-14032ba4] {\n  border: 1px solid red;\n  width: 200px;\n}", ""]);
 
 // exports
 
