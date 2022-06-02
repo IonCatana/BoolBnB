@@ -22,29 +22,59 @@
                         @enderror
                     </div>
 
-                    {{-- Address Places --}}
+                    {{-- indirizzo --}}
                     <div class="form-group">
                         <label for="address">Address *</label>
                         <input type="text" class="form-control" id="address" name="address"
-                            value="{{ old('title', $place->address) }}">
+                        value="{{ old('title', $place->address) }}"
+                        class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
+                        >
                         {{-- Error --}}
                         @error('address')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}">
+                        {{-- lat e lon display: none --}}
+                        <div class="form-group d-none">
+                            <div class="row">
+                                <div class="col">
+                                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}">
+                                </div>
+                                <div class="col">
+                                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}">
+                                </div>
                             </div>
-                            <div class="col">
-                                <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}">
+                        </div>
+    
+                        <!-- Modal for address-input -->
+                        <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addressModalLabel">Enter your places address</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="address-modal" class="">Address</label>
+                                            <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                            id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                            >
+                                            <div id="list-modal" class="list-group"></div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
 
                     {{-- Stanze Rooms, Beds, Bathrooms --}}
                     <div class="form-group">
@@ -128,7 +158,15 @@
                     </div>
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
-                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
+                    {{-- visibility --}}
+                    <label class="d-block">All fields must be filled to make your place visible on the app</label>
+                    <div class="form-group form-check form-check-inline d-block">
+                        <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+                        {{ old('visible') || $place->visible ? ' checked' : '' }}/>
+                        <label class="form-check-label mr-3" for="visible">Visible</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
 
             </div>
