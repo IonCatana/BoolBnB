@@ -49,11 +49,13 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Place $place, Message $msg)
+    public function show($place_id, $msg_id)
     {
-        dd($msg);
-        // $msg = Message::where('id', $msg->id);
-        return view('host.places.messages.show', compact('place', 'msg'));
+        // dd($msg);
+        // dd($place_id);
+        $message = Message::where('id', $msg_id)->first();
+
+        return view('host.places.messages.show', compact('message'));
     }
 
     /**
