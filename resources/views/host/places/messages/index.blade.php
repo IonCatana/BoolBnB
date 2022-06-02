@@ -46,5 +46,7 @@
                 @endforeach
             </tbody>
         </table>
+
+        <a href="{{ route('host.places.index', $place->slug) }}">Back to places</a>
     </div>
 @endsection

@@ -8,7 +8,7 @@
         <h2>Sender: {{ $message->sender_name }}</h2>
         <h3>Sender email: {{ $message->sender_email }}</h3>
         <p>Content: {{ $message->content }}</p>
+    
+        <a href="{{ route('host.places.messages.index', $message->place->slug) }}">Back to messages</a>
     </div>
-
-    {{-- <a href="{{ route('host.places.messages.index', $place_id) }}">Back to messages</a> --}}
 @endsection
