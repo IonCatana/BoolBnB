@@ -11,7 +11,7 @@
                 <th>Object</th>
                 <th>Date</th>
                 <th>Read</th>
-                <th>Actions</th>
+                <th colspan="2">Actions</th>
             </thead>
 
             <tbody class="text-center">
@@ -39,6 +39,7 @@
                                 @method('DELETE')
 
                                 <button type="submit" class="btn btn-danger">Delete this message</button>
+                                {{-- //TODO aggiungere un tasto di conferma eliminazione? --}}
                             </form>
                         </td>
                     </tr>

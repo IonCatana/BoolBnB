@@ -21,6 +21,7 @@
                 <th>Amenities</th>
                 <th>Image</th>
                 <th>Actions</th>
+                <th>Messages</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>

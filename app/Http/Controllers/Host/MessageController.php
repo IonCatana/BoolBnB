@@ -51,11 +51,12 @@ class MessageController extends Controller
      */
     public function show($place_id, $msg_id)
     {
-        // dd($msg);
+        // dd($msg_id);
         // dd($place_id);
         $message = Message::where('id', $msg_id)->first();
+        // dd($message);
 
-        return view('host.places.messages.show', compact('message'));
+        return view('host.places.messages.show', compact('message') );
     }
 
     /**
@@ -87,13 +88,15 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($place_id, $msg_id)
+    public function destroy(Place $place, $msg_id)
     {
+        // dd($place);
+        // dd($msg_id);
         $message = Message::where('id', $msg_id)->get();
         // dd($message);
         $message->each->delete();
 
-        return redirect()->route('host.places.messages.index', $place_id);
+        return redirect()->route('host.places.messages.index', $place);
         // return redirect()->back();
     }
 }
