@@ -37472,33 +37472,9 @@ address.addEventListener('keypress', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-__webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
-=======
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\sass\front.scss */"./resources/sass/front.scss");
->>>>>>> 667c2daea07df6d5785e9b0cce3563e69880f082
-=======
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
->>>>>>> parent of 28c28b5 (Merge branch 'advanced-search-filter')
-=======
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
->>>>>>> advanced-search-filter
-=======
-__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
->>>>>>> 274315788242fc8b707b2b3f0a335b80efbf0a5c
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
 
 
 /***/ })
