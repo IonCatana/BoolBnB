@@ -22,6 +22,17 @@
             id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
             class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
             >
+            {{-- lat e lon: invisibili --}}
+            <div class="form-group d-none">
+                <div class="row">
+                    <div class="col">
+                        <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
+                    </div>
+                    <div class="col">
+                        <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
+                    </div>
+                </div>
+            </div>
             
             <!-- Modal for address-input -->
             <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
@@ -55,17 +66,6 @@
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
-                </div>
-                <div class="col">
-                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
-                </div>
-            </div>
         </div>
 
         {{-- numero di stanze, letti, bagni e metri quadri --}}
