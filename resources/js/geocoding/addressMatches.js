@@ -11,6 +11,37 @@ function setAddressToForm(address) {
   document.getElementById('address').value = address;
 }
 
+function composeAddress(address) {
+  let { freeformAddress, countrySubdivision, countrySecondarySubdivision, country, municipality } = address;
+  let str = '';
+
+  if (freeformAddress != null) str += freeformAddress;
+  if (countrySubdivision != null) str += ', ' + countrySubdivision;
+  if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
+  if (country != null) country;
+  
+  return str;
+}
+
+function makeAddressAnchor() {
+  const anchor = document.createElement('a');
+
+  anchor.setAttribute('href', '#');
+  anchor.className = 'list-group-item list-group-item-action';
+
+  return anchor;
+}
+
+function firstMatchTriggersOnEnter(element, str, position) {
+  element.classList.add('active');
+  addressInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+      setCoordinatesToForm(position.lat, position.lon);
+      setAddressToForm(str);
+      $('#addressModal').modal('hide');
+    }
+  });
+}
 
 const TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
@@ -25,23 +56,19 @@ async function fetchAndSetAddress(query) {
       results.forEach((result, index) => {
         const { address, position } = result;
         
-        const anchor = document.createElement('a');
+        const a = makeAddressAnchor(index);
+        
+        const addressStr = composeAddress(address);
+        a.append(addressStr);
+        
+        if (index === 0) firstMatchTriggersOnEnter(a, addressStr, position);
 
-        anchor.setAttribute('href', '#');
-        anchor.className = 'list-group-item list-group-item-action';
-        if (index === 0) anchor.classList.add('active');
+        list.appendChild(a);
 
-        let {streetName, municipality, country } = address;
-        if (streetName == null) streetName = 'Unnamed street';
-        const builtAddress = `${streetName}, ${municipality}, ${country}`;
-        anchor.append(builtAddress);
-
-        list.appendChild(anchor);
-
-        anchor.addEventListener('click', e => {
+        a.addEventListener('click', () => {
           setCoordinatesToForm(position.lat, position.lon);
-          setAddressToForm(builtAddress);
-          $('#exampleModal').modal('hide');
+          setAddressToForm(addressStr);
+          $('#addressModal').modal('hide');
         });
       });
     })
@@ -51,53 +78,26 @@ async function fetchAndSetAddress(query) {
 }
 
 const MIN_LENGTH = 4; // arbitrario, corrisponde alla lunghezza di Via_, cosi non inizia a cercare prima che l'utente abbia inserito info specifiche
-const address = document.getElementById('address-modal');
+const addressInput = document.getElementById('address-modal');
 const list = document.getElementById('list-modal');
 let pos = {};
 
-address.addEventListener('keypress', e => {
+addressInput.addEventListener('keypress', e => {
   if (e.target.value.length > MIN_LENGTH) {
     const query = encodeURIComponent(e.target.value);
     fetchAndSetAddress(query);
-
-    // addressMatches.forEach(item => {
-    //   console.warn('press')
-    //   const { address, position } = item;
-      
-    //   const option = document.createElement('option');
-    //   option.value = address.streetName;
-    //   console.log(option)
-    //   list.appendChild(option);
-    // });
   }
 });
-
-// address.addEventListener('focusout', e => {
-//   const query = encodeURIComponent(e.target.value);
-//   addressMatches = fetchAddressMatches(query);
-
-//   addressMatches.forEach(item => {
-//     console.warn('press')
-//     const { address, position } = item;
-    
-//     const option = document.createElement('option');
-//     option.value = address.streetName;
-//     console.log(option)
-//     list.appendChild(option);
-//   });
-// });
-
-// export default searchMatches;
-
-// const modal = document.getElementById('exampleModal');
-// modal.addEventListener('shown.bs.modal', e => {
-//   console.log('shown')
-//   address.focus();
-// });
+addressInput.addEventListener('keyup', e => {
+  if (e.key === 'Backspace') {
+    const query = encodeURIComponent(e.target.value);
+    fetchAndSetAddress(query);
+  }
+});
 
 /**
  * focus sull'input quando mostro la modale
  */
-$(document).on('shown.bs.modal','#exampleModal', function () {
-  address.focus();
+$(document).on('shown.bs.modal','#addressModal', function () {
+  addressInput.focus();
 })

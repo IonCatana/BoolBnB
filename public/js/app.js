@@ -37365,6 +37365,38 @@ function setAddressToForm(address) {
   document.getElementById('address').value = address;
 }
 
+function composeAddress(address) {
+  var freeformAddress = address.freeformAddress,
+      countrySubdivision = address.countrySubdivision,
+      countrySecondarySubdivision = address.countrySecondarySubdivision,
+      country = address.country,
+      municipality = address.municipality;
+  var str = '';
+  if (freeformAddress != null) str += freeformAddress;
+  if (countrySubdivision != null) str += ', ' + countrySubdivision;
+  if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
+  if (country != null) country;
+  return str;
+}
+
+function makeAddressAnchor() {
+  var anchor = document.createElement('a');
+  anchor.setAttribute('href', '#');
+  anchor.className = 'list-group-item list-group-item-action';
+  return anchor;
+}
+
+function firstMatchTriggersOnEnter(element, str, position) {
+  element.classList.add('active');
+  addressInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      setCoordinatesToForm(position.lat, position.lon);
+      setAddressToForm(str);
+      $('#addressModal').modal('hide');
+    }
+  });
+}
+
 var TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
 function fetchAndSetAddress(_x) {
@@ -37387,21 +37419,15 @@ function _fetchAndSetAddress() {
               results.forEach(function (result, index) {
                 var address = result.address,
                     position = result.position;
-                var anchor = document.createElement('a');
-                anchor.setAttribute('href', '#');
-                anchor.className = 'list-group-item list-group-item-action';
-                if (index === 0) anchor.classList.add('active');
-                var streetName = address.streetName,
-                    municipality = address.municipality,
-                    country = address.country;
-                if (streetName == null) streetName = 'Unnamed street';
-                var builtAddress = "".concat(streetName, ", ").concat(municipality, ", ").concat(country);
-                anchor.append(builtAddress);
-                list.appendChild(anchor);
-                anchor.addEventListener('click', function (e) {
+                var a = makeAddressAnchor(index);
+                var addressStr = composeAddress(address);
+                a.append(addressStr);
+                if (index === 0) firstMatchTriggersOnEnter(a, addressStr, position);
+                list.appendChild(a);
+                a.addEventListener('click', function () {
                   setCoordinatesToForm(position.lat, position.lon);
-                  setAddressToForm(builtAddress);
-                  $('#exampleModal').modal('hide');
+                  setAddressToForm(addressStr);
+                  $('#addressModal').modal('hide');
                 });
               });
             })["catch"](function (err) {
@@ -37420,46 +37446,27 @@ function _fetchAndSetAddress() {
 
 var MIN_LENGTH = 4; // arbitrario, corrisponde alla lunghezza di Via_, cosi non inizia a cercare prima che l'utente abbia inserito info specifiche
 
-var address = document.getElementById('address-modal');
+var addressInput = document.getElementById('address-modal');
 var list = document.getElementById('list-modal');
 var pos = {};
-address.addEventListener('keypress', function (e) {
+addressInput.addEventListener('keypress', function (e) {
   if (e.target.value.length > MIN_LENGTH) {
     var query = encodeURIComponent(e.target.value);
-    fetchAndSetAddress(query); // addressMatches.forEach(item => {
-    //   console.warn('press')
-    //   const { address, position } = item;
-    //   const option = document.createElement('option');
-    //   option.value = address.streetName;
-    //   console.log(option)
-    //   list.appendChild(option);
-    // });
+    fetchAndSetAddress(query);
   }
-}); // address.addEventListener('focusout', e => {
-//   const query = encodeURIComponent(e.target.value);
-//   addressMatches = fetchAddressMatches(query);
-//   addressMatches.forEach(item => {
-//     console.warn('press')
-//     const { address, position } = item;
-//     const option = document.createElement('option');
-//     option.value = address.streetName;
-//     console.log(option)
-//     list.appendChild(option);
-//   });
-// });
-// export default searchMatches;
-// const modal = document.getElementById('exampleModal');
-// modal.addEventListener('shown.bs.modal', e => {
-//   console.log('shown')
-//   address.focus();
-// });
-
+});
+addressInput.addEventListener('keyup', function (e) {
+  if (e.key === 'Backspace') {
+    var query = encodeURIComponent(e.target.value);
+    fetchAndSetAddress(query);
+  }
+});
 /**
  * focus sull'input quando mostro la modale
  */
 
-$(document).on('shown.bs.modal', '#exampleModal', function () {
-  address.focus();
+$(document).on('shown.bs.modal', '#addressModal', function () {
+  addressInput.focus();
 });
 
 /***/ }),
