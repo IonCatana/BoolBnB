@@ -33,13 +33,13 @@
                             <a class="btn btn-info" href="{{ route('host.places.messages.show', [$place, $msg] ) }}"> See Details</a>
                         </td>
                         <td>
-                            {{-- <form class="form-group" action="{{ route('host.places.messages.destroy', $msg) }}"
+                            <form class="form-group" action="{{ route('host.places.messages.destroy', [$place, $msg]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <button type="submit" class="btn btn-danger">Delete this message</button>
-                            </form> --}}
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -87,11 +87,13 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Place $place, Message $message)
+    public function destroy($place_id, $msg_id)
     {
-        // $message->delete();
+        $message = Message::where('id', $msg_id)->get();
+        // dd($message);
+        $message->each->delete();
 
-        // return redirect()->route('host.places.messages.index');
+        return redirect()->route('host.places.messages.index', $place_id);
         // return redirect()->back();
     }
 }
