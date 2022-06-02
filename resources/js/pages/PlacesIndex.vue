@@ -6,6 +6,7 @@
               tag="li" v-for="place in places" :key="place.id" 
               class="myLink px-3 py-1 rounded-full text-sm whitespace-nowrap bg-white">
               {{ place.title }}
+              <PlacesCard/>
           </router-link>
         </ul>
     </div>
@@ -13,9 +14,12 @@
 
 <script>
 import axios from "axios";
+import PlacesCard from '../components/PlacesCard.vue'
 
 export default {
-  components: {},
+  components: {
+    PlacesCard,
+  },
 
   data() {
     return {
