@@ -22,6 +22,10 @@
             id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
             class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
             >
+            @error('address')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
             {{-- lat e lon: invisibili --}}
             <div class="form-group d-none">
                 <div class="row">
@@ -37,35 +41,28 @@
             <!-- Modal for address-input -->
             <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addressModalLabel">Enter your places address</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addressModalLabel">Enter your places address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="address-modal" class="">Address</label>
+                                <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                >
+                                <div id="list-modal" class="list-group"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                    
-                        <div class="form-group">
-                            <label for="address-modal" class="">Address</label>
-                            <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
-                            id="address-modal" placeholder="Enter a valid address" value="" autofocus
-                            >
-
-                            <div id="list-modal" class="list-group"></div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
                 </div>
             </div>
-              
-            @error('address')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
         </div>
 
         {{-- numero di stanze, letti, bagni e metri quadri --}}

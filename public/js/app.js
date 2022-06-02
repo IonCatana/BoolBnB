@@ -37375,7 +37375,7 @@ function composeAddress(address) {
   if (freeformAddress != null) str += freeformAddress;
   if (countrySubdivision != null) str += ', ' + countrySubdivision;
   if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
-  if (country != null) country;
+  if (country != null) str += ', ' + country;
   return str;
 }
 
