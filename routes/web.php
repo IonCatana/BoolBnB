@@ -29,9 +29,6 @@ Route::prefix('host')
         ->scoped([
             'place' => 'slug'
         ]);
-        
-        Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
-            ->name('places.toggleVisibility');
 
         Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
             ->name('places.toggleVisibility');

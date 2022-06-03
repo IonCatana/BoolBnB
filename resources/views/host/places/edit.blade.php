@@ -61,7 +61,7 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="address-modal" class="">Address</label>
-                                            <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                            <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
                                             id="address-modal" placeholder="Enter a valid address" value="" autofocus
                                             >
                                             <div id="list-modal" class="list-group"></div>
@@ -166,7 +166,7 @@
                         <label class="form-check-label mr-3" for="visible">Visible</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
                 </form>
 
             </div>
