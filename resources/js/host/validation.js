@@ -1,29 +1,33 @@
 //create & edit
-const { isEmpty } = require("lodash");
+// const { isEmpty } = require("lodash");
+import { isEmpty } from 'lodash';
 
 let validationErrors = []; //array che contiene gli errori
 
 // Compare alert se non è stata checkata almeno una checkbox delle amenities
 const submitButtons = document.getElementById('form-submit-button');
-const checkboxes = document.querySelectorAll("input[type=checkbox]");
+const checkboxes = document.getElementsByClassName('validation-amenity');
 let arrayChecked = [];
 
-checkboxes.forEach(element => {
-
-    if(element.checked){
-        arrayChecked.push(element);
-    }
-
-    element.addEventListener('change', function(el) {
+if (!isEmpty(checkboxes)) {
+    for (const element of checkboxes) {
+    // checkboxes.forEach(element => {
+        console.log(element)
+    
         if(element.checked){
             arrayChecked.push(element);
-
-        } else if (!element.checked){
-            arrayChecked.splice(element, 1);
         }
-    })
-
-})
+    
+        element.addEventListener('change', function(el) {
+            if(element.checked){
+                arrayChecked.push(element);
+    
+            } else {
+                arrayChecked.splice(element, 1);
+            }
+        })
+    }
+}
 
 submitButtons.addEventListener('click', function() {
     if (arrayChecked.length == 0) {

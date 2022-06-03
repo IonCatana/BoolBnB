@@ -37271,7 +37271,9 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
-/* harmony import */ var _geocoding_addressMatches__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./geocoding/addressMatches */ "./resources/js/geocoding/addressMatches.js");
+/* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/validation.js */ "./resources/js/host/validation.js");
+/* harmony import */ var _geocoding_addressMatches__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./geocoding/addressMatches */ "./resources/js/geocoding/addressMatches.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37283,6 +37285,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
+
 
 
 
@@ -37477,13 +37480,9 @@ $(document).on('shown.bs.modal', '#addressModal', function () {
 /*!***********************************!*\
   !*** ./resources/js/host/form.js ***!
   \***********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _validation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validation.js */ "./resources/js/host/validation.js");
-/* harmony import */ var _validation_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_validation_js__WEBPACK_IMPORTED_MODULE_0__);
 //input non fanno submit quando gli si da l'enter
 var formInputs = document.querySelectorAll('.form-control');
 formInputs.forEach(function (input) {
@@ -37494,42 +37493,24 @@ formInputs.forEach(function (input) {
     }
   });
 }); // Compare alert quando si clicca sul delete
+//TODO refactor con messaggi
 
-var buttons = document.querySelectorAll('.delete-form [type="submit"]');
-buttons.forEach(function (element) {
-  element.addEventListener('click', function (el) {
-    el.preventDefault();
-    var btn = el.target;
-    var form = btn.closest('.delete-form');
-    console.log(form);
+var actionsNeedingConfirmation = ['place-delete', 'message-delete'];
+actionsNeedingConfirmation.forEach(function (action) {
+  var buttons = document.querySelectorAll(".".concat(action, "-form [type=\"submit\"]"));
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function (el) {
+      el.preventDefault();
+      var btn = el.target;
+      var form = btn.closest('.delete-form');
+      console.log(form);
 
-    if (form && confirm('Do you really want to delete this place?')) {
-      form.submit();
-    }
+      if (form && confirm('Do you really want to delete this place?')) {
+        form.submit();
+      }
+    });
   });
-}); // Compare alert se non è stata checkata almeno una checkbox delle amenities
-
-var submitButtons = document.getElementById('form-submit-button');
-var checkboxes = document.querySelectorAll("input[type=checkbox]");
-var arrayChecked = []; // checkboxes.forEach(element => {
-//     if(element.checked){
-//         arrayChecked.push(element);
-//     }
-//     element.addEventListener('change', function(el) {
-//         if(element.checked){
-//             arrayChecked.push(element);
-//         } else if (!element.checked){
-//             arrayChecked.splice(element, 1);
-//         }
-//     })
-// })
-// submitButtons.addEventListener('click', function() {
-//     if (arrayChecked.length == 0) {
-//         alert('Please, select at least one amenity');
-//     } 
-// })
-
-
+});
 
 /***/ }),
 
@@ -37537,32 +37518,62 @@ var arrayChecked = []; // checkboxes.forEach(element => {
 /*!*****************************************!*\
   !*** ./resources/js/host/validation.js ***!
   \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 //create & edit
-var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
-    isEmpty = _require.isEmpty;
+// const { isEmpty } = require("lodash");
 
 var validationErrors = []; //array che contiene gli errori
 // Compare alert se non è stata checkata almeno una checkbox delle amenities
 
 var submitButtons = document.getElementById('form-submit-button');
-var checkboxes = document.querySelectorAll("input[type=checkbox]");
+var checkboxes = document.getElementsByClassName('validation-amenity');
 var arrayChecked = [];
-checkboxes.forEach(function (element) {
-  if (element.checked) {
-    arrayChecked.push(element);
-  }
 
-  element.addEventListener('change', function (el) {
-    if (element.checked) {
-      arrayChecked.push(element);
-    } else if (!element.checked) {
-      arrayChecked.splice(element, 1);
+if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(checkboxes)) {
+  var _iterator = _createForOfIteratorHelper(checkboxes),
+      _step;
+
+  try {
+    var _loop = function _loop() {
+      var element = _step.value;
+      // checkboxes.forEach(element => {
+      console.log(element);
+
+      if (element.checked) {
+        arrayChecked.push(element);
+      }
+
+      element.addEventListener('change', function (el) {
+        if (element.checked) {
+          arrayChecked.push(element);
+        } else {
+          arrayChecked.splice(element, 1);
+        }
+      });
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _loop();
     }
-  });
-});
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+}
+
 submitButtons.addEventListener('click', function () {
   if (arrayChecked.length == 0) {
     // alert('Please, select at least one amenity');
@@ -37587,25 +37598,25 @@ submitButtons.addEventListener('click', function () {
   //     alert("Longitude must be filled out");
   var rooms = document.forms["place-form"]["rooms"].value;
 
-  if (!isEmpty(rooms)) {
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(rooms)) {
     if (isNaN(rooms) || rooms < 1) validationErrors.push("- Rooms must be a number and greater than 0");
   }
 
   var beds = document.forms["place-form"]["beds"].value;
 
-  if (!isEmpty(beds)) {
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(beds)) {
     if (isNaN(beds) || beds < 1) validationErrors.push("- Beds must be a number and greater than 0");
   }
 
   var baths = document.forms["place-form"]["bathrooms"].value;
 
-  if (!isEmpty(baths)) {
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(baths)) {
     if (isNaN(baths) || baths < 1) validationErrors.push("- Bathrooms must be a number and greater than 0");
   }
 
   var squareM = document.forms["place-form"]["square_meters"].value;
 
-  if (!isEmpty(squareM)) {
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(squareM)) {
     if (isNaN(squareM) || squareM < 1) validationErrors.push("- Square meters must be a number and greater than 0");
   }
 
@@ -37613,7 +37624,7 @@ submitButtons.addEventListener('click', function () {
   var imgPath = imgInput.value;
   var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
-  if (!isEmpty(imgPath)) {
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(imgPath)) {
     if (!allowedExtensions.exec(imgPath)) {
       validationErrors.push('- Invalid file type');
     }
@@ -37680,9 +37691,9 @@ visibility.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
 
 
 /***/ })

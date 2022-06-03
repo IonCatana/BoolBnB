@@ -55199,19 +55199,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\front.js */"./resources/js/front.js");
-=======
 module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/front.js */"./resources/js/front.js");
->>>>>>> upgrade-backend-tomtom-call
-=======
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\front.js */"./resources/js/front.js");
->>>>>>> develop
->>>>>>> master
 
 
 /***/ })

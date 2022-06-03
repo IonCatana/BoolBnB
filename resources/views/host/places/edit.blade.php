@@ -135,9 +135,9 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="amenities[]"
                                                 {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
-                                                class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
+                                                class="form-check-input validation-amenity" id="{{ 'custom_check' . '_' . $i }}">
                                                 {{-- //TODO install icons dependencies --}}
-                                            <label class="custom-control-label"
+                                            <label class="form-check-label mr-3"
                                                 for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}
                                             </label>
                                         </div>

@@ -46,7 +46,7 @@
                         <td>
                             <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>
                         
-                            <form class="delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
+                            <form class="place-delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')

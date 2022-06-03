@@ -51,7 +51,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="address-modal" class="">Address</label>
-                                <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
                                 id="address-modal" placeholder="Enter a valid address" value="" autofocus
                                 >
                                 <div id="list-modal" class="list-group"></div>
@@ -104,7 +104,7 @@
         <label class="d-block">Amenities *</label>
         <div class="form-group form-check form-check-inline">
             @foreach ($amenities as $i => $amenity)
-                <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
+                <input class="form-check-input validation-amenity @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
                 <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
                 @error('amenities[]')
