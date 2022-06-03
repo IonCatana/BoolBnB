@@ -28,7 +28,7 @@ submitButtons.addEventListener('click', function(e) {
     validationErrors = [];
     
     // richiamo fn che controlla le checkboxes
-    if (checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
+    if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
 
     //controllo dei campi
     

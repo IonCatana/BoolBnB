@@ -37564,7 +37564,7 @@ submitButtons.addEventListener('click', function (e) {
   // resetto l'array nel caso venga ricaricata la pagina
   validationErrors = []; // richiamo fn che controlla le checkboxes
 
-  if (checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity'); //controllo dei campi
+  if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity'); //controllo dei campi
   // let title = document.forms["place-form"]["title"].value;
   // if (title == "") 
   //     alert("Title must be filled out");
