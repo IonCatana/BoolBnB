@@ -29,6 +29,10 @@ class Place extends Model
         return $this->hasMany('App\Visualisation');
     }
 
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
+
     // utilities
     /**
      * Generates a unique slug on this db table
