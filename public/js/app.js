@@ -37483,7 +37483,55 @@ $(document).on('shown.bs.modal', '#addressModal', function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\holog\\Boolean\\BoolBnb\\resources\\js\\host\\form.js: Unexpected token (37:2)\n\n\u001b[0m \u001b[90m 35 |\u001b[39m })\u001b[0m\n\u001b[0m \u001b[90m 36 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 38 |\u001b[39m \u001b[90m// Compare alert se non è stata checkata almeno una checkbox delle amenities\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 |\u001b[39m \u001b[90m//TODO erro in console\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 40 |\u001b[39m \u001b[36mconst\u001b[39m submitButtons \u001b[33m=\u001b[39m document\u001b[33m.\u001b[39mgetElementById(\u001b[32m'form-submit-button'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n    at instantiate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Parser.raise (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:3336:19)\n    at Parser.unexpected (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:3374:16)\n    at Parser.parseExprAtom (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:13120:22)\n    at Parser.parseExprSubscripts (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12645:23)\n    at Parser.parseUpdate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12624:21)\n    at Parser.parseMaybeUnary (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12595:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12389:61)\n    at Parser.parseExprOpBaseRightExpr (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12511:34)\n    at Parser.parseExprOpRightExpr (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12504:21)\n    at Parser.parseExprOp (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12457:27)\n    at Parser.parseExprOps (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12402:17)\n    at Parser.parseMaybeConditional (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12366:23)\n    at Parser.parseMaybeAssign (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12318:21)\n    at Parser.parseExpressionBase (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12254:23)\n    at C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12248:39\n    at Parser.allowInAnd (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14343:16)\n    at Parser.parseExpression (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12248:17)\n    at Parser.parseStatementContent (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14783:23)\n    at Parser.parseStatement (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14640:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:15283:25)\n    at Parser.parseBlockBody (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:15274:10)\n    at Parser.parseProgram (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14558:10)\n    at Parser.parseTopLevel (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14545:25)\n    at Parser.parse (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:16508:10)\n    at parse (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:16560:38)\n    at parser (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\parser\\index.js:52:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:87:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transform.js:25:41)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\gensync\\index.js:261:32)");
+//input non fanno submit quando gli si da l'enter
+var formInputs = document.querySelectorAll('.form-control');
+formInputs.forEach(function (input) {
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // const form = e.target.closest('form');
+      e.preventDefault();
+    }
+  });
+}); // Compare alert quando si clicca sul delete
+//TODO refactor con messaggi
+
+var resourcesWithDeleteConfirmation = ['place', 'message'];
+resourcesWithDeleteConfirmation.forEach(function (resource) {
+  var buttons = document.querySelectorAll(".".concat(resource, "-delete-form [type=\"submit\"]"));
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function (el) {
+      el.preventDefault();
+      var btn = el.target;
+      var form = btn.closest(".".concat(resource, "-delete-form"));
+      console.log(form);
+
+      if (form && confirm("Do you really want to delete this ".concat(resource, "?"))) {
+        form.submit();
+      }
+    });
+  });
+}); // Compare alert se non è stata checkata almeno una checkbox delle amenities
+//TODO erro in console
+// const submitButtons = document.getElementById('form-submit-button');
+// const checkboxes = document.querySelectorAll("input[type=checkbox]");
+// let arrayChecked = [];
+// checkboxes.forEach(element => {
+//     if(element.checked){
+//         arrayChecked.push(element);
+//     }
+//     element.addEventListener('change', function(el) {
+//         if(element.checked){
+//             arrayChecked.push(element);
+//         } else if (!element.checked){
+//             arrayChecked.splice(element, 1);
+//         }
+//     })
+// })
+// submitButtons.addEventListener('click', function() {
+//     if (arrayChecked.length == 0) {
+//         alert('Please, select at least one amenity');
+//     } 
+// })
 
 /***/ }),
 
