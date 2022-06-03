@@ -23,7 +23,7 @@ function checkAmenities () {
 }
 
 // se c'è qualche errore, compare alert, quando si invia il form
-submitButtons.addEventListener('click', function() {
+submitButtons.addEventListener('click', function(e) {
 
     // resetto l'array nel caso venga ricaricata la pagina
     validationErrors = [];
@@ -83,8 +83,10 @@ submitButtons.addEventListener('click', function() {
         }
     }
 
-    if (validationErrors.length > 0)
+    if (validationErrors.length > 0) {
+        e.preventDefault();
         alert(validationErrors.join("\n"));
+    }
 });
 
 //TODO ?

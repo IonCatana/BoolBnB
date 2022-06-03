@@ -37428,7 +37428,8 @@ function _fetchAndSetAddress() {
                 var addressStr = composeAddress(address);
                 a.append(addressStr);
                 if (index === 0) firstMatchTriggersOnEnter(a, addressStr, position);
-                list.appendChild(a);
+                list.appendChild(a); // TODO TAB navigation (on focus event??)
+
                 a.addEventListener('click', function () {
                   setCoordinatesToForm(position.lat, position.lon);
                   setAddressToForm(addressStr);
@@ -37460,7 +37461,7 @@ addressInput.addEventListener('keypress', function (e) {
     fetchAndSetAddress(query);
   }
 });
-addressInput.addEventListener('keyup', function (e) {
+addressInput.addEventListener('keydown', function (e) {
   if (e.key === 'Backspace') {
     var query = encodeURIComponent(e.target.value);
     fetchAndSetAddress(query);
@@ -37585,7 +37586,7 @@ function checkAmenities() {
 } // se c'è qualche errore, compare alert, quando si invia il form
 
 
-submitButtons.addEventListener('click', function () {
+submitButtons.addEventListener('click', function (e) {
   // resetto l'array nel caso venga ricaricata la pagina
   validationErrors = []; // richiamo fn che controlla le checkboxes
 
@@ -37637,7 +37638,10 @@ submitButtons.addEventListener('click', function () {
     }
   }
 
-  if (validationErrors.length > 0) alert(validationErrors.join("\n"));
+  if (validationErrors.length > 0) {
+    e.preventDefault();
+    alert(validationErrors.join("\n"));
+  }
 }); //TODO ?
 //visibility
 //prendo il pulsante submit del form visibility
@@ -37709,9 +37713,9 @@ submitButtons.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
 
 
 /***/ })
