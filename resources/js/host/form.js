@@ -10,22 +10,27 @@ formInputs.forEach(input => {
 })
 
 // Compare alert quando si clicca sul delete
-const buttons = document.querySelectorAll('.delete-form [type="submit"]');
-
-buttons.forEach(element => {
-
-    element.addEventListener('click', function(el) {
-
-        el.preventDefault(); 
-
-        const btn = el.target; 
-
-        const form = btn.closest('.delete-form'); 
-        console.log(form);
-
-        if(form && confirm('Do you really want to delete this place?') ) { 
-            form.submit(); 
-        }
+//TODO refactor con messaggi
+const resourcesWithDeleteConfirmation = [
+    'place',
+    'message',
+];
+resourcesWithDeleteConfirmation.forEach(resource => {
+    const buttons = document.querySelectorAll(`.${resource}-delete-form [type="submit"]`);
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(el) {
+            el.preventDefault(); 
+    
+            const btn = el.target; 
+    
+            const form = btn.closest(`.${resource}-delete-form`); 
+            console.log(form);
+    
+            if(form && confirm(`Do you really want to delete this ${resource}?`) ) { 
+                form.submit(); 
+            }
+        })
     })
 })
 

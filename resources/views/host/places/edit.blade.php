@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h1>Edit place info</h1>
-                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="place-form">
                     @csrf
                     @method('PUT')
 
@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="title">Title *</label>
                         <input type="text" class="form-control" id="title" name="title"
-                            value="{{ old('title', $place->title) }}">
+                            value="{{ old('title', $place->title) }}" required>
                         {{-- Error --}}
                         @error('title')
                             <div class="alert alert-danger">
@@ -135,9 +135,9 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="amenities[]"
                                                 {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}"
-                                                class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
+                                                class="form-check-input validation-amenity" id="{{ 'custom_check' . '_' . $i }}">
                                                 {{-- //TODO install icons dependencies --}}
-                                            <label class="custom-control-label"
+                                            <label class="form-check-label mr-3"
                                                 for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}
                                             </label>
                                         </div>
@@ -166,7 +166,7 @@
                         <label class="form-check-label mr-3" for="visible">Visible</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
                 </form>
 
             </div>

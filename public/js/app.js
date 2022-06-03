@@ -37272,7 +37272,8 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./host/form.js */ "./resources/js/host/form.js");
 /* harmony import */ var _host_form_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_host_form_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _geocoding_addressMatches__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./geocoding/addressMatches */ "./resources/js/geocoding/addressMatches.js");
+/* harmony import */ var _host_validation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./host/validation.js */ "./resources/js/host/validation.js");
+/* harmony import */ var _geocoding_addressMatches__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./geocoding/addressMatches */ "./resources/js/geocoding/addressMatches.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37284,6 +37285,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * custom
  * 
  */
+
 
 
 
@@ -37481,53 +37483,152 @@ $(document).on('shown.bs.modal', '#addressModal', function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//input non fanno submit quando gli si da l'enter
-var formInputs = document.querySelectorAll('.form-control');
-formInputs.forEach(function (input) {
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // const form = e.target.closest('form');
-      e.preventDefault();
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\holog\\Boolean\\BoolBnb\\resources\\js\\host\\form.js: Unexpected token (37:2)\n\n\u001b[0m \u001b[90m 35 |\u001b[39m })\u001b[0m\n\u001b[0m \u001b[90m 36 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 38 |\u001b[39m \u001b[90m// Compare alert se non è stata checkata almeno una checkbox delle amenities\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 |\u001b[39m \u001b[90m//TODO erro in console\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 40 |\u001b[39m \u001b[36mconst\u001b[39m submitButtons \u001b[33m=\u001b[39m document\u001b[33m.\u001b[39mgetElementById(\u001b[32m'form-submit-button'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n    at instantiate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Parser.raise (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:3336:19)\n    at Parser.unexpected (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:3374:16)\n    at Parser.parseExprAtom (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:13120:22)\n    at Parser.parseExprSubscripts (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12645:23)\n    at Parser.parseUpdate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12624:21)\n    at Parser.parseMaybeUnary (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12595:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12389:61)\n    at Parser.parseExprOpBaseRightExpr (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12511:34)\n    at Parser.parseExprOpRightExpr (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12504:21)\n    at Parser.parseExprOp (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12457:27)\n    at Parser.parseExprOps (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12402:17)\n    at Parser.parseMaybeConditional (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12366:23)\n    at Parser.parseMaybeAssign (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12318:21)\n    at Parser.parseExpressionBase (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12254:23)\n    at C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12248:39\n    at Parser.allowInAnd (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14343:16)\n    at Parser.parseExpression (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:12248:17)\n    at Parser.parseStatementContent (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14783:23)\n    at Parser.parseStatement (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14640:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:15283:25)\n    at Parser.parseBlockBody (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:15274:10)\n    at Parser.parseProgram (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14558:10)\n    at Parser.parseTopLevel (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:14545:25)\n    at Parser.parse (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:16508:10)\n    at parse (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\parser\\lib\\index.js:16560:38)\n    at parser (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\parser\\index.js:52:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:87:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\@babel\\core\\lib\\transform.js:25:41)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\holog\\Boolean\\BoolBnb\\node_modules\\gensync\\index.js:261:32)");
+
+/***/ }),
+
+/***/ "./resources/js/host/validation.js":
+/*!*****************************************!*\
+  !*** ./resources/js/host/validation.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//create & edit
+// const { isEmpty } = require("lodash");
+
+var validationErrors = []; //array che contiene gli errori
+//prende i pulsanti submit dei form create e edit
+
+var submitButtons = document.getElementById('form-submit-button'); //prende le checkbox delle amenities
+
+var checkboxes = document.getElementsByClassName('validation-amenity'); //fn che controlla se almeno una checkbox è checkata
+
+function checkAmenities() {
+  var _iterator = _createForOfIteratorHelper(checkboxes),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var element = _step.value;
+
+      if (element.checked) {
+        return true;
+      }
     }
-  });
-}); // Compare alert quando si clicca sul delete
-
-var buttons = document.querySelectorAll('.delete-form [type="submit"]');
-buttons.forEach(function (element) {
-  element.addEventListener('click', function (el) {
-    el.preventDefault();
-    var btn = el.target;
-    var form = btn.closest('.delete-form');
-    console.log(form);
-
-    if (form && confirm('Do you really want to delete this place?')) {
-      form.submit();
-    }
-  });
-}); // Compare alert se non è stata checkata almeno una checkbox delle amenities
-//TODO erro in console
-
-var submitButtons = document.getElementById('form-submit-button');
-var checkboxes = document.querySelectorAll("input[type=checkbox]");
-var arrayChecked = [];
-checkboxes.forEach(function (element) {
-  if (element.checked) {
-    arrayChecked.push(element);
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
   }
 
-  element.addEventListener('change', function (el) {
-    if (element.checked) {
-      arrayChecked.push(element);
-    } else if (!element.checked) {
-      arrayChecked.splice(element, 1);
-    }
-  });
-});
+  validationErrors.push('- Select at least one amenity');
+  return false;
+} // se c'è qualche errore, compare alert, quando si invia il form
+
+
 submitButtons.addEventListener('click', function () {
-  if (arrayChecked.length == 0) {
-    alert('Please, select at least one amenity');
+  // resetto l'array nel caso venga ricaricata la pagina
+  validationErrors = []; // richiamo fn che controlla le checkboxes
+
+  checkAmenities(); //controllo dei campi
+  // let title = document.forms["place-form"]["title"].value;
+  // if (title == "") 
+  //     alert("Title must be filled out");
+  // let address = document.forms["place-form"]["address"].value;
+  // if (address == "") 
+  //     alert("Address must be filled out");
+  // let lat = document.forms["place-form"]["lat"].value;
+  // if (lat == "") 
+  //     alert("Latitude must be filled out");
+  // let lon = document.forms["place-form"]["lon"].value;
+  // if (lon == "") 
+  //     alert("Longitude must be filled out");
+
+  var rooms = document.forms["place-form"]["rooms"].value;
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(rooms)) {
+    if (isNaN(rooms) || rooms < 1) validationErrors.push("- Rooms must be a number and greater than 0");
   }
-});
+
+  var beds = document.forms["place-form"]["beds"].value;
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(beds)) {
+    if (isNaN(beds) || beds < 1) validationErrors.push("- Beds must be a number and greater than 0");
+  }
+
+  var baths = document.forms["place-form"]["bathrooms"].value;
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(baths)) {
+    if (isNaN(baths) || baths < 1) validationErrors.push("- Bathrooms must be a number and greater than 0");
+  }
+
+  var squareM = document.forms["place-form"]["square_meters"].value;
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(squareM)) {
+    if (isNaN(squareM) || squareM < 1) validationErrors.push("- Square meters must be a number and greater than 0");
+  }
+
+  var imgInput = document.forms["place-form"]["img"];
+  var imgPath = imgInput.value;
+  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(imgPath)) {
+    if (!allowedExtensions.exec(imgPath)) {
+      validationErrors.push('- Invalid file type');
+    }
+  }
+
+  if (validationErrors.length > 0) alert(validationErrors.join("\n"));
+}); //TODO ?
+//visibility
+//prendo il pulsante submit del form visibility
+// const visibility = document.getElementById('visibility-btn');
+//quando si preme submit eseguo la fn di verifica
+// visibility.addEventListener('click', function() {
+//     // let title = document.forms["visibility-form"]["title"].value;
+//     // if (title == "") 
+//     //     alert("Title must be filled out");
+//     // let address = document.forms["visibility-form"]["address"].value;
+//     // if (address == "") 
+//     //     alert("Address must be filled out");
+//     let rooms = document.forms["visibility-form"]["rooms"].value;
+//     if (rooms == "") 
+//         alert("Rooms must be filled out");
+//     else if (isNaN(rooms) || rooms < 1)
+//         alert("Rooms must be a number and greater than 0");
+//     let beds = document.forms["visibility-form"]["beds"].value;
+//     if (beds == "") 
+//         alert("Beds must be filled out");
+//     else if (isNaN(beds) || beds < 1) 
+//         alert("Beds must be a number and greater than 0");
+//     let baths = document.forms["visibility-form"]["bathrooms"].value;
+//     if (baths == "") 
+//         alert("Longitude must be filled out");
+//     else if (isNaN(baths) || baths < 1) 
+//         alert("Baths must be a number and greater than 0");
+//     let squareM = document.forms["visibility-form"]["square_meters"].value;
+//     if (squareM == "") 
+//         alert("Square meters must be filled out");
+//     else if (isNaN(squareM) || squareM < 1) 
+//         alert("Square meters must be a number and greater than 0");
+//     let imgInput = document.forms["visibility-form"]["img"];
+//     let imgPath = imgInput.value;
+//     let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+//     if (!allowedExtensions.exec(imgPath)) {
+//         alert('Invalid file type');
+//     }
+// });
 
 /***/ }),
 
@@ -37560,9 +37661,9 @@ submitButtons.addEventListener('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
 
 
 /***/ })

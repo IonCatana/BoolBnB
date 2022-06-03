@@ -8,7 +8,7 @@
 
                 <h3>Make sure all fields are filled, otherwise {{ $place->title }} wont be made visible on the app</h3>
 
-                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="visibility-form">
                     @csrf
                     @method('PUT')
 
@@ -102,14 +102,14 @@
                     @if (in_array('img', $missing_attributes))
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
-                        <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <input id="img" type="file" name="img" id="img" class="@error('img') is-invalid @enderror">
                         @error('img')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     @endif
 
-                    <button type="submit" class="btn btn-primary">Salva</button>
+                    <button type="submit" class="btn btn-primary" id="visibility-btn">Salva</button>
                 </form>
 
             </div>

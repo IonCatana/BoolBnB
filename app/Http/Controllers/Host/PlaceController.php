@@ -185,7 +185,7 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
-        dd($place->visible);
+        // dd($place->visible);
         if (!$place->visible) {
 
             $missing_attributes = $place->getMissingAttributes();
