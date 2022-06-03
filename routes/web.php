@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -27,10 +23,10 @@ Route::prefix('host')
     ->namespace('Host')
     ->middleware('auth')
     ->group(function() {
-
+        
         Route::resource('places', 'PlaceController')
-            ->except('show')
-            ->scoped([
+        ->except('show')
+        ->scoped([
             'place' => 'slug'
         ]);
 

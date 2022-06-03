@@ -17,9 +17,9 @@ class CheckVisibilityPermissions
      */
     public function handle($request, Closure $next)
     {
-        dd($request->route());
-        if (!$request->input('visible')) return $next($request);
+        // dd($request->route());
 
+        if (!$request->input('visible')) return $next($request);
 
         $attributes = $request->all();
         $missing_attributes = [];

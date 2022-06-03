@@ -65,6 +65,7 @@ async function fetchAndSetAddress(query) {
 
         list.appendChild(a);
 
+        // TODO TAB navigation (on focus event??)
         a.addEventListener('click', () => {
           setCoordinatesToForm(position.lat, position.lon);
           setAddressToForm(addressStr);
@@ -88,7 +89,7 @@ addressInput.addEventListener('keypress', e => {
     fetchAndSetAddress(query);
   }
 });
-addressInput.addEventListener('keyup', e => {
+addressInput.addEventListener('keydown', e => {
   if (e.key === 'Backspace') {
     const query = encodeURIComponent(e.target.value);
     fetchAndSetAddress(query);

@@ -21,6 +21,7 @@
                 <th>Amenities</th>
                 <th>Image</th>
                 <th>Actions</th>
+                <th>Messages</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
@@ -45,7 +46,7 @@
                         <td>
                             <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>
                         
-                            <form class="delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
+                            <form class="place-delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -59,6 +60,7 @@
                                 <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-success">Visibility:On</a>
                             @endif
                         </td>
+                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                 @endforeach
                 </tr>
