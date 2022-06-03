@@ -17,19 +17,50 @@
         {{-- indirizzo --}}
         <div class="form-group">
             <label for="address">Address *</label>
-            <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter a valid address" value="{{ old('address') }}">
+            {{-- click on input triggers modal --}}
+            <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
+            id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
+            class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
+            >
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
+            
+            {{-- lat e lon: invisibili --}}
+            <div class="form-group d-none">
+                <div class="row">
+                    <div class="col">
+                        <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
+                    </div>
+                    <div class="col">
+                        <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
+                    </div>
                 </div>
-                <div class="col">
-                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
+            </div>
+            
+            <!-- Modal for address-input -->
+            <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addressModalLabel">Enter your places address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="address-modal" class="">Address</label>
+                                <input required list="matches" id="address-modal" type="text" class="orm-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                >
+                                <div id="list-modal" class="list-group"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +91,7 @@
         </div>
 
         <div class="form-group">
-            <label for="square_meters">Square meters</label>
+            <label for="square_meters">Square meters - min: 20&#13217;</label>
             <input id="square_meters" type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
             @error('square_meters')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -70,12 +101,15 @@
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
-        <label class="d-block">Amenities</label>
+        <label class="d-block">Amenities *</label>
         <div class="form-group form-check form-check-inline">
             @foreach ($amenities as $i => $amenity)
-                <input class="form-check-input" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
+                <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="amenities-{{ $i }}">{{ $amenity->name }}</label>
+                <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+                @error('amenities[]')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             @endforeach
         </div>
 
@@ -83,7 +117,8 @@
         <label class="d-block">Load an image of your place</label>
         <div class="form-group">
             {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-            <input id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            <span>Accepted formats: jpg, jpeg, png, webp</span>
             @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
