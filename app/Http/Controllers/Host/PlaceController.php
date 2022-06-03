@@ -122,6 +122,8 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
+        dd($request);
+
         $validated = $request->validate([
             'title' => 'required|max:200',
             'rooms' => 'nullable|numeric|between:1,255',

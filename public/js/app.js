@@ -37362,8 +37362,8 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
 
 
 function setCoordinatesToForm(lat, lon) {
-  document.getElementById('latitude').value = lat;
-  document.getElementById('longitude').value = lon;
+  var latit = document.getElementById('latitude').value = lat;
+  var longit = document.getElementById('longitude').value = lon;
 }
 
 function setAddressToForm(address) {
@@ -37454,7 +37454,8 @@ var MIN_LENGTH = 4; // arbitrario, corrisponde alla lunghezza di Via_, cosi non 
 
 var addressInput = document.getElementById('address-modal');
 var list = document.getElementById('list-modal');
-var pos = {};
+var pos = {}; // lancia chiamata a tomtom quando cambia l'input
+
 addressInput.addEventListener('keypress', function (e) {
   if (e.target.value.length > MIN_LENGTH) {
     var query = encodeURIComponent(e.target.value);

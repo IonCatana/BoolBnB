@@ -133,6 +133,6 @@
         </div>
 
         {{-- submit button --}}
-        <button id="form-submit-button" type="submit">Add places</button>
+        <button id="form-submit-button" type="submit" class="btn btn-primary">Add places</button>
     </form>
 @endsection

@@ -3,8 +3,8 @@ import Axios from "axios";
 
 
 function setCoordinatesToForm(lat, lon) {
-  document.getElementById('latitude').value = lat;
-  document.getElementById('longitude').value = lon;
+  const latit = document.getElementById('latitude').value = lat;
+  const longit = document.getElementById('longitude').value = lon;
 }
 
 function setAddressToForm(address) {
@@ -83,6 +83,7 @@ const addressInput = document.getElementById('address-modal');
 const list = document.getElementById('list-modal');
 let pos = {};
 
+// lancia chiamata a tomtom quando cambia l'input
 addressInput.addEventListener('keypress', e => {
   if (e.target.value.length > MIN_LENGTH) {
     const query = encodeURIComponent(e.target.value);
