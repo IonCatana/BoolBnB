@@ -24,14 +24,14 @@ Route::prefix('host')
     ->middleware('auth')
     ->group(function() {
         
-        Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
-            ->name('places.toggleVisibility');
-
         Route::resource('places', 'PlaceController')
-            ->except('show')
-            ->scoped([
+        ->except('show')
+        ->scoped([
             'place' => 'slug'
         ]);
+        
+        Route::get('places/{place:slug}', 'PlaceController@toggleVisibility')
+            ->name('places.toggleVisibility');
 
         Route::resource('places.messages', 'MessageController')
             ->only('index', 'show', 'destroy')
