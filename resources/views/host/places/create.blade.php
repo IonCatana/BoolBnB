@@ -113,14 +113,17 @@
 
             {{-- servizi --}}
             <label class="d-block">Amenities *</label>
-            <div class="form-group form-check form-check-inline">
+            <div class="form-group">
                 @foreach ($amenities as $i => $amenity)
-                    <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
-                    {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                    <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+                <div class="form-check form-check-inline col-2">
+                    <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
+
+                    <label class="form-check-label" for="{{ 'amenities' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+
                     @error('amenities[]')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                </div>
                 @endforeach
             </div>
 

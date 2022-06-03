@@ -118,12 +118,19 @@
                         
                         
             {{-- Chechboxes Amenities --}}
-            <label class="d-block">Servizi</label>                    
-            <div class="form-group form-check form-check-inline">
+            <label class="d-block">Amenities *</label>                    
+            <div class="form-group">
                 @foreach ($amenities as $i => $amenity)
-                    <input type="checkbox" name="amenities[]" {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}" class="custom-control-input" id="{{ 'custom_check' . '_' . $i }}">
+                <div class="form-check form-check-inline col-2">
+                    <input type="checkbox" name="amenities[]" {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}" class="custom-control-input @error('amenities[]') is-invalid @enderror" id="{{ 'custom_check' . '_' . $i }}">
+
                     {{-- //TODO install icons dependencies --}}
-                    <label class="custom-control-label" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+                    <label class="custom-control-label" for="{{ 'amenities' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+
+                    @error('amenities[]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 @endforeach
             </div>
 
