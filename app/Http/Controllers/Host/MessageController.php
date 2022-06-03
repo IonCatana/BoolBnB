@@ -55,9 +55,9 @@ class MessageController extends Controller
         // dd($place_id);
         $message = Message::where('id', $msg_id)->with(['place'])->first();
         // dd($message);
-        // $place = Place::where('id', $place_id)->first();
+        $place = Place::where('id', $place_id)->first();
 
-        return view('host.places.messages.show', compact('message') );
+        return view('host.places.messages.show', compact('place', 'message') );
     }
 
     /**
