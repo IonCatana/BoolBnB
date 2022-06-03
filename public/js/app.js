@@ -37495,17 +37495,17 @@ formInputs.forEach(function (input) {
 }); // Compare alert quando si clicca sul delete
 //TODO refactor con messaggi
 
-var actionsNeedingConfirmation = ['place-delete', 'message-delete'];
-actionsNeedingConfirmation.forEach(function (action) {
-  var buttons = document.querySelectorAll(".".concat(action, "-form [type=\"submit\"]"));
+var resourcesWithDeleteConfirmation = ['place', 'message'];
+resourcesWithDeleteConfirmation.forEach(function (resource) {
+  var buttons = document.querySelectorAll(".".concat(resource, "-delete-form [type=\"submit\"]"));
   buttons.forEach(function (button) {
     button.addEventListener('click', function (el) {
       el.preventDefault();
       var btn = el.target;
-      var form = btn.closest('.delete-form');
+      var form = btn.closest(".".concat(resource, "-delete-form"));
       console.log(form);
 
-      if (form && confirm('Do you really want to delete this place?')) {
+      if (form && confirm("Do you really want to delete this ".concat(resource, "?"))) {
         form.submit();
       }
     });

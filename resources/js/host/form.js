@@ -11,12 +11,12 @@ formInputs.forEach(input => {
 
 // Compare alert quando si clicca sul delete
 //TODO refactor con messaggi
-const actionsNeedingConfirmation = [
-    'place-delete',
-    'message-delete',
+const resourcesWithDeleteConfirmation = [
+    'place',
+    'message',
 ];
-actionsNeedingConfirmation.forEach(action => {
-    const buttons = document.querySelectorAll(`.${action}-form [type="submit"]`);
+resourcesWithDeleteConfirmation.forEach(resource => {
+    const buttons = document.querySelectorAll(`.${resource}-delete-form [type="submit"]`);
     
     buttons.forEach(button => {
         button.addEventListener('click', function(el) {
@@ -24,10 +24,10 @@ actionsNeedingConfirmation.forEach(action => {
     
             const btn = el.target; 
     
-            const form = btn.closest('.delete-form'); 
+            const form = btn.closest(`.${resource}-delete-form`); 
             console.log(form);
     
-            if(form && confirm('Do you really want to delete this place?') ) { 
+            if(form && confirm(`Do you really want to delete this ${resource}?`) ) { 
                 form.submit(); 
             }
         })
