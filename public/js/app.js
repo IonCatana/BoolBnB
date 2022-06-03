@@ -37505,6 +37505,7 @@ buttons.forEach(function (element) {
     }
   });
 }); // Compare alert se non è stata checkata almeno una checkbox delle amenities
+//TODO erro in console
 
 var submitButtons = document.getElementById('form-submit-button');
 var checkboxes = document.querySelectorAll("input[type=checkbox]");

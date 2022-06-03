@@ -30,6 +30,7 @@ buttons.forEach(element => {
 })
 
 // Compare alert se non è stata checkata almeno una checkbox delle amenities
+//TODO erro in console
 const submitButtons = document.getElementById('form-submit-button');
 const checkboxes = document.querySelectorAll("input[type=checkbox]");
 let arrayChecked = [];
