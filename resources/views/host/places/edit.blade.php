@@ -40,10 +40,10 @@
                         <div class="form-group d-none">
                             <div class="row">
                                 <div class="col">
-                                    <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}">
+                                    <input id="latitude" name="lat" type="number" class="coordinate form-control" value="{{ old('lat', $place->lat) }}">
                                 </div>
                                 <div class="col">
-                                    <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}">
+                                    <input id="longitude" name="lon" type="number" class="coordinate form-control" value="{{ old('lon', $place->lon) }}">
                                 </div>
                             </div>
                         </div>
