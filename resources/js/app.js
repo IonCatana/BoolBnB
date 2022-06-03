@@ -13,8 +13,4 @@ require('./bootstrap');
  */
 
 import './host/form.js';
-<<<<<<< HEAD
-import './host/geocoding.js';
-=======
 import './geocoding/addressMatches';
->>>>>>> master
