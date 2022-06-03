@@ -17,7 +17,7 @@ class CheckVisibilityPermissions
      */
     public function handle($request, Closure $next)
     {
-        dd($request->ip());
+        // dd($request->ip());
         if ($request->input('visible')) {
             $attributes = $request->all();
             $missing_attributes = [];
