@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Host;
 use App\Http\Controllers\Controller;
 use App\Place;
 use Illuminate\Http\Request;
+use App\Message;
 
 class MessageController extends Controller
 {
@@ -15,7 +16,10 @@ class MessageController extends Controller
      */
     public function index(Place $place)
     {
-        dd($place);
+        $place->load('messages');
+        $messages = $place->messages;
+
+        return view ('host.places.messages.index', compact('place', 'messages'));
     }
 
     /**
@@ -25,7 +29,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        //front-office
     }
 
     /**
@@ -36,7 +40,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //front-office
     }
 
     /**
@@ -45,9 +49,15 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($place_id, $msg_id)
     {
-        //
+        // dd($msg_id);
+        // dd($place_id);
+        $message = Message::where('id', $msg_id)->with(['place'])->first();
+        // dd($message);
+        $place = Place::where('id', $place_id)->first();
+
+        return view('host.places.messages.show', compact('place', 'message') );
     }
 
     /**
@@ -58,7 +68,7 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -70,7 +80,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //eventualmente front-office
     }
 
     /**
@@ -79,8 +89,15 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Place $place, $msg_id)
     {
-        //
+        // dd($place);
+        // dd($msg_id);
+        $message = Message::where('id', $msg_id)->get();
+        // dd($message);
+        $message->each->delete();
+
+        return redirect()->route('host.places.messages.index', $place);
+        // return redirect()->back();
     }
 }

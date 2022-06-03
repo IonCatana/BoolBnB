@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Auth;
 class PlaceController extends Controller
 {
     /**
+     * 
+     */
+    public function __construct()
+    {
+        $this->middleware('check.visibility')
+            ->only([
+                'update',
+                'store',
+            ]);
+    }
+
+    /**
      * Display a listing of the resource.
      * * @return \Illuminate\Http\Response
      */
@@ -56,8 +68,9 @@ class PlaceController extends Controller
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' ,
             //TODO decidere la grandezze massima dell'immagine caricabile
+            'visible' => 'boolean',
         ]);
 
         if( count($validated['amenities']) == 0)
@@ -172,6 +185,7 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
+        dd($place->visible);
         if (!$place->visible) {
 
             $missing_attributes = $place->getMissingAttributes();
@@ -186,7 +200,8 @@ class PlaceController extends Controller
 
             // se campi vuoti: utente vai a riempirli!
             $amenities = Amenity::all();
-            return view('host.places.visibilityOn', compact('place', 'amenities', 'missing_attributes'));
+            return view('host.places.fillAttributes', compact('place', 'amenities', 'missing_attributes'));
+            //TODO come gestisco se la request proviene da create o update? nel caso di create non posso andare a toggleVisibility perche il model ancora non esiste
         }
 
         // se era gia visibile la spegniamo

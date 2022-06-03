@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Place;
 use App\Amenity;
 
-class PlaceController extends Controller
+class AmenityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,11 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::all();
+        $amenities = Amenity::all();
 
         return response()->json([
-            'places' => $places,
-            'success' => true, 
+            'amenities' => $amenities,
+            'success' => true,
         ]);
     }
 
@@ -51,21 +50,9 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $place = Place::with(['user', 'amenities'])->where('slug', $slug)->first();
-
-        if($place){
-            return response()->json([
-                'place' => $place,
-                'success' => true,
-            ]);
-        }
-
-        return response()->json([
-            'place' => 'place not found',
-            'success' => false, 
-        ], 404);
+        //
     }
 
     /**
@@ -74,9 +61,9 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
+    public function edit($id)
     {
-        
+        //
     }
 
     /**

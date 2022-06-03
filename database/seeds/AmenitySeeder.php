@@ -34,6 +34,41 @@ class AmenitySeeder extends Seeder
                 'slug' => '',
                 'icon' => 'fa-solid fa-wind'
             ],
+            [
+                'name' => 'TV',
+                'slug' => '',
+                'icon' => 'fa-solid fa-tv'
+            ],
+            [
+                'name' => 'Kitchen',
+                'slug' => '',
+                'icon' => 'fa-solid fa-kitchen-set'
+            ],
+            [
+                'name' => 'Hydromassage',
+                'slug' => '',
+                'icon' => 'fa-solid fa-water-ladder'
+            ],
+            [
+                'name' => 'Animals Allowed',
+                'slug' => '',
+                'icon' => 'fa-solid fa-cat'
+            ],
+            [
+                'name' => 'Fireplace',
+                'slug' => '',
+                'icon' => 'fa-solid fa-fire'
+            ],
+            [
+                'name' => 'Fire Extinguisher',
+                'slug' => '',
+                'icon' => 'fa-solid fa-fire-extinguisher'
+            ],
+            [
+                'name' => 'Medical Kit',
+                'slug' => '',
+                'icon' => 'fa-solid fa-briefcase-medical'
+            ],
         ];
         foreach ($amenities as $amenity) {
 
