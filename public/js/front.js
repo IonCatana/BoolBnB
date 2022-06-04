@@ -1908,6 +1908,9 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _host_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../host/store.js */ "./resources/js/host/store.js");
 //
 //
 //
@@ -1951,8 +1954,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "HeaderNavBar"
+  name: "HeaderNavBar",
+  data: function data() {
+    return {
+      TOMTOM_API_KEY: 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj',
+      searchInput: ''
+    };
+  },
+  methods: {
+    fetchAdress: function fetchAdress(searchInput) {
+      console.log(searchInput);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://api.tomtom.com/search/2/geocode/".concat(searchInput, ".json"), {
+        params: {
+          'key': this.TOMTOM_API_KEY
+        }
+      }).then(function (res) {
+        var results = res.data.results;
+        _host_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].searchResults = res.data;
+        console.log(_host_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].searchResults);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2181,7 +2213,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/places").then(function (res) {
-        _this.places = res.data.places;
+        var places = res.data.places;
+        _this.places = places;
       })["catch"](function (error) {
         console.warn(error);
       });
@@ -2252,9 +2285,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/places/".concat(this.$route.params.slug)).then(function (res) {
-        // console.log(res.data.place);
-        _this.place = res.data.place;
-        _this.amenities = res.data.place.amenities;
+        var _res$data = res.data,
+            place = _res$data.place,
+            amenities = _res$data.amenities;
+        _this.place = place;
+        _this.amenities = amenities;
         _this.host = res.data.place.user.name;
       });
     } //TODO metter il catch error  
@@ -38684,7 +38719,38 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("form", { staticClass: "form-inline" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchInput,
+              expression: "searchInput",
+            },
+          ],
+          staticClass: "form-control mr-sm-2",
+          attrs: {
+            type: "search",
+            placeholder: "Search",
+            "aria-label": "Search",
+          },
+          domProps: { value: _vm.searchInput },
+          on: {
+            keyup: function ($event) {
+              return _vm.fetchAdress(_vm.searchInput)
+            },
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchInput = $event.target.value
+            },
+          },
+        }),
+        _vm._v(" "),
+        _vm._m(0),
+      ]),
       _vm._v(" "),
       _vm._m(1),
     ]),
@@ -38695,25 +38761,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline" }, [
-      _c("input", {
-        staticClass: "form-control mr-sm-2",
-        attrs: {
-          type: "search",
-          placeholder: "Search",
-          "aria-label": "Search",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit" },
-        },
-        [_c("a", { attrs: { href: "/advanced_search" } }, [_vm._v("Search")])]
-      ),
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-success my-2 my-sm-0",
+        attrs: { type: "submit" },
+      },
+      [_c("a", { attrs: { href: "/advanced_search" } }, [_vm._v("Search")])]
+    )
   },
   function () {
     var _vm = this
@@ -54799,8 +54854,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); //  window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -54817,6 +54872,25 @@ var app = new Vue({
   },
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
+
+/***/ }),
+
+/***/ "./resources/js/host/store.js":
+/*!************************************!*\
+  !*** ./resources/js/host/store.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
+  searchResults: []
+});
+/* harmony default export */ __webpack_exports__["default"] = (state);
 
 /***/ }),
 
@@ -55199,7 +55273,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/antonio/Desktop/web-dev/esercitazioni-boolean/boolBnb/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -27,7 +27,8 @@ export default {
     fetchPlaces() {
         axios.get("/api/places")
         .then((res) => {
-            this.places = res.data.places;
+            const {places} = res.data;
+            this.places = places;
         })
         .catch( error => {
             console.warn(error);

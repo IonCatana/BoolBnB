@@ -47,9 +47,9 @@ export default {
         fetchPlace() {
             axios.get(`/api/places/${ this.$route.params.slug }`)
             .then((res) => {
-                // console.log(res.data.place);
-                this.place = res.data.place;
-                this.amenities = res.data.place.amenities;
+                const {place, amenities} = res.data;
+                this.place = place;
+                this.amenities = amenities;
                 this.host = res.data.place.user.name;
             })
         },
