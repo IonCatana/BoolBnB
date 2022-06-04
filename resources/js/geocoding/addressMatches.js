@@ -45,7 +45,7 @@ function firstMatchTriggersOnEnter(element, str, position) {
 
 const TOMTOM_API_KEY = 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj';
 
-async function fetchAndSetAddress(query) {
+function fetchAndSetAddress(query) {
   Axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
     params: {'key': TOMTOM_API_KEY}
   })
@@ -70,6 +70,7 @@ async function fetchAndSetAddress(query) {
           setCoordinatesToForm(position.lat, position.lon);
           setAddressToForm(addressStr);
           $('#addressModal').modal('hide');
+          console.log(document.getElementById('latitude'))
         });
       });
     })

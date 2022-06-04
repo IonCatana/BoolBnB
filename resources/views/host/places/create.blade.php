@@ -30,10 +30,10 @@
             <div class="form-group d-none">
                 <div class="row">
                     <div class="col">
-                        <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat') }}">
+                        <input id="latitude" name="lat" type="number" class="form-control" value="{{ old('lat') }}" step="0.000001">
                     </div>
                     <div class="col">
-                        <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon') }}">
+                        <input id="longitude" name="lon" type="number" class="form-control" value="{{ old('lon') }}" step="0.000001">
                     </div>
                 </div>
             </div>
@@ -101,12 +101,13 @@
         {{-- //TODO upload dell'immagine? --}}
 
         {{-- servizi --}}
+        {{-- // TODO sistemare le checkboxes come nella edit --}}
         <label class="d-block">Amenities *</label>
         <div class="form-group form-check form-check-inline">
             @foreach ($amenities as $i => $amenity)
                 <input class="form-check-input validation-amenity @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" 
                 {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="{{ 'custom_check' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+                <label class="form-check-label mr-3" for="{{ 'amenities-'.$i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
                 @error('amenities[]')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

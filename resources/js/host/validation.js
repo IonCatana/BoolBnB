@@ -10,15 +10,14 @@ const submitButtons = document.getElementById('form-submit-button');
 const checkboxes = document.getElementsByClassName('validation-amenity');
 
 //fn che controlla se almeno una checkbox è checkata
-function checkAmenities () {
+function checkAmenities (checklist) {
 
-    for (const element of checkboxes) {
+    for (const element of checklist) {
         if (element.checked) {
             return true;
         }
     }
 
-    validationErrors.push('- Select at least one amenity')
     return false;
 }
 
@@ -29,7 +28,7 @@ submitButtons.addEventListener('click', function(e) {
     validationErrors = [];
     
     // richiamo fn che controlla le checkboxes
-    checkAmenities();
+    if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
 
     //controllo dei campi
     
