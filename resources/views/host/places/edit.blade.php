@@ -40,10 +40,10 @@
                         <div class="form-group d-none">
                             <div class="row">
                                 <div class="col">
-                                    <input id="latitude" name="lat" type="number" class="coordinate form-control" value="{{ old('lat', $place->lat) }}">
+                                    <input id="latitude" name="lat" type="number" class="form-control" value="{{ old('lat', $place->lat) }}" step="0.000001">
                                 </div>
                                 <div class="col">
-                                    <input id="longitude" name="lon" type="number" class="coordinate form-control" value="{{ old('lon', $place->lon) }}">
+                                    <input id="longitude" name="lon" type="number" class="form-control" value="{{ old('lon', $place->lon) }}" step="0.000001">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="address-modal" class="">Address</label>
-                                            <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                            <input list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
                                             id="address-modal" placeholder="Enter a valid address" value="" autofocus
                                             >
                                             <div id="list-modal" class="list-group"></div>
@@ -128,7 +128,7 @@
                     {{-- Chechboxes Amenities --}}                    
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label>Servizi</label>
+                            <label>Amenities</label>
                             <div class="row">
                                 @foreach ($amenities as $i => $amenity)
                                     <div class="col-lg-3 col-md-6 col-sm-12">
