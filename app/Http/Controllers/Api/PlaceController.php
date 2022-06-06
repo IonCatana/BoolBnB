@@ -16,7 +16,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::all();
+        $places = Place::with('amenities')->get();
 
         return response()->json([
             'places' => $places,

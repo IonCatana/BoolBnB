@@ -1,8 +1,9 @@
 <template>
   <div id="header_nav_bar">
     <nav class="navbar d-flex justify-content-between">
-      <div class="logo">
-        <a href="/"><img :src="'../../assets/img/Logo.jpg'" alt="" /></a>
+      <div class="logo d-flex align-items-center">
+        <img class="mr-2" :src="'../../assets/img/Logo.jpg'" alt="" />
+        <h4 class="project-name">BoolBnb</h4>
       </div>
       <form class="form-inline">
         <input
@@ -48,21 +49,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+
 .container {
   width: 100vw;
   display: flex;
   justify-content: space-between;
 }
+
 .logo {
   width: 35px;
   height: 70px;
-}
 
-img {
-  width: 100%;
-  height: 100%;
-}
-a {
-  text-decoration: none;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-name {
+    background-image: linear-gradient(60deg, #0f0e50, #41d272);
+    background-clip: text;
+    color: transparent;
+  }
 }
 </style>
