@@ -2269,14 +2269,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   data: function data() {
     return {
-      amenities: []
+      amenities: [],
+      value: "0"
     };
   },
   methods: {
@@ -2287,18 +2286,20 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res.data);
         _this.amenities = res.data.amenities;
       });
+    },
+    warning: function warning() {
+      if (this.value > 1) {
+        return {
+          color: "#e74c3c",
+          animation: "anim .3s ease-in 1 alternate"
+        };
+      }
     }
   },
   mounted: function mounted() {
     this.fetchAmenities();
   }
 }); // Slider Range Km
-// const slider = document.getElementById("myRange");
-// const output = document.getElementById("demo");
-// output.innerHTML = slider.value;
-// slider.oninput = function () {
-//   output.innerHTML = this.value;
-// };
 
 /***/ }),
 
@@ -6876,7 +6877,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}\n.slidecontainer[data-v-0312e533] {\n  width: 100%;\n}\n.slidecontainer .slider[data-v-0312e533] {\n  -webkit-appearance: none;\n  width: 100%;\n  height: 15px;\n  border-radius: 5px;\n  background: #d3d3d3;\n  outline: none;\n  opacity: 0.7;\n  transition: opacity 0.2s;\n}\n.slidecontainer .slider[data-v-0312e533]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]::-moz-range-thumb {\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]:hover {\n  opacity: 1;\n}", ""]);
+exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}\n.container .mySlider[data-v-0312e533] {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  width: 100%;\n  background-color: #d3d3d3;\n  border-radius: 20px;\n  outline: none;\n  opacity: 0.7;\n  transition: opacity 0.2s ease-in;\n  -webkit-transition: opacity 0.2s ease-in;\n}\n\n/*hover on range slider*/\n.container .mySlider[data-v-0312e533]:hover {\n  opacity: 1;\n}\n\n/* chrome and safari supporter */\n.container .mySlider[data-v-0312e533]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n          appearance: none;\n  height: 20px;\n  width: 20px;\n  border-radius: 50%;\n  background-color: #e74c3c;\n  cursor: pointer;\n  -webkit-transition: all 0.3s ease-in;\n  transition: all 0.3s ease-in;\n}\n.container .mySlider[data-v-0312e533]::-moz-range-thumb {\n  -moz-appearance: none;\n       appearance: none;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  background-color: #e74c3c;\n  cursor: pointer;\n  -moz-transition: all 0.3s ease-in;\n  transition: all 0.3s ease-in;\n  border: 2px solid #d3d3d3;\n}\n\n/* hover on slider thumb */\n.container .mySlider[data-v-0312e533]::-webkit-slider-thumb:hover {\n  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);\n}\n\n/* Range Value Span */\n.container .rangeValue[data-v-0312e533] {\n  height: 40px;\n  width: 60px;\n  border: 1px solid #fff;\n  color: #fff;\n  font-weight: 600;\n  text-align: center;\n  font-size: 22px;\n  line-height: 38px;\n}\n\n/* Draw with ::before on span*/\n.container .rangeValue[data-v-0312e533]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  transform: rotate(45deg);\n}\n\n/*animation key frames*/\n@-webkit-keyframes anim-data-v-0312e533 {\n0% {\n    right: -20px;\n}\n25% {\n    right: -10px;\n}\n50% {\n    right: -30px;\n}\n70% {\n    right: -10px;\n}\n100% {\n    right: -20px;\n}\n}\n@keyframes anim-data-v-0312e533 {\n0% {\n    right: -20px;\n}\n25% {\n    right: -10px;\n}\n50% {\n    right: -30px;\n}\n70% {\n    right: -10px;\n}\n100% {\n    right: -20px;\n}\n}", ""]);
 
 // exports
 
@@ -39272,9 +39273,46 @@ var render = function () {
                   _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
-                    _vm._m(2),
+                    _c(
+                      "div",
+                      { staticClass: "container", attrs: { id: "app" } },
+                      [
+                        _c("h1", [_vm._v("Slide range km")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.value,
+                              expression: "value",
+                            },
+                          ],
+                          staticClass: "mySlider",
+                          attrs: { type: "range", min: "0", max: "100" },
+                          domProps: { value: _vm.value },
+                          on: {
+                            __r: function ($event) {
+                              _vm.value = $event.target.value
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "rangeValue", style: _vm.warning() },
+                          [
+                            _vm._v(
+                              "\n                  " +
+                                _vm._s(_vm.value) +
+                                " km\n                "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -39318,7 +39356,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _vm._m(3),
                 ]),
               ]),
             ]
@@ -39372,35 +39410,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "range_km" }, [
-      _c("h1", [_vm._v("Range km")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Drag the slider to display the current value.")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "slidecontainer" }, [
-        _c("input", {
-          staticClass: "slider",
-          attrs: {
-            type: "range",
-            min: "1",
-            max: "100",
-            value: "50",
-            id: "myRange",
-          },
-        }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Value: "),
-          _c("span", { attrs: { id: "demo" } }),
-          _vm._v(" km"),
-        ]),
-      ]),
     ])
   },
   function () {
