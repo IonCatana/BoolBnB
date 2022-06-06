@@ -172,6 +172,8 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
+        
+        Storage::delete($place->img);
         $place->delete();
 
         return redirect()->route('host.places.index');

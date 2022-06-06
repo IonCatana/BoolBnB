@@ -24,9 +24,9 @@ function checkAmenities (checklist) {
 // se c'è qualche errore, compare alert, quando si invia il form
 submitButtons.addEventListener('click', function(e) {
 
-    // resetto l'array nel caso venga ricaricata la pagina
     validationErrors = [];
-    
+    console.log(validationErrors);
+
     // richiamo fn che controlla le checkboxes
     if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
 

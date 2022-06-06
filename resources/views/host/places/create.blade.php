@@ -4,7 +4,7 @@
     <div class="container px-5 md-12">
         <h1>Create place</h1>
 
-        <form action="{{ route('host.places.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('host.places.store') }}" method="POST" enctype="multipart/form-data" name="place-form">
             @csrf
 
             {{-- place name --}}
@@ -116,7 +116,7 @@
             <div class="form-group">
                 @foreach ($amenities as $i => $amenity)
                 <div class="form-check form-check-inline col-2">
-                    <input class="form-check-input @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
+                    <input class="form-check-input validation-amenity @error('amenities[]') is-invalid @enderror" type="checkbox" id="amenities-{{ $i }}" value="{{ $amenity->id }}" name="amenities[]" {{ (is_array(old('amenities')) && in_array($amenity->id, old('amenities'))) ? ' checked' : '' }}/>
 
                     <label class="form-check-label" for="{{ 'amenities' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
 
