@@ -91,9 +91,15 @@ submitButtons.addEventListener('click', function(e) {
 
 //visibility
 const visibility = document.getElementById('visible-check');
+// TODO controlla se funziona una volta sistemata la visibility lato backend
+setVisibilityRequirements(visibility);
 
 visibility.addEventListener('change', e => {
-    if (e.target.checked) {
+    setVisibilityRequirements(e.target);
+})
+
+function setVisibilityRequirements (visibleCheckbox) {
+    if (visibleCheckbox.checked) {
         // info text
         const smallText = document.getElementById('visible-check-info');
         smallText.classList.remove('d-none');
@@ -106,7 +112,7 @@ visibility.addEventListener('change', e => {
         }
     }
     
-    if (!e.target.checked) {
+    if (!visibleCheckbox.checked) {
         const smallText = document.getElementById('visible-check-info');
         smallText.classList.add('d-none');
 
@@ -117,48 +123,4 @@ visibility.addEventListener('change', e => {
             }
         }
     }
-})
-
-
-//quando si preme submit eseguo la fn di verifica
-// visibility.addEventListener('click', function() {
-//     // let title = document.forms["visibility-form"]["title"].value;
-//     // if (title == "") 
-//     //     alert("Title must be filled out");
-
-//     // let address = document.forms["visibility-form"]["address"].value;
-//     // if (address == "") 
-//     //     alert("Address must be filled out");
-
-//     let rooms = document.forms["visibility-form"]["rooms"].value;
-//     if (rooms == "") 
-//         alert("Rooms must be filled out");
-//     else if (isNaN(rooms) || rooms < 1)
-//         alert("Rooms must be a number and greater than 0");
-
-//     let beds = document.forms["visibility-form"]["beds"].value;
-//     if (beds == "") 
-//         alert("Beds must be filled out");
-//     else if (isNaN(beds) || beds < 1) 
-//         alert("Beds must be a number and greater than 0");
-
-//     let baths = document.forms["visibility-form"]["bathrooms"].value;
-//     if (baths == "") 
-//         alert("Longitude must be filled out");
-//     else if (isNaN(baths) || baths < 1) 
-//         alert("Baths must be a number and greater than 0");
-
-//     let squareM = document.forms["visibility-form"]["square_meters"].value;
-//     if (squareM == "") 
-//         alert("Square meters must be filled out");
-//     else if (isNaN(squareM) || squareM < 1) 
-//         alert("Square meters must be a number and greater than 0");
-
-//     let imgInput = document.forms["visibility-form"]["img"];
-//     let imgPath = imgInput.value;
-//     let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-
-//     if (!allowedExtensions.exec(imgPath)) {
-//         alert('Invalid file type');
-//     }
-// });
+}
