@@ -70,14 +70,17 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' ,
             //TODO decidere la grandezze massima dell'immagine caricabile
-            'visible' => 'boolean',
+            'visible' => 'nullable|boolean',
         ]);
 
-        if( count($validated['amenities']) == 0)
-        {
-            // $msg = 'Check at least one amenity ';
-            return redirect()->route('host.places.index');
-        }
+        dd('pre valid', $validated);
+
+
+        // if( count($validated['amenities']) == 0)
+        // {
+        //     // $msg = 'Check at least one amenity ';
+        //     return redirect()->route('host.places.index');
+        // }
 
         $new_place = new Place();
 
