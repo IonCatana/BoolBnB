@@ -58,9 +58,9 @@
                                 @csrf
                                 @method('PUT')
 
-                                <input type="checkbox" name="visible" id="visible-index" value="{{ $place->visible }}" class="d-none">
+                                <input type="checkbox" name="visible" value="{{ $place->visible }}" class="d-none visibility-check">
                                 @if (!$place->visible)
-                                    <button type="submit" class="visibility btn btn-dark">Visibility:Off</a>
+                                    <button type="submit" class="visibility-toggle btn btn-dark">Visibility:Off</a>
                                 @else
                                     <button type="submit" class="visibility btn btn-success">Visibility:On</a>
                                 @endif
