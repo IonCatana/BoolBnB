@@ -88,10 +88,37 @@ submitButtons.addEventListener('click', function(e) {
     }
 });
 
-//TODO ?
+
 //visibility
-//prendo il pulsante submit del form visibility
-// const visibility = document.getElementById('visibility-btn');
+const visibility = document.getElementById('visible-check');
+
+visibility.addEventListener('change', e => {
+    if (e.target.checked) {
+        // info text
+        const smallText = document.getElementById('visible-check-info');
+        smallText.classList.remove('d-none');
+        
+        const inputs = document.forms['place-form'];
+        for (let input of inputs) {
+            if (input.classList.contains('required_if_visible')) {
+                input.setAttribute('required', '');
+            }
+        }
+    }
+    
+    if (!e.target.checked) {
+        const smallText = document.getElementById('visible-check-info');
+        smallText.classList.add('d-none');
+
+        const inputs = document.forms['place-form'];
+        for (let input of inputs) {
+            if (input.classList.contains('required_if_visible')) {
+                input.removeAttribute('required');
+            }
+        }
+    }
+})
+
 
 //quando si preme submit eseguo la fn di verifica
 // visibility.addEventListener('click', function() {

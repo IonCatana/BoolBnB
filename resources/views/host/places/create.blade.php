@@ -68,7 +68,7 @@
         {{-- numero di stanze, letti, bagni e metri quadri --}}
         <div class="form-group">
             <label for="rooms">Number of rooms</label>
-            <input id="rooms" type="number" class="form-control @error('rooms') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
+            <input id="rooms" type="number" class="form-control required_if_visible @error('rooms') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
             @error('rooms')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -76,7 +76,7 @@
 
         <div class="form-group">
             <label for="beds">Number of beds</label>
-            <input id="beds" type="number" class="form-control @error('beds') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
+            <input id="beds" type="number" class="form-control required_if_visible @error('beds') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
             @error('beds')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -84,7 +84,7 @@
 
         <div class="form-group">
             <label for="bathrooms">Number of bathrooms</label>
-            <input id="bathrooms" type="number" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
+            <input id="bathrooms" type="number" class="form-control required_if_visible @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
             @error('bathrooms')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -92,7 +92,7 @@
 
         <div class="form-group">
             <label for="square_meters">Square meters - min: 20&#13217;</label>
-            <input id="square_meters" type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
+            <input id="square_meters" type="number" class="form-control required_if_visible @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
             @error('square_meters')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -126,11 +126,13 @@
         </div>
 
         {{-- visibility --}}
-        <label class="d-block">All fields must be filled to make your place visible on the app</label>
         <div class="form-group form-check form-check-inline d-block">
-            <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+            <input class="form-check-input" type="checkbox" id="visible-check" name="visible" 
             {{ old('visible') ? ' checked' : '' }}/>
-            <label class="form-check-label mr-3" for="visible">Visible</label>
+            <label class="form-check-label mr-3" for="visible-check">Visible</label>
+            <small id="visible-check-info" class="form-text text-muted d-none">
+                All fields must be filled before you submit, in order to make your place visible on the app
+            </small>
         </div>
 
         {{-- submit button --}}
