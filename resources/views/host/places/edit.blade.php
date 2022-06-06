@@ -122,10 +122,10 @@
             <div class="form-group">
                 @foreach ($amenities as $i => $amenity)
                 <div class="form-check form-check-inline col-2">
-                    <input type="checkbox" name="amenities[]" {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}" class="custom-control-input @error('amenities[]') is-invalid @enderror" id="{{ 'custom_check' . '_' . $i }}">
+                    <input type="checkbox" name="amenities[]" {{ $place->amenities->contains($amenity) ? 'checked' : '' }} value="{{ $amenity->id }}" class="form-check-input @error('amenities[]') is-invalid @enderror" id="{{ 'custom_check' . '_' . $i }}">
 
                     {{-- //TODO install icons dependencies --}}
-                    <label class="custom-control-label" for="{{ 'amenities' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
+                    <label class="form-check-label" for="{{ 'amenities' . '_' . $i }}"><i class="{{ $amenity->icon }} mr-2"></i>{{ $amenity->name }}</label>
 
                     @error('amenities[]')
                         <div class="alert alert-danger">{{ $message }}</div>
