@@ -36,10 +36,10 @@
                 <div class="form-group d-none">
                     <div class="row">
                         <div class="col">
-                            <input id="latitude" name="lat" type="number" class="coordinate form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}">
+                            <input id="latitude" name="lat" type="number" class="form-control" placeholder="Latitude" readonly value="{{ old('lat', $place->lat) }}" step="0.000001">
                         </div>
                         <div class="col">
-                            <input id="longitude" name="lon" type="number" class="coordinate form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}">
+                            <input id="longitude" name="lon" type="number" class="form-control" placeholder="Longitude" readonly value="{{ old('lon', $place->lon) }}" step="0.000001">
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="address-modal" class="">Address</label>
-                                    <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                    <input  list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
                                     id="address-modal" placeholder="Enter a valid address" value="" autofocus
                                     >
                                     <div id="list-modal" class="list-group"></div>
