@@ -10,9 +10,9 @@
       v-on:keyup="fetchAdress(searchInput)"
     />
 
-    <div class="addressList rounded border border-primary" v-show="searchResults.length != 0">
+    <div class="suggestions-list rounded border border-primary" v-show="searchResults.length != 0">
         <router-link to="/advanced_search" 
-            class="suggestions d-block text-dark" 
+            class="suggestion d-block text-dark" 
             v-for="(result, index) in searchResults" :key="index">
             {{ composeAddress(result.address) }}
         </router-link>
@@ -26,62 +26,6 @@
     >
       Search
     </button>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="searchInput"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Where do you like to go?
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input
-              id="address-modal"
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              v-model="searchInput"
-              v-on:keyup="fetchAdress(searchInput)"
-            />
-            <div id="list-modal" class="list-group">
-              <ul>
-                <li v-for="result in searchObject" :key="result.id">
-                  {{ result.address }}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- VEDI IL MODAL IN CREATE.BLADE MA FAR SPUNTARE LE SEARCH SUGGESTIONS SOTTO IL SEARCH-->
   </form>
 </template>
 
@@ -158,21 +102,22 @@ li {
     position: relative;
     padding-bottom: 8px;
 
-    .addressList{
+    .suggestions-list{
         position: absolute;
         top: 100%;
         background: #fff;
         z-index: 10;
+        overflow-y: auto;
+        max-height: 80vh;
 
-        .suggestions{
+        .suggestion{
             padding: 10px 20px;
             line-height: 2.3em;
             border-bottom: 1px solid gainsboro;
             cursor: pointer;
 
             &:hover{
-                background-color: whitesmoke;
-                
+                background-color: whitesmoke;   
             }
         }
     }
