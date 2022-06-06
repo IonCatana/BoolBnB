@@ -84,19 +84,21 @@ const addressInput = document.getElementById('address-modal');
 const list = document.getElementById('list-modal');
 let pos = {};
 
-// lancia chiamata a tomtom quando cambia l'input
-addressInput.addEventListener('keypress', e => {
-  if (e.target.value.length > MIN_LENGTH) {
-    const query = encodeURIComponent(e.target.value);
-    fetchAndSetAddress(query);
-  }
-});
-addressInput.addEventListener('keydown', e => {
-  if (e.key === 'Backspace') {
-    const query = encodeURIComponent(e.target.value);
-    fetchAndSetAddress(query);
-  }
-});
+if (addressInput) {
+  // lancia chiamata a tomtom quando cambia l'input
+  addressInput.addEventListener('keypress', e => {
+    if (e.target.value.length > MIN_LENGTH) {
+      const query = encodeURIComponent(e.target.value);
+      fetchAndSetAddress(query);
+    }
+  });
+  addressInput.addEventListener('keydown', e => {
+    if (e.key === 'Backspace') {
+      const query = encodeURIComponent(e.target.value);
+      fetchAndSetAddress(query);
+    }
+  });
+}
 
 /**
  * focus sull'input quando mostro la modale

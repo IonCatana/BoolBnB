@@ -122,7 +122,7 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        dd($request);
+        dd('UPDATE', $request);
 
         $validated = $request->validate([
             'title' => 'required|max:200',

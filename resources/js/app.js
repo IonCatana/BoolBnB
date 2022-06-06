@@ -14,4 +14,5 @@ require('./bootstrap');
 
 import './host/form.js';
 import './host/validation.js';
+import './host/visible-button-index.js';
 import './geocoding/addressMatches';

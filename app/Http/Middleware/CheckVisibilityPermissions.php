@@ -19,7 +19,6 @@ class CheckVisibilityPermissions
     {
         
         // dd($request->route());
-        if (true) return $next($request);
         if (!$request->input('visible')) return $next($request);
 
         $attributes = $request->all();
@@ -44,6 +43,12 @@ class CheckVisibilityPermissions
         }
 
         if (empty($missing_attributes)) return $next($request);
-        return redirect()->route('host.places.toggleVisibility', );
+
+        $status_message = 'The following fields still need filling!</br>';
+        foreach ($missing_attributes as $att) {
+            $status_message .= ' - ' . $att . '</br>';
+        }
+        
+        return redirect()->back()->with('status', $status_message);
     }
 }

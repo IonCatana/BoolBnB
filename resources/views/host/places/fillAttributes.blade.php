@@ -109,7 +109,7 @@
                     </div>
                     @endif
 
-                    <button type="submit" class="btn btn-primary" id="visibility-btn">Salva</button>
+                    <button type="submit" class="btn btn-primary" id="form-submit-button">Salva</button>
                 </form>
 
             </div>

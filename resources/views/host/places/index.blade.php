@@ -54,11 +54,17 @@
                                 <button type="submit" class="btn btn-danger w-100">Delete</button>
                             </form>
 
-                            @if (!$place->visible)
-                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-dark">Visibility:Off</a>
-                            @else
-                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-success">Visibility:On</a>
-                            @endif
+                            <form action="{{ route('host.places.update', $place) }}" name="visibility-form">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="checkbox" name="visible" id="visible-index" value="{{ $place->visible }}" class="d-none">
+                                @if (!$place->visible)
+                                    <button type="submit" class="visibility btn btn-dark">Visibility:Off</a>
+                                @else
+                                    <button type="submit" class="visibility btn btn-success">Visibility:On</a>
+                                @endif
+                            </form>
                         </td>
                         <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
