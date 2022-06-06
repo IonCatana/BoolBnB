@@ -8,9 +8,14 @@
       aria-label="Search"      
       v-model="searchInput"
       v-on:keyup="fetchAdress(searchInput)"
+      @click="visible = true"
     />
 
-    <div class="suggestions-list rounded border border-primary" v-show="searchResults.length != 0">
+    <!-- TODO quando clicco su uno degli apartamenti che verrà fuori dalla ricerca il visible diventa false così la barra dei suggerimenti scompare -->
+    <!-- TODO quando seleziono il risultato che voglio, quello va nella box di search -->
+    <!-- ho usato lo state per questo motivo -->
+    <div class="suggestions-list rounded border border-primary" 
+    v-show="searchResults.length != 0 && visible==true" @click="visible = false">
         <router-link to="/advanced_search" 
             class="suggestion d-block text-dark" 
             v-for="(result, index) in searchResults" :key="index">
@@ -31,7 +36,7 @@
 
 <script>
 import axios from "axios";
-// import state from "../../host/store.js";
+import state from "../../host/store.js";
 
 export default {
   data() {
@@ -39,6 +44,7 @@ export default {
       TOMTOM_API_KEY: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
       searchInput: "",
       searchResults: [],
+      visible: state.visibleSearch,
     };
   },
 
@@ -84,10 +90,6 @@ export default {
 
         return str;
     },
-
-    showSuggestions() {
-        
-    },
   },
 };
 </script>
@@ -121,5 +123,9 @@ li {
             }
         }
     }
+}
+
+.hide{
+    display: none;
 }
 </style>

@@ -1991,6 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _host_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../host/store.js */ "./resources/js/host/store.js");
 //
 //
 //
@@ -2027,65 +2028,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
- // import state from "../../host/store.js";
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       TOMTOM_API_KEY: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
       searchInput: "",
-      searchResults: []
+      searchResults: [],
+      visible: _host_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].visibleSearch
     };
   },
   methods: {
@@ -2117,8 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
       if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
       if (country != null) str += ", " + country;
       return str;
-    },
-    showSuggestions: function showSuggestions() {}
+    }
   }
 });
 
@@ -2269,13 +2219,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   data: function data() {
     return {
-      amenities: [],
-      value: "0"
+      amenities: []
     };
   },
   methods: {
@@ -2286,20 +2237,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res.data);
         _this.amenities = res.data.amenities;
       });
-    },
-    warning: function warning() {
-      if (this.value > 1) {
-        return {
-          color: "#e74c3c",
-          animation: "anim .3s ease-in 1 alternate"
-        };
-      }
     }
   },
   mounted: function mounted() {
     this.fetchAmenities();
   }
 }); // Slider Range Km
+// const slider = document.getElementById("myRange");
+// const output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+// slider.oninput = function () {
+//   output.innerHTML = this.value;
+// };
 
 /***/ }),
 
@@ -6858,7 +6807,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "ul[data-v-32feffea],\nli[data-v-32feffea] {\n  list-style: none;\n}\n.myForm[data-v-32feffea] {\n  position: relative;\n  padding-bottom: 8px;\n}\n.myForm .addressList[data-v-32feffea] {\n  position: absolute;\n  top: 100%;\n  background: #fff;\n  z-index: 10;\n}\n.myForm .addressList .suggestions[data-v-32feffea] {\n  padding: 10px 20px;\n  line-height: 2.3em;\n  border-bottom: 1px solid gainsboro;\n  cursor: pointer;\n}\n.myForm .addressList .suggestions[data-v-32feffea]:hover {\n  background-color: whitesmoke;\n}", ""]);
+exports.push([module.i, "ul[data-v-32feffea],\nli[data-v-32feffea] {\n  list-style: none;\n}\n.myForm[data-v-32feffea] {\n  position: relative;\n  padding-bottom: 8px;\n}\n.myForm .suggestions-list[data-v-32feffea] {\n  position: absolute;\n  top: 100%;\n  background: #fff;\n  z-index: 10;\n  overflow-y: auto;\n  max-height: 80vh;\n}\n.myForm .suggestions-list .suggestion[data-v-32feffea] {\n  padding: 10px 20px;\n  line-height: 2.3em;\n  border-bottom: 1px solid gainsboro;\n  cursor: pointer;\n}\n.myForm .suggestions-list .suggestion[data-v-32feffea]:hover {\n  background-color: whitesmoke;\n}\n.hide[data-v-32feffea] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -6877,7 +6826,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}\n.container .mySlider[data-v-0312e533] {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  width: 100%;\n  background-color: #d3d3d3;\n  border-radius: 20px;\n  outline: none;\n  opacity: 0.7;\n  transition: opacity 0.2s ease-in;\n  -webkit-transition: opacity 0.2s ease-in;\n}\n\n/*hover on range slider*/\n.container .mySlider[data-v-0312e533]:hover {\n  opacity: 1;\n}\n\n/* chrome and safari supporter */\n.container .mySlider[data-v-0312e533]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n          appearance: none;\n  height: 20px;\n  width: 20px;\n  border-radius: 50%;\n  background-color: #e74c3c;\n  cursor: pointer;\n  -webkit-transition: all 0.3s ease-in;\n  transition: all 0.3s ease-in;\n}\n.container .mySlider[data-v-0312e533]::-moz-range-thumb {\n  -moz-appearance: none;\n       appearance: none;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  background-color: #e74c3c;\n  cursor: pointer;\n  -moz-transition: all 0.3s ease-in;\n  transition: all 0.3s ease-in;\n  border: 2px solid #d3d3d3;\n}\n\n/* hover on slider thumb */\n.container .mySlider[data-v-0312e533]::-webkit-slider-thumb:hover {\n  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);\n}\n\n/* Range Value Span */\n.container .rangeValue[data-v-0312e533] {\n  height: 40px;\n  width: 60px;\n  border: 1px solid #fff;\n  color: #fff;\n  font-weight: 600;\n  text-align: center;\n  font-size: 22px;\n  line-height: 38px;\n}\n\n/* Draw with ::before on span*/\n.container .rangeValue[data-v-0312e533]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  transform: rotate(45deg);\n}\n\n/*animation key frames*/\n@-webkit-keyframes anim-data-v-0312e533 {\n0% {\n    right: -20px;\n}\n25% {\n    right: -10px;\n}\n50% {\n    right: -30px;\n}\n70% {\n    right: -10px;\n}\n100% {\n    right: -20px;\n}\n}\n@keyframes anim-data-v-0312e533 {\n0% {\n    right: -20px;\n}\n25% {\n    right: -10px;\n}\n50% {\n    right: -30px;\n}\n70% {\n    right: -10px;\n}\n100% {\n    right: -20px;\n}\n}", ""]);
+exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}\n.slidecontainer[data-v-0312e533] {\n  width: 100%;\n}\n.slidecontainer .slider[data-v-0312e533] {\n  -webkit-appearance: none;\n  width: 100%;\n  height: 15px;\n  border-radius: 5px;\n  background: #d3d3d3;\n  outline: none;\n  opacity: 0.7;\n  transition: opacity 0.2s;\n}\n.slidecontainer .slider[data-v-0312e533]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]::-moz-range-thumb {\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]:hover {\n  opacity: 1;\n}", ""]);
 
 // exports
 
@@ -39033,6 +38982,9 @@ var render = function () {
         keyup: function ($event) {
           return _vm.fetchAdress(_vm.searchInput)
         },
+        click: function ($event) {
+          _vm.visible = true
+        },
         input: function ($event) {
           if ($event.target.composing) {
             return
@@ -39049,18 +39001,23 @@ var render = function () {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.searchResults.length != 0,
-            expression: "searchResults.length != 0",
+            value: _vm.searchResults.length != 0 && _vm.visible == true,
+            expression: "searchResults.length != 0 && visible==true",
           },
         ],
-        staticClass: "addressList rounded border border-primary",
+        staticClass: "suggestions-list rounded border border-primary",
+        on: {
+          click: function ($event) {
+            _vm.visible = false
+          },
+        },
       },
       _vm._l(_vm.searchResults, function (result, index) {
         return _c(
           "router-link",
           {
             key: index,
-            staticClass: "suggestions d-block text-dark",
+            staticClass: "suggestion d-block text-dark",
             attrs: { to: "/advanced_search" },
           },
           [
@@ -39087,130 +39044,9 @@ var render = function () {
       },
       [_vm._v("\n    Search\n  ")]
     ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "searchInput",
-          tabindex: "-1",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true",
-        },
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.searchInput,
-                    expression: "searchInput",
-                  },
-                ],
-                staticClass: "form-control mr-sm-2",
-                attrs: {
-                  id: "address-modal",
-                  type: "search",
-                  placeholder: "Search",
-                  "aria-label": "Search",
-                },
-                domProps: { value: _vm.searchInput },
-                on: {
-                  keyup: function ($event) {
-                    return _vm.fetchAdress(_vm.searchInput)
-                  },
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.searchInput = $event.target.value
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "list-group", attrs: { id: "list-modal" } },
-                [
-                  _c(
-                    "ul",
-                    _vm._l(_vm.searchObject, function (result) {
-                      return _c("li", { key: result.id }, [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(result.address) +
-                            "\n              "
-                        ),
-                      ])
-                    }),
-                    0
-                  ),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _vm._m(1),
-          ]),
-        ]),
-      ]
-    ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("\n            Where do you like to go?\n          ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close",
-          },
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" },
-        },
-        [_vm._v("\n            Close\n          ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Save changes")]
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39273,46 +39109,9 @@ var render = function () {
                   _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "container", attrs: { id: "app" } },
-                      [
-                        _c("h1", [_vm._v("Slide range km")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.value,
-                              expression: "value",
-                            },
-                          ],
-                          staticClass: "mySlider",
-                          attrs: { type: "range", min: "0", max: "100" },
-                          domProps: { value: _vm.value },
-                          on: {
-                            __r: function ($event) {
-                              _vm.value = $event.target.value
-                            },
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          { staticClass: "rangeValue", style: _vm.warning() },
-                          [
-                            _vm._v(
-                              "\n                  " +
-                                _vm._s(_vm.value) +
-                                " km\n                "
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
                     _vm._m(2),
+                    _vm._v(" "),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
@@ -39356,7 +39155,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(4),
                 ]),
               ]),
             ]
@@ -39410,6 +39209,35 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "range_km" }, [
+      _c("h1", [_vm._v("Range km")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Drag the slider to display the current value.")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "slidecontainer" }, [
+        _c("input", {
+          staticClass: "slider",
+          attrs: {
+            type: "range",
+            min: "1",
+            max: "100",
+            value: "50",
+            id: "myRange",
+          },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Value: "),
+          _c("span", { attrs: { id: "demo" } }),
+          _vm._v(" km"),
+        ]),
+      ]),
     ])
   },
   function () {
@@ -55347,6 +55175,25 @@ var app = new Vue({
 
 /***/ }),
 
+/***/ "./resources/js/host/store.js":
+/*!************************************!*\
+  !*** ./resources/js/host/store.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
+  visibleSearch: true
+});
+/* harmony default export */ __webpack_exports__["default"] = (state);
+
+/***/ }),
+
 /***/ "./resources/js/pages/AdvancedSearch.vue":
 /*!***********************************************!*\
   !*** ./resources/js/pages/AdvancedSearch.vue ***!
@@ -55726,7 +55573,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
