@@ -178,13 +178,13 @@ export default {
     },
 
     queryDatabase(result) {
-      // query a database
       axios.get('/api/search_area', { 
         params: this.params
       })
       .then(res => {
         // array di risultati
         this.places = res.data;
+        console.log('che cazzo', this.places)
       })
     },
 
