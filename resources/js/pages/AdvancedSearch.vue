@@ -43,20 +43,18 @@
               </div>
 
               <div class="modal-body">
-                <div class="range_km">
-                  <h1>Range km</h1>
-                  <p>Drag the slider to display the current value.</p>
-                  <div class="slidecontainer">
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      value="50"
-                      class="slider"
-                      id="myRange"
-                    />
-                    <p>Value: <span id="demo"></span> km</p>
-                  </div>
+                <div class="container" id="app">
+                  <h1>Slide range km</h1>
+                  <input
+                    v-model="value"
+                    type="range"
+                    class="mySlider"
+                    min="0"
+                    max="100"
+                  />
+                  <span :style="warning()" class="rangeValue">
+                    {{ value }} km
+                  </span>
                 </div>
                 <div class="rooms_beds">
                   <h2>Rooms and Beds</h2>
@@ -141,6 +139,7 @@ export default {
   data() {
     return {
       amenities: [],
+      value: "0",
     };
   },
   methods: {
@@ -150,19 +149,20 @@ export default {
         this.amenities = res.data.amenities;
       });
     },
+    warning: function () {
+      if (this.value > 1) {
+        return {
+          color: "#e74c3c",
+          animation: "anim .3s ease-in 1 alternate",
+        };
+      }
+    },
   },
   mounted() {
     this.fetchAmenities();
   },
 };
 // Slider Range Km
-// const slider = document.getElementById("myRange");
-// const output = document.getElementById("demo");
-// output.innerHTML = slider.value;
-
-// slider.oninput = function () {
-//   output.innerHTML = this.value;
-// };
 </script>
 
 <style lang="scss" scoped>
@@ -190,37 +190,84 @@ ul {
 }
 
 // Slide Range Km
-.slidecontainer {
+.container .mySlider {
+  appearance: none;
   width: 100%;
-  .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 15px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: 0.2s;
-    transition: opacity 0.2s;
+  background-color: #d3d3d3;
+  border-radius: 20px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in;
+  -webkit-transition: opacity 0.2s ease-in;
+}
+
+/*hover on range slider*/
+.container .mySlider:hover {
+  opacity: 1;
+}
+
+/* chrome and safari supporter */
+.container .mySlider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.container .mySlider::-moz-range-thumb {
+  appearance: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  border: 2px solid #d3d3d3;
+}
+
+/* hover on slider thumb */
+.container .mySlider::-webkit-slider-thumb:hover {
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Range Value Span */
+.container .rangeValue {
+  height: 40px;
+  width: 60px;
+  border: 1px solid #fff;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 22px;
+  line-height: 38px;
+}
+
+/* Draw with ::before on span*/
+.container .rangeValue::before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  transform: rotate(45deg);
+}
+/*animation key frames*/
+@keyframes anim {
+  0% {
+    right: -20px;
   }
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #04aa6d;
-    cursor: pointer;
+  25% {
+    right: -10px;
   }
-  .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #04aa6d;
-    cursor: pointer;
+  50% {
+    right: -30px;
   }
-  .slider:hover {
-    opacity: 1;
+  70% {
+    right: -10px;
+  }
+  100% {
+    right: -20px;
   }
 }
 </style>
