@@ -136,6 +136,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   components: {},
   data() {
@@ -143,6 +144,14 @@ export default {
       amenities: [],
       value: "0",
       activeItem: null,
+      params: {
+        address: '',
+        range: 20000, //default
+        rooms: 0,
+        bathrooms: 0,
+        amenities: [],
+      },
+      places: [],
     };
   },
 
@@ -167,9 +176,49 @@ export default {
       console.log(i);
       this.activeItem = i;
     },
+
+    queryDatabase(result) {
+      // query a database
+      axios.get('/api/search_area', { 
+        params: this.params
+      })
+      .then(res => {
+        // array di risultati
+        this.places = res.data;
+      })
+    },
+
+    prepareParams(result) {
+      this.params.address = this.composeAddress(result.address);
+      // ecc
+    },
+
+    composeAddress(address) {
+        let {
+            freeformAddress,
+            countrySubdivision,
+            countrySecondarySubdivision,
+            country,
+            municipality,
+        } = address;
+        let str = "";
+
+        if (freeformAddress != null) str += freeformAddress;
+        if (countrySubdivision != null) str += ", " + countrySubdivision;
+        if (
+            countrySecondarySubdivision != null &&
+            countrySecondarySubdivision !== municipality
+        )
+            countrySecondarySubdivision;
+        if (country != null) str += ", " + country;
+
+        return str;
+    },
   },
-  mounted() {
+  beforeMount() {
     this.fetchAmenities();
+    this.prepareParams(this.$route.params.result);
+    this.queryDatabase();
   },
 };
 // Slider Range Km

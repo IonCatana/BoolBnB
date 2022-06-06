@@ -16,9 +16,11 @@
     <!-- ho usato lo state per questo motivo -->
     <div class="suggestions-list rounded border border-primary" 
     v-show="searchResults.length != 0 && visible==true" @click="visible = false">
-        <router-link to="/advanced_search" 
+        <router-link :to="{ name: 'places.advanced.search', params: { result } }" 
             class="suggestion d-block text-dark" 
-            v-for="(result, index) in searchResults" :key="index">
+            v-for="(result, index) in searchResults" :key="index"
+            @click="setResult(result)"
+            >
             {{ composeAddress(result.address) }}
         </router-link>
     </div>
@@ -45,22 +47,27 @@ export default {
       searchInput: "",
       searchResults: [],
       visible: state.visibleSearch,
+      params: {
+        address: '',
+        lon: null,
+        lat: null
+      },
     };
   },
 
   methods: {
     fetchAdress(searchInput) {
-      console.log(searchInput);
-
       axios
         .get(`https://api.tomtom.com/search/2/geocode/${searchInput}.json`, {
           params: {
             key: this.TOMTOM_API_KEY,
+            range: 20000, // default
           },
         })
         .then((res) => {
           const { results } = res.data;
           this.searchResults = results;
+          // loader
 
           console.log(this.searchResults);
         })
@@ -90,6 +97,13 @@ export default {
 
         return str;
     },
+
+    // setResult(r) {
+    //   this.params.address = this.composeAddress(r.address);
+    //   this.params.lat = r.position.lat;
+    //   this.params.lon = r.position.lon;
+    //   console.log(this.params)
+    // }
   },
 };
 </script>

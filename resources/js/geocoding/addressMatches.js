@@ -103,3 +103,8 @@ addressInput.addEventListener('keydown', e => {
 $(document).on('shown.bs.modal','#addressModal', function () {
   addressInput.focus();
 })
+
+
+
+
+// export { composeAddress };

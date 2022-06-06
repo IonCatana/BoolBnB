@@ -22,6 +22,7 @@ const routes = [
     path: '/advanced_search',
     name: 'places.advanced.search',
     component: AdvancedSearch,
+    props: true,
   },
 ]
 
