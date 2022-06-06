@@ -51,7 +51,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="address-modal" class="">Address</label>
-                                <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
+                                <input list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
                                 id="address-modal" placeholder="Enter a valid address" value="" autofocus
                                 >
                                 <div id="list-modal" class="list-group"></div>
@@ -136,6 +136,6 @@
         </div>
 
         {{-- submit button --}}
-        <button id="form-submit-button" type="submit" class="btn btn-primary">Add places</button>
+        <button id="form-submit-button" type="submit" class="btn btn-primary">Save</button>
     </form>
 @endsection

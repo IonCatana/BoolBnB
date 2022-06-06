@@ -18,8 +18,8 @@ class CheckVisibilityPermissions
     public function handle($request, Closure $next)
     {
         
-        // dd($request->route());
         if (!$request->input('visible')) return $next($request);
+        // dd($request);
 
         $attributes = $request->all();
         $missing_attributes = [];
@@ -41,14 +41,15 @@ class CheckVisibilityPermissions
                 $missing_attributes[] = $attribute;
             }
         }
-
-        if (empty($missing_attributes)) return $next($request);
+        
+        if (empty($missing_attributes)) return $next($request); // TODO qui mi riporta indietro invece di andare a update o store
+        dd('middle', empty($missing_attributes));
 
         $status_message = 'The following fields still need filling!</br>';
         foreach ($missing_attributes as $att) {
+            dump($att);
             $status_message .= ' - ' . $att . '</br>';
         }
-        
         return redirect()->back()->with('status', $status_message);
     }
 }

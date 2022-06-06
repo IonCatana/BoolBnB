@@ -15,14 +15,14 @@ class PlaceController extends Controller
     /**
      * 
      */
-    public function __construct()
-    {
-        $this->middleware('check.visibility')
-            ->only([
-                'update',
-                'store',
-            ]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('check.visibility')
+    //         ->only([
+    //             'update',
+    //             'store',
+    //         ]);
+    // }
 
     /**
      * Display a listing of the resource.
