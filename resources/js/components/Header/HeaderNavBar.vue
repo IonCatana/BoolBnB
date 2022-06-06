@@ -3,7 +3,7 @@
     <nav class="navbar d-flex justify-content-between">
       <div class="logo d-flex align-items-center">
         <img class="mr-2" :src="'../../assets/img/Logo.jpg'" alt="" />
-        <h4 class="project-name">BoolBnb</h4>
+        <a href="/"> <h4 class="project-name">BoolBnb</h4></a>
       </div>
       <form class="form-inline">
         <input
