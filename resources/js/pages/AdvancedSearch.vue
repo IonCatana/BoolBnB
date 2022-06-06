@@ -2,9 +2,11 @@
   <div id="advanced_search">
     <div class="amenity_card align-items-center d-flex justify-content-center">
       <div class="amenity_icon">
-        <div v-for="amenity in amenities" :key="amenity.id" class="icon">
-          <i :class="amenity.icon"></i>
-          <span>{{ amenity.name }}</span>
+        <div v-for="(amenity, i) in amenities" :key="amenity.id" class="icon" :class="{clickedAmenity : i === activeItem}">
+          <button class="amenity-button" @click="selectItem(i)">
+            <i :class="amenity.icon"></i>
+            <span class="d-block">{{ amenity.name }}</span>
+          </button>
         </div>
       </div>
 
@@ -140,8 +142,10 @@ export default {
     return {
       amenities: [],
       value: "0",
+      activeItem: null,
     };
   },
+
   methods: {
     fetchAmenities() {
       axios.get("/api/amenities").then((res) => {
@@ -149,6 +153,7 @@ export default {
         this.amenities = res.data.amenities;
       });
     },
+
     warning: function () {
       if (this.value > 1) {
         return {
@@ -156,6 +161,11 @@ export default {
           animation: "anim .3s ease-in 1 alternate",
         };
       }
+    },
+
+    selectItem: function (i) {
+      console.log(i);
+      this.activeItem = i;
     },
   },
   mounted() {
@@ -187,6 +197,31 @@ export default {
 li,
 ul {
   list-style: none;
+}
+
+// amenities icon as buttons
+.amenity-button {
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.clickedAmenity  {
+  opacity: 1;
+  transform: scale(1.1);
+
+  &:after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
 }
 
 // Slide Range Km
