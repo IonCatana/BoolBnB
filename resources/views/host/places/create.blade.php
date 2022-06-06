@@ -118,7 +118,7 @@
         <label class="d-block">Load an image of your place</label>
         <div class="form-group">
             {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-            <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+            <input class="bg-white rounded my-2 mb-3 mr-2 required_if_visible" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
             <span>Accepted formats: jpg, jpeg, png, webp</span>
             @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>

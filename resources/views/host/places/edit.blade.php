@@ -79,7 +79,7 @@
                     {{-- Rooms, Beds, Bathrooms --}}
                     <div class="form-group">
                         <label for="rooms">Rooms</label>
-                        <input type="text" class="form-control" id="rooms" name="rooms"
+                        <input type="text" class="form-control required_if_visible" id="rooms" name="rooms"
                             value="{{ old('rooms', $place->rooms) }}">
                         {{-- Error --}}
                         @error('rooms')
@@ -90,7 +90,7 @@
                     </div>
                     <div class="form-group">
                         <label for="beds">Beds</label>
-                        <input type="text" class="form-control" id="beds" name="beds"
+                        <input type="text" class="form-control required_if_visible" id="beds" name="beds"
                             value="{{ old('beds', $place->beds) }}">
                         {{-- Error --}}
                         @error('beds')
@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <label for="bathrooms">Bathrooms</label>
-                        <input type="text" class="form-control" id="bathrooms" name="bathrooms"
+                        <input type="text" class="form-control required_if_visible" id="bathrooms" name="bathrooms"
                             value="{{ old('bathrooms', $place->bathrooms) }}">
                         {{-- Error --}}
                         @error('bathrooms')
@@ -114,7 +114,7 @@
                     {{-- Square Meters --}}
                     <div class="form-group">
                         <label for="square_meters">Square Meters</label>
-                        <input type="text" class="form-control" id="square_meters" name="square_meters"
+                        <input type="text" class="form-control required_if_visible" id="square_meters" name="square_meters"
                             value="{{ old('square_meters', $place->square_meters) }}">
                         {{-- Error --}}
                         @error('square_meters')
@@ -150,7 +150,7 @@
                     {{-- upload dell'immagine --}}
                     <div class="form-group">
                         {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-                        <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                        <input class="bg-white rounded my-2 mb-3 mr-2 required_if_visible" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
                         <span>Accepted formats: jpg, jpeg, png, webp</span>
                         @error('img')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -159,11 +159,13 @@
                     {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
                     {{-- visibility --}}
-                    <label class="d-block">All fields must be filled to make your place visible on the app</label>
                     <div class="form-group form-check form-check-inline d-block">
-                        <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+                        <input class="form-check-input" type="checkbox" id="visible-check" name="visible" 
                         {{ old('visible') || $place->visible ? ' checked' : '' }}/>
                         <label class="form-check-label mr-3" for="visible">Visible</label>
+                        <small id="visible-check-info" class="form-text text-muted d-none">
+                            All fields must be filled before you submit, in order to make your place visible on the app
+                        </small>
                     </div>
 
                     <button type="submit" id="form-submit-button" class="btn btn-primary">Update</button>
