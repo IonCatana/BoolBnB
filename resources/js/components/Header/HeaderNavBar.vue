@@ -5,17 +5,9 @@
         <img class="mr-2" :src="'../../assets/img/Logo.jpg'" alt="" />
         <a href="/"> <h4 class="project-name">BoolBnb</h4></a>
       </div>
-      <form class="form-inline">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <a href="/advanced_search">Search</a>
-        </button>
-      </form>
+
+      <SearchInput/>
+
       <div class="right_nav_bar d-flex align-items-center">
         <a class="dropdown-item" href="#"
           >Become a host <i class="fas fa-globe"></i
@@ -43,9 +35,14 @@
 </template>
 
 <script>
-export default {
-  name: "HeaderNavBar",
-};
+import SearchInput from './SearchInput.vue'
+
+  export default {
+    name: "HeaderNavBar",
+    components: {
+      SearchInput,
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

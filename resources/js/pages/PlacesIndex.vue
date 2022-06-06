@@ -23,8 +23,8 @@ export default {
     fetchPlaces() {
         axios.get("/api/places")
         .then((res) => {
-            this.places = res.data.places;
-            console.log(this.amenities);
+            const {places} = res.data;
+            this.places = places;
         })
         .catch( error => {
             console.warn(error);
@@ -32,7 +32,7 @@ export default {
     },
   },
 
-  mounted() {
+  beforeMount() {
     this.fetchPlaces();
   },
 };
