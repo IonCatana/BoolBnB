@@ -11,6 +11,9 @@
         />
 
         <!-- VEDI IL MODAL IN CREATE.BLADE MA FAR SPUNTARE LE SEARCH SUGGESTIONS SOTTO IL SEARCH-->
+        <ul>
+            <li v-for="result in searchObject" :key="result.id">{{result.address}}</li>
+        </ul>
 
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
             <a href="/advanced_search">Search</a>
@@ -20,7 +23,7 @@
 
 <script>
 import axios from "axios";
-import state from "../../host/store.js";
+// import state from "../../host/store.js";
 
     export default {
         data() {
@@ -28,6 +31,7 @@ import state from "../../host/store.js";
                 TOMTOM_API_KEY : 'yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj',
                 searchInput: '',
                 searchResults: [],
+                searchObject: [{}],
             }
         },
 
@@ -43,22 +47,52 @@ import state from "../../host/store.js";
             }).then((res) => {
                 const { results } = res.data;
                 this.searchResults = results;
-                state.searchResults = this.searchResults;
-
-                // USARE ADATTANDO QUELLO CHE C'È IN addressMatches
+                // state.searchResults = this.searchResults;
+                console.log(this.searchResults);
 
                 results.forEach((result, index) => {
-                    console.log(result.address)
+
+                    const { address, position } = result;
+                    const addressStr = this.composeAddress(address);
+
+                    this.searchObject = [
+                        {
+                            'id' : index,
+                            'address' : addressStr,
+                        }
+                    ]
                 });
 
             })
-            .catch(err => {
-                console.log(err);
-            })
+                .catch(err => {
+                    console.log(err);
+                })
             },
 
+            composeAddress(address) {
+                let { freeformAddress, countrySubdivision, countrySecondarySubdivision, country, municipality } = address;
+                let str = '';
+
+                if (freeformAddress != null) str += freeformAddress;
+                if (countrySubdivision != null) str += ', ' + countrySubdivision;
+                if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
+                if (country != null) str += ', ' + country;
+                
+                return str;
+            },
+
+            // firstMatchTriggersOnEnter(element, str, position) {
+            //     element.classList.add('active');
+            //     addressInput.addEventListener('keypress', e => {
+            //         if (e.key === 'Enter') {
+            //             setCoordinatesToForm(position.lat, position.lon);
+            //             setAddressToForm(str);
+            //             $('#addressModal').modal('hide');
+            //         }
+            // });
             
         },
+
     }
 </script>
 
