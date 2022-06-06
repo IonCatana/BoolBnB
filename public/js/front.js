@@ -2069,6 +2069,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // import state from "../../host/store.js";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2076,8 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       TOMTOM_API_KEY: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
       searchInput: "",
-      searchResults: [],
-      searchObject: [{}]
+      searchResults: []
     };
   },
   methods: {
@@ -2091,20 +2099,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         var results = res.data.results;
-        _this.searchResults = results; // state.searchResults = this.searchResults;
-
+        _this.searchResults = results;
         console.log(_this.searchResults);
-        results.forEach(function (result, index) {
-          var address = result.address,
-              position = result.position;
-
-          var addressStr = _this.composeAddress(address);
-
-          _this.searchObject = [{
-            id: index,
-            address: addressStr
-          }];
-        });
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2121,16 +2117,8 @@ __webpack_require__.r(__webpack_exports__);
       if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
       if (country != null) str += ", " + country;
       return str;
-    } // firstMatchTriggersOnEnter(element, str, position) {
-    //     element.classList.add('active');
-    //     addressInput.addEventListener('keypress', e => {
-    //         if (e.key === 'Enter') {
-    //             setCoordinatesToForm(position.lat, position.lon);
-    //             setAddressToForm(str);
-    //             $('#addressModal').modal('hide');
-    //         }
-    // });
-
+    },
+    showSuggestions: function showSuggestions() {}
   }
 });
 
@@ -2358,7 +2346,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     this.fetchPlaces();
   }
 });
@@ -6869,7 +6857,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "ul[data-v-32feffea],\nli[data-v-32feffea] {\n  list-style: none;\n}", ""]);
+exports.push([module.i, "ul[data-v-32feffea],\nli[data-v-32feffea] {\n  list-style: none;\n}\n.myForm[data-v-32feffea] {\n  position: relative;\n  padding-bottom: 8px;\n}\n.myForm .addressList[data-v-32feffea] {\n  position: absolute;\n  top: 100%;\n  background: #fff;\n  z-index: 10;\n}\n.myForm .addressList .suggestions[data-v-32feffea] {\n  padding: 10px 20px;\n  line-height: 2.3em;\n  border-bottom: 1px solid gainsboro;\n  cursor: pointer;\n}\n.myForm .addressList .suggestions[data-v-32feffea]:hover {\n  background-color: whitesmoke;\n}", ""]);
 
 // exports
 
@@ -39022,7 +39010,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { staticClass: "form-inline" }, [
+  return _c("form", { staticClass: "myForm form-inline" }, [
     _c("input", {
       directives: [
         {
@@ -39032,7 +39020,7 @@ var render = function () {
           expression: "searchInput",
         },
       ],
-      staticClass: "form-control mr-sm-2",
+      staticClass: "myInput form-control mr-sm-2",
       attrs: {
         id: "address-modal",
         type: "search",
@@ -39052,6 +39040,39 @@ var render = function () {
         },
       },
     }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.searchResults.length != 0,
+            expression: "searchResults.length != 0",
+          },
+        ],
+        staticClass: "addressList rounded border border-primary",
+      },
+      _vm._l(_vm.searchResults, function (result, index) {
+        return _c(
+          "router-link",
+          {
+            key: index,
+            staticClass: "suggestions d-block text-dark",
+            attrs: { to: "/advanced_search" },
+          },
+          [
+            _vm._v(
+              "\n          " +
+                _vm._s(_vm.composeAddress(result.address)) +
+                "\n      "
+            ),
+          ]
+        )
+      }),
+      1
+    ),
     _vm._v(" "),
     _c(
       "button",
