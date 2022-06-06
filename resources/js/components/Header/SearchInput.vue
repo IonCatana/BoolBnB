@@ -11,6 +11,7 @@
         />
 
         <!-- VEDI IL MODAL IN CREATE.BLADE MA FAR SPUNTARE LE SEARCH SUGGESTIONS SOTTO IL SEARCH-->
+       
         <ul>
             <li v-for="result in searchObject" :key="result.id">{{result.address}}</li>
         </ul>
