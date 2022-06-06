@@ -43,9 +43,20 @@
               </div>
 
               <div class="modal-body">
-                <div class="range_price">
-                  <h2>Fascia di prezzo</h2>
-                  <p>il prezzo medio giornaliero é ...€</p>
+                <div class="range_km">
+                  <h1>Range km</h1>
+                  <p>Drag the slider to display the current value.</p>
+                  <div class="slidecontainer">
+                    <input
+                      type="range"
+                      min="1"
+                      max="100"
+                      value="50"
+                      class="slider"
+                      id="myRange"
+                    />
+                    <p>Value: <span id="demo"></span> km</p>
+                  </div>
                 </div>
                 <div class="rooms_beds">
                   <h2>Rooms and Beds</h2>
@@ -144,6 +155,14 @@ export default {
     this.fetchAmenities();
   },
 };
+// Slider Range Km
+// const slider = document.getElementById("myRange");
+// const output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+
+// slider.oninput = function () {
+//   output.innerHTML = this.value;
+// };
 </script>
 
 <style lang="scss" scoped>
@@ -168,5 +187,40 @@ export default {
 li,
 ul {
   list-style: none;
+}
+
+// Slide Range Km
+.slidecontainer {
+  width: 100%;
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04aa6d;
+    cursor: pointer;
+  }
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04aa6d;
+    cursor: pointer;
+  }
+  .slider:hover {
+    opacity: 1;
+  }
 }
 </style>

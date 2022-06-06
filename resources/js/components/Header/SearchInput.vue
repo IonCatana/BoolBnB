@@ -5,9 +5,7 @@
       class="form-control mr-sm-2"
       type="search"
       placeholder="Search"
-      aria-label="Search"
-      data-toggle="modal"
-      data-target="#exampleModal"
+      aria-label="Search"      
       v-model="searchInput"
       v-on:keyup="fetchAdress(searchInput)"
     />
@@ -15,7 +13,7 @@
       type="button"
       class="btn btn-primary"
       data-toggle="modal"
-      data-target="#exampleModal"
+      data-target="#searchInput"
     >
       Search
     </button>
@@ -23,7 +21,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="searchInput"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"

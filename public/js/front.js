@@ -2069,8 +2069,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
  // import state from "../../host/store.js";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2274,6 +2272,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -2295,7 +2304,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.fetchAmenities();
   }
-});
+}); // Slider Range Km
+// const slider = document.getElementById("myRange");
+// const output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+// slider.oninput = function () {
+//   output.innerHTML = this.value;
+// };
 
 /***/ }),
 
@@ -6873,7 +6888,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}", ""]);
+exports.push([module.i, ".amenity_card[data-v-0312e533] {\n  width: 100vw;\n}\n.amenity_card .amenity_icon[data-v-0312e533] {\n  display: flex;\n  gap: 20px;\n}\n.amenity_card .amenity_icon .icon[data-v-0312e533] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.amenity_card .amenity_icon .icon i[data-v-0312e533] {\n  font-size: 22px;\n}\n.amenity_card .amenity_icon .icon span[data-v-0312e533] {\n  font-size: 11px;\n}\nli[data-v-0312e533],\nul[data-v-0312e533] {\n  list-style: none;\n}\n.slidecontainer[data-v-0312e533] {\n  width: 100%;\n}\n.slidecontainer .slider[data-v-0312e533] {\n  -webkit-appearance: none;\n  width: 100%;\n  height: 15px;\n  border-radius: 5px;\n  background: #d3d3d3;\n  outline: none;\n  opacity: 0.7;\n  transition: opacity 0.2s;\n}\n.slidecontainer .slider[data-v-0312e533]::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]::-moz-range-thumb {\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  background: #04aa6d;\n  cursor: pointer;\n}\n.slidecontainer .slider[data-v-0312e533]:hover {\n  opacity: 1;\n}", ""]);
 
 // exports
 
@@ -39023,8 +39038,6 @@ var render = function () {
         type: "search",
         placeholder: "Search",
         "aria-label": "Search",
-        "data-toggle": "modal",
-        "data-target": "#exampleModal",
       },
       domProps: { value: _vm.searchInput },
       on: {
@@ -39047,7 +39060,7 @@ var render = function () {
         attrs: {
           type: "button",
           "data-toggle": "modal",
-          "data-target": "#exampleModal",
+          "data-target": "#searchInput",
         },
       },
       [_vm._v("\n    Search\n  ")]
@@ -39058,7 +39071,7 @@ var render = function () {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "exampleModal",
+          id: "searchInput",
           tabindex: "-1",
           "aria-labelledby": "exampleModalLabel",
           "aria-hidden": "true",
@@ -39344,10 +39357,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "range_price" }, [
-      _c("h2", [_vm._v("Fascia di prezzo")]),
+    return _c("div", { staticClass: "range_km" }, [
+      _c("h1", [_vm._v("Range km")]),
       _vm._v(" "),
-      _c("p", [_vm._v("il prezzo medio giornaliero é ...€")]),
+      _c("p", [_vm._v("Drag the slider to display the current value.")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "slidecontainer" }, [
+        _c("input", {
+          staticClass: "slider",
+          attrs: {
+            type: "range",
+            min: "1",
+            max: "100",
+            value: "50",
+            id: "myRange",
+          },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Value: "),
+          _c("span", { attrs: { id: "demo" } }),
+          _vm._v(" km"),
+        ]),
+      ]),
     ])
   },
   function () {
