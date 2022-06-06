@@ -12,6 +12,11 @@
                     @csrf
                     @method('PUT')
 
+                    {{-- arrivati a questo form siamo sicuri di volere che la place sia visible, 
+                        per cui non lasciamo scelta su questa checkbox
+                    --}}
+                    <input type="checkbox" name="visible" class="d-none" checked>
+
                     Places Name
                     <div class="form-group">
                         <label for="title">Title *</label>

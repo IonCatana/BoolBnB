@@ -134,8 +134,9 @@ class PlaceController extends Controller
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp',
             //TODO decidere la grandezze massima dell'immagine caricabile
+            'visible' => 'boolean',
         ]);
 
         //Controllo che nessuno user non puoi modificare i dati dei altri!
@@ -162,7 +163,7 @@ class PlaceController extends Controller
         $place->fill($validated);
         $place->update();
         
-        return redirect()->route('host.places.index'); // sarebbe meglio redirigere sulla show sul frontend??
+        return redirect()->route('host.places.index');
     }
 
     /**
@@ -186,6 +187,7 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
+        // TODO validation
         if (!$place->visible) {
             
             $missing_attributes = $place->getMissingAttributes();
