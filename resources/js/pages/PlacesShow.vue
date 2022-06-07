@@ -6,7 +6,8 @@
 
         <div class="row mb-4">
             <figure class="w-75">
-                <img :src=" `/storage/${place.img}` " class="place-img w-100" alt="">
+                <img v-if="place.img == null" class="place-img w-100" src="https://a0.muscache.com/im/pictures/04355deb-8003-47c5-8ef8-1ebca56d7720.jpg?im_w=1440" alt="">
+                <img v-else :src=" `/storage/${place.img}` " class="place-img w-100" alt="">
             </figure>
         </div>
         
@@ -25,7 +26,8 @@
             <ul class="m-0">
                 <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
                     <i :class="amenity.icon" class="mr-2"></i>
-                    {{amenity.name}}</li> 
+                    {{amenity.name}}
+                </li> 
             </ul>
         </div>
     </div>
@@ -47,9 +49,9 @@ export default {
         fetchPlace() {
             axios.get(`/api/places/${ this.$route.params.slug }`)
             .then((res) => {
-                const {place, amenities} = res.data;
+                const {place} = res.data;
                 this.place = place;
-                this.amenities = amenities;
+                this.amenities = res.data.place.amenities;
                 this.host = res.data.place.user.name;
             })
         },
