@@ -15,14 +15,14 @@ class PlaceController extends Controller
     /**
      * 
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('check.visibility')
-    //         ->only([
-    //             'update',
-    //             'store',
-    //         ]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('check.visibility')
+            ->only([
+                'update',
+                'store',
+            ]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -70,10 +70,10 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' ,
             //TODO decidere la grandezze massima dell'immagine caricabile
-            'visible' => 'nullable|boolean',
+            // 'visible' => 'nullable|boolean',
         ]);
 
-        dd('pre valid', $validated);
+        // dd('post valid', $request->input('visible'));
 
 
         // if( count($validated['amenities']) == 0)
@@ -83,6 +83,9 @@ class PlaceController extends Controller
         // }
 
         $new_place = new Place();
+
+        $visible = $request->has('visible');
+        $new_place->visible = $visible;
 
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
@@ -139,7 +142,7 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp',
             //TODO decidere la grandezze massima dell'immagine caricabile
-            'visible' => 'boolean',
+            // 'visible' => 'boolean',
         ]);
 
         //Controllo che nessuno user non puoi modificare i dati dei altri!
@@ -162,6 +165,9 @@ class PlaceController extends Controller
         array_key_exists('amenities', $validated)
             ? $place->amenities()->sync($validated['amenities'])
             : $place->amenities()->detach();
+
+        $visible = $request->has('visible');
+        $place->visible = $visible;
         
         $place->fill($validated);
         $place->update();

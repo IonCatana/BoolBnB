@@ -43,11 +43,10 @@ class CheckVisibilityPermissions
         }
         
         if (empty($missing_attributes)) return $next($request); // TODO qui mi riporta indietro invece di andare a update o store
-        dd('middle', empty($missing_attributes));
+        // dd('middle', empty($missing_attributes));
 
         $status_message = 'The following fields still need filling!</br>';
         foreach ($missing_attributes as $att) {
-            dump($att);
             $status_message .= ' - ' . $att . '</br>';
         }
         return redirect()->back()->with('status', $status_message);

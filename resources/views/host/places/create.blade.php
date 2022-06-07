@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label for="address-modal" class="">Address</label>
                                 <input list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
-                                id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                id="address-modal" placeholder="Enter a valid address" value="" autofocus autocomplete="off"
                                 >
                                 <div id="list-modal" class="list-group"></div>
                             </div>

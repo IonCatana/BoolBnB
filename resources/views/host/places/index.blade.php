@@ -55,9 +55,9 @@
                             </form>
 
                             @if (!$place->visible)
-                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="visibility-toggle btn btn-dark">Visibility:Off</a>
+                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-dark">Visibility:Off</a>
                             @else
-                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="visibility btn btn-success">Visibility:On</a>
+                                <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-success">Visibility:On</a>
                             @endif
                         </td>
                         <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>

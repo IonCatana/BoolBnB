@@ -9,6 +9,7 @@ class Place extends Model
 {
     protected $guarded = [
         'img',
+        'visible',
     ];
 
     // relations
