@@ -80,7 +80,7 @@
             {{-- Stanze Rooms, Beds, Bathrooms --}}
             <div class="form-group">
                 <label for="rooms">Number of rooms</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="rooms" name="rooms" value="{{ old('rooms', $place->rooms) }}">
+                <input type="text" class="form-control required_if_visible @error('title') is-invalid @enderror" id="rooms" name="rooms" value="{{ old('rooms', $place->rooms) }}">
 
                 {{-- Error --}}
                 @error('rooms')
@@ -90,7 +90,7 @@
 
             <div class="form-group">
                 <label for="beds">Number of beds available</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="beds" name="beds" value="{{ old('beds', $place->beds) }}">
+                <input type="text" class="form-control required_if_visible @error('title') is-invalid @enderror" id="beds" name="beds" value="{{ old('beds', $place->beds) }}">
 
                 {{-- Error --}}
                 @error('beds')
@@ -100,7 +100,7 @@
 
             <div class="form-group">
                 <label for="bathrooms">Number of bathrooms</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="bathrooms" name="bathrooms"
+                <input type="text" class="form-control required_if_visible @error('title') is-invalid @enderror" id="bathrooms" name="bathrooms"
                     value="{{ old('bathrooms', $place->bathrooms) }}">
 
                 {{-- Error --}}
@@ -112,7 +112,7 @@
             {{-- Square Meters --}}
             <div class="form-group">
                 <label for="square_meters">Square Meters</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="square_meters" name="square_meters"
+                <input type="text" class="form-control required_if_visible @error('title') is-invalid @enderror" id="square_meters" name="square_meters"
                     value="{{ old('square_meters', $place->square_meters) }}">
 
                 {{-- Error --}}
@@ -142,7 +142,7 @@
             {{-- upload dell'immagine --}}
             <div class="form-group">
                 {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-                <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="required_if_visible @error('img') is-invalid @enderror">
                 <span>Accepted formats: jpg, jpeg, png, webp</span>
                 @error('img')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -150,10 +150,11 @@
             </div>
             {{-- // TODO tasto per rimuovere senza sostituire la foto --}}
 
+            {{-- //TODO sistemare la validation cs quando visible --}}
             {{-- visibility --}}
             <label class="d-block">All fields must be filled to make your place visible on the app</label>
             <div class="form-group form-check form-check-inline d-block">
-                <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+                <input class="form-check-input" type="checkbox" id="visible-check" name="visible" 
                 {{ old('visible') || $place->visible ? ' checked' : '' }}/>
                 <label class="form-check-label mr-3" for="visible">Visible</label>
             </div>

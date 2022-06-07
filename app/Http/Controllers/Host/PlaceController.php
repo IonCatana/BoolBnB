@@ -22,6 +22,11 @@ class PlaceController extends Controller
                 'update',
                 'store',
             ]);
+
+        // $this->middleware('check.user.edit')
+        //     ->only([
+        //         'edit',
+        //     ]);
     }
 
     /**
@@ -113,6 +118,9 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
+        // se l'appartamento non è tuo, non lo puoi modificare
+        if ($place->user_id != Auth::id()) return redirect()->route('host.places.index', ['status' => 'You are not allowed to visit that page!']);
+
         $amenities = Amenity::all();
         // $place->load('amenities');
 
@@ -144,12 +152,6 @@ class PlaceController extends Controller
             //TODO decidere la grandezze massima dell'immagine caricabile
             // 'visible' => 'boolean',
         ]);
-
-        //Controllo che nessuno user non puoi modificare i dati dei altri!
-        $user_id = Auth::user()->id;
-        if ($user_id != $place->user_id) {
-            return redirect()->route('host.places.index'); //TODO da vedere il messaggio di errore
-        }
 
         if ($validated['title'] != $place->title) {
             $place->slug = Place::getUniqueSlug($validated['title']);
