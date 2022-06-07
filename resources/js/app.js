@@ -12,4 +12,6 @@ require('./bootstrap');
  * 
  */
 
-import './host/geocoding.js';
+import './host/form.js';
+import './host/validation.js';
+import './geocoding/addressMatches';

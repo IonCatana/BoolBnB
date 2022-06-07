@@ -33,7 +33,7 @@
                             <a class="btn btn-info" href="{{ route('host.places.messages.show', [$place, $msg] ) }}"> See Details</a>
                         </td>
                         <td>
-                            <form class="form-group" action="{{ route('host.places.messages.destroy', [$place, $msg]) }}"
+                            <form class="message-delete-form form-group" action="{{ route('host.places.messages.destroy', [$place, $msg]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')

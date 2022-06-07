@@ -16,6 +16,7 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <a href="/host/places">Places link temporaneo</a>
             </div>
         </div>
     </div>
