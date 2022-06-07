@@ -52,10 +52,10 @@
                                 @method('DELETE')
 
                                 <!-- Button trigger modal -->
-                                <button type="submit" id="form-submit-button" class="btn btn-danger w-100" data-toggle="modal" data-target="">Delete</button>
+                                <button type="submit" id="delete-confirm-button" class="btn btn-danger w-100" data-toggle="modal" data-target="">Delete</button>
             
                                 <!-- Modal -->
-                                <div name="validation-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div name="delete-confirm-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
