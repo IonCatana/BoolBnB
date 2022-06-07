@@ -27,19 +27,19 @@ if (submitButtons) {
     
         // resetto l'array nel caso venga ricaricata la pagina
         validationErrors = [];
-        
-        // richiamo fn che controlla le checkboxes
-        if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
     
         //controllo dei campi
         
-        // let title = document.forms["place-form"]["title"].value;
-        // if (title == "") 
-        //     alert("Title must be filled out");
+        let title = document.forms["place-form"]["title"].value;
+        if (title == "") 
+            validationErrors.push("- Title must be filled out");
     
-        // let address = document.forms["place-form"]["address"].value;
-        // if (address == "") 
-        //     alert("Address must be filled out");
+        let address = document.forms["place-form"]["address"].value;
+        if (address == "") 
+            validationErrors.push("- Address must be filled out");
+
+        // richiamo fn che controlla le checkboxes
+        if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
     
         // let lat = document.forms["place-form"]["lat"].value;
         // if (lat == "") 
@@ -74,7 +74,10 @@ if (submitButtons) {
         }
     
         let imgInput = document.forms["place-form"]["img"];
-        let imgPath = imgInput.value;
+        let imgPath;
+        if (imgInput.value) {
+            imgPath = imgInput.value;
+        } 
         let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
     
         if ( !(isEmpty(imgPath) ) ) {
@@ -85,9 +88,17 @@ if (submitButtons) {
     
         if (validationErrors.length > 0) {
             e.preventDefault();
-            alert(validationErrors.join("\n"));
+            // alert(validationErrors.join("\n"));
+            submitButtons.dataset.target = '#exampleModal';
+            let message = document.getElementById('modal-msg');
+            message.innerText += validationErrors.join("\n");
+            // console.log(validationErrors);
+        } 
+        else {
+            submitButtons.dataset.target = '';
         }
     });
+
 }
 
 
