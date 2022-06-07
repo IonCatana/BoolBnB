@@ -55,7 +55,7 @@ function checkFields () {
 
     let imgInput = document.forms["place-form"]["img"];
     let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
-    if ( !(isEmpty(imgInput.value) ) ) {
+    if ( typeof imgInput !== 'undefined' && !(isEmpty(imgInput.value) ) ) {
         if (!allowedExtensions.exec(imgInput.value)) {
             validationErrors.push('- Invalid file type');
         }

@@ -10,7 +10,7 @@
             {{-- place name --}}
             <div class="form-group">
                 <label for="title">Denomination *</label>
-                <input required id="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
+                <input required id="title" type="text" class="form-control mb-3 @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter a descriptive title" value="{{ old('title') }}">
 
                 {{-- Error --}}
                 @error('title')
@@ -149,18 +149,18 @@
             <!-- Modal -->
             <div name="validation-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Attention!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="exampleModalLabel">Attention!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modal-msg"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                        </div>
                     </div>
-                    <div class="modal-body" id="modal-msg"></div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
                 </div>
             </div>
         </form>
