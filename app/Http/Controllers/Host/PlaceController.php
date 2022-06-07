@@ -70,16 +70,22 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' ,
             //TODO decidere la grandezze massima dell'immagine caricabile
-            'visible' => 'boolean',
+            // 'visible' => 'nullable|boolean',
         ]);
 
-        if( count($validated['amenities']) == 0)
-        {
-            // $msg = 'Check at least one amenity ';
-            return redirect()->route('host.places.index');
-        }
+        // dd('post valid', $request->input('visible'));
+
+
+        // if( count($validated['amenities']) == 0)
+        // {
+        //     // $msg = 'Check at least one amenity ';
+        //     return redirect()->route('host.places.index');
+        // }
 
         $new_place = new Place();
+
+        $visible = $request->has('visible');
+        $new_place->visible = $visible;
 
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
@@ -122,6 +128,7 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
+        // dd('update', $request);
         $validated = $request->validate([
             'title' => 'required|max:200',
             'rooms' => 'nullable|numeric|between:1,255',
@@ -133,8 +140,9 @@ class PlaceController extends Controller
             'lon' => 'required|numeric|min:-180|max:180',
             'amenities' => 'required|array|min:1',
             'amenities.*' => 'required|min:1|exists:amenities,id',
-            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' 
+            'img' => 'nullable|file|mimes:jpeg,jpg,png,webp',
             //TODO decidere la grandezze massima dell'immagine caricabile
+            // 'visible' => 'boolean',
         ]);
 
         //Controllo che nessuno user non puoi modificare i dati dei altri!
@@ -157,11 +165,14 @@ class PlaceController extends Controller
         array_key_exists('amenities', $validated)
             ? $place->amenities()->sync($validated['amenities'])
             : $place->amenities()->detach();
+
+        $visible = $request->has('visible');
+        $place->visible = $visible;
         
         $place->fill($validated);
         $place->update();
         
-        return redirect()->route('host.places.index'); // sarebbe meglio redirigere sulla show sul frontend??
+        return redirect()->route('host.places.index');
     }
 
     /**
@@ -187,10 +198,11 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
-        // dd($place->visible);
+        // TODO validation
         if (!$place->visible) {
-
+            
             $missing_attributes = $place->getMissingAttributes();
+            // dd('toggle', $missing_attributes);
                                   
             if (!$missing_attributes) {
                 // se non mancano campi
@@ -203,7 +215,6 @@ class PlaceController extends Controller
             // se campi vuoti: utente vai a riempirli!
             $amenities = Amenity::all();
             return view('host.places.fillAttributes', compact('place', 'amenities', 'missing_attributes'));
-            //TODO come gestisco se la request proviene da create o update? nel caso di create non posso andare a toggleVisibility perche il model ancora non esiste
         }
 
         // se era gia visibile la spegniamo

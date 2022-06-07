@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container px-5 md-12">
-        <h1>Edit place info</h1>
+    <div class="container">
+
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {!! session('status') !!}
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('host.places.update', $place) }}" enctype="multipart/form-data" name="place-form">
         @csrf
@@ -58,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="address-modal" class="">Address</label>
                                     <input  list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
-                                    id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                    id="address-modal" placeholder="Enter a valid address" value="" autofocus autocomplete="off"
                                     >
                                     <div id="list-modal" class="list-group"></div>
                                 </div>
