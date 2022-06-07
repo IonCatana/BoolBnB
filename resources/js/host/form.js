@@ -19,18 +19,22 @@ resourcesWithDeleteConfirmation.forEach(resource => {
     const buttons = document.querySelectorAll(`.${resource}-delete-form [type="submit"]`);
     
     buttons.forEach(button => {
-        button.addEventListener('click', function(el) {
-            el.preventDefault(); 
-    
-            const btn = el.target; 
-    
-            const form = btn.closest(`.${resource}-delete-form`); 
-            console.log(form);
-    
-            if(form && confirm(`Do you really want to delete this ${resource}?`) ) { 
-                form.submit(); 
-            }
-        })
+      button.addEventListener('click', function(el) {
+        el.preventDefault(); 
+        
+        const form = button.closest(`.${resource}-delete-form`); 
+
+        button.dataset.target = '#exampleModal';
+
+        let message = document.getElementById('modal-msg');
+        message.innerText = `Do you really want to delete this ${resource}?`
+        
+        let btnConfirmDelete = document.getElementById('btn-confirm-delete');
+        btnConfirmDelete.addEventListener('click', function() {
+          form.submit();
+        }); 
+
+      })
     })
 })
 

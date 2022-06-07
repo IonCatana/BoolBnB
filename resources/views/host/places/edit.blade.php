@@ -159,7 +159,7 @@
             </div>
 
             <!-- Button trigger modal -->
-            <button type="submit" id="form-submit-button" class="btn btn-primary" data-toggle="modal" data-target="">Save</button>
+            <button type="submit" id="form-submit-button" class="btn btn-primary" data-toggle="modal" data-target="">Update</button>
             
             <!-- Modal -->
             <div name="validation-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
