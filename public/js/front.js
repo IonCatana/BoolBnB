@@ -2290,14 +2290,12 @@ __webpack_require__.r(__webpack_exports__);
       amenities: [],
       value: "0",
       activeItem: null,
-      params: {
-        address: '',
-        range: 20000,
-        //default
-        rooms: 0,
-        bathrooms: 0,
-        amenities: []
-      },
+      // i filtri, per popolare la query
+      activeFilters: null,
+      // da passare nella chiamata al server
+      params: null,
+      query: null,
+      // la risposta del server alla chiamata api/search_area
       places: []
     };
   },
@@ -2325,6 +2323,7 @@ __webpack_require__.r(__webpack_exports__);
     queryDatabase: function queryDatabase(result) {
       var _this2 = this;
 
+      this.prepareQuery(result);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/search_area', {
         params: this.params
       }).then(function (res) {
@@ -2333,8 +2332,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log('che cazzo', _this2.places);
       });
     },
-    prepareParams: function prepareParams(result) {
-      this.params.address = this.composeAddress(result.address); // ecc
+    prepareQuery: function prepareQuery(result) {
+      var _this$$route$params$r = this.$route.params.result.position,
+          lat = _this$$route$params$r.lat,
+          lon = _this$$route$params$r.lon;
+      this.params = {
+        lat: lat,
+        lon: lon
+      };
+      console.log(this.params);
+      console.log(_.isEmpty(this.query)); // this.query = {
+      // }
     },
     composeAddress: function composeAddress(address) {
       var freeformAddress = address.freeformAddress,
@@ -2351,9 +2359,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    console.log(this.$route); // this.fetchAmenities();
-    // this.prepareParams(this.$route.params.result);
-    // this.queryDatabase();
+    console.log(this.$route);
+    this.fetchAmenities();
+    this.queryDatabase();
   }
 }); // Slider Range Km
 

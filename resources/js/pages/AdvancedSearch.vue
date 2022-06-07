@@ -144,13 +144,13 @@ export default {
       amenities: [],
       value: "0",
       activeItem: null,
-      params: {
-        address: '',
-        range: 20000, //default
-        rooms: 0,
-        bathrooms: 0,
-        amenities: [],
-      },
+
+      // i filtri, per popolare la query
+      activeFilters: null,
+      // da passare nella chiamata al server
+      params: null,
+      query: null,
+      // la risposta del server alla chiamata api/search_area
       places: [],
     };
   },
@@ -178,6 +178,8 @@ export default {
     },
 
     queryDatabase(result) {
+      this.prepareQuery(result);
+
       axios.get('/api/search_area', { 
         params: this.params
       })
@@ -188,18 +190,24 @@ export default {
       })
     },
 
-    prepareParams(result) {
-      this.params.address = this.composeAddress(result.address);
-      // ecc
+    prepareQuery(result) {
+      const { lat, lon } = this.$route.params.result.position
+
+      this.params = { lat, lon }
+      console.log(this.params)
+      
+      if (!_.isEmpty(this.activeFilters)) {
+        this.query = this.activeFilters
+      }
     },
 
     composeAddress(address) {
         let {
-            freeformAddress,
-            countrySubdivision,
-            countrySecondarySubdivision,
-            country,
-            municipality,
+          freeformAddress,
+          countrySubdivision,
+          countrySecondarySubdivision,
+          country,
+          municipality,
         } = address;
         let str = "";
 
@@ -217,9 +225,8 @@ export default {
   },
   beforeMount() {
     console.log(this.$route);
-    // this.fetchAmenities();
-    // this.prepareParams(this.$route.params.result);
-    // this.queryDatabase();
+    this.fetchAmenities();
+    this.queryDatabase();
   },
 };
 // Slider Range Km
