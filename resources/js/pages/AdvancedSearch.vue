@@ -209,7 +209,7 @@ export default {
             countrySecondarySubdivision != null &&
             countrySecondarySubdivision !== municipality
         )
-            countrySecondarySubdivision;
+            str += ', ' + countrySecondarySubdivision;
         if (country != null) str += ", " + country;
 
         return str;
