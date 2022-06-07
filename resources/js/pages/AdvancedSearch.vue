@@ -177,27 +177,30 @@ export default {
       this.activeItem = i;
     },
 
-    queryDatabase(result) {
-      this.prepareQuery(result);
+    queryDatabase() {
+      this.prepareQuery();
 
-      axios.get('/api/search_area', { 
-        params: this.params
+      axios.get('/api/search_area/45.4636/9.1881', { 
+        query: this.query,
       })
-      .then(res => {
-        // array di risultati
-        this.places = res.data;
-        console.log('che cazzo', this.places)
+      .then((r) => {
+        console.log(r.data);
+      })
+      .catch(err => {
+        console.warn(err)
       })
     },
 
-    prepareQuery(result) {
-      const { lat, lon } = this.$route.params.result.position
+    prepareQuery() {      
+      const { lat, lon } = this.$route.params.result.position;
 
-      this.params = { lat, lon }
-      console.log(this.params)
-      
+      this.query = { lat, lon };
+      console.log('before', this.params)
+
       if (!_.isEmpty(this.activeFilters)) {
-        this.query = this.activeFilters
+        for (let filter of this.activeFilters) {
+          // 
+        }
       }
     },
 

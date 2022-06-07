@@ -14,13 +14,21 @@ class SearchAreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $lat, $lon)
     {
-        $place = Place::where('beds', 1)->first();
+        // dd($lat, $lon);
+
+        $places = Place::cursor()->filter(function($place, $lat, $lon, $range) {
+            dump($place->inArea($lat, $lon, $range));
+            return $place->inArea($lat, $lon, $range);
+        });
+        // $places = Place::all();
+
+        // dd($places);
 
         return response()->json([
             'success' => true,
-            'place' => $place
+            'places' => $places,
         ]);
     }
 }
