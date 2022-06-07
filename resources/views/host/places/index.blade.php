@@ -41,7 +41,9 @@
                             @endforeach
                         </td>
                         <td>
-                            <img class="img-fluid" src="{{ asset('storage/' . $place->img)}}" alt="">
+                            @if($place->img)
+                                <img class="img-fluid" src="{{ asset('storage/' . $place->img)}}" alt="">
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>

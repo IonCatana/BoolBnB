@@ -132,6 +132,55 @@ if (submitButtons) {
             validationErrors.push('- Select at least one amenity');
 
         //se l'array ha almeno un elemento, appare modale con errori
+        // richiamo fn che controlla le checkboxes
+        if (!checkAmenities(checkboxes)) validationErrors.push('- Select at least one amenity');
+    
+        // let lat = document.forms["place-form"]["lat"].value;
+        // if (lat == "") 
+        //     alert("Latitude must be filled out");
+    
+        // let lon = document.forms["place-form"]["lon"].value;
+        // if (lon == "") 
+        //     alert("Longitude must be filled out");
+    
+        let rooms = document.forms["place-form"]["rooms"].value;
+        if ( !(isEmpty(rooms) ) ) {
+            if ( isNaN(rooms) || rooms < 1 )
+                validationErrors.push("- Rooms must be a number and greater than 0");
+        }
+    
+        let beds = document.forms["place-form"]["beds"].value;
+        if ( !(isEmpty(beds) ) ) {
+            if (isNaN(beds) || beds < 1) 
+                validationErrors.push("- Beds must be a number and greater than 0");
+        }
+    
+        let baths = document.forms["place-form"]["bathrooms"].value;
+        if ( !(isEmpty(baths) ) ) {
+            if (isNaN(baths) || baths < 1) 
+                validationErrors.push("- Bathrooms must be a number and greater than 0");
+        }
+    
+        let squareM = document.forms["place-form"]["square_meters"].value;
+        if ( !(isEmpty(squareM) ) ) {
+            if (isNaN(squareM) || squareM < 1)
+                validationErrors.push("- Square meters must be a number and greater than 0");
+        }
+    
+        let imgInput = document.forms["place-form"]["img"];
+        let imgPath;
+        if (typeof imgInput !== 'undefined') {
+            imgPath = imgInput.value;
+        } 
+        
+        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
+    
+        if ( !(isEmpty(imgPath) ) ) {
+            if (!allowedExtensions.exec(imgPath)) {
+                validationErrors.push('- Invalid file type');
+            }
+        }
+    
         if (validationErrors.length > 0) {
             e.preventDefault();
             // alert(validationErrors.join("\n"));

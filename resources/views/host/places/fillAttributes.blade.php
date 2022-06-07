@@ -137,7 +137,7 @@
                     </div>
                     @endif
                     
-                    <button type="submit" class="btn btn-primary" id="form-submit-button">Salva</button>
+                    <button type="submit" class="btn btn-primary" id="form-submit-button">Save</button>
                 </form>
 
             </div>
