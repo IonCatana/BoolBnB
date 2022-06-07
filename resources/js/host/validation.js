@@ -78,7 +78,7 @@ if (submitButtons) {
         if (imgInput.value) {
             imgPath = imgInput.value;
         } 
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
     
         if ( !(isEmpty(imgPath) ) ) {
             if (!allowedExtensions.exec(imgPath)) {
