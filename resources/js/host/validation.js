@@ -29,7 +29,6 @@ if (submitButtons) {
         validationErrors = [];
     
         //controllo dei campi
-        
         let title = document.forms["place-form"]["title"].value;
         if (title == "") 
             validationErrors.push("- Title must be filled out");

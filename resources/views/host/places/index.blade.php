@@ -66,7 +66,7 @@
                                             </div>
                                             <div class="modal-body" id="modal-msg"></div>
                                             <div class="modal-footer">
-                                                <button id="btn-confirm-delete" type="button" class="btn btn-primary">Yes</button>
+                                                <button id="btn-confirm-delete" type="button" class="btn btn-danger">Yes</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                             </div>
                                         </div>
