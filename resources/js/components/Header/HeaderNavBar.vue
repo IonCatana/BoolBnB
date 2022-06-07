@@ -1,20 +1,19 @@
 <template>
   <div id="header_nav_bar">
-    <nav class="navbar d-flex justify-content-between">
-      <div class="logo d-flex align-items-center">
-        <img class="mr-2" :src="'../../assets/img/Logo.jpg'" alt="" />
-        <a href="/"> <h4 class="project-name">BoolBnb</h4></a>
-      </div>
+    <nav class="navbar d-flex justify-content-between px-5">
+      <a href="/" class="logo d-flex align-items-center">
+        <img class="mr-2" :src="'../../assets/img/Logo.png'" alt="" />
+        <h4 class="project-name">BoolBnb</h4>
+      </a>
 
       <SearchInput/>
 
       <div class="right_nav_bar d-flex align-items-center">
-        <a class="dropdown-item" href="#"
-          >Become a host <i class="fas fa-globe"></i
-        ></a>
+        <a class="become-host dropdown-item" href="#">Become a host </a>
+        <a class="text-dark"  href=""> <i class="fas fa-globe mr-4 ml-2"></i> </a>
         <div class="dropdown dropleft">
           <a
-            class="btn btn-secondary dropdown-toggle"
+            class="login btn dropdown-toggle"
             href="#"
             role="button"
             id="dropdownMenuLink"
@@ -46,29 +45,41 @@ import SearchInput from './SearchInput.vue'
 </script>
 
 <style lang="scss" scoped>
+@import '../../../sass/_variables.scss';
+
 a {
   text-decoration: none;
 }
 
-.container {
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.logo {
-  width: 35px;
-  height: 70px;
-
-  img {
-    width: 100%;
-    height: 100%;
+.navbar{
+  border-bottom: 1px solid #e6e6e6;
+  
+  .logo {
+    height: 70px;
+  
+    img {
+      width: 20%;
+    }
+  
+    .project-name {
+      background-image: linear-gradient(60deg, $boolean-blue, $boolean-green);
+      background-clip: text;
+      color: transparent;
+    }
   }
 
-  .project-name {
-    background-image: linear-gradient(60deg, #0f0e50, #41d272);
-    background-clip: text;
-    color: transparent;
+  .become-host{
+    border-radius:50px;
+  }
+
+  .login{
+    background-color: $boolean-green;
+    color: $boolean-blue;
+
+    &:hover{
+      color: $boolean-green;
+      background-color: $boolean-blue;
+    }
   }
 }
 </style>
