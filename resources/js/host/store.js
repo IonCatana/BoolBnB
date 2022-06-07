@@ -6,6 +6,5 @@ const state = Vue.observable(
         searchResult: {},
     }
 )
-console.log(state.searchResult)
 
 export default state;

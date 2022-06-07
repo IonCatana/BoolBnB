@@ -216,9 +216,10 @@ export default {
     },
   },
   beforeMount() {
-    this.fetchAmenities();
-    this.prepareParams(this.$route.params.result);
-    this.queryDatabase();
+    console.log(this.$route);
+    // this.fetchAmenities();
+    // this.prepareParams(this.$route.params.result);
+    // this.queryDatabase();
   },
 };
 // Slider Range Km

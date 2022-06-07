@@ -2031,6 +2031,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2040,30 +2047,23 @@ __webpack_require__.r(__webpack_exports__);
       searchInput: "",
       searchResults: [],
       visible: _host_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].visibleSearch,
-      params: {
-        address: '',
-        lon: null,
-        lat: null
-      }
+      params: null,
+      query: null
     };
   },
   methods: {
-    fetchAdress: function fetchAdress(searchInput) {
+    fetchAddressMatches: function fetchAddressMatches(searchInput) {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://api.tomtom.com/search/2/geocode/".concat(searchInput, ".json"), {
         params: {
-          key: this.TOMTOM_API_KEY,
-          range: 20000 // default
-
+          key: this.TOMTOM_API_KEY
         }
       }).then(function (res) {
         var results = res.data.results;
-        _this.searchResults = results; // loader
-
-        console.log(_this.searchResults);
+        _this.searchResults = results;
       })["catch"](function (err) {
-        console.log(err);
+        console.warn(err);
       });
     },
     composeAddress: function composeAddress(address) {
@@ -2078,13 +2078,24 @@ __webpack_require__.r(__webpack_exports__);
       if (countrySecondarySubdivision != null && countrySecondarySubdivision !== municipality) countrySecondarySubdivision;
       if (country != null) str += ", " + country;
       return str;
-    } // setResult(r) {
-    //   this.params.address = this.composeAddress(r.address);
-    //   this.params.lat = r.position.lat;
-    //   this.params.lon = r.position.lon;
-    //   console.log(this.params)
-    // }
+    },
+    slugify: function slugify(str) {
+      return str.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    },
+    navigateToAdvancedSearch: function navigateToAdvancedSearch(r) {
+      this.params = {
+        result: r,
+        address: this.slugify(r.address.freeformAddress)
+      }; // this.query = {
+      //   'range': 20000, //default
+      // }
 
+      this.$router.push({
+        name: 'places.advanced.search',
+        params: this.params // query: this.query,
+
+      });
+    }
   }
 });
 
@@ -2340,9 +2351,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    this.fetchAmenities();
-    this.prepareParams(this.$route.params.result);
-    this.queryDatabase();
+    console.log(this.$route); // this.fetchAmenities();
+    // this.prepareParams(this.$route.params.result);
+    // this.queryDatabase();
   }
 }); // Slider Range Km
 
@@ -39133,7 +39144,7 @@ var render = function () {
       domProps: { value: _vm.searchInput },
       on: {
         keyup: function ($event) {
-          return _vm.fetchAdress(_vm.searchInput)
+          return _vm.fetchAddressMatches(_vm.searchInput)
         },
         click: function ($event) {
           _vm.visible = true
@@ -39167,19 +39178,13 @@ var render = function () {
       },
       _vm._l(_vm.searchResults, function (result, index) {
         return _c(
-          "router-link",
+          "div",
           {
             key: index,
             staticClass: "suggestion d-block text-dark",
-            attrs: {
-              to: {
-                name: "places.advanced.search",
-                params: { result: result },
-              },
-            },
             on: {
               click: function ($event) {
-                return _vm.setResult(result)
+                return _vm.navigateToAdvancedSearch(result)
               },
             },
           },
@@ -39192,7 +39197,7 @@ var render = function () {
           ]
         )
       }),
-      1
+      0
     ),
     _vm._v(" "),
     _c(
@@ -55533,7 +55538,6 @@ var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   visibleSearch: true,
   searchResult: {}
 });
-console.log(state.searchResult);
 /* harmony default export */ __webpack_exports__["default"] = (state);
 
 /***/ }),
@@ -55829,7 +55833,7 @@ var routes = [{
   name: 'places.show',
   component: _pages_PlacesShow_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
-  path: '/advanced_search',
+  path: '/advanced_search/:address',
   name: 'places.advanced.search',
   component: _pages_AdvancedSearch_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   props: true

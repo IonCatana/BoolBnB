@@ -19,7 +19,7 @@ const routes = [
     component: PlacesShow,
   },
   {
-    path: '/advanced_search',
+    path: '/advanced_search/:address',
     name: 'places.advanced.search',
     component: AdvancedSearch,
     props: true,

@@ -7,7 +7,7 @@
       placeholder="Search"
       aria-label="Search"      
       v-model="searchInput"
-      v-on:keyup="fetchAdress(searchInput)"
+      v-on:keyup="fetchAddressMatches(searchInput)"
       @click="visible = true"
     />
 
@@ -16,13 +16,20 @@
     <!-- ho usato lo state per questo motivo -->
     <div class="suggestions-list rounded border border-primary" 
     v-show="searchResults.length != 0 && visible==true" @click="visible = false">
-        <router-link :to="{ name: 'places.advanced.search', params: { result } }" 
+        <!-- <router-link :to="{ name: 'places.advanced.search', params, query }" 
             class="suggestion d-block text-dark" 
             v-for="(result, index) in searchResults" :key="index"
             @click="setResult(result)"
             >
             {{ composeAddress(result.address) }}
-        </router-link>
+        </router-link> -->
+
+        <div class="suggestion d-block text-dark" 
+        v-for="(result, index) in searchResults" :key="index"
+        @click="navigateToAdvancedSearch(result)"
+        >
+            {{ composeAddress(result.address) }}
+        </div>
     </div>
 
     <button
@@ -47,32 +54,25 @@ export default {
       searchInput: "",
       searchResults: [],
       visible: state.visibleSearch,
-      params: {
-        address: '',
-        lon: null,
-        lat: null
-      },
+      params: null,
+      query: null,
     };
   },
 
   methods: {
-    fetchAdress(searchInput) {
+    fetchAddressMatches(searchInput) {
       axios
         .get(`https://api.tomtom.com/search/2/geocode/${searchInput}.json`, {
           params: {
             key: this.TOMTOM_API_KEY,
-            range: 20000, // default
           },
         })
         .then((res) => {
           const { results } = res.data;
           this.searchResults = results;
-          // loader
-
-          console.log(this.searchResults);
         })
         .catch((err) => {
-          console.log(err);
+          console.warn(err);
         });
     },
 
@@ -98,12 +98,31 @@ export default {
         return str;
     },
 
-    // setResult(r) {
-    //   this.params.address = this.composeAddress(r.address);
-    //   this.params.lat = r.position.lat;
-    //   this.params.lon = r.position.lon;
-    //   console.log(this.params)
-    // }
+    slugify(str) {
+      return str.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+    },
+
+    navigateToAdvancedSearch(r) {
+
+      this.params = {
+        result: r,
+        address: this.slugify(r.address.freeformAddress)
+      };
+      // this.query = {
+      //   'range': 20000, //default
+      // }
+
+      this.$router.push({ 
+        name: 'places.advanced.search', 
+        params: this.params, 
+        // query: this.query,
+        })
+    },
   },
 };
 </script>
