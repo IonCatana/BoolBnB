@@ -1,5 +1,5 @@
 <template>
-    <div class="card mx-2 mb-4" style="width: 19rem; height: 50vh">
+    <div class="card mx-2 mb-4" style="width: 19rem;">
         <figure class="img-wrapper mb-0">
             <img v-if="place.img == null" class="place-img w-100 p-3" src="https://a0.muscache.com/im/pictures/04355deb-8003-47c5-8ef8-1ebca56d7720.jpg?im_w=1440" alt="">
             <img v-else :src=" `/storage/${place.img}`" class="place-img w-100 p-3" alt="">
