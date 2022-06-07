@@ -16,21 +16,21 @@
                 @error('title')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror 
-            </div>
 
-            {{-- indirizzo --}}
-            <div class="form-group">
-                <label for="address">Address *</label>
-                {{-- click on input triggers modal --}}
-                <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
-                id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
-                class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
-                >
+                {{-- indirizzo --}}
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    {{-- click on input triggers modal --}}
+                    <input required id="address" type="text" class="form-control @error('address') is-invalid @enderror" 
+                    id="address" name="address" placeholder="Click to find your place's address" value="{{ old('address') }}"
+                    class="btn btn-primary" data-toggle="modal" data-target="#addressModal" autocomplete="off"
+                    >
 
-                @error('address')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                
+                    @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 {{-- lat e lon: invisibili --}}
                 <div class="form-group d-none">
                     <div class="row">
@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label for="address-modal" class="">Address</label>
                                     <input required list="matches" id="address-modal" type="text" class="form-control mb-2 mr-sm-2 @error('address') is-invalid @enderror"
-                                    id="address-modal" placeholder="Enter a valid address" value="" autofocus
+                                    id="address-modal" placeholder="Enter a valid address" value="" autofocus autocomplete="off"
                                     >
                                     <div id="list-modal" class="list-group"></div>
                                 </div>
@@ -73,19 +73,15 @@
             {{-- numero di stanze, letti, bagni e metri quadri --}}
             <div class="form-group">
                 <label for="rooms">Number of rooms</label>
-                <input id="rooms" type="number" class="form-control @error('rooms') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
-
-                {{-- Error --}}
+                <input id="rooms" type="number" class="form-control required_if_visible @error('rooms') is-invalid @enderror" id="rooms" name="rooms" placeholder="Enter how many rooms the apartment has" value="{{ old('rooms') }}">
                 @error('rooms')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="beds">Number of beds available</label>
-                <input id="beds" type="number" class="form-control @error('beds') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
-
-                {{-- Error --}}
+                <label for="beds">Number of beds</label>
+                <input id="beds" type="number" class="form-control required_if_visible @error('beds') is-invalid @enderror" id="beds" name="beds" placeholder="Enter how many beds the apartment has" value="{{ old('beds') }}">
                 @error('beds')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -93,9 +89,7 @@
 
             <div class="form-group">
                 <label for="bathrooms">Number of bathrooms</label>
-                <input id="bathrooms" type="number" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
-
-                {{-- Error --}}
+                <input id="bathrooms" type="number" class="form-control required_if_visible @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms" placeholder="Enter how many bathrooms the apartment has" value="{{ old('bathrooms') }}">
                 @error('bathrooms')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -103,13 +97,11 @@
 
             <div class="form-group">
                 <label for="square_meters">Square meters - min: 20&#13217;</label>
-                <input id="square_meters" type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
+                <input id="square_meters" type="number" class="form-control required_if_visible @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" placeholder="Enter how many square meters the apartment is" value="{{ old('square_meters') }}">
                 @error('square_meters')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-
-            {{-- //TODO upload dell'immagine? --}}
 
             {{-- servizi --}}
             <label class="d-block">Amenities *</label>
@@ -131,7 +123,7 @@
             <label class="d-block">Load an image of your place</label>
             <div class="form-group">
                 {{-- //TODO trovare il modo per cambiare la lingua in inglese, problema è che online la maggior parte dice che dipende dal browser --}}
-                <input class="bg-white rounded my-2 mb-3 mr-2" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
+                <input class="bg-white rounded my-2 mb-3 mr-2 required_if_visible" id="img" type="file" name="img" class="@error('img') is-invalid @enderror">
                 <span>Accepted formats: jpg, jpeg, png, webp</span>
                 @error('img')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -139,15 +131,17 @@
             </div>
 
             {{-- visibility --}}
-            <label class="d-block">All fields must be filled to make your place visible on the app</label>
             <div class="form-group form-check form-check-inline d-block">
-                <input class="form-check-input" type="checkbox" id="visible" name="visible" 
+                <input class="form-check-input" type="checkbox" id="visible-check" name="visible" 
                 {{ old('visible') ? ' checked' : '' }}/>
-                <label class="form-check-label mr-3" for="visible">Visible</label>
+                <label class="form-check-label mr-3" for="visible-check">Visible</label>
+                <small id="visible-check-info" class="form-text text-muted d-none">
+                    All fields must be filled before you submit, in order to make your place visible on the app
+                </small>
             </div>
 
             {{-- submit button --}}
-            <button id="form-submit-button" type="submit">Add places</button>
+            <button id="form-submit-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 @endsection

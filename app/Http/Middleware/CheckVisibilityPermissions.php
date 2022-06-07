@@ -17,36 +17,38 @@ class CheckVisibilityPermissions
      */
     public function handle($request, Closure $next)
     {
-        // dd($request->ip());
-        if ($request->input('visible')) {
-            $attributes = $request->all();
-            $missing_attributes = [];
+        
+        if (!$request->input('visible')) return $next($request);
+        // dd($request);
 
-            //check amenities presence
-            if (!array_key_exists('amenities', $attributes)) {
-                $missing_attributes[] = 'amenities';
-            }
+        $attributes = $request->all();
+        $missing_attributes = [];
 
-            //controllo se img è nella request o è gia in db
-            $place = Place::where('slug', Str::slug($attributes['title']))->first();
-            if (!array_key_exists('img', $attributes)
-                && ($place != null && blank($place->img) || $place == null)
-                ) $missing_attributes[] = 'img';
-
-            // controllo se manca qualche altro attributo
-            foreach ($attributes as $attribute => $value) {
-                if (blank($value)) {
-                    $missing_attributes[] = $attribute;
-                }
-            }
-
-            if (empty($missing_attributes)) {
-                return $next($request);
-            }
-
-            return redirect()->route('host.places.toggleVisibility', );
+        //check amenities presence
+        if (!array_key_exists('amenities', $attributes)) {
+            $missing_attributes[] = 'amenities';
         }
 
-        return $next($request);
+        //controllo se img è nella request o è gia in db
+        $place = Place::where('slug', Str::slug($attributes['title']))->first();
+        if (!array_key_exists('img', $attributes)
+            && ($place != null && blank($place->img) || $place == null)
+            ) $missing_attributes[] = 'img';
+
+        // controllo se manca qualche altro attributo
+        foreach ($attributes as $attribute => $value) {
+            if (blank($value)) {
+                $missing_attributes[] = $attribute;
+            }
+        }
+        
+        if (empty($missing_attributes)) return $next($request); // TODO qui mi riporta indietro invece di andare a update o store
+        // dd('middle', empty($missing_attributes));
+
+        $status_message = 'The following fields still need filling!</br>';
+        foreach ($missing_attributes as $att) {
+            $status_message .= ' - ' . $att . '</br>';
+        }
+        return redirect()->back()->with('status', $status_message);
     }
 }
