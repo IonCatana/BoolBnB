@@ -21,7 +21,13 @@
           />
         </figure>
       </div>
-      <div class="container flex-row flex-sm-column  flex-md-column flex-xl-row flex-lg-row d-flex">
+      <div
+        class="
+          container
+          flex-row flex-sm-column flex-md-column flex-xl-row flex-lg-row
+          d-flex
+        "
+      >
         <div class="col-4">
           <div class="info flex-column mb-4">
             <h4>Hosted by {{ host }}</h4>
@@ -43,13 +49,9 @@
             </div>
           </div>
         </div>
-        <div class="col-4">
-          <Map :lat="place.lat" :lon="place.lon"/>
+        <div class="col-8">
+          <Map :lat="place.lat" :lon="place.lon" />
         </div>
-        <div class="col-4 ">
-          <MessageHost />
-        </div>
-        
       </div>
     </div>
     <div class="container tomtom_map w-100 p-0"></div>
@@ -90,7 +92,7 @@ export default {
 
   beforeMount() {
     // this.fetchPlace();
-    console.log(this.place)
+    console.log(this.place);
   },
 };
 </script>
