@@ -3,14 +3,12 @@
         <h5>Essential services</h5>
 
         <div v-for="amenity in amenities" :key="amenity.id" class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                :value="amenity.name" :checked="getAmenities()" v-model="checkbox"
-            />
+            <input type="checkbox" class="form-check-input" :id="amenity.name" :value="amenity.name" v-model="checkedAmenities" />
 
-            <label class="form-check-label" for="exampleCheck1">
-                {{ amenity.name }}
-            </label>
+            <label class="form-check-label" :for="amenity.name">{{ amenity.name }}</label>
         </div>
+
+        <span>Checked amenities: {{ checkedAmenities }}</span>
     </div>
 </template>
 
@@ -19,10 +17,10 @@
         data() {
             return {
                 amenities: [],
-                filterAmenities: [],
-                checkbox: null,
+                checkedAmenities: [],
             }
         },
+
         methods: {
             fetchAmenities() {
                 axios.get("/api/amenities").then((res) => {
@@ -31,12 +29,7 @@
             },
 
             getAmenities: function() {
-                // this.checkbox = e.target.value;
-
-                if(this.checkbox.checked){
-                    this.filterAmenities.push(this.checkbox);
-                    console.log(this.filterAmenities);
-                }
+                console.log(checkedAmenities);
             },
         },
 
