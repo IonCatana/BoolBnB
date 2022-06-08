@@ -157,6 +157,9 @@
                 <input class="form-check-input" type="checkbox" id="visible-check" name="visible" 
                 {{ old('visible') || $place->visible ? ' checked' : '' }}/>
                 <label class="form-check-label mr-3" for="visible">Visible</label>
+                <small id="visible-check-info" class="form-text text-muted d-none">
+                    All fields must be filled before you submit, in order to make your place visible on the app
+                </small>
             </div>
 
             <!-- Button trigger modal -->

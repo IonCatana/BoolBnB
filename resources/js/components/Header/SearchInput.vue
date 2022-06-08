@@ -15,6 +15,7 @@
     <!-- TODO quando clicco su uno degli apartamenti che verrà fuori dalla ricerca il visible diventa false così la barra dei suggerimenti scompare -->
     <!-- TODO quando seleziono il risultato che voglio, quello va nella box di search -->
     <!-- ho usato lo state per questo motivo -->
+
     <div class="suggestions-list rounded" 
     v-show="searchResults.length != 0 && visible==true" @click="visible = false">
         <router-link to="/advanced_search" 
@@ -96,17 +97,13 @@ ul, li {
   list-style: none;
 }
 
-.form-control:focus {
-    border-color: none;
-    box-shadow: none;
-}
-
 .myForm{
   padding: 3px 3px;
   border: 1px solid gainsboro;
   border-radius: 50px;
   box-shadow: 0px 2px 5px gainsboro;
   overflow: hidden;
+  flex-wrap: nowrap;
 
   &:hover{
     box-shadow: 0px 4px 5px 0px gainsboro;
@@ -115,8 +112,8 @@ ul, li {
   #searchbox{
     position: relative;
     border-radius: 50px;
-    border-left: 1px solid gainsboro;
     flex-grow: 1;
+    width: 80%;
   }
 
   .suggestions-list{
@@ -143,6 +140,8 @@ ul, li {
   .search-btn{
     color: $boolean-green;
     background-color: $boolean-blue;
+    width: 35px;
+    aspect-ratio: 1/1;
   }
 }
 

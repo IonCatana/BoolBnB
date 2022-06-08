@@ -1,6 +1,6 @@
 <template>
-  <div id="advanced_search">
-    <div class="amenity_card align-items-center d-flex justify-content-center">
+  <div id="advanced_search" class="container d-flex justify-content-center">
+    <div class="amenity_card px-4 d-flex justify-content-center align-items-center ">
       <div class="overflow-auto amenity_icon">
         <div v-for="(amenity, i) in amenities" :key="amenity.id" class="icon" :class="{clickedAmenity : i === activeItem}">
           <button class="amenity-button" @click="selectItem(i)">
