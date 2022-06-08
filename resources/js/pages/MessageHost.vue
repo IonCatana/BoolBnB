@@ -43,7 +43,7 @@
                   class="form-control"
                   id="sender_name"
                 />
-                <div v-if="errors.sender_name">
+                <div class="alert alert-danger" v-if="errors.sender_name">
                   <p v-for="(error, index) in errors.sender_name" :key="index">
                     {{ error }}
                   </p>
@@ -59,13 +59,13 @@
                   class="form-control"
                   id="sender_email"
                 />
-                <div v-if="errors.sender_email">
+                <div class="alert alert-danger" v-if="errors.sender_email">
                   <p v-for="(error, index) in errors.sender_email" :key="index">
                     {{ error }}
                   </p>
                 </div>
               </div>
-              <div class="form-group">
+              <div  class="form-group">
                 <label for="object" class="col-form-label">Object:</label>
                 <input
                   v-model="object"
@@ -73,7 +73,7 @@
                   class="form-control"
                   id="object"
                 />
-                <div v-if="errors.object">
+                <div class="alert alert-danger" v-if="errors.object">
                   <p v-for="(error, index) in errors.object" :key="index">
                     {{ error }}
                   </p>
@@ -89,7 +89,7 @@
                   cols="30"
                   rows="10"
                 ></textarea>
-                <div v-if="errors.content">
+                <div class="alert alert-danger" v-if="errors.content">
                   <p v-for="(error, index) in errors.content" :key="index">
                     {{ error }}
                   </p>
