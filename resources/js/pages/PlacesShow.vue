@@ -45,7 +45,7 @@
         <div class="col-4">
           <Map />
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4 ">
           <MessageHost />
         </div>
       </div>
