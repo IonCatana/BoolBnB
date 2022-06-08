@@ -30,24 +30,23 @@
               <li class="beds mr-3">{{ place.beds }} Beds</li>
               <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
             </ul>
-            <div class="dropdown-divider"></div>
+            <div class="mb-3 dropdown-divider"></div>
             <div class="amenities">
               <h4>What this place offers</h4>
-              <ul class="m-0">
+              <ul class="m-0 mb-3">
                 <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
                   <i :class="amenity.icon" class="mr-2"></i>
                   {{ amenity.name }}
                 </li>
               </ul>
+              <MessageHost />
             </div>
           </div>
         </div>
-        <div class="col-4">
-          <Map />
+        <div class="col-8">
+          <Map :position="place.position" />
         </div>
-        <div class="col-4 ">
-          <MessageHost />
-        </div>
+        
       </div>
     </div>
     <div class="container tomtom_map w-100 p-0"></div>
