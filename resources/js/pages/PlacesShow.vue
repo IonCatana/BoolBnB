@@ -56,9 +56,12 @@ export default {
   components: {
     Map,
   },
+  props: {
+    place: Object,
+  },
   data() {
     return {
-      place: [],
+      // place: [],
       amenities: [],
       host: "",
     };
@@ -77,7 +80,8 @@ export default {
   },
 
   beforeMount() {
-    this.fetchPlace();
+    // this.fetchPlace();
+    console.log(this.place)
   },
 };
 </script>

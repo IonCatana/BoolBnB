@@ -12,7 +12,7 @@
                 <span class="card-text mr-2 text-dark" v-for="amenity in place.amenities" :key="amenity.id"><i :class="amenity.icon"></i></span>
             </div>
             <div class="text-center">
-                <router-link :to="{ name:'places.show', params:{slug:place.slug} }" class="detail">Show this place!</router-link>
+                <router-link :to="{ name:'places.show', params:{ slug: place.slug, place } }" class="detail">Show this place!</router-link>
             </div>
         </div>
     </div>
