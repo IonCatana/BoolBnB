@@ -199,7 +199,7 @@ export default {
 
       if (!_.isEmpty(this.activeFilters)) {
         for (let filter of this.activeFilters) {
-          // 
+          // this.query[filter.name] = filter.value;
         }
       }
     },
