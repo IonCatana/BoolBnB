@@ -2,8 +2,13 @@
     <div class="amenities">
         <h5>Essential services</h5>
 
-        <div v-for="amenity in amenities" :key="amenity.id" class="form-group form-check">
-            <input type="checkbox" class="form-check-input" :id="amenity.name" :value="amenity.name" v-model="checkedAmenities" />
+        <div v-for="(amenity, i) in amenities" :key="i" class="form-group form-check">
+            <input type="checkbox" 
+            class="form-check-input" 
+            :value="amenity.name" 
+            v-model="checkedAmenities"
+            @change="returnValue($event)" 
+            />
 
             <label class="form-check-label" :for="amenity.name">{{ amenity.name }}</label>
         </div>
@@ -28,9 +33,17 @@
                 });
             },
 
-            getAmenities: function() {
-                console.log(checkedAmenities);
+            returnValue: function(e) {
+
+                const filter = {
+                    'name': 'amenities',
+                    'value': this.checkedAmenities,
+                };
+
+                console.log(filter);
+                this.$emit('pick-filter', filter);
             },
+
         },
 
         beforeMount() {

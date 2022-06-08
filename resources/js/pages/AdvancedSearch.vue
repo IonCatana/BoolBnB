@@ -49,19 +49,6 @@
                 <!-- range -->
                 <h2>Slide range km</h2>
                 <RangeFilter @pick-filter="addFilter" />
-                <!-- <div class="container" id="app">
-                  <h2>Slide range km</h2>
-                  <input
-                    v-model="value"
-                    type="range"
-                    class="mySlider"
-                    min="0"
-                    max="100"
-                  />
-                  <span :style="warning()" class="rangeValue">
-                    {{ value }} km
-                  </span>
-                </div> -->
 
                 <!-- rooms, beds & bathrooms -->
                 <div class="rooms_beds">
@@ -77,24 +64,9 @@
                 <!-- amenities -->
                 <div class="amenities">
                   <h2>Amenity</h2>
-                  <AmenitiesFilter />
+                  <AmenitiesFilter @pick-filter="addFilter" />
                 </div>
 
-                  <!-- <h5>Essential services</h5>
-                  <div
-                    v-for="amenity in amenities"
-                    :key="amenity.id"
-                    class="form-group form-check"
-                  >
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1">{{
-                      amenity.name
-                    }}</label>
-                  </div> -->
               </div>
 
               <div class="modal-footer">
@@ -142,9 +114,8 @@ export default {
         { name: 'range', value: 0 },
         { name: 'rooms', value: null, },
         { name: 'beds', value:null, },
-        { name: 'bathrooms', value: null, }
-        // { name: 'amenities', value: []}
-        //andranno aggiunte amenities e raggio km
+        { name: 'bathrooms', value: null, },
+        { name: 'amenities', value: []}
       ],
 
       // da passare nella chiamata al server
@@ -227,26 +198,13 @@ export default {
     },
 
     addFilter(filter) {
-      //deve mettere il filtro che gli arriva dai componenti dentro a activeFilter
-      // console.log('advanced search filter', filter);
-
       //Find index of specific object using findIndex method.    
       let objIndex = this.activeFilters.findIndex((obj => obj.name == filter.name));
-
-      //Log object to Console.
-      // console.log("Before update: ", this.activeFilters[objIndex])
 
       //Update object's name property.
       this.activeFilters[objIndex].value = filter.value;
 
-      // //Log object to console again.
-      // console.log("After update: ", this.activeFilters[objIndex])
       console.log('activefilter', this.activeFilters);
-
-      // this.activeFilters = {
-      //   'name': filter.name,
-      //   'value': filter.value,
-      // };
       
     },
   },
