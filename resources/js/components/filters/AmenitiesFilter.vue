@@ -19,21 +19,24 @@
 
 <script>
     export default {
+        props: {
+            amenities: Array,
+        },
         data() {
             return {
-                amenities: [],
                 checkedAmenities: [],
             }
         },
 
         methods: {
-            fetchAmenities() {
-                axios.get("/api/amenities").then((res) => {
-                    this.amenities = res.data.amenities;
-                });
-            },
+            // fetchAmenities() {
+            //     axios.get("/api/amenities").then((res) => {
+            //         this.amenities = res.data.amenities;
+            //     });
+            // },
 
             returnValue: function(e) {
+                console.log(this.amenities);
 
                 const filter = {
                     'name': 'amenities',
@@ -47,7 +50,7 @@
         },
 
         beforeMount() {
-            this.fetchAmenities();
+            // this.fetchAmenities();
         }
     }
 </script>

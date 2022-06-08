@@ -64,7 +64,7 @@
                 <!-- amenities -->
                 <div class="amenities">
                   <h2>Amenities</h2>
-                  <AmenitiesFilter @pick-filter="addFilter" />
+                  <AmenitiesFilter @pick-filter="addFilter" :amenities="amenities"/>
                 </div>
 
               </div>
@@ -116,6 +116,7 @@ export default {
       params: null,
       query: null,
       // la risposta del server alla chiamata api/search_area
+      // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
       places: [],
     };
   },
@@ -194,10 +195,13 @@ export default {
     addFilter(filter) {
       if (filter.value == null) {
         this.activeFilters.delete(filter.name)
+        // console.log('length', filter.value.length)
         return
       }
 
       this.activeFilters.set(filter.name, filter.value);
+
+      if (this.activeFilters.get('amenities')?.length === 0) this.activeFilters.delete('amenities');
       console.log('activefilter', this.activeFilters);
     },
   },
