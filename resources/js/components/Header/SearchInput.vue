@@ -16,14 +16,6 @@
     <!-- ho usato lo state per questo motivo -->
     <div class="suggestions-list rounded border border-primary" 
     v-show="searchResults.length != 0 && visible==true" @click="visible = false">
-        <!-- <router-link :to="{ name: 'places.advanced.search', params, query }" 
-            class="suggestion d-block text-dark" 
-            v-for="(result, index) in searchResults" :key="index"
-            @click="setResult(result)"
-            >
-            {{ composeAddress(result.address) }}
-        </router-link> -->
-
         <div class="suggestion d-block text-dark" 
         v-for="(result, index) in searchResults" :key="index"
         @click="navigateToAdvancedSearch(result)"
@@ -55,7 +47,6 @@ export default {
       searchResults: [],
       visible: state.visibleSearch,
       params: null,
-      query: null,
     };
   },
 
@@ -113,14 +104,10 @@ export default {
         result: r,
         address: this.slugify(r.address.freeformAddress)
       };
-      // this.query = {
-      //   'range': 20000, //default
-      // }
 
       this.$router.push({ 
         name: 'places.advanced.search', 
         params: this.params, 
-        // query: this.query,
         })
     },
   },

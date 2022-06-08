@@ -10,6 +10,7 @@
         </div>
       </div>
 
+      <!-- li ??? -->
       <li class="nav-item dropdown">
         <!-- Button trigger modal -->
         <button
@@ -78,7 +79,9 @@
                   Close
                 </button>
 
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary"
+                @click="queryDatabase" data-dismiss="modal"
+                >
                   Save changes
                 </button>
               </div>
@@ -87,6 +90,11 @@
         </div>
       </li>
     </div>
+
+      <div v-if="placesLoaded" class="card-wrapper d-flex flex-wrap justify-content-center">
+        <PlacesCard tag="div" v-for="place in places" :key="place.id" :place="place"/>
+      </div>
+
   </div>
 </template>
 
@@ -95,12 +103,14 @@ import axios from "axios";
 import RangeFilter from "../components/filters/RangeFilter.vue";
 import ButtonFilter from '../components/filters/ButtonsFilter.vue';
 import AmenitiesFilter from "../components/filters/AmenitiesFilter.vue";
+import PlacesCard from '../components/PlacesCard.vue';
 
 export default {
   components: {
     RangeFilter,
     ButtonFilter,
     AmenitiesFilter,
+    PlacesCard,
   },
 
   data() {
@@ -114,12 +124,22 @@ export default {
 
       // da passare nella chiamata al server
       params: null,
-      query: null,
+      query: new Map(),
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
-      places: [],
+      places: null,
+      placesLoaded: false,
+
+      // data per la chiamata axios post
+      payload: {},
     };
   },
+
+  // watch: {
+  //   $route(to, from) {
+  //     this.queryDatabase();
+  //   }
+  // },
 
   methods: {
     fetchAmenities() {
@@ -144,31 +164,57 @@ export default {
     },
 
     queryDatabase() {
-      this.prepareQuery();
+      this.preparePayload();
+      this.updateRoute();
 
       axios.get('/api/search_area', { 
-        query: this.query,
+        params: JSON.stringify(this.payload),
       })
       .then((res) => {
         this.places = res.data.places;
-        console.log(this.places);
+        this.placesLoaded = true;
+        console.log('places', this.places);
+        console.log('route', this.$route)
       })
       .catch(err => {
         console.warn(err)
       })
+      // const options = {
+      //   method: 'GET',
+      //   url: 'http://127.0.0.1:8000/api/search_area',
+      //   params: JSON.stringify(this.payload),
+      // };
+
+      // axios.request(options).then(function (response) {
+      //   this.places = response.data;
+      //   this.placesLoaded = true;
+      //   console.log('places in axios', this.places)
+      //   console.log(response.data.places);
+      // }).catch(function (error) {
+      //   console.error(error);
+      // });
     },
 
-    prepareQuery() {      
+    preparePayload() {
       const { lat, lon } = this.$route.params.result.position;
+      this.payload = { lat, lon };
+      console.log('payload', this.payload)
+    },
 
-      this.query = { lat, lon };
-      console.log('before', this.query)
-
+    updateRoute() {   
       if (!_.isEmpty(this.activeFilters)) {
-        for (let filter of this.activeFilters) {
-          // this.query[filter.name] = filter.value;
-        }
+        this.activeFilters.forEach((value, filter) => {
+          if (filter === 'amenities') {
+            value.forEach((amenityId, index) => {
+              this.query.set(`amenity[${index}]`, amenityId);
+            });    
+          } else {
+            this.query.set(filter, value);
+          }
+        });
       }
+      console.log('filters', this.activeFilters)
+      console.log('query', this.query)
     },
 
     composeAddress(address) {

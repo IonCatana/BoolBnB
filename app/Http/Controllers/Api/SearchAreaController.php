@@ -28,9 +28,9 @@ class SearchAreaController extends Controller
         $places = Place::cursor()->filter(function($place) use ($lat, $lon, $range) {
             return $place->inArea($lat, $lon, $range);
         });
+
         
         // optional filters
-        // filta >= e non strettamente =
         if (!empty($filters)) {
             foreach ($filters as $filter => $value) {
                 $places = $places->filter(function($place) use ($filter, $value) {
@@ -38,6 +38,8 @@ class SearchAreaController extends Controller
                 });
             }
         }
+
+        // $places = Place::all();
 
         return response()->json([
             'success' => true,

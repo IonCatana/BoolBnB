@@ -5,7 +5,8 @@
         <div v-for="(amenity, i) in amenities" :key="i" class="form-group form-check">
             <input type="checkbox" 
             class="form-check-input" 
-            :value="amenity.name" 
+            :id="amenity.name" 
+            :value="amenity.id"
             v-model="checkedAmenities"
             @change="returnValue($event)" 
             />
@@ -29,15 +30,7 @@
         },
 
         methods: {
-            // fetchAmenities() {
-            //     axios.get("/api/amenities").then((res) => {
-            //         this.amenities = res.data.amenities;
-            //     });
-            // },
-
             returnValue: function(e) {
-                console.log(this.amenities);
-
                 const filter = {
                     'name': 'amenities',
                     'value': this.checkedAmenities,
@@ -48,10 +41,6 @@
             },
 
         },
-
-        beforeMount() {
-            // this.fetchAmenities();
-        }
     }
 </script>
 

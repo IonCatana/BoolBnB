@@ -39,7 +39,7 @@
                     'value': this.value,
                 };
 
-                console.log(filter);
+                // console.log(filter);
                 this.$emit('pick-filter', filter);
             },
         }
