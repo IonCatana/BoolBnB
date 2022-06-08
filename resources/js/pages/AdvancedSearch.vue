@@ -58,46 +58,21 @@
                     {{ value }} km
                   </span>
                 </div>
+
                 <div class="rooms_beds">
                   <h2>Rooms and Beds</h2>
-                  <div class="room">
-                    <p>Room</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
-                  <div class="dropdown-divider"></div>
-
-                  <div class="bed">
-                    <p>Bed</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
-                  <div class="bathroom">
-                    <p>Bathroom</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
+                  <ButtonFilter name="Rooms" @Rooms="num" />
+                  <ButtonFilter name="Beds" />
+                  <ButtonFilter name="Bathrooms" />
                 </div>
+
                 <div class="dropdown-divider"></div>
 
                 <div class="amenities">
                   <h2>Amenity</h2>
-                  <h5>Essential services</h5>
+                  <AmenitiesFilter />
+                </div>
+                  <!-- <h5>Essential services</h5>
                   <div
                     v-for="amenity in amenities"
                     :key="amenity.id"
@@ -111,8 +86,9 @@
                     <label class="form-check-label" for="exampleCheck1">{{
                       amenity.name
                     }}</label>
-                  </div>
-                </div>
+                  </div> -->
+
+                
               </div>
               <div class="modal-footer">
                 <button
@@ -136,9 +112,14 @@
 
 <script>
 import axios from "axios";
+import ButtonFilter from '../components/filters/ButtonsFilter.vue';
+import AmenitiesFilter from "../components/filters/AmenitiesFilter.vue";
 
 export default {
-  components: {},
+  components: {
+    ButtonFilter,
+    AmenitiesFilter,
+  },
   data() {
     return {
       amenities: [],
@@ -156,12 +137,12 @@ export default {
   },
 
   methods: {
-    fetchAmenities() {
-      axios.get("/api/amenities").then((res) => {
-        console.log(res.data);
-        this.amenities = res.data.amenities;
-      });
-    },
+    // fetchAmenities() {
+    //   axios.get("/api/amenities").then((res) => {
+    //     console.log(res.data);
+    //     this.amenities = res.data.amenities;
+    //   });
+    // },
 
     warning: function () {
       if (this.value > 1) {
