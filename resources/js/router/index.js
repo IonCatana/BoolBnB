@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 import PlacesIndex from '../pages/PlacesIndex.vue';
 import PlacesShow from '../pages/PlacesShow.vue';
 import AdvancedSearch from '../pages/AdvancedSearch.vue';
-
+import MessageHost from "../pages/MessageHost";
 const routes = [
   {
     path: '/',
@@ -23,6 +23,11 @@ const routes = [
     name: 'places.advanced.search',
     component: AdvancedSearch,
   },
+  {
+    path: "/place/:slug",
+    name: "message.host",
+    component: MessageHost
+  }
 ]
 
 const router = new VueRouter({
