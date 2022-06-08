@@ -43,8 +43,11 @@
             </div>
           </div>
         </div>
-        <div class="col-8">
-          <Map :position="place.position" />
+        <div class="col-4">
+          <Map :lat="place.lat" :lon="place.lon"/>
+        </div>
+        <div class="col-4 ">
+          <MessageHost />
         </div>
         
       </div>
@@ -63,9 +66,11 @@ export default {
     MessageHost,
     Map,
   },
+  props: {
+    place: Object,
+  },
   data() {
     return {
-      place: [],
       amenities: [],
       host: "",
     };
@@ -84,7 +89,8 @@ export default {
   },
 
   beforeMount() {
-    this.fetchPlace();
+    // this.fetchPlace();
+    console.log(this.place)
   },
 };
 </script>
