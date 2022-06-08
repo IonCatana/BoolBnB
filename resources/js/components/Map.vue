@@ -29,7 +29,7 @@ export default {
 <style>
 #map {
   border-radius: 10px;
-  height: 200px;
+  height: 25vh;
   width: 100%;
 }
 </style>

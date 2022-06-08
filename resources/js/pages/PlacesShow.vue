@@ -21,9 +21,9 @@
           />
         </figure>
       </div>
-      <div class="container d-flex">
+      <div class="container flex-row flex-sm-column  flex-md-column flex-xl-row flex-lg-row d-flex">
         <div class="col-4">
-          <div class="info row flex-column mb-4">
+          <div class="info flex-column mb-4">
             <h4>Hosted by {{ host }}</h4>
             <ul class="d-flex rooms">
               <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
