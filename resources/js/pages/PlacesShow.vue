@@ -43,22 +43,19 @@
       </div>
     </div>
     <div class="container tomtom_map w-100 p-0">
-      <h1>TomTom map layout esempio</h1>
-      <figure class="w-100">
-        <img
-          class="w-100"
-          src="https://www.maptiler.com/img/maps/basic/banner-img.png"
-          alt=""
-        />
-      </figure>
+      <Map />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Map from "../components/Map.vue";
 export default {
+  name: "PlacesShow",
+  components: {
+    Map,
+  },
   data() {
     return {
       place: [],
@@ -129,5 +126,4 @@ li {
     }
   }
 }
-
 </style>
