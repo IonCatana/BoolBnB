@@ -91,7 +91,7 @@ export default {
   },
 
   beforeMount() {
-    // this.fetchPlace();
+    this.fetchPlace();
     console.log(this.place);
   },
 };
