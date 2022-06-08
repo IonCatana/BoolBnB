@@ -22,14 +22,22 @@
         </figure>
       </div>
 
-      <div class="info row flex-column mb-4">
-        <h4>Hosted by {{ host }}</h4>
+      <div class="d-flex justify-content-between">
+        <div class="info row flex-column mb-4">
+          <h4>Hosted by {{ host }}</h4>
 
-        <ul class="d-flex rooms">
-          <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
-          <li class="beds mr-3">{{ place.beds }} Beds</li>
-          <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
-        </ul>
+          <ul class="d-flex rooms">
+            <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
+            <li class="beds mr-3">{{ place.beds }} Beds</li>
+            <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
+          </ul>
+        </div>
+
+        <div>
+          <!-- modale per inviare msg all'host -->
+          
+          <MessageHost />
+        </div>
       </div>
 
       <div class="amenities row flex-column">
@@ -50,18 +58,18 @@
 
 <script>
 import axios from "axios";
+import MessageHost from "../pages/MessageHost.vue";
 import Map from "../components/Map.vue";
 export default {
-  name: "PlacesShow",
+  name: 'PlacesShow',
   components: {
-    Map,
-  },
-  props: {
-    place: Object,
+    MessageHost,
+    Map
+
   },
   data() {
     return {
-      // place: [],
+      place: [],
       amenities: [],
       host: "",
     };
@@ -80,8 +88,8 @@ export default {
   },
 
   beforeMount() {
-    // this.fetchPlace();
-    console.log(this.place)
+     this.fetchPlace();
+    
   },
 };
 </script>
@@ -97,12 +105,12 @@ li {
 }
 
 .info {
-  position: relative;
+  // position: relative;
 
   &:after {
     content: "";
     display: block;
-    position: relative;
+    // position: relative;
     height: 1px;
     width: 100%;
     background-color: gainsboro;
