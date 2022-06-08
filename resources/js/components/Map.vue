@@ -7,18 +7,22 @@
 <script>
 export default {
   name: "Map",
+  props: {
+    lon: Number, 
+    lat: Number,
+  },
   methods: {
     initializeMap: function () {
       const map = tt.map({
         key: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
         container: "map",
         zoom: 15,
-        center: [9.1859243, 45.4654219],
+        center: [this.lon, this.lat],
       });
       // aggiunta controlli mappa
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
-      new tt.Marker().setLngLat([9.1859243, 45.4654219]).addTo(map);
+      new tt.Marker().setLngLat([this.lon, this.lat]).addTo(map);
     },
   },
   mounted: function () {
