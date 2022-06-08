@@ -9,6 +9,7 @@ class Place extends Model
 {
     protected $guarded = [
         'img',
+        'visible',
     ];
 
     // relations
@@ -27,6 +28,10 @@ class Place extends Model
     
     public function visualisations() {
         return $this->hasMany('App\Visualisation');
+    }
+
+    public function messages() {
+        return $this->hasMany('App\Message');
     }
 
     // utilities

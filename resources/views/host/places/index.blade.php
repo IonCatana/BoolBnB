@@ -21,6 +21,7 @@
                 <th>Amenities</th>
                 <th>Image</th>
                 <th>Actions</th>
+                <th>Messages</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
@@ -40,17 +41,39 @@
                             @endforeach
                         </td>
                         <td>
-                            <img class="img-fluid" src="{{ asset('storage/' . $place->img)}}" alt="">
+                            @if($place->img)
+                                <img class="img-fluid" src="{{ asset('storage/' . $place->img)}}" alt="">
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('host.places.edit', $place) }}" class="btn btn-warning mb-2 w-100">Edit</a>
                         
-                            <form class="delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
+                            <form class="place-delete-form form-group mb-2" action="{{ route('host.places.destroy', $place) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger w-100">Delete</button>
+                                <!-- Button trigger modal -->
+                                <button type="submit" id="delete-confirm-button" class="btn btn-danger w-100" data-toggle="modal" data-target="">Delete</button>
+            
+                                <!-- Modal -->
+                                <div name="delete-confirm-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-danger" id="exampleModalLabel">Attention!</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="modal-msg"></div>
+                                            <div class="modal-footer">
+                                                <button id="btn-confirm-delete" type="button" class="btn btn-danger">Yes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
 
                             @if (!$place->visible)
@@ -59,6 +82,7 @@
                                 <a href="{{ route('host.places.toggleVisibility', $place) }}" class="btn btn-success">Visibility:On</a>
                             @endif
                         </td>
+                        <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                 @endforeach
                 </tr>
