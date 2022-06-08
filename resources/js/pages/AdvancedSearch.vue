@@ -146,7 +146,7 @@ export default {
     queryDatabase() {
       this.prepareQuery();
 
-      axios.get('/api/search_area/45.4636/9.1881', { 
+      axios.get('/api/search_area', { 
         query: this.query,
       })
       .then((r) => {
@@ -201,8 +201,8 @@ export default {
 
       this.activeFilters.set(filter.name, filter.value);
 
+      // array amenities vuoto
       if (this.activeFilters.get('amenities')?.length === 0) this.activeFilters.delete('amenities');
-      console.log('activefilter', this.activeFilters);
     },
   },
 
