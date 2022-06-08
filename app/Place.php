@@ -81,7 +81,7 @@ class Place extends Model
      * Calculate great-circle distance between 2 points and returns wether it is smaller than $range
      * using the Vincenty formula
      */
-    public function inArea($latitude, $longitude, $radius = 20000) {
+    public function inArea($latitude, $longitude, $radius) {
         $earthRadius = 6371000; // meters
         // convert from degrees to radians
         $lat_from = deg2rad($latitude);

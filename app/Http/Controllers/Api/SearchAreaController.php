@@ -20,17 +20,24 @@ class SearchAreaController extends Controller
         $filters = $request->query();
         $lat = Arr::pull($filters, 'lat');
         $lon = Arr::pull($filters, 'lon');
-        // dd($filters['range']);
 
-
+        define('DEFAULT_RANGE', 20000); // meters
+        $range = Arr::pull($filters, 'range', DEFAULT_RANGE);
         
-        $places = Place::cursor()->filter(function($place) use ($lat, $lon) {
-            // dump($place, $key);
-            return $place->inArea($lat, $lon);
+        // $place inside area?
+        $places = Place::cursor()->filter(function($place) use ($lat, $lon, $range) {
+            return $place->inArea($lat, $lon, $range);
         });
-        // $places = Place::all();
-
-        // dd($places);
+        
+        // optional filters
+        // filta >= e non strettamente =
+        if (!empty($filters)) {
+            foreach ($filters as $filter => $value) {
+                $places = $places->filter(function($place) use ($filter, $value) {
+                    return $place[$filter] >= $value;
+                });
+            }
+        }
 
         return response()->json([
             'success' => true,
