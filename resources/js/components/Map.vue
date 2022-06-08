@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="text-center">TomTom Map</h1>
+  <div>    
     <div id="map" ref="mapRef"></div>
   </div>
 </template>
@@ -29,8 +28,8 @@ export default {
 </script>
 <style>
 #map {
-  margin: 0 auto;
-  height: 55vh;
-  width: 55vw;
+  border-radius: 10px;
+  height: 200px;
+  width: 100%;
 }
 </style>

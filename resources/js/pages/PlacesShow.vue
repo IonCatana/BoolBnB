@@ -21,38 +21,36 @@
           />
         </figure>
       </div>
-
-      <div class="d-flex justify-content-between">
-        <div class="info row flex-column mb-4">
-          <h4>Hosted by {{ host }}</h4>
-
-          <ul class="d-flex rooms">
-            <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
-            <li class="beds mr-3">{{ place.beds }} Beds</li>
-            <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
-          </ul>
+      <div class="container d-flex">
+        <div class="col-4">
+          <div class="info row flex-column mb-4">
+            <h4>Hosted by {{ host }}</h4>
+            <ul class="d-flex rooms">
+              <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
+              <li class="beds mr-3">{{ place.beds }} Beds</li>
+              <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
+            </ul>
+            <div class="dropdown-divider"></div>
+            <div class="amenities">
+              <h4>What this place offers</h4>
+              <ul class="m-0">
+                <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
+                  <i :class="amenity.icon" class="mr-2"></i>
+                  {{ amenity.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <!-- modale per inviare msg all'host -->
-          
+        <div class="col-4">
+          <Map />
+        </div>
+        <div class="col-4 text-center">
           <MessageHost />
         </div>
       </div>
-
-      <div class="amenities row flex-column">
-        <h4>What this place offers</h4>
-        <ul class="m-0">
-          <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
-            <i :class="amenity.icon" class="mr-2"></i>
-            {{ amenity.name }}
-          </li>
-        </ul>
-      </div>
     </div>
-    <div class="container tomtom_map w-100 p-0">
-      <Map />
-    </div>
+    <div class="container tomtom_map w-100 p-0"></div>
   </div>
 </template>
 
@@ -61,11 +59,10 @@ import axios from "axios";
 import MessageHost from "../pages/MessageHost.vue";
 import Map from "../components/Map.vue";
 export default {
-  name: 'PlacesShow',
+  name: "PlacesShow",
   components: {
     MessageHost,
-    Map
-
+    Map,
   },
   data() {
     return {
@@ -88,8 +85,7 @@ export default {
   },
 
   beforeMount() {
-     this.fetchPlace();
-    
+    this.fetchPlace();
   },
 };
 </script>
@@ -102,40 +98,5 @@ li {
 .place-img {
   border-radius: 15px;
   width: 100%;
-}
-
-.info {
-  // position: relative;
-
-  &:after {
-    content: "";
-    display: block;
-    // position: relative;
-    height: 1px;
-    width: 100%;
-    background-color: gainsboro;
-    border-radius: 50%;
-    top: 100%;
-  }
-
-  .rooms {
-    .bedrooms,
-    .beds {
-      position: relative;
-
-      &:after {
-        content: "";
-        display: block;
-        position: relative;
-        height: 3px;
-        width: 3px;
-        background-color: black;
-        border-radius: 50%;
-        bottom: 47%;
-        left: 100%;
-        margin-left: 6px;
-      }
-    }
-  }
 }
 </style>
