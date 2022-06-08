@@ -44,76 +44,31 @@
                 </button>
               </div>
 
+              
               <div class="modal-body">
-                <div class="container" id="app">
-                  <h1>Slide range km</h1>
-                  <input
-                    v-model="value"
-                    type="range"
-                    class="mySlider"
-                    min="0"
-                    max="100"
-                  />
-                  <span :style="warning()" class="rangeValue">
-                    {{ value }} km
-                  </span>
-                </div>
-                <div class="rooms_beds">
-                  <h2>Rooms and Beds</h2>
-                  <div class="room">
-                    <p>Room</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
-                  <div class="dropdown-divider"></div>
+                <!-- range -->
+                <h2>Slide range km</h2>
+                <RangeFilter @pick-filter="addFilter" />
 
-                  <div class="bed">
-                    <p>Bed</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
-                  <div class="bathroom">
-                    <p>Bathroom</p>
-                    <button>Any</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6+</button>
-                  </div>
+                <!-- rooms, beds & bathrooms -->
+                <div class="rooms_beds">
+                  <h2>Rooms, Beds & Bathrooms</h2>
+
+                  <ButtonFilter name="Rooms" @pick-filter="addFilter" />
+                  <ButtonFilter name="Beds" @pick-filter="addFilter" />
+                  <ButtonFilter name="Bathrooms" @pick-filter="addFilter" />
                 </div>
+
                 <div class="dropdown-divider"></div>
 
+                <!-- amenities -->
                 <div class="amenities">
-                  <h2>Amenity</h2>
-                  <h5>Essential services</h5>
-                  <div
-                    v-for="amenity in amenities"
-                    :key="amenity.id"
-                    class="form-group form-check"
-                  >
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1">{{
-                      amenity.name
-                    }}</label>
-                  </div>
+                  <h2>Amenities</h2>
+                  <AmenitiesFilter @pick-filter="addFilter" :amenities="amenities"/>
                 </div>
+
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
@@ -122,6 +77,7 @@
                 >
                   Close
                 </button>
+
                 <button type="button" class="btn btn-primary">
                   Save changes
                 </button>
@@ -136,21 +92,31 @@
 
 <script>
 import axios from "axios";
+import RangeFilter from "../components/filters/RangeFilter.vue";
+import ButtonFilter from '../components/filters/ButtonsFilter.vue';
+import AmenitiesFilter from "../components/filters/AmenitiesFilter.vue";
 
 export default {
-  components: {},
+  components: {
+    RangeFilter,
+    ButtonFilter,
+    AmenitiesFilter,
+  },
+
   data() {
     return {
       amenities: [],
-      value: "0",
+      // value: "0",
       activeItem: null,
 
       // i filtri, per popolare la query
-      activeFilters: null,
+      activeFilters: new Map(),
+
       // da passare nella chiamata al server
       params: null,
       query: null,
       // la risposta del server alla chiamata api/search_area
+      // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
       places: [],
     };
   },
@@ -163,14 +129,14 @@ export default {
       });
     },
 
-    warning: function () {
-      if (this.value > 1) {
-        return {
-          color: "#e74c3c",
-          animation: "anim .3s ease-in 1 alternate",
-        };
-      }
-    },
+    // warning: function () {
+    //   if (this.value > 1) {
+    //     return {
+    //       color: "#e74c3c",
+    //       animation: "anim .3s ease-in 1 alternate",
+    //     };
+    //   }
+    // },
 
     selectItem: function (i) {
       // console.log(i);
@@ -200,7 +166,7 @@ export default {
 
       if (!_.isEmpty(this.activeFilters)) {
         for (let filter of this.activeFilters) {
-          // 
+          // this.query[filter.name] = filter.value;
         }
       }
     },
@@ -226,9 +192,22 @@ export default {
 
         return str;
     },
+
+    addFilter(filter) {
+      if (filter.value == null) {
+        this.activeFilters.delete(filter.name)
+        // console.log('length', filter.value.length)
+        return
+      }
+
+      this.activeFilters.set(filter.name, filter.value);
+
+      // array amenities vuoto
+      if (this.activeFilters.get('amenities')?.length === 0) this.activeFilters.delete('amenities');
+    },
   },
+
   beforeMount() {
-    console.log(this.$route);
     this.fetchAmenities();
     this.queryDatabase();
   },
@@ -285,69 +264,6 @@ ul {
   }
 }
 
-// Slide Range Km
-.container .mySlider {
-  appearance: none;
-  width: 100%;
-  background-color: #d3d3d3;
-  border-radius: 20px;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s ease-in;
-  -webkit-transition: opacity 0.2s ease-in;
-}
-
-/*hover on range slider*/
-.container .mySlider:hover {
-  opacity: 1;
-}
-
-/* chrome and safari supporter */
-.container .mySlider::-webkit-slider-thumb {
-  appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: #e74c3c;
-  cursor: pointer;
-  transition: all 0.3s ease-in;
-}
-
-.container .mySlider::-moz-range-thumb {
-  appearance: none;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  background-color: #e74c3c;
-  cursor: pointer;
-  transition: all 0.3s ease-in;
-  border: 2px solid #d3d3d3;
-}
-
-/* hover on slider thumb */
-.container .mySlider::-webkit-slider-thumb:hover {
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Range Value Span */
-.container .rangeValue {
-  height: 40px;
-  width: 60px;
-  border: 1px solid #fff;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
-  font-size: 22px;
-  line-height: 38px;
-}
-
-/* Draw with ::before on span*/
-.container .rangeValue::before {
-  content: "";
-  height: 10px;
-  width: 10px;
-  transform: rotate(45deg);
-}
 /*animation key frames*/
 @keyframes anim {
   0% {
