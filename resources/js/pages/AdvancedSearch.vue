@@ -63,7 +63,7 @@
 
                 <!-- amenities -->
                 <div class="amenities">
-                  <h2>Amenity</h2>
+                  <h2>Amenities</h2>
                   <AmenitiesFilter @pick-filter="addFilter" />
                 </div>
 
@@ -110,13 +110,7 @@ export default {
       activeItem: null,
 
       // i filtri, per popolare la query
-      activeFilters: [
-        { name: 'range', value: 0 },
-        { name: 'rooms', value: null, },
-        { name: 'beds', value:null, },
-        { name: 'bathrooms', value: null, },
-        { name: 'amenities', value: []}
-      ],
+      activeFilters: new Map(),
 
       // da passare nella chiamata al server
       params: null,
@@ -198,19 +192,17 @@ export default {
     },
 
     addFilter(filter) {
-      //Find index of specific object using findIndex method.    
-      let objIndex = this.activeFilters.findIndex((obj => obj.name == filter.name));
+      if (filter.value == null) {
+        this.activeFilters.delete(filter.name)
+        return
+      }
 
-      //Update object's name property.
-      this.activeFilters[objIndex].value = filter.value;
-
+      this.activeFilters.set(filter.name, filter.value);
       console.log('activefilter', this.activeFilters);
-      
     },
   },
 
   beforeMount() {
-    console.log(this.$route);
     this.fetchAmenities();
     this.queryDatabase();
   },

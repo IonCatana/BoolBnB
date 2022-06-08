@@ -31,7 +31,9 @@ export default {
         'name': queryfiedName,
         'value': e.target.value,
       };
-      // console.log(filter);
+      if (filter.value === 'Any') filter.value = null;
+      if (filter.value === '6+') filter.value = 6;
+      console.log('buttons', filter);
       this.$emit('pick-filter', filter);
     },
 
