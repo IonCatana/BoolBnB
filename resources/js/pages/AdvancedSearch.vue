@@ -62,8 +62,8 @@
                 <div class="rooms_beds">
                   <h2>Rooms and Beds</h2>
                   <ButtonFilter name="Rooms" @pick-filter="addFilter" />
-                  <ButtonFilter name="Beds" />
-                  <ButtonFilter name="Bathrooms" />
+                  <ButtonFilter name="Beds" @pick-filter="addFilter" />
+                  <ButtonFilter name="Bathrooms" @pick-filter="addFilter" />
                 </div>
 
                 <div class="dropdown-divider"></div>
@@ -131,7 +131,11 @@ export default {
       activeItem: null,
 
       // i filtri, per popolare la query
-      activeFilters: null,
+      activeFilters: [
+        { name: 'rooms', value: null, },
+        { name: 'beds', value:null, },
+        { name: 'bathrooms', value: null, }
+      ],
       // da passare nella chiamata al server
       params: null,
       query: null,
@@ -213,11 +217,29 @@ export default {
 
     addFilter(filter) {
       //deve mettere il filtro che gli arriva dai componenti dentro a activeFilter
-      console.log('filter', filter);
-      this.activeFilters = this.activeFilters[filter.name] = filter.value;
+      // console.log('advanced search filter', filter);
+
+      //Find index of specific object using findIndex method.    
+      let objIndex = this.activeFilters.findIndex((obj => obj.name == filter.name));
+
+      //Log object to Console.
+      console.log("Before update: ", this.activeFilters[objIndex])
+
+      //Update object's name property.
+      this.activeFilters[objIndex].value = filter.value;
+
+      // //Log object to console again.
+      console.log("After update: ", this.activeFilters[objIndex])
       console.log('activefilter', this.activeFilters);
-    }
+
+      // this.activeFilters = {
+      //   'name': filter.name,
+      //   'value': filter.value,
+      // };
+      
+    },
   },
+
   beforeMount() {
     console.log(this.$route);
     this.fetchAmenities();

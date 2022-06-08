@@ -26,12 +26,21 @@ export default {
 
   methods: {
     returnValue: function(e) {
+      let queryfiedName = this.queryfy(this.name);
       const filter = {
-        'name': this.name,
+        'name': queryfiedName,
         'value': e.target.value,
       };
       // console.log(filter);
       this.$emit('pick-filter', filter);
+    },
+
+    queryfy(str) {
+      return str.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '_')
+        .replace(/^-+|-+$/g, '');
     },
   }
 }
