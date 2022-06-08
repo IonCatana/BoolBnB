@@ -132,12 +132,12 @@ li {
 }
 
 .info {
-  position: relative;
+  // position: relative;
 
   &:after {
     content: "";
     display: block;
-    position: relative;
+    // position: relative;
     height: 1px;
     width: 100%;
     background-color: gainsboro;
