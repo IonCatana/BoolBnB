@@ -75,22 +75,11 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp' ,
             //TODO decidere la grandezze massima dell'immagine caricabile
-            // 'visible' => 'nullable|boolean',
         ]);
-
-        // dd('post valid', $request->input('visible'));
-
-
-        // if( count($validated['amenities']) == 0)
-        // {
-        //     // $msg = 'Check at least one amenity ';
-        //     return redirect()->route('host.places.index');
-        // }
 
         $new_place = new Place();
 
-        $visible = $request->has('visible');
-        $new_place->visible = $visible;
+        $new_place->visible = $request->has('visible');
 
         $new_place->fill($validated);
         $new_place->user_id = auth()->user()->id;
@@ -136,7 +125,6 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        // dd('update', $request);
         $validated = $request->validate([
             'title' => 'required|max:200',
             'rooms' => 'nullable|numeric|between:1,255',
@@ -150,7 +138,6 @@ class PlaceController extends Controller
             'amenities.*' => 'required|min:1|exists:amenities,id',
             'img' => 'nullable|file|mimes:jpeg,jpg,png,webp',
             //TODO decidere la grandezze massima dell'immagine caricabile
-            // 'visible' => 'boolean',
         ]);
 
         if ($validated['title'] != $place->title) {
@@ -200,11 +187,24 @@ class PlaceController extends Controller
      */
     public function toggleVisibility(Place $place)
     {
-        // TODO validation
+        // TODO test validation
+        // $validated = $request->validate([
+        //     'title' => 'required|max:200',
+        //     'rooms' => 'nullable|numeric|between:1,255',
+        //     'beds' => 'nullable|numeric|between:1,255',
+        //     'bathrooms' => 'nullable|numeric|between:1,255',
+        //     'square_meters' => 'nullable|numeric|between:1,65535',
+        //     'address' => 'required|max:255',
+        //     'lat' => 'required|numeric|min:-90|max:90',
+        //     'lon' => 'required|numeric|min:-180|max:180',
+        //     'amenities' => 'required|array|min:1',
+        //     'amenities.*' => 'required|min:1|exists:amenities,id',
+        //     'img' => 'nullable|file|mimes:jpeg,jpg,png,webp',
+        // ]);
+
         if (!$place->visible) {
             
             $missing_attributes = $place->getMissingAttributes();
-            // dd('toggle', $missing_attributes);
                                   
             if (!$missing_attributes) {
                 // se non mancano campi
