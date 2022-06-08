@@ -1,7 +1,7 @@
 <template>
   <div id="advanced_search">
     <div class="amenity_card align-items-center d-flex justify-content-center">
-      <div class="amenity_icon">
+      <div class="overflow-auto amenity_icon">
         <div v-for="(amenity, i) in amenities" :key="amenity.id" class="icon" :class="{clickedAmenity : i === activeItem}">
           <button class="amenity-button" @click="selectItem(i)">
             <i :class="amenity.icon"></i>
