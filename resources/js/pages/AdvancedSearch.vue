@@ -158,7 +158,7 @@ export default {
   methods: {
     fetchAmenities() {
       axios.get("/api/amenities").then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.amenities = res.data.amenities;
       });
     },
@@ -173,18 +173,19 @@ export default {
     },
 
     selectItem: function (i) {
-      console.log(i);
+      // console.log(i);
       this.activeItem = i;
     },
 
     queryDatabase() {
       this.prepareQuery();
 
-      axios.get('/api/search_area/45.4636/9.1881', { 
+      axios.get('/api/search_area', { 
         query: this.query,
       })
-      .then((r) => {
-        console.log(r.data);
+      .then((res) => {
+        this.places = res.data.places;
+        console.log(this.places);
       })
       .catch(err => {
         console.warn(err)
@@ -195,7 +196,7 @@ export default {
       const { lat, lon } = this.$route.params.result.position;
 
       this.query = { lat, lon };
-      console.log('before', this.params)
+      console.log('before', this.query)
 
       if (!_.isEmpty(this.activeFilters)) {
         for (let filter of this.activeFilters) {
