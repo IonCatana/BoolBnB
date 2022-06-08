@@ -44,9 +44,13 @@
                 </button>
               </div>
 
+              
               <div class="modal-body">
-                <div class="container" id="app">
-                  <h1>Slide range km</h1>
+                <!-- range -->
+                <h2>Slide range km</h2>
+                <RangeFilter @pick-filter="addFilter" />
+                <!-- <div class="container" id="app">
+                  <h2>Slide range km</h2>
                   <input
                     v-model="value"
                     type="range"
@@ -57,10 +61,12 @@
                   <span :style="warning()" class="rangeValue">
                     {{ value }} km
                   </span>
-                </div>
+                </div> -->
 
+                <!-- rooms, beds & bathrooms -->
                 <div class="rooms_beds">
-                  <h2>Rooms and Beds</h2>
+                  <h2>Rooms, Beds & Bathrooms</h2>
+
                   <ButtonFilter name="Rooms" @pick-filter="addFilter" />
                   <ButtonFilter name="Beds" @pick-filter="addFilter" />
                   <ButtonFilter name="Bathrooms" @pick-filter="addFilter" />
@@ -68,6 +74,7 @@
 
                 <div class="dropdown-divider"></div>
 
+                <!-- amenities -->
                 <div class="amenities">
                   <h2>Amenity</h2>
                   <AmenitiesFilter />
@@ -88,8 +95,6 @@
                       amenity.name
                     }}</label>
                   </div> -->
-
-                
               </div>
 
               <div class="modal-footer">
@@ -115,11 +120,13 @@
 
 <script>
 import axios from "axios";
+import RangeFilter from "../components/filters/RangeFilter.vue";
 import ButtonFilter from '../components/filters/ButtonsFilter.vue';
 import AmenitiesFilter from "../components/filters/AmenitiesFilter.vue";
 
 export default {
   components: {
+    RangeFilter,
     ButtonFilter,
     AmenitiesFilter,
   },
@@ -127,15 +134,19 @@ export default {
   data() {
     return {
       amenities: [],
-      value: "0",
+      // value: "0",
       activeItem: null,
 
       // i filtri, per popolare la query
       activeFilters: [
+        { name: 'range', value: 0 },
         { name: 'rooms', value: null, },
         { name: 'beds', value:null, },
         { name: 'bathrooms', value: null, }
+        // { name: 'amenities', value: []}
+        //andranno aggiunte amenities e raggio km
       ],
+
       // da passare nella chiamata al server
       params: null,
       query: null,
@@ -152,14 +163,14 @@ export default {
       });
     },
 
-    warning: function () {
-      if (this.value > 1) {
-        return {
-          color: "#e74c3c",
-          animation: "anim .3s ease-in 1 alternate",
-        };
-      }
-    },
+    // warning: function () {
+    //   if (this.value > 1) {
+    //     return {
+    //       color: "#e74c3c",
+    //       animation: "anim .3s ease-in 1 alternate",
+    //     };
+    //   }
+    // },
 
     selectItem: function (i) {
       console.log(i);
@@ -223,13 +234,13 @@ export default {
       let objIndex = this.activeFilters.findIndex((obj => obj.name == filter.name));
 
       //Log object to Console.
-      console.log("Before update: ", this.activeFilters[objIndex])
+      // console.log("Before update: ", this.activeFilters[objIndex])
 
       //Update object's name property.
       this.activeFilters[objIndex].value = filter.value;
 
       // //Log object to console again.
-      console.log("After update: ", this.activeFilters[objIndex])
+      // console.log("After update: ", this.activeFilters[objIndex])
       console.log('activefilter', this.activeFilters);
 
       // this.activeFilters = {
@@ -298,69 +309,6 @@ ul {
   }
 }
 
-// Slide Range Km
-.container .mySlider {
-  appearance: none;
-  width: 100%;
-  background-color: #d3d3d3;
-  border-radius: 20px;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s ease-in;
-  -webkit-transition: opacity 0.2s ease-in;
-}
-
-/*hover on range slider*/
-.container .mySlider:hover {
-  opacity: 1;
-}
-
-/* chrome and safari supporter */
-.container .mySlider::-webkit-slider-thumb {
-  appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: #e74c3c;
-  cursor: pointer;
-  transition: all 0.3s ease-in;
-}
-
-.container .mySlider::-moz-range-thumb {
-  appearance: none;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  background-color: #e74c3c;
-  cursor: pointer;
-  transition: all 0.3s ease-in;
-  border: 2px solid #d3d3d3;
-}
-
-/* hover on slider thumb */
-.container .mySlider::-webkit-slider-thumb:hover {
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Range Value Span */
-.container .rangeValue {
-  height: 40px;
-  width: 60px;
-  border: 1px solid #fff;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
-  font-size: 22px;
-  line-height: 38px;
-}
-
-/* Draw with ::before on span*/
-.container .rangeValue::before {
-  content: "";
-  height: 10px;
-  width: 10px;
-  transform: rotate(45deg);
-}
 /*animation key frames*/
 @keyframes anim {
   0% {
