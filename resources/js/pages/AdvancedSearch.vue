@@ -61,7 +61,7 @@
 
                 <div class="rooms_beds">
                   <h2>Rooms and Beds</h2>
-                  <ButtonFilter name="Rooms" @Rooms="num" />
+                  <ButtonFilter name="Rooms" @pick-filter="addFilter" />
                   <ButtonFilter name="Beds" />
                   <ButtonFilter name="Bathrooms" />
                 </div>
@@ -72,6 +72,7 @@
                   <h2>Amenity</h2>
                   <AmenitiesFilter />
                 </div>
+
                   <!-- <h5>Essential services</h5>
                   <div
                     v-for="amenity in amenities"
@@ -90,6 +91,7 @@
 
                 
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
@@ -98,6 +100,7 @@
                 >
                   Close
                 </button>
+
                 <button type="button" class="btn btn-primary">
                   Save changes
                 </button>
@@ -120,6 +123,7 @@ export default {
     ButtonFilter,
     AmenitiesFilter,
   },
+
   data() {
     return {
       amenities: [],
@@ -137,12 +141,12 @@ export default {
   },
 
   methods: {
-    // fetchAmenities() {
-    //   axios.get("/api/amenities").then((res) => {
-    //     console.log(res.data);
-    //     this.amenities = res.data.amenities;
-    //   });
-    // },
+    fetchAmenities() {
+      axios.get("/api/amenities").then((res) => {
+        console.log(res.data);
+        this.amenities = res.data.amenities;
+      });
+    },
 
     warning: function () {
       if (this.value > 1) {
@@ -206,6 +210,13 @@ export default {
 
         return str;
     },
+
+    addFilter(filter) {
+      //deve mettere il filtro che gli arriva dai componenti dentro a activeFilter
+      console.log('filter', filter);
+      this.activeFilters = this.activeFilters[filter.name] = filter.value;
+      console.log('activefilter', this.activeFilters);
+    }
   },
   beforeMount() {
     console.log(this.$route);

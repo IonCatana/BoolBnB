@@ -4,7 +4,7 @@
       <button class="buttonNumber" 
         v-for="(num, i) in availableNumber" 
         :key="i" :value="num"
-        @click="getButton($event)"
+        @click="returnValue($event)"
       >
         {{ num }}
       </button>
@@ -20,20 +20,18 @@ export default {
   data() {
     return {
       availableNumber: ['Any', 1, 2, 3, 4, 5, '6+'],
-      number: null,
-      buttonValue: null, 
+      value: null,
     }
   },
 
   methods: {
-    getButton: function(e) {
-      this.buttonValue = e.target.value;
-      console.log(this.buttonValue);
-    },
-    
-    returnValue() {
-      //emit
-      // const value = {name: number};
+    returnValue: function(e) {
+      const filter = {
+        'name': this.name,
+        'value': e.target.value,
+      };
+      // console.log(filter);
+      this.$emit('pick-filter', filter);
     },
   }
 }
