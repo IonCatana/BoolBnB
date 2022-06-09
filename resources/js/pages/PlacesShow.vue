@@ -91,9 +91,19 @@ export default {
 
     setVisit() {
       // get the user ip address
+      fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(({ ip }) => {
+          this.term = ip;
+            console.log( 'indirizzo ip', ip);
+      });
       // axios call, method post, sending ip to visualisation controller
       // in controller, save new instance in visualisation table
     }
+  },
+
+  created() {
+    this.setVisit();
   },
 
   beforeMount() {
