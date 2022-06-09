@@ -16,7 +16,7 @@ export default {
       const map = tt.map({
         key: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
         container: "map",
-        zoom: 15,
+        zoom: 14,
         center: [this.lon, this.lat],
       });
       // aggiunta controlli mappa
