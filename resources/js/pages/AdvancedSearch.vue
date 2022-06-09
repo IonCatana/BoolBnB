@@ -127,7 +127,7 @@ export default {
       query: new Map(),
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
-      places: null,
+      places: [],
       placesLoaded: false,
 
       // data per la chiamata axios post
@@ -144,7 +144,6 @@ export default {
   methods: {
     fetchAmenities() {
       axios.get("/api/amenities").then((res) => {
-        // console.log(res.data);
         this.amenities = res.data.amenities;
       });
     },
@@ -159,41 +158,26 @@ export default {
     // },
 
     selectItem: function (i) {
-      // console.log(i);
       this.activeItem = i;
     },
 
     queryDatabase() {
-      this.preparePayload();
       this.updateRoute();
+      this.preparePayload();
 
       axios.get('/api/search_area', { 
-        params: JSON.stringify(this.payload),
+        params: this.payload,
       })
       .then((res) => {
         this.places = res.data.places;
         this.placesLoaded = true;
-        console.log('data', res.data.places);
+        console.log('data', res);
         console.log('places', this.places);
         console.log('route', this.$route)
       })
       .catch(err => {
         console.warn(err)
-      })
-      // const options = {
-      //   method: 'GET',
-      //   url: 'http://127.0.0.1:8000/api/search_area',
-      //   params: JSON.stringify(this.payload),
-      // };
-
-      // axios.request(options).then(function (response) {
-      //   this.places = response.data;
-      //   this.placesLoaded = true;
-      //   console.log('places in axios', this.places)
-      //   console.log(response.data.places);
-      // }).catch(function (error) {
-      //   console.error(error);
-      // });
+      });
     },
 
     preparePayload() {
@@ -214,8 +198,8 @@ export default {
           }
         });
       }
-      console.log('filters', this.activeFilters)
-      console.log('query', this.query)
+      // console.log('filters', this.activeFilters)
+      // console.log('query', this.query)
     },
 
     composeAddress(address) {
@@ -243,7 +227,6 @@ export default {
     addFilter(filter) {
       if (filter.value == null) {
         this.activeFilters.delete(filter.name)
-        // console.log('length', filter.value.length)
         return
       }
 
