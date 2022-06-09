@@ -228,8 +228,4 @@ class PlaceController extends Controller
         return redirect()->route('host.places.index');
         
     }
-
-    public function sponsor(Place $place) {
-
-    }
 }

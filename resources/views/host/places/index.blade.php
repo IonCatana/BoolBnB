@@ -119,19 +119,21 @@
                                                                         <h5 class="card-title">{{ $spons->denomination }}</h5>
                                                                         <p class="card-text">Sponsor your place for {{ $spons->duration }} hours</p>
                                                                         <p class="card-text ">Price: {{ $spons->price }} &euro;</p>
-                                                                        <a href="#" class="btn btn-primary">Purchase</a>
+                                                                        {{-- <form action="{{ route('host.payment.token', $spons, $place) }}" method="GET">
+                                                                            @csrf
+                                                                            <button type="submit" class="btn btn-primary">Purchase</button >
+                                                                        </form> --}}
+                                                                        <a href="{{ route('host.payment.token', [$spons->id, $place->id]) }}" class="btn btn-primary">lojhuyfoutfd</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                <div id="dropin-container"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             @endif
 
 

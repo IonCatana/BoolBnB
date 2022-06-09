@@ -38,6 +38,11 @@ Route::prefix('host')
             ->scoped([
                 'place' => 'slug'
         ]);
+
+        Route::get('/place/{place}/payment/{sponsorship}', 'BraintreeController@token')
+            ->name('payment.token');
+        Route::post('/payment', 'BraintreeController@nonce')
+            ->name('payment.nonce');
     });
 
 Route::get('/{any?}', function(){ 
