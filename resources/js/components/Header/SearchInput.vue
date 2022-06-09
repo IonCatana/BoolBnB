@@ -7,7 +7,7 @@
       placeholder="Search"
       aria-label="Search"      
       v-model="searchInput"
-      v-on:keyup="fetchAdress(searchInput)"
+      v-on:keyup="fetchAddressMatches(searchInput)"
       @click="visible = true"
     />
 
@@ -18,11 +18,12 @@
 
     <div class="suggestions-list rounded" 
     v-show="searchResults.length != 0 && visible==true" @click="visible = false">
-        <router-link to="/advanced_search" 
-            class="suggestion d-block text-dark" 
-            v-for="(result, index) in searchResults" :key="index">
+        <div class="suggestion d-block text-dark" 
+        v-for="(result, index) in searchResults" :key="index"
+        @click="navigateToAdvancedSearch(result)"
+        >
             {{ composeAddress(result.address) }}
-        </router-link>
+        </div>
     </div>
 
     <button type="button" class="search-btn rounded-circle border-0" data-target="#searchInput">
@@ -42,12 +43,14 @@ export default {
       searchInput: "",
       searchResults: [],
       visible: state.visibleSearch,
+      // TODO da vedere
       choise: '',
+      params: null,
     };
   },
 
   methods: {
-    fetchAdress(searchInput) {
+    fetchAddressMatches(searchInput) {
       axios
         .get(`https://api.tomtom.com/search/2/geocode/${searchInput}.json`, {
           params: {
@@ -57,11 +60,9 @@ export default {
         .then((res) => {
           const { results } = res.data;
           this.searchResults = results;
-
-          console.log(this.searchResults);
         })
         .catch((err) => {
-          console.log(err);
+          console.warn(err);
         });
     },
 
@@ -85,6 +86,28 @@ export default {
         if (country != null) str += ", " + country;
 
         return str;
+    },
+
+    slugify(str) {
+      return str.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+    },
+
+    navigateToAdvancedSearch(r) {
+
+      this.params = {
+        result: r,
+        address: this.slugify(r.address.freeformAddress)
+      };
+
+      this.$router.push({ 
+        name: 'places.advanced.search', 
+        params: this.params, 
+        })
     },
   },
 };

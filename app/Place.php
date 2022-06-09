@@ -77,4 +77,26 @@ class Place extends Model
 
         return $missing_attributes;
     }
+
+    /**
+     * Calculate great-circle distance between 2 points and returns wether it is smaller than $range
+     * using the Vincenty formula
+     */
+    public function inArea($latitude, $longitude, $radius) {
+        $earthRadius = 6371; // km
+        // convert from degrees to radians
+        $lat_from = deg2rad($latitude);
+        $lon_from = deg2rad($longitude);
+        $lat_to = deg2rad($this->lat);
+        $lon_to = deg2rad($this->lon);
+
+        $delta_lon = $lon_to - $lon_from;
+        $a = pow(cos($lat_to) * sin($delta_lon), 2) + pow(cos($lat_from) * sin($lat_to) - sin($lat_from) * cos($lat_to) * cos($delta_lon), 2);
+        $b = sin($lat_from) * sin($lat_to) + cos($lat_from) * cos($lat_to) * cos($delta_lon);
+
+        $angle = atan2(sqrt($a), $b);
+        $distance = $angle * $earthRadius; // km
+
+        return $distance < $radius;
+    }
 }
