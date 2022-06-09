@@ -87,6 +87,8 @@
                             <a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info mb-2">View Messages</a>
                             @if (!$place->visible)
                                 <button class="btn btn-secondary w-100 disabled">Sponsor</button>
+                            @elseif($place->activeSponsorship() != null)
+                                <button class="btn btn-secondary w-100 disabled">Sponsored 'til {{ $place->activeSponsorship() }}</button>
                             @else
                                 <button class="btn btn-info w-100" data-toggle="modal" data-target="#sponsorship-modal">Sponsor</button>
 

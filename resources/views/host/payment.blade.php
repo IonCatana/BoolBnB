@@ -4,7 +4,8 @@
 
 <div class="container">
 
-  <form id="payment-form" action="/route/on/your/server" method="post">
+  <form id="payment-form" action="{{ route('host.payment.token', [$sponsorship_id, $place_id]) }}" method="GET">
+    @csrf
     <div id="dropin-container" class="d-flex justify-content-center"></div>
     <div class="d-flex justify-content-center">
       <button id="submit-payment-button" class="btn btn-success">
@@ -17,10 +18,5 @@
 
   
 </div>
-
-<script type="text/javascript">
-
-
-</script>
 
 @endsection

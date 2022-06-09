@@ -39,10 +39,10 @@ Route::prefix('host')
                 'place' => 'slug'
         ]);
 
-        Route::get('/place/{place}/payment/{sponsorship}', 'BraintreeController@token')
+        Route::get('/place/{place}/payment/{sponsorship}', 'BraintreeController')
             ->name('payment.token');
-        Route::post('/payment', 'BraintreeController@nonce')
-            ->name('payment.nonce');
+        // Route::post('/place/{place}/payment/{sponsorship}', 'BraintreeController@nonce')
+        //     ->name('payment.nonce');
     });
 
 Route::get('/{any?}', function(){ 

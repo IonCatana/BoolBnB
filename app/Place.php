@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,8 @@ class Place extends Model
 
     public function sponsorships() {
         return $this->belongsToMany('App\Sponsorship')
-            ->withPivot('end_time');
+            ->withPivot('end_time')
+            ->withTimestamps();
     }
     
     public function visualisations() {
@@ -98,5 +100,26 @@ class Place extends Model
         $distance = $angle * $earthRadius; // km
 
         return $distance < $radius;
+    }
+
+    /**
+     * Returns 
+     */
+    public function activeSponsorship() {
+        if ($this->sponsorships->isEmpty()) return null;
+
+        // find latest sponsorship
+        $end_time = new Carbon('2000-01-01 00:00:00'); // data sicuramente passata
+        foreach($this->sponsorships as $spons) {
+            if ($spons->pivot->end_time > $end_time) {
+                $latest = $spons;
+                $end_time = $latest->pivot->end_time;
+            }
+        }
+
+        // if active
+        if ($end_time > Carbon::now()) return $latest;
+
+        return null;
     }
 }
