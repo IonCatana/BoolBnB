@@ -88,6 +88,12 @@ export default {
       });
     },
     //TODO metter il catch error
+
+    setVisit() {
+      // get the user ip address
+      // axios call, method post, sending ip to visualisation controller
+      // in controller, save new instance in visualisation table
+    }
   },
 
   beforeMount() {
