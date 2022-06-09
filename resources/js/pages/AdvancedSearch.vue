@@ -184,6 +184,11 @@ export default {
       const { lat, lon } = this.$route.params.result.position;
       this.payload = { lat, lon };
       console.log('payload', this.payload)
+      console.log('query', this.query)
+      this.query.forEach((value, filter) => {
+        this.payload[filter] = value;
+      })
+      console.log('payload2', this.payload)
     },
 
     updateRoute() {   
