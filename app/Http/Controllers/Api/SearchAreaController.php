@@ -25,7 +25,7 @@ class SearchAreaController extends Controller
         $range = Arr::pull($filters, 'range', DEFAULT_RANGE);
         
         // $place inside area?
-        $places = Place::cursor()->filter(function($place) use ($lat, $lon, $range) {
+        $places = Place::cursor()->where('visible', 1)->filter(function($place) use ($lat, $lon, $range) {
             return $place->inArea($lat, $lon, $range);
         });
 
@@ -33,7 +33,7 @@ class SearchAreaController extends Controller
         // optional filters
         if (!empty($filters)) {
             foreach ($filters as $filter => $value) {
-                $places = $places->filter(function($place) use ($filter, $value) {
+                $places = $places->where('visible', 1)->filter(function($place) use ($filter, $value) {
                     return $place[$filter] >= $value;
                 });
             }
