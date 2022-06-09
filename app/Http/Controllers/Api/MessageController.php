@@ -41,12 +41,13 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
+        dd($slug);
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'place_id' => 'required',
+            'place_id' => 'required|exists:places,id',
             'sender_name' => 'required|max:255',
             'object' => 'required|max:255',
             'sender_email' => 'required|max:255',
@@ -62,7 +63,7 @@ class MessageController extends Controller
 
         $new_msg = new Message();
 
-        $new_msg->fill($validator);
+        $new_msg->fill($validator->validated());
         $new_msg->user_id = auth()->user()->id;
 
         $new_msg->save();
