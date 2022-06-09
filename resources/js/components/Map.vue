@@ -1,5 +1,5 @@
 <template>
-  <div>    
+  <div>
     <div id="map" ref="mapRef"></div>
   </div>
 </template>
@@ -8,8 +8,8 @@
 export default {
   name: "Map",
   props: {
-    lon: Number, 
-    lat: Number,
+    lon: String, 
+    lat: String,
   },
   methods: {
     initializeMap: function () {

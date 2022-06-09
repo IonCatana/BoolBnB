@@ -33,6 +33,22 @@
           </div>
           <div class="modal-body">
             <form>
+              <div class="d-none form-group">
+                <label for="place_id" class="col-form-label"
+                  >Place Id:{{ place_id }}</label
+                >
+                <input
+                  v-model="place_id"
+                  type="text"
+                  class="form-control"
+                  id="place_id"
+                />
+                <div class="alert alert-danger" v-if="errors.place_id">
+                  <p v-for="(error, index) in errors.place_id" :key="index">
+                    {{ error }}
+                  </p>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="sender_name" class="col-form-label"
                   >Sender Name:</label
@@ -65,7 +81,7 @@
                   </p>
                 </div>
               </div>
-              <div  class="form-group">
+              <div class="form-group">
                 <label for="object" class="col-form-label">Object:</label>
                 <input
                   v-model="object"
@@ -99,9 +115,7 @@
           </div>
           <div class="modal-footer">
             <div v-if="success">
-              <h3 style="color: green">
-                L'Email è stata inviata correttamente!
-              </h3>
+              <h3 style="color: green">Email has been sent!</h3>
             </div>
             <button
               type="button"
@@ -128,6 +142,9 @@
 import axios from "axios";
 export default {
   name: "MessageHost",
+  props: {
+    place_id: String,
+  },
   data: function () {
     return {
       place_id: this.$route.params.id,
@@ -140,16 +157,9 @@ export default {
     };
   },
   methods: {
-    getUser() {
-      axios.get("/api/messages/take").then((response) => {
-        if (response) {
-          console.log(response);
-        }
-      });
-    },
     sendMessage: function () {
       axios
-        .post("/api/messages/store", {
+        .post("/api/message/store", {
           place_id: this.place_id,
           sender_email: this.sender_email,
           sender_name: this.sender_name,
@@ -172,13 +182,8 @@ export default {
         });
     },
   },
-  created: function () {
-    this.getUser();
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 </style>

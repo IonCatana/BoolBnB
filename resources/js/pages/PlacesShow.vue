@@ -45,7 +45,7 @@
                   {{ amenity.name }}
                 </li>
               </ul>
-              <MessageHost />
+              <MessageHost :place_id="place_id" />
             </div>
           </div>
         </div>
@@ -75,6 +75,7 @@ export default {
     return {
       amenities: [],
       host: "",
+      place_id: "",
     };
   },
 
@@ -83,6 +84,7 @@ export default {
       axios.get(`/api/places/${this.$route.params.slug}`).then((res) => {
         const { place } = res.data;
         this.place = place;
+        this.place_id = res.data.place.id;
         this.amenities = res.data.place.amenities;
         this.host = res.data.place.user.name;
       });
