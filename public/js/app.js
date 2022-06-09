@@ -563,6 +563,7 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\Users\holog\Boolean\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
@@ -571,6 +572,11 @@ __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\js\app.js */"./
 __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\Users\catan\Desktop\BoolBnb\resources\sass\front.scss */"./resources/sass/front.scss");
 >>>>>>> fixing-msg
+=======
+__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/michela/Boolean-54/Progetti-Esercizi/BoolBnb/resources/sass/front.scss */"./resources/sass/front.scss");
+>>>>>>> 3b5ebae5e5d1c0dc9ad1272895825b8650caefd5
 
 
 /***/ })
