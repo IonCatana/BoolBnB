@@ -16,8 +16,8 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-                <a href="/host/places">Places link temporaneo</a>
             </div>
+            <a href="/host/places" class="btn btn-primary w-100 my-5">Go to your places!</a>
         </div>
     </div>
 </div>
