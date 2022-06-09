@@ -10,6 +10,7 @@ class Message extends Model
     {
         return $this->belongsTo('App\Place');
     }
+
     protected $fillable = [
         'place_id',
         'sender_email',
@@ -17,4 +18,9 @@ class Message extends Model
         'object',
         'content'
     ];
+
+    public function formattedDate()
+    {
+        return $this->created_at->format('M d Y');
+    }
 }

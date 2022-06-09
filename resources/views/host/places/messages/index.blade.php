@@ -20,7 +20,7 @@
                         <td>{{ $msg->sender_name }}</td>
                         <td>{{ $msg->sender_email }}</td>
                         <td>{{ $msg->object }}</td>
-                        <td>{{ $msg->created_at }}</td>
+                        <td>{{ $msg->formattedDate() }}</td>
                         <td>
                             {{-- //TODO tasto interattivo --}}
                             @if ( !$msg->read)
