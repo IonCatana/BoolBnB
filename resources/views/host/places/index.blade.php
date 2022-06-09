@@ -126,6 +126,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+                                                <div id="dropin-container"></div>
                                             </div>
                                         </div>
                                     </div>
