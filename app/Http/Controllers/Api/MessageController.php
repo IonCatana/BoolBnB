@@ -52,15 +52,26 @@ class MessageController extends Controller
             'sender_email' => 'required|max:255',
             'content' => 'required',
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors()
             ]);
         }
+
+        $new_msg = new Message();
+
+        $new_msg->fill($validator);
+        $new_msg->user_id = auth()->user()->id;
+
+        $new_msg->save();
+
         return response()->json([
             'success' => true
         ]);
+
+        return redirect()->route('host.places.show');
     }
 
     /**
