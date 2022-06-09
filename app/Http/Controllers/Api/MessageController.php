@@ -18,11 +18,11 @@ class MessageController extends Controller
      */
     public function take()
     {
-        $usernow = Auth::id();
-        return response()->json([
-            'success' => true,
-            'results' => $usernow
-        ]);
+        //$usernow = Auth::id();
+       // return response()->json([
+            //'success' => true,
+            //'results' => $usernow
+        //]);
     }
 
     /**
@@ -41,9 +41,9 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $slug)
+    public function store(Request $request)
     {
-        dd($slug);
+        
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -63,9 +63,8 @@ class MessageController extends Controller
 
         $new_msg = new Message();
 
-        $new_msg->fill($validator->validated());
-        $new_msg->user_id = auth()->user()->id;
-
+        $new_msg->fill($data);       
+        
         $new_msg->save();
 
         return response()->json([
