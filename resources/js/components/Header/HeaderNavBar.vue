@@ -1,8 +1,6 @@
 <template>
-  <div id="header_nav_bar">
     <nav class="navbar d-flex justify-content-between px-5">
-
-      <a href="/" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center mb-3">
         <img class="mr-2" :src="'../../assets/img/Logo.png'" alt="" />
         <h4 class="project-name">BoolBnb</h4>
       </a>
@@ -49,18 +47,16 @@
               </li>
           </ul>
 
-          <div @click="click()" :class="{'hide' : this.clicked}">
-            <!-- x per chidere hamburger -->
-              <i class="fas fa-bars"></i> 
-          </div>
-          <div @click="click()" :class="{'hide' : !this.clicked}">
-            <!-- 3 barre -->
-              <i class="fas fa-times"></i>
+          <div class="icons">
+              <!-- x per chiudere hamburger -->
+              <i class="fas fa-bars" @click="click()" :class="{'hide' : this.clicked}"></i> 
+              <!-- 3 barre -->
+              <i class="fas fa-times" @click="click()" :class="{'hide' : !this.clicked}"></i>
           </div>
       </div>
-
     </nav>
-  </div>
+  <!-- <div id="header_nav_bar">
+  </div> -->
 </template>
 
 <script>
@@ -109,24 +105,25 @@ a {
 .navbar{
   border-bottom: 1px solid #e6e6e6;
 
+  .logo {
+    height: 70px;
+  
+    img {
+      width: 20%;
+    }
+  
+    .project-name {
+      background-image: linear-gradient(60deg, $boolean-blue, $boolean-green);
+      background-clip: text;
+      color: transparent;
+    }
+  
+  }
+
   .full-menu{
     display: flex;
     align-items: center;
 
-    .logo {
-      height: 70px;
-    
-      img {
-        width: 20%;
-      }
-    
-      .project-name {
-        background-image: linear-gradient(60deg, $boolean-blue, $boolean-green);
-        background-clip: text;
-        color: transparent;
-      }
-    }
-  
     .become-host{
       border-radius:50px;
     }
@@ -157,27 +154,29 @@ a {
 
     .hamburger-container{
       display: block;
-      // border: 1px solid red;
       position: relative;
 
-        .hamburger-menu{
-          position: absolute;
-          z-index: 10;
-          background-color: white;
-          top: 100%;
-          right: 0;
-          box-shadow: 0px 0px 7px 0px gainsboro;
-          margin-top: 10px;
+      .hamburger-menu{
+        position: absolute;
+        z-index: 10;
+        background-color: white;
+        top: 100%;
+        right: 0;
+        box-shadow: 0px 0px 7px 0px gainsboro;
+        margin-top: 10px;
+      }
 
-        }
+      .show{
+        display: block;
+      }
 
-        .show{
-          display: block;
-        }
+      .hide{
+        display: none;
+      }
 
-        .hide{
-          display: none;
-        }
+      .icons{
+        width: 25px;
+        text-align: center;
 
         .fas{//icone
           font-size: 1.5rem;
@@ -187,9 +186,24 @@ a {
             color: $boolean-blue;
           }
         }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 575px){
+    .navbar{
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+
+      .hamburger-container{
+        position: absolute;
+        top: 28px;
+        right: 50px;
+      }
     }
 
-
-  }
 }
 </style>
