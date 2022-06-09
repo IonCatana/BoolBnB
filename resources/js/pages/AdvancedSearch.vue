@@ -1,5 +1,5 @@
 <template>
-  <div id="advanced_search" class="container d-flex justify-content-center">
+  <div id="advanced_search" class=" justify-content-center">
     <div class="amenity_card px-4 d-flex justify-content-center align-items-center ">
       <div class="overflow-auto amenity_icon">
         <div v-for="(amenity, i) in amenities" :key="amenity.id" class="icon" :class="{clickedAmenity : i === activeItem}">
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <!-- li ??? -->
+      <!-- TODO li ??? -->
       <li class="nav-item dropdown">
         <!-- Button trigger modal -->
         <button
@@ -91,9 +91,9 @@
       </li>
     </div>
 
-      <div v-if="placesLoaded" class="card-wrapper d-flex flex-wrap justify-content-center">
-        <PlacesCard tag="div" v-for="place in places" :key="place.id" :place="place"/>
-      </div>
+    <div v-if="placesLoaded" class="card-wrapper d-flex flex-wrap justify-content-center">
+      <PlacesCard tag="div" v-for="place in places" :key="place.id" :place="place"/>
+    </div>
 
   </div>
 </template>
