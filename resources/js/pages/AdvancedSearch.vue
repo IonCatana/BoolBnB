@@ -173,6 +173,7 @@ export default {
       .then((res) => {
         this.places = res.data.places;
         this.placesLoaded = true;
+        console.log('data', res.data.places);
         console.log('places', this.places);
         console.log('route', this.$route)
       })
