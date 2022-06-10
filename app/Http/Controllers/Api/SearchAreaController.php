@@ -23,7 +23,7 @@ class SearchAreaController extends Controller
         $lon = Arr::pull($filters, 'lon');
         $amenities = Arr::pull($filters, 'amenities');
 
-        define('DEFAULT_RANGE', 20); // km
+        define('DEFAULT_RANGE', 20000); // metri
         $range = Arr::pull($filters, 'range', DEFAULT_RANGE);
         
         // $place inside area?

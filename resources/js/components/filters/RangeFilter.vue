@@ -4,13 +4,13 @@
             v-model="value"
             type="range"
             class="mySlider"
-            min="1"
-            max="100"
+            min="100"
+            max="30000"
             @click="returnValue($event)"
         />
 
         <span :style="warning()" class="rangeValue">
-            {{ value }} km
+            {{ value }} meters
         </span>
     </div>
 </template>
@@ -19,7 +19,7 @@
     export default {
         data() {
             return {
-                value: "20", //TODO server ragiona in metri, cambiare a km!
+                value: "20000",
             }
         }, 
 
