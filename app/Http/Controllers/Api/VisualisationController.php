@@ -37,27 +37,19 @@ class VisualisationController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $validator = Validator::make($data, [
-            'place_id' => 'required|exists:visualisation,id',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ]);
-        }
-
+        $data = $request->all(); 
+        
         $visualisation = new Visualisation();
-
+        
         $visualisation->fill($data);
+        $visualisation->visitor = $request->ip();
+        dd($data);
+
+        // dd($visualisation);
 
         $visualisation->save();
 
         return response()->json([
-            'data' => $request, 
             'success' => true
         ]);
     }
