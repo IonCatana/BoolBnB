@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             SponsorshipSeeder::class,
             AmenitySeeder::class,
             PlaceSeeder::class,
-            MessageSeeder::class
+            MessageSeeder::class,
+            VisualisationSeeder::class
 
         ]);
     }
