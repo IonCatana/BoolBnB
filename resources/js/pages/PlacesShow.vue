@@ -28,28 +28,34 @@
           d-flex
         "
       >
-        <div class="col-4">
-          <div class="info flex-column mb-4">
-            <h4>Hosted by {{ host }}</h4>
-            <ul class="d-flex rooms">
-              <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
-              <li class="beds mr-3">{{ place.beds }} Beds</li>
-              <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
-            </ul>
-            <div class="mb-3 dropdown-divider"></div>
-            <div class="amenities">
-              <h4>What this place offers</h4>
-              <ul class="m-0 mb-3">
-                <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
-                  <i :class="amenity.icon" class="mr-2"></i>
-                  {{ amenity.name }}
-                </li>
+        <div class="col-xs-12 col-md-12 col-lg-4">
+          <div class="info d-flex justify-content-center align-items-center flex-column mb-4">
+            <div>
+              <h4>Hosted by {{ host }}</h4>
+              <ul class="d-flex rooms">
+                <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
+                <li class="beds mr-3">{{ place.beds }} Beds</li>
+                <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
               </ul>
-              <MessageHost :place_id="place_id" />
+              <div class="mb-3 dropdown-divider"></div>
+              <div class="amenities">
+                <h4>What this place offers</h4>
+                <ul class="m-0 mb-3">
+                  <li
+                    class="mr-3"
+                    v-for="amenity in amenities"
+                    :key="amenity.id"
+                  >
+                    <i :class="amenity.icon" class="mr-2"></i>
+                    {{ amenity.name }}
+                  </li>
+                </ul>
+                <MessageHost :place_id="place_id" />
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-xs-12 col-md-12 col-lg-8">
           <Map :lat="place.lat" :lon="place.lon" />
         </div>
       </div>
