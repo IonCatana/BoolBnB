@@ -1,3 +1,4 @@
+{{-- //TODO? si apre in una finestra nuova --}}
 @extends('layouts.app')
 
 @section('content')
@@ -12,7 +13,7 @@
         Submit payment
       </button>
     </div>
-    <input type="hidden" id="nonce" name="payment_method_nonce"/>
+    <input type="hidden" id="nonce" name="nonce"/>
     <input type="hidden" id="token" value="{{ $token }}"/>
   </form>
 

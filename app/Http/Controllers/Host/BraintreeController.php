@@ -28,20 +28,20 @@ class BraintreeController extends Controller
         if($request->has('nonce')){
             // se l'utente sta pagando entra qui
             $nonceFromTheClient = $request->input('nonce');
-            dump($nonceFromTheClient);
 
             $chosen_sponsorship = Sponsorship::where('id', $sponsorship_id)->first();
             $sponsored_place = Place::where('id', $place_id)->first();
 
-            dump($chosen_sponsorship->price);
+            // il $place already sponsored
+            if ($sponsored_place->activeSponsorship() != null) return redirect()->route('host.places.index');
+
             $result = $gateway->transaction()->sale([
                 'amount' => $chosen_sponsorship->price,
-                'paymentMethodNonce' => 'fake-valid-nonce',
+                'paymentMethodNonce' => $nonceFromTheClient,
                 'options' => [
                     'submitForSettlement' => True
                 ]
             ]);
-            dd($result);
 
             $sponsored_place->sponsorships()->attach($chosen_sponsorship, [
                 'end_time' => Carbon::now()->addHours($chosen_sponsorship->duration)
@@ -50,17 +50,12 @@ class BraintreeController extends Controller
             return redirect()->route('host.places.index');
         }
 
-        // se ha solo appena scelto la sponsorizzazione va qui
+        // se ha solo appena scelto (!has(nonce)) la sponsorizzazione va qui
         $token = $gateway->clientToken()->generate(
             // TODO ['customer_id' => generate id???]
         );
 
         return view('host.payment', compact('token', 'sponsorship_id', 'place_id'));
     }
-
-    // public function nonce(Request $request, $sponsorship_id, $place_id)
-    // {
-    //     dd($request, $sponsorship_id, $place_id);
-    // }
 }
 

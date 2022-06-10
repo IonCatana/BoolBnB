@@ -103,23 +103,16 @@ class Place extends Model
     }
 
     /**
-     * Returns 
+     * Retreives the model instance of the active sponsorship or null of $place isn't currently sponsored
      */
     public function activeSponsorship() {
         if ($this->sponsorships->isEmpty()) return null;
 
-        // find latest sponsorship
-        $end_time = new Carbon('2000-01-01 00:00:00'); // data sicuramente passata
-        foreach($this->sponsorships as $spons) {
-            if ($spons->pivot->end_time > $end_time) {
-                $latest = $spons;
-                $end_time = $latest->pivot->end_time;
-            }
-        }
+        // find active sponsorship
+        $active_spons = $this->sponsorships->first(function($spons) {
+            return $spons->isActive();
+        });
 
-        // if active
-        if ($end_time > Carbon::now()) return $latest;
-
-        return null;
+        return $active_spons;
     }
 }

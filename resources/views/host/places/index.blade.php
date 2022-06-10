@@ -88,18 +88,16 @@
                             @if (!$place->visible)
                                 <button class="btn btn-secondary w-100 disabled">Sponsor</button>
                             @elseif($place->activeSponsorship() != null)
-                                <button class="btn btn-secondary w-100 disabled">Sponsored 'til {{ $place->activeSponsorship() }}</button>
+                                <button id="sponsored-button" class="btn btn-success w-100 disabled">Sponsorship ends {{ $place->activeSponsorship()->remainingTime() }}</button>
                             @else
                                 <button class="btn btn-info w-100" data-toggle="modal" data-target="#sponsorship-modal">Sponsor</button>
-
-
 
                                 <!-- Sponsorships Modal -->
                                 <div name="sponsorship-modal" class="modal fade" id="sponsorship-modal" tabindex="-1" role="dialog" aria-labelledby="sposnsorshipModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                {{-- //TODO sarebbe bello centrato? --}}
+                                                {{-- //TODO il titolo sarebbe bello centrato? --}}
                                                 <h5 class="modal-title text-success" id="sponsorshipModalLabel">Welcome <span class="text-danger">{{ Auth::user()->name }}</span>! Boost your place's visualisations by sponsoring it!</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -125,7 +123,7 @@
                                                                             @csrf
                                                                             <button type="submit" class="btn btn-primary">Purchase</button >
                                                                         </form> --}}
-                                                                        <a href="{{ route('host.payment.token', [$spons->id, $place->id]) }}" class="btn btn-primary">lojhuyfoutfd</a>
+                                                                        <a href="{{ route('host.payment.token', [$spons->id, $place->id]) }}" class="btn btn-primary">Purchase</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -137,8 +135,6 @@
                                     </div>
                                 </div>
                             @endif
-
-
 
                         </td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
