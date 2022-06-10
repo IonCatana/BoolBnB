@@ -31,13 +31,13 @@
 
         methods: {
             returnValue: function(e) {
-                const filter = {
-                    'name': 'amenities',
-                    'value': this.checkedAmenities,
-                };
+                // const filter = {
+                //     'name': 'amenities',
+                //     'value': this.checkedAmenities,
+                // };
 
-                console.log(filter);
-                this.$emit('pick-filter', filter);
+                console.log('checked', this.checkedAmenities);
+                this.$emit('pick-filter', this.checkedAmenities);
             },
 
         },

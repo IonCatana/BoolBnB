@@ -73,7 +73,7 @@
                 <div class="amenities">
                   <h2>Amenities</h2>
                   <AmenitiesFilter
-                    @pick-filter="addFilter"
+                    @pick-filter="addAmenityFilter"
                     :amenities="amenities"
                   />
                 </div>
@@ -104,7 +104,7 @@
     </div>
 
     <div
-      v-if="placesLoaded"
+      v-if="!loading"
       class="card-wrapper d-flex flex-wrap justify-content-center"
     >
       <PlacesCard
@@ -140,14 +140,12 @@ export default {
 
       // i filtri, per popolare la query
       activeFilters: new Map(),
+      checkedAmenities: new Map(),
 
-      // da passare nella chiamata al server
-      params: null,
-      query: new Map(),
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
       places: [],
-      placesLoaded: false,
+      loading: false,
 
       // data per la chiamata axios post
       payload: {},
@@ -181,16 +179,16 @@ export default {
     },
 
     queryDatabase() {
-      this.updateRoute();
-      this.preparePayload();
+      // this.updateRoute();
+      const params = this.prepareParams();
 
       axios
-        .get("/api/search_area", {
-          params: this.payload,
-        })
+        .get("/api/search_area", { params })
         .then((res) => {
+          this.loading = true;
           this.places = res.data.places;
-          this.placesLoaded = true;
+          this.loading = false;
+
           console.log("data", res);
           console.log("places", this.places);
           console.log("route", this.$route);
@@ -200,15 +198,16 @@ export default {
         });
     },
 
-    preparePayload() {
+    prepareParams() {
       const { lat, lon } = this.$route.params.result.position;
-      this.payload = { lat, lon };
-      console.log("payload", this.payload);
-      console.log("query", this.query);
-      this.query.forEach((value, filter) => {
-        this.payload[filter] = value;
-      });
-      console.log("payload2", this.payload);
+      
+      let filters, amenities;
+      if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
+      if (this.checkedAmenities.size !== 0) amenities = Object.fromEntries(this.checkedAmenities);
+
+      const params = { lat, lon, ...filters, ...amenities };
+
+      return params;
     },
 
     updateRoute() {
@@ -256,10 +255,15 @@ export default {
       }
 
       this.activeFilters.set(filter.name, filter.value);
+    },
 
-      // array amenities vuoto
-      if (this.activeFilters.get("amenities")?.length === 0)
-        this.activeFilters.delete("amenities");
+    addAmenityFilter(array) {
+      this.checkedAmenities = new Map();
+      // if (array.isEmpty) this.checkedAmenities
+      array.forEach((amenityId, i) => {
+        this.checkedAmenities.set(`amenities[${i}]`, amenityId)
+      });
+      console.log(this.checkedAmenities)
     },
   },
 
