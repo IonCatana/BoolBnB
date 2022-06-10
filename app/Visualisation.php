@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Visualisation extends Model
 {
     public function place() {
-        return $this->hasOne('App\Place');
+        return $this->belongsTo('App\Place');
     }
 
     protected $fillable = [

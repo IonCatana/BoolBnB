@@ -2,6 +2,7 @@
 
 @section('content')
     {{-- button per creare nuovo place --}}
+    {{-- @dd('place'); --}}
     <div class="container py-2 justify-content-end mb-4">
         <a href="{{ route('host.places.create') }}">
             <button type="submit" class="btn btn-primary">Create new place</button>
@@ -22,6 +23,7 @@
                 <th>Image</th>
                 <th>Actions</th>
                 <th>Messages</th>
+                <th>Statistics</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
@@ -84,6 +86,8 @@
                         </td>
                         <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
+                        <td><a href="{{ route('host.places.visualisations.index', $place) }}" class="btn" style="background-color: #91f7c8">View Statistics</a></td>
+                        
                 @endforeach
                 </tr>
             </tbody>

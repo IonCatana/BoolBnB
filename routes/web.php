@@ -38,6 +38,12 @@ Route::prefix('host')
             ->scoped([
                 'place' => 'slug'
         ]);
+
+        Route::resource('places.visualisations', 'VisualisationController')
+            // ->only('index')
+            ->scoped([
+                'place' => 'slug'
+        ]);
     });
 
 Route::get('/{any?}', function(){ 

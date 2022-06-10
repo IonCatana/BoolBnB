@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
 use App\User;
+use App\Visualisation;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
