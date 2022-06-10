@@ -27,6 +27,7 @@
           container
           flex-row flex-sm-column flex-md-column flex-xl-row flex-lg-row
           d-flex
+          m-0
         "
       >
         <div class="col-xs-12 col-md-12 col-lg-4">
@@ -60,7 +61,9 @@
                     {{ amenity.name }}
                   </li>
                 </ul>
-                <MessageHost :place_id="place_id" />
+                <div class="d-flex justify-content-center">
+                  <MessageHost :place_id="place_id" />
+                </div>
               </div>
             </div>
           </div>
