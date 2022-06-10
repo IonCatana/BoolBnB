@@ -74,41 +74,23 @@ export default {
   data() {
     return {
       amenities: [],
-      host: "",
     };
   },
 
   methods: {
-    fetchPlace() {
-      axios.get(`/api/places/${this.$route.params.slug}`).then((res) => {
-        const { place } = res.data;
-        this.place = place;
-        this.amenities = res.data.place.amenities;
-        this.host = res.data.place.user.name;
-      });
+    // axios call, method post, sending ip to visualisation controller
+    sendVisualisation() { 
+      axios.post("/api/visualisation/store",{
+        place_id : this.place.id,
+      })
+      .then(function (response) {
+        console.log('visualizzazioni', response);
+      })
     },
-    //TODO metter il catch error
-
-    setVisit() {
-      // get the user ip address
-      fetch('https://api.ipify.org?format=json')
-        .then(res => res.json())
-        .then(({ ip }) => {
-          this.term = ip;
-            console.log( 'indirizzo ip', ip);
-      });
-      // axios call, method post, sending ip to visualisation controller
-      // in controller, save new instance in visualisation table
-    }
   },
 
-  created() {
-    this.setVisit();
-  },
-
-  beforeMount() {
-    this.fetchPlace();
-    console.log(this.place);
+  mounted() {
+    this.sendVisualisation();
   },
 };
 </script>
