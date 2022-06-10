@@ -23,13 +23,23 @@
       </div>
       <div
         class="
+          row
           container
           flex-row flex-sm-column flex-md-column flex-xl-row flex-lg-row
           d-flex
         "
       >
         <div class="col-xs-12 col-md-12 col-lg-4">
-          <div class="info d-flex justify-content-center align-items-center flex-column mb-4">
+          <div
+            class="
+              info
+              d-flex
+              justify-content-center
+              align-items-center
+              flex-column
+              mb-4
+            "
+          >
             <div>
               <h4>Hosted by {{ host }}</h4>
               <ul class="d-flex rooms">
