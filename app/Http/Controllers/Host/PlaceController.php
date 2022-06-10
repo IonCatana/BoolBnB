@@ -38,7 +38,12 @@ class PlaceController extends Controller
     {
         // recuperiamo id utente loggato
         $user_id = auth()->user()->id;
-        $places = Place::with('amenities')->where('user_id', $user_id)->get();
+        $places = Place::with('amenities', 'visualisations')->where('user_id', $user_id)->get();
+        // $places->load(['visualisations']);
+        // dd($places->visualisations);
+        // $visualisations = $places->visualisations;
+
+        // dd($visualisations);
         
         return view('host.places.index', compact('places'));
     }

@@ -17,11 +17,13 @@ class VisualisationController extends Controller
     public function index(Place $place)
     {
         $place->load(['visualisations']);
-        $visualisations = $place->visualisations;
+        // $visualisations = $place->visualisations;
+
+        $count = Visualisation::where('place_id', $place->id)->count();
 
         // dd($visualisations);
 
-        return view ('host.places.visualisations.index', compact('place', 'visualisations'));
+        return view('host.places.visualisations.index', $count);
     }
 
     /**
@@ -53,7 +55,14 @@ class VisualisationController extends Controller
      */
     public function show(Place $place)
     {
-        //
+        // $place->load(['visualisations']);
+        // $visualisations = $place->visualisations;
+
+        // $count = Visualisation::where('place_id', $place->id)->count();
+
+        // dd($count);
+
+        // return view('host.places.visualisations.show', $count);
     }
 
     /**

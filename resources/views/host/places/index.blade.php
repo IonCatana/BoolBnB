@@ -85,8 +85,10 @@
                             @endif
                         </td>
                         <td><a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info">View Messages</a></td>
+                        
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
                         <td><a href="{{ route('host.places.visualisations.index', $place) }}" class="btn" style="background-color: #91f7c8">View Statistics</a></td>
+                        {{-- <td><a href="{{ route('host.places.visualisations.show', [$place, $visualisations]) }}" class="btn" style="background-color: #91f7c8">View Statistics</a></td> --}}
                         
                 @endforeach
                 </tr>
