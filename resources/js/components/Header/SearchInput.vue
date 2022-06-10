@@ -34,7 +34,6 @@
 
 <script>
 import axios from "axios";
-import state from "../../host/store.js";
 
 export default {
   data() {
@@ -42,7 +41,7 @@ export default {
       TOMTOM_API_KEY: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
       searchInput: "",
       searchResults: [],
-      visible: state.visibleSearch,
+      visible: true,
       // TODO da vedere
       choise: '',
       params: null,

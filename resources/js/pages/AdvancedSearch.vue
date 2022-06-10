@@ -22,7 +22,7 @@
         <div class="filter">
           <button
             type="button"
-            class="btn btn-primary ml-4"
+            class="btn-filter btn btn-primary ml-4"
             data-toggle="modal"
             data-target="#exampleModal"
           >
@@ -273,6 +273,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../sass/_variables.scss";
+
+.btn-filter{
+    border: none;
+    color: $boolean-green;
+    background-color: $boolean-blue;
+
+    &:hover {
+      background-color: $boolean-green;
+      color: $boolean-blue;
+    }
+}
+
 .amenity_card {
   width: 100vw;
   .amenity_icon {
