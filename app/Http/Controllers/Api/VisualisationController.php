@@ -43,7 +43,7 @@ class VisualisationController extends Controller
         
         $visualisation->fill($data);
         $visualisation->visitor = $request->ip();
-        dd($data);
+        // dd($data);
 
         // dd($visualisation);
 

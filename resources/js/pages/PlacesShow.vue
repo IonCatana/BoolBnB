@@ -80,7 +80,7 @@ export default {
   methods: {
     // axios call, method post, sending ip to visualisation controller
     sendVisualisation() { 
-      axios.post("/api/visualisation/store",{
+      axios.post("/api/visualisations/store",{
         place_id : this.place.id,
       })
       .then(function (response) {

@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    public function place()
-    {
-        return $this->belongsTo('App\Place');
-    }
-
     protected $fillable = [
         'place_id',
         'sender_email',
@@ -18,6 +13,11 @@ class Message extends Model
         'object',
         'content'
     ];
+    
+    public function place()
+    {
+        return $this->belongsTo('App\Place');
+    }
 
     public function formattedDate()
     {

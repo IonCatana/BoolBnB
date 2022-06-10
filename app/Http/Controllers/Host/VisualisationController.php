@@ -16,10 +16,12 @@ class VisualisationController extends Controller
      */
     public function index(Place $place)
     {
-        $place->load('visualisation');
-        $visualisation = $place->visualisation;
+        $place->load(['visualisations']);
+        $visualisations = $place->visualisations;
 
-        return view ('host.places.visualisations.index', compact('place', 'visualisation'));
+        // dd($visualisations);
+
+        return view ('host.places.visualisations.index', compact('place', 'visualisations'));
     }
 
     /**
