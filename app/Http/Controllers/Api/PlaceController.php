@@ -16,7 +16,14 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::with('amenities')->get();
+        $places = Place::where('visible', true)
+            ->with('amenities', 'sponsorships')
+            ->get();
+
+        // filtriamo le places non sponsorizzate
+        $places = $places->filter(function($place) {
+            return $place->activeSponsorship();
+        });
 
         return response()->json([
             'places' => $places,
