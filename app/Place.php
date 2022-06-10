@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,8 @@ class Place extends Model
 
     public function sponsorships() {
         return $this->belongsToMany('App\Sponsorship')
-            ->withPivot('end_time');
+            ->withPivot('end_time')
+            ->withTimestamps();
     }
     
     public function visualisations() {
@@ -98,5 +100,19 @@ class Place extends Model
         $distance = $angle * $earthRadius; // km
 
         return $distance < $radius;
+    }
+
+    /**
+     * Retreives the model instance of the active sponsorship or null of $place isn't currently sponsored
+     */
+    public function activeSponsorship() {
+        if ($this->sponsorships->isEmpty()) return null;
+
+        // find active sponsorship
+        $active_spons = $this->sponsorships->first(function($spons) {
+            return $spons->isActive();
+        });
+
+        return $active_spons;
     }
 }

@@ -15,3 +15,4 @@ require('./bootstrap');
 import './host/form.js';
 import './host/validation.js';
 import './geocoding/addressMatches';
+import './host/braintree-dropin.js';

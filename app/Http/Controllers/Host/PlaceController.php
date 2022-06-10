@@ -6,6 +6,7 @@ use App\Amenity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\Sponsorship;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -37,9 +38,10 @@ class PlaceController extends Controller
     {
         // recuperiamo id utente loggato
         $user_id = auth()->user()->id;
-        $places = Place::with('amenities')->where('user_id', $user_id)->get();
-        
-        return view('host.places.index', compact('places'));
+        $places = Place::with('amenities', 'sponsorships')->where('user_id', $user_id)->get();
+        $sponsorships = Sponsorship::all();
+
+        return view('host.places.index', compact('places', 'sponsorships'));
     }
 
     /**
