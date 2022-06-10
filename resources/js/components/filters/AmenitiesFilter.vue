@@ -8,7 +8,7 @@
             :id="amenity.name" 
             :value="amenity.id"
             v-model="checkedAmenities"
-            @change="returnValue($event)" 
+            @change="returnValue" 
             />
 
             <label class="form-check-label" :for="amenity.name">{{ amenity.name }}</label>
@@ -30,12 +30,7 @@
         },
 
         methods: {
-            returnValue: function(e) {
-                // const filter = {
-                //     'name': 'amenities',
-                //     'value': this.checkedAmenities,
-                // };
-
+            returnValue: function() {
                 console.log('checked', this.checkedAmenities);
                 this.$emit('pick-filter', this.checkedAmenities);
             },

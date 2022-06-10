@@ -140,15 +140,12 @@ export default {
 
       // i filtri, per popolare la query
       activeFilters: new Map(),
-      checkedAmenities: new Map(),
+      checkedAmenities: [],
 
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
       places: [],
       loading: false,
-
-      // data per la chiamata axios post
-      payload: {},
     };
   },
 
@@ -203,12 +200,15 @@ export default {
       
       let filters, amenities;
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
-      if (this.checkedAmenities.size !== 0) amenities = Object.fromEntries(this.checkedAmenities);
 
-      const params = { lat, lon, ...filters, ...amenities };
-
+      const params = { lat, lon, ...filters};
+      console.log('params', params)
       return params;
     },
+
+    // prepareQuery() {
+
+    // },
 
     updateRoute() {
       if (!_.isEmpty(this.activeFilters)) {
@@ -258,12 +258,8 @@ export default {
     },
 
     addAmenityFilter(array) {
-      this.checkedAmenities = new Map();
-      // if (array.isEmpty) this.checkedAmenities
-      array.forEach((amenityId, i) => {
-        this.checkedAmenities.set(`amenities[${i}]`, amenityId)
-      });
-      console.log(this.checkedAmenities)
+      if (array.length === 0) this.activeFilters.delete('amenities');
+      this.activeFilters.set('amenities', array);
     },
   },
 

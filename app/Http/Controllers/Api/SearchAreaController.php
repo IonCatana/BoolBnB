@@ -17,6 +17,7 @@ class SearchAreaController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // dd($request->amenities);
         $filters = $request->query();
         $lat = Arr::pull($filters, 'lat');
         $lon = Arr::pull($filters, 'lon');
@@ -29,7 +30,6 @@ class SearchAreaController extends Controller
             return $place->inArea($lat, $lon, $range);
         });
 
-        
         // optional filters
         if (!empty($filters)) {
             foreach ($filters as $filter => $value) {
@@ -44,6 +44,7 @@ class SearchAreaController extends Controller
         return response()->json([
             'success' => true,
             'places' => $places,
+            'filters' => $filters,
         ]);
     }
 }
