@@ -39,11 +39,7 @@ Route::prefix('host')
                 'place' => 'slug'
         ]);
 
-        Route::resource('places.visualisations', 'VisualisationController')
-            // ->only('index')
-            ->scoped([
-                'place' => 'slug'
-        ]);
+        Route::get('places/{place:slug}/stats', 'StatisticsController');
     });
 
 Route::get('/{any?}', function(){ 
