@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PlaceSeeder::class,
             MessageSeeder::class,
             VisualisationSeeder::class
+            
 
         ]);
     }
