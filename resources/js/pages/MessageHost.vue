@@ -127,7 +127,7 @@
             <button
               type="submit"
               @click.prevent="sendMessage()"
-              class="btn btn-primary"
+              class="btn-send-message btn"
             >
               Send message
             </button>
@@ -189,13 +189,13 @@ export default {
 @import "../../sass/_variables.scss";
 
 .btn-send-message{
-    background-color: $boolean-green;
-    color: $boolean-blue;
+    background-color: $boolean-blue;
+    color: $boolean-green;
     border: none;
 
     &:hover {
-      color: $boolean-green;
-      background-color: $boolean-blue;
+      background-color: $boolean-green;
+      color: $boolean-blue;
     }
 }
 </style>

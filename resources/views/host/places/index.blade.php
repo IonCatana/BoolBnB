@@ -22,6 +22,7 @@
                 <th>Image</th>
                 <th>Actions</th>
                 <th>Messages</th>
+                <th>Statistics</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
