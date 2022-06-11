@@ -22,6 +22,7 @@ class VisualisationSeeder extends Seeder
 
             $new_visualisation->place_id = $faker->randomElement($place_ids);
             $new_visualisation->visitor = $faker->ipv4();
+            $new_visualisation->visit_date = $faker->dateTimeBetween('-3 years', 'today');
 
             $new_visualisation->save();
         }
