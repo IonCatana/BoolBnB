@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('object');
             $table->text('content');
             $table->boolean('read')->default(false);
+            $table->date('send_date');
             $table->timestamps();
         });
     }

@@ -25,6 +25,7 @@ class MessageSeeder extends Seeder
             $new_message->sender_email = $faker->safeEmail();
             $new_message->object = $faker->sentence();
             $new_message->content = $faker->text(300);
+            $new_message->send_date = $faker->dateTimeBetween('-3 years', 'today');
             $new_message->save();
         }
     }

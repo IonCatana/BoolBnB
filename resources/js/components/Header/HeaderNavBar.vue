@@ -127,6 +127,7 @@ a {
       background-image: linear-gradient(60deg, $boolean-blue, $boolean-green);
       background-clip: text;
       color: transparent;
+      padding-top: 7px;
     }
   }
 

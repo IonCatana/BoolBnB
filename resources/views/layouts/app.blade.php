@@ -15,6 +15,8 @@
     <!-- braintree drop-in -->
     <script src="https://js.braintreegateway.com/web/dropin/1.33.2/js/dropin.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

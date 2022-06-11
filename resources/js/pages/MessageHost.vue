@@ -2,7 +2,7 @@
   <div>
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn-send-message btn btn-primary"
       data-toggle="modal"
       data-target="#exampleModal"
       data-whatever="@mdo"
@@ -186,4 +186,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../sass/_variables.scss";
+
+.btn-send-message{
+    background-color: $boolean-green;
+    color: $boolean-blue;
+    border: none;
+
+    &:hover {
+      color: $boolean-green;
+      background-color: $boolean-blue;
+    }
+}
 </style>

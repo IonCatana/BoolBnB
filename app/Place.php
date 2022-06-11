@@ -85,7 +85,7 @@ class Place extends Model
      * using the Vincenty formula
      */
     public function inArea($latitude, $longitude, $radius) {
-        $earthRadius = 6371; // km
+        $earthRadius = 6371000; // metri
         // convert from degrees to radians
         $lat_from = deg2rad($latitude);
         $lon_from = deg2rad($longitude);
@@ -97,7 +97,7 @@ class Place extends Model
         $b = sin($lat_from) * sin($lat_to) + cos($lat_from) * cos($lat_to) * cos($delta_lon);
 
         $angle = atan2(sqrt($a), $b);
-        $distance = $angle * $earthRadius; // km
+        $distance = $angle * $earthRadius;
 
         return $distance < $radius;
     }

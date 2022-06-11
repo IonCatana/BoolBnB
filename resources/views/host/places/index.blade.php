@@ -53,10 +53,10 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <!-- Button trigger modal -->
+                                <!-- Button trigger modal delete-->
                                 <button type="submit" id="delete-confirm-button" class="btn btn-danger w-100" data-toggle="modal" data-target="">Delete</button>
             
-                                <!-- Modal -->
+                                <!-- Modal delete-->
                                 {{-- // TODO pericoloso laciare id tipo exampleModal --}}
                                 <div name="delete-confirm-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -84,7 +84,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info mb-2">View Messages</a>
+                            <a href="{{ route('host.places.messages.index', $place) }}" class="btn btn-info mb-2 w-100">View Messages</a>
                             @if (!$place->visible)
                                 <button class="btn btn-secondary w-100 disabled">Sponsor</button>
                             @elseif($place->activeSponsorship() != null)
@@ -128,6 +128,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,6 +139,7 @@
 
                         </td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
+                        <td><a href="{{ route('host.chart.index', $place) }}" class="btn" style="background-color: #91f7c8">View Statistics</a></td>
                 @endforeach
                 </tr>
             </tbody>
