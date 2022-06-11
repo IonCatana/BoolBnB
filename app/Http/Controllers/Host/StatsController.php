@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Host;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Place;
+use App\Visualisation;
+use Carbon\Carbon;
 
 class StatsController extends Controller
 {
@@ -19,6 +21,14 @@ class StatsController extends Controller
         $place->load('visualisations', 'messages');
         
         $visualisations = $place->visualisations;
+
+        foreach($visualisations as $visualisation){
+            $date = $visualisation->created_at->format('m');
+            if($date == 6){
+                dd($date);
+            }
+        }
+
         $messages = $place->messages;
 
         return view('host.places.stats', [
