@@ -10,7 +10,6 @@ formInputs.forEach(input => {
 })
 
 // Compare alert quando si clicca sul delete
-//TODO refactor con messaggi
 const resourcesWithDeleteConfirmation = [
     'place',
     'message',
@@ -66,3 +65,5 @@ resourcesWithDeleteConfirmation.forEach(resource => {
 //         alert('Please, select at least one amenity');
 //     } 
 // })
+
+// TODO modale di conferma se si vuole rendere invisibile un appartamento sponsorizzato

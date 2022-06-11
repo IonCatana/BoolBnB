@@ -23,33 +23,52 @@
       </div>
       <div
         class="
+          row
           container
           flex-row flex-sm-column flex-md-column flex-xl-row flex-lg-row
           d-flex
+          m-0
         "
       >
-        <div class="col-4">
-          <div class="info flex-column mb-4">
-            <h4>Hosted by {{ host }}</h4>
-            <ul class="d-flex rooms">
-              <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
-              <li class="beds mr-3">{{ place.beds }} Beds</li>
-              <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
-            </ul>
-            <div class="mb-3 dropdown-divider"></div>
-            <div class="amenities">
-              <h4>What this place offers</h4>
-              <ul class="m-0 mb-3">
-                <li class="mr-3" v-for="amenity in amenities" :key="amenity.id">
-                  <i :class="amenity.icon" class="mr-2"></i>
-                  {{ amenity.name }}
-                </li>
+        <div class="col-xs-12 col-md-12 col-lg-4">
+          <div
+            class="
+              info
+              d-flex
+              justify-content-center
+              align-items-center
+              flex-column
+              mb-4
+            "
+          >
+            <div>
+              <h4>Hosted by {{ host }}</h4>
+              <ul class="d-flex rooms">
+                <li class="bedrooms mr-3">{{ place.rooms }} Rooms</li>
+                <li class="beds mr-3">{{ place.beds }} Beds</li>
+                <li class="bathrooms mr-3">{{ place.bathrooms }} Bathrooms</li>
               </ul>
-              <MessageHost />
+              <div class="mb-3 dropdown-divider"></div>
+              <div class="amenities">
+                <h4>What this place offers</h4>
+                <ul class="m-0 mb-3">
+                  <li
+                    class="mr-3"
+                    v-for="amenity in amenities"
+                    :key="amenity.id"
+                  >
+                    <i :class="amenity.icon" class="mr-2"></i>
+                    {{ amenity.name }}
+                  </li>
+                </ul>
+                <div class="d-flex justify-content-center">
+                  <MessageHost :place_id="place_id" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-xs-12 col-md-12 col-lg-8">
           <Map :lat="place.lat" :lon="place.lon" />
         </div>
       </div>
@@ -74,18 +93,20 @@ export default {
   data() {
     return {
       amenities: [],
+      host: "",
+      place_id: "",
     };
   },
 
   methods: {
-    // axios call, method post, sending ip to visualisation controller
-    sendVisualisation() { 
-      axios.post("/api/visualisations/store",{
-        place_id : this.place.id,
-      })
-      .then(function (response) {
-        console.log('visualizzazioni', response);
-      })
+    fetchPlace() {
+      axios.get(`/api/places/${this.$route.params.slug}`).then((res) => {
+        const { place } = res.data;
+        this.place = place;
+        this.place_id = res.data.place.id;
+        this.amenities = res.data.place.amenities;
+        this.host = res.data.place.user.name;
+      });
     },
   },
 

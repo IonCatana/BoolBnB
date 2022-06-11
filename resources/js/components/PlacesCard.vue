@@ -52,13 +52,15 @@
     }
 
     .detail{
+        border: none;
+        background-color: $boolean-green;
         color: $boolean-blue;
-        background-color: #a0f1c6;
         padding: 8px 10px;
+        transition: 200ms;
 
         &:hover{
-            background-color: #5dd394; 
-            color: white;  
+            color: $boolean-green;
+            background-color: $boolean-blue;
             text-decoration: none;
         }
     }

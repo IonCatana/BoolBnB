@@ -1,5 +1,5 @@
 <template>
-  <div class="myForm form-inline w-25 d-flex">
+  <div class="search-wrapper form-inline d-flex">
     <input
       id="searchbox"
       class="border-0 form-control mr-sm-2"
@@ -34,7 +34,6 @@
 
 <script>
 import axios from "axios";
-import state from "../../host/store.js";
 
 export default {
   data() {
@@ -42,7 +41,7 @@ export default {
       TOMTOM_API_KEY: "yQdOXmdWcQjythjoyUwOQaQSJBBNCvPj",
       searchInput: "",
       searchResults: [],
-      visible: state.visibleSearch,
+      visible: true,
       // TODO da vedere
       choise: '',
       params: null,
@@ -120,7 +119,8 @@ ul, li {
   list-style: none;
 }
 
-.myForm{
+.search-wrapper{
+  width: 25%;
   padding: 3px 3px;
   border: 1px solid gainsboro;
   border-radius: 50px;
@@ -146,6 +146,7 @@ ul, li {
       z-index: 10;
       overflow-y: auto;
       max-height: 80vh;
+      max-width: 380px;
       border: 1px solid gainsboro;
 
       .suggestion{
@@ -170,5 +171,27 @@ ul, li {
 
 .hide{
     display: none;
+}
+
+@media screen and (max-width: 768px){
+  .search-wrapper{
+    width: 40%;
+    margin: 0 40px;
+
+    .suggestions-list{
+      left: 38%;
+    }
+  }
+}
+
+@media screen and (max-width: 575px){
+  .search-wrapper{
+    margin: 0 0 40px 0;
+    width: 100%;
+
+    .suggestions-list{
+      left:12%;
+    }
+  }
 }
 </style>

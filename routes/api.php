@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function() {
     Route::get('/places', 'PlaceController@index');
     Route::get('/places/{slug}', 'PlaceController@show');
+
     Route::get('/amenities', 'AmenityController@index');
     Route::post('/messages/store', 'MessageController@store');
     Route::post('/visualisations/store', 'VisualisationController@store');

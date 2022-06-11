@@ -18,11 +18,11 @@ class MessageController extends Controller
      */
     public function take()
     {
-        $usernow = Auth::id();
-        return response()->json([
-            'success' => true,
-            'results' => $usernow
-        ]);
+        //$usernow = Auth::id();
+       // return response()->json([
+            //'success' => true,
+            //'results' => $usernow
+        //]);
     }
 
     /**
@@ -43,25 +43,36 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+        
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'place_id' => 'required',
+            'place_id' => 'required|exists:places,id',
             'sender_name' => 'required|max:255',
             'object' => 'required|max:255',
             'sender_email' => 'required|max:255',
             'content' => 'required',
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors()
             ]);
         }
+
+        $new_msg = new Message();
+
+        $new_msg->fill($data);       
+        
+        $new_msg->save();
+
         return response()->json([
             'data' => $data,
             'success' => true
         ]);
+
+        return redirect()->route('host.places.show');
     }
 
     /**

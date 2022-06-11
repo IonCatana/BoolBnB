@@ -41,6 +41,10 @@ Route::prefix('host')
 
         Route::get('places/{place:slug}/stats', 'StatsController')
             ->name('places.stats');
+        Route::get('/place/{place}/payment/{sponsorship}', 'BraintreeController')
+            ->name('payment.token');
+        // Route::post('/place/{place}/payment/{sponsorship}', 'BraintreeController@nonce')
+        //     ->name('payment.nonce');
     });
 
 Route::get('/{any?}', function(){ 

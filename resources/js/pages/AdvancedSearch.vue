@@ -1,8 +1,15 @@
 <template>
-  <div id="advanced_search" class=" justify-content-center">
-    <div class="amenity_card px-4 d-flex justify-content-center align-items-center ">
-      <div class="overflow-auto amenity_icon">
-        <div v-for="(amenity, i) in amenities" :key="amenity.id" class="icon" :class="{clickedAmenity : i === activeItem}">
+  <div id="advanced_search" class="justify-content-center">
+    <div
+      class="amenity_card px-4 d-flex justify-content-center align-items-center"
+    >
+      <div class="overflow-hidden amenity_icon">
+        <div
+          v-for="(amenity, i) in amenities"
+          :key="amenity.id"
+          class="icon"
+          :class="{ clickedAmenity: i === activeItem }"
+        >
           <button class="amenity-button" @click="selectItem(i)">
             <i :class="amenity.icon"></i>
             <span class="d-block">{{ amenity.name }}</span>
@@ -10,18 +17,19 @@
         </div>
       </div>
 
-      <!-- TODO li ??? -->
-      <li class="nav-item dropdown">
+      <div class="">
         <!-- Button trigger modal -->
-        <button
-          type="button"
-          class="btn btn-primary ml-4"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          <i class="fas fa-sort"></i>
-          Filter
-        </button>
+        <div class="filter">
+          <button
+            type="button"
+            class="btn-filter btn btn-primary ml-4"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            <i class="fas fa-sort"></i>
+            Filter
+          </button>
+        </div>
 
         <!-- Modal -->
         <div
@@ -45,7 +53,6 @@
                 </button>
               </div>
 
-              
               <div class="modal-body">
                 <!-- range -->
                 <h2>Slide range km</h2>
@@ -65,9 +72,11 @@
                 <!-- amenities -->
                 <div class="amenities">
                   <h2>Amenities</h2>
-                  <AmenitiesFilter @pick-filter="addFilter" :amenities="amenities"/>
+                  <AmenitiesFilter
+                    @pick-filter="addAmenityFilter"
+                    :amenities="amenities"
+                  />
                 </div>
-
               </div>
 
               <div class="modal-footer">
@@ -79,8 +88,11 @@
                   Close
                 </button>
 
-                <button type="button" class="btn btn-primary"
-                @click="queryDatabase" data-dismiss="modal"
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="queryDatabase"
+                  data-dismiss="modal"
                 >
                   Save changes
                 </button>
@@ -88,22 +100,29 @@
             </div>
           </div>
         </div>
-      </li>
+      </div>
     </div>
 
-    <div v-if="placesLoaded" class="card-wrapper d-flex flex-wrap justify-content-center">
-      <PlacesCard tag="div" v-for="place in places" :key="place.id" :place="place"/>
+    <div
+      v-if="!loading"
+      class="card-wrapper d-flex flex-wrap justify-content-center"
+    >
+      <PlacesCard
+        tag="div"
+        v-for="place in places"
+        :key="place.id"
+        :place="place"
+      />
     </div>
-
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import RangeFilter from "../components/filters/RangeFilter.vue";
-import ButtonFilter from '../components/filters/ButtonsFilter.vue';
+import ButtonFilter from "../components/filters/ButtonsFilter.vue";
 import AmenitiesFilter from "../components/filters/AmenitiesFilter.vue";
-import PlacesCard from '../components/PlacesCard.vue';
+import PlacesCard from "../components/PlacesCard.vue";
 
 export default {
   components: {
@@ -121,17 +140,12 @@ export default {
 
       // i filtri, per popolare la query
       activeFilters: new Map(),
+      checkedAmenities: [],
 
-      // da passare nella chiamata al server
-      params: null,
-      query: new Map(),
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
       places: [],
-      placesLoaded: false,
-
-      // data per la chiamata axios post
-      payload: {},
+      loading: false,
     };
   },
 
@@ -162,42 +176,47 @@ export default {
     },
 
     queryDatabase() {
-      this.updateRoute();
-      this.preparePayload();
+      // this.updateRoute();
+      const params = this.prepareParams();
 
-      axios.get('/api/search_area', { 
-        params: this.payload,
-      })
-      .then((res) => {
-        this.places = res.data.places;
-        this.placesLoaded = true;
-        console.log('data', res);
-        console.log('places', this.places);
-        console.log('route', this.$route)
-      })
-      .catch(err => {
-        console.warn(err)
-      });
+      axios
+        .get("/api/search_area", { params })
+        .then((res) => {
+          this.loading = true;
+          this.places = res.data.places;
+          this.loading = false;
+
+          console.log("data", res);
+          console.log("places", this.places);
+          console.log("route", this.$route);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
 
-    preparePayload() {
+    prepareParams() {
       const { lat, lon } = this.$route.params.result.position;
-      this.payload = { lat, lon };
-      console.log('payload', this.payload)
-      console.log('query', this.query)
-      this.query.forEach((value, filter) => {
-        this.payload[filter] = value;
-      })
-      console.log('payload2', this.payload)
+      
+      let filters, amenities;
+      if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
+
+      const params = { lat, lon, ...filters};
+      console.log('params', params)
+      return params;
     },
 
-    updateRoute() {   
+    // prepareQuery() {
+
+    // },
+
+    updateRoute() {
       if (!_.isEmpty(this.activeFilters)) {
         this.activeFilters.forEach((value, filter) => {
-          if (filter === 'amenities') {
+          if (filter === "amenities") {
             value.forEach((amenityId, index) => {
               this.query.set(`amenity[${index}]`, amenityId);
-            });    
+            });
           } else {
             this.query.set(filter, value);
           }
@@ -208,37 +227,39 @@ export default {
     },
 
     composeAddress(address) {
-        let {
-          freeformAddress,
-          countrySubdivision,
-          countrySecondarySubdivision,
-          country,
-          municipality,
-        } = address;
-        let str = "";
+      let {
+        freeformAddress,
+        countrySubdivision,
+        countrySecondarySubdivision,
+        country,
+        municipality,
+      } = address;
+      let str = "";
 
-        if (freeformAddress != null) str += freeformAddress;
-        if (countrySubdivision != null) str += ", " + countrySubdivision;
-        if (
-            countrySecondarySubdivision != null &&
-            countrySecondarySubdivision !== municipality
-        )
-            str += ', ' + countrySecondarySubdivision;
-        if (country != null) str += ", " + country;
+      if (freeformAddress != null) str += freeformAddress;
+      if (countrySubdivision != null) str += ", " + countrySubdivision;
+      if (
+        countrySecondarySubdivision != null &&
+        countrySecondarySubdivision !== municipality
+      )
+        str += ", " + countrySecondarySubdivision;
+      if (country != null) str += ", " + country;
 
-        return str;
+      return str;
     },
 
     addFilter(filter) {
       if (filter.value == null) {
-        this.activeFilters.delete(filter.name)
-        return
+        this.activeFilters.delete(filter.name);
+        return;
       }
 
       this.activeFilters.set(filter.name, filter.value);
+    },
 
-      // array amenities vuoto
-      if (this.activeFilters.get('amenities')?.length === 0) this.activeFilters.delete('amenities');
+    addAmenityFilter(array) {
+      if (array.length === 0) this.activeFilters.delete('amenities');
+      this.activeFilters.set('amenities', array);
     },
   },
 
@@ -251,6 +272,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../sass/_variables.scss";
+
+.btn-filter{
+    border: none;
+    color: $boolean-green;
+    background-color: $boolean-blue;
+
+    &:hover {
+      background-color: $boolean-green;
+      color: $boolean-blue;
+    }
+}
+
 .amenity_card {
   width: 100vw;
   .amenity_icon {
@@ -279,22 +313,29 @@ ul {
   padding: 5px;
   background-color: transparent;
   border: none;
-  opacity: 0.6;
-
+  opacity: 0.7;
+  transition: 200ms;
+  color: $boolean-blue;
+  &:focus {
+    color: $boolean-green;
+    opacity: 1;
+    transform: scale(1.1);
+  }
   &:hover {
+    color: $boolean-green;
     opacity: 1;
     transform: scale(1.1);
   }
 }
 
-.clickedAmenity  {
+.clickedAmenity {
   opacity: 1;
   transform: scale(1.1);
 
   &:after {
     content: "";
     display: block;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $boolean-blue;
     width: 100%;
   }
 }
@@ -316,5 +357,9 @@ ul {
   100% {
     right: -20px;
   }
+}
+.filter{
+  width: 100px;
+  height: 37px;
 }
 </style>

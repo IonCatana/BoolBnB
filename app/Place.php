@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,8 @@ class Place extends Model
 
     public function sponsorships() {
         return $this->belongsToMany('App\Sponsorship')
-            ->withPivot('end_time');
+            ->withPivot('end_time')
+            ->withTimestamps();
     }
     
     public function visualisations() {
@@ -83,7 +85,7 @@ class Place extends Model
      * using the Vincenty formula
      */
     public function inArea($latitude, $longitude, $radius) {
-        $earthRadius = 6371; // km
+        $earthRadius = 6371000; // metri
         // convert from degrees to radians
         $lat_from = deg2rad($latitude);
         $lon_from = deg2rad($longitude);
@@ -95,8 +97,22 @@ class Place extends Model
         $b = sin($lat_from) * sin($lat_to) + cos($lat_from) * cos($lat_to) * cos($delta_lon);
 
         $angle = atan2(sqrt($a), $b);
-        $distance = $angle * $earthRadius; // km
+        $distance = $angle * $earthRadius;
 
         return $distance < $radius;
+    }
+
+    /**
+     * Retreives the model instance of the active sponsorship or null of $place isn't currently sponsored
+     */
+    public function activeSponsorship() {
+        if ($this->sponsorships->isEmpty()) return null;
+
+        // find active sponsorship
+        $active_spons = $this->sponsorships->first(function($spons) {
+            return $spons->isActive();
+        });
+
+        return $active_spons;
     }
 }
