@@ -1,8 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-    <h3 class="text-center pt-3">Statistics per Place: {{$place_title}}</h3>
+<div class="container">
+    <h3 class="text-center pt-3">Statistics per Place: {{$place->title}}</h3>
+
+    <form action="{{ route('host.chart.index', $place) }}">
+        <div class="d-flex justify-content-end">
+            <select name="year" id="choose-year">
+                <option {{  }} value="2022">2022</option>
+                <option {{  }} value="2021">2021</option>
+                <option {{  }} value="2020">2020</option>
+            </select>
+        </div>
+    </form>
+
     <div class="row">
 
         {{-- Grafic Visualisations --}}
@@ -26,7 +37,20 @@
             labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
             datasets: [{
                 label: 'Visualisations',
-                data: [{{count($monthlyViews[0])}}, {{count($monthlyViews[1])}}, {{count($monthlyViews[2])}}, {{count($monthlyViews[3])}}, {{count($monthlyViews[4])}}, {{count($monthlyViews[5])}}, {{count($monthlyViews[6])}}, {{count($monthlyViews[7])}}, {{count($monthlyViews[8])}}, {{count($monthlyViews[9])}}, {{count($monthlyViews[10])}}, {{count($monthlyViews[11])}}],
+                data: [
+                    {{count($monthlyViews[1])}}, 
+                    {{count($monthlyViews[2])}}, 
+                    {{count($monthlyViews[3])}}, 
+                    {{count($monthlyViews[4])}}, 
+                    {{count($monthlyViews[5])}}, 
+                    {{count($monthlyViews[6])}}, 
+                    {{count($monthlyViews[7])}}, 
+                    {{count($monthlyViews[8])}}, 
+                    {{count($monthlyViews[9])}}, 
+                    {{count($monthlyViews[10])}}, 
+                    {{count($monthlyViews[11])}}, 
+                    {{count($monthlyViews[12])}}
+                ],
                 backgroundColor: [
                     'rgba(0,0,0,0)'
                 ],
@@ -66,20 +90,9 @@
             labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
             datasets: [{
                 label: 'Messagges',
-                data: [{{count($monthlyMessages[0])}}, {{count($monthlyMessages[1])}}, {{count($monthlyMessages[2])}}, {{count($monthlyMessages[3])}}, {{count($monthlyMessages[4])}}, {{count($monthlyMessages[5])}}, {{count($monthlyMessages[6])}}, {{count($monthlyMessages[7])}}, {{count($monthlyMessages[8])}}, {{count($monthlyMessages[9])}}, {{count($monthlyMessages[10])}}, {{count($monthlyMessages[11])}}],
+                data: [{{count($monthlyMessages[1])}}, {{count($monthlyMessages[2])}}, {{count($monthlyMessages[3])}}, {{count($monthlyMessages[4])}}, {{count($monthlyMessages[5])}}, {{count($monthlyMessages[6])}}, {{count($monthlyMessages[7])}}, {{count($monthlyMessages[8])}}, {{count($monthlyMessages[9])}}, {{count($monthlyMessages[10])}}, {{count($monthlyMessages[11])}}, {{count($monthlyMessages[12])}}],
                 backgroundColor: [
                     '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c',
-                    '#ff385c'
                 ],
                 pointborderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -105,6 +118,15 @@
                 }]
             }
         }
+    });
+
+
+
+    // submit form on select change
+    const select = document.getElementById('choose-year');
+    select.addEventListener('change', e => {
+        const form = e.target.closest('form');
+        form.submit();
     });
 </script>
 @endsection
