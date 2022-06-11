@@ -149,11 +149,27 @@ export default {
     };
   },
 
-  // watch: {
-  //   $route(to, from) {
-  //     this.queryDatabase();
-  //   }
-  // },
+  watch: {
+    // $route(to, from) {
+    //   this.queryDatabase();
+    // },
+
+    activeFilters: function() {
+      console.log('pre query', this.$route)
+      // let filters;
+      // if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
+
+      // const query = Object.assign({}, this.$route.query, this.activeFilters);
+      const pre = Object.entries(this.params)
+      const plus = this.activeFilters
+      this.params = { ...pre, ...plus };
+
+      const params = this.params;
+      this.$router.push({ params });
+      console.log('post params', params)
+      console.log('post query', this.$route)
+    },
+  },
 
   methods: {
     fetchAmenities() {
@@ -198,7 +214,7 @@ export default {
     prepareParams() {
       const { lat, lon } = this.$route.params.result.position;
       
-      let filters, amenities;
+      let filters;
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
 
       const params = { lat, lon, ...filters};
@@ -213,13 +229,7 @@ export default {
     updateRoute() {
       if (!_.isEmpty(this.activeFilters)) {
         this.activeFilters.forEach((value, filter) => {
-          if (filter === "amenities") {
-            value.forEach((amenityId, index) => {
-              this.query.set(`amenity[${index}]`, amenityId);
-            });
-          } else {
-            this.query.set(filter, value);
-          }
+          console.log(filter, value)
         });
       }
       // console.log('filters', this.activeFilters)
@@ -266,6 +276,7 @@ export default {
   beforeMount() {
     this.fetchAmenities();
     this.queryDatabase();
+    console.log(this.$route)
   },
 };
 // Slider Range Km
