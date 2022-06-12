@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    protected $dates = ['send_date'];
+    
     public function place()
     {
         return $this->belongsTo('App\Place');
