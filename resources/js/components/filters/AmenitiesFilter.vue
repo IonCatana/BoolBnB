@@ -1,7 +1,5 @@
 <template>
     <div class="amenities">
-        <h5>Essential services</h5>
-
         <div v-for="(amenity, i) in amenities" :key="i" class="form-group form-check">
             <input type="checkbox" 
             class="form-check-input" 
@@ -13,8 +11,6 @@
 
             <label class="form-check-label" :for="amenity.name">{{ amenity.name }}</label>
         </div>
-
-        <span>Checked amenities: {{ checkedAmenities }}</span>
     </div>
 </template>
 

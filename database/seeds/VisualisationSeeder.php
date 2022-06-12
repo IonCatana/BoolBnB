@@ -17,11 +17,12 @@ class VisualisationSeeder extends Seeder
         $places = Place::all();
         $place_ids = $places->pluck('id')->all();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20000; $i++) {
             $new_visualisation = new Visualisation;
 
             $new_visualisation->place_id = $faker->randomElement($place_ids);
             $new_visualisation->visitor = $faker->ipv4();
+            $new_visualisation->visit_date = $faker->dateTimeBetween('-3 years', 'today');
 
             $new_visualisation->save();
         }

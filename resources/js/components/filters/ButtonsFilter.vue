@@ -1,10 +1,12 @@
 <template>
    <div>
-      <h3>{{ name }}</h3>
-      <button class="buttonNumber" 
+      <h2>{{ name }}</h2>
+
+      <button class="buttonNumber btn py-2 px-3 mx-2" 
         v-for="(num, i) in availableNumber" 
         :key="i" :value="num"
-        @click="returnValue($event)"
+        :class="[(activeIndex == i)? 'active' : '']"
+        @click="returnValue($event, i)"
       >
         {{ num }}
       </button>
@@ -21,11 +23,12 @@ export default {
     return {
       availableNumber: ['Any', 1, 2, 3, 4, 5, '6+'],
       value: null,
+      activeIndex: 0,
     }
   },
 
   methods: {
-    returnValue: function(e) {
+    returnValue: function(e, i) {
       let queryfiedName = this.queryfy(this.name);
       const filter = {
         'name': queryfiedName,
@@ -35,6 +38,8 @@ export default {
       if (filter.value === '6+') filter.value = 6;
 
       this.$emit('pick-filter', filter);
+
+      this.activeIndex = i;
     },
 
     queryfy(str) {
@@ -44,12 +49,28 @@ export default {
         .replace(/[\s_-]+/g, '_')
         .replace(/^-+|-+$/g, '');
     },
-  }
+  },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "../../../sass/_variables.scss";
+
 .buttonNumber {
-  padding: 2px 5px;
+  border: none;
+  background-color: #d3d3d3;
+  color: $boolean-blue;
+
+  &:hover{
+    background-color: $boolean-blue;
+    color: white;
+  }
+
+  &.active{
+    background-color: $boolean-green;
+    color: white;
+  }
 }
+
+
 </style>

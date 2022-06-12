@@ -22,6 +22,7 @@
                 <th>Image</th>
                 <th>Actions</th>
                 <th>Messages</th>
+                <th>Statistics</th>
                 
                 {{-- //TODO aggiungere collegamento alla view front/show --}}
             </thead>
@@ -128,6 +129,7 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,6 +140,7 @@
 
                         </td>
                         {{-- //TODO aggiungere tasto/link per front/show-- --}}
+                        <td><a href="{{ route('host.chart.index', $place) }}" class="btn" style="background-color: #91f7c8">View Statistics</a></td>
                 @endforeach
                 </tr>
             </tbody>

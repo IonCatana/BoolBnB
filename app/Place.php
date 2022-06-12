@@ -115,4 +115,16 @@ class Place extends Model
 
         return $active_spons;
     }
+
+    public function monthlyViews($month, $year) {
+        $monthly_views = Visualisation::whereYear('visit_date', $year)
+            ->whereMonth('visit_date', $month)
+            ->where('place_id', $this->id)
+            ->get()
+            ->countBy(function($view) {
+                return $view->visitor;
+            });
+
+        return $monthly_views;
+    }
 }

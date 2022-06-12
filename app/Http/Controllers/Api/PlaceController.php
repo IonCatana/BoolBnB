@@ -20,6 +20,8 @@ class PlaceController extends Controller
             ->with('amenities', 'sponsorships')
             ->get();
 
+        // TODO pagination
+
         // filtriamo le places non sponsorizzate
         $places = $places->filter(function($place) {
             return $place->activeSponsorship();

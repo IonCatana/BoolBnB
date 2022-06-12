@@ -27,7 +27,7 @@
             warning: function () {
             if (this.value > 1) {
                     return {
-                    color: "#e74c3c",
+                    color: "#03DF6B",
                     animation: "anim .3s ease-in 1 alternate",
                     };
                 }
@@ -47,6 +47,8 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../../../sass/_variables.scss";
+
 // Slide Range Km
 .container .mySlider {
   appearance: none;
@@ -70,7 +72,7 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background-color: #e74c3c;
+  background-color: $boolean-green;
   cursor: pointer;
   transition: all 0.3s ease-in;
 }
@@ -80,7 +82,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background-color: #e74c3c;
+  background-color: $boolean-green;
   cursor: pointer;
   transition: all 0.3s ease-in;
   border: 2px solid #d3d3d3;

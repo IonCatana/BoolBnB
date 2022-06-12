@@ -56,18 +56,20 @@
               <div class="modal-body">
                 <!-- range -->
                 <h2>Slide range km</h2>
-                <RangeFilter @pick-filter="addFilter" />
+                <RangeFilter class="mb-2" @pick-filter="addFilter" />
+
+                <div class="dropdown-divider mb-4"></div>
 
                 <!-- rooms, beds & bathrooms -->
-                <div class="rooms_beds">
-                  <h2>Rooms, Beds & Bathrooms</h2>
+                <div class="rooms_beds pb-2">
+                  <!-- <h2 class="mb-3">Rooms, Beds & Bathrooms</h2> -->
 
-                  <ButtonFilter name="Rooms" @pick-filter="addFilter" />
-                  <ButtonFilter name="Beds" @pick-filter="addFilter" />
-                  <ButtonFilter name="Bathrooms" @pick-filter="addFilter" />
+                  <ButtonFilter class="mb-4" name="Rooms" @pick-filter="addFilter" />
+                  <ButtonFilter class="mb-4" name="Beds" @pick-filter="addFilter" />
+                  <ButtonFilter class="mb-4" name="Bathrooms" @pick-filter="addFilter" />
                 </div>
 
-                <div class="dropdown-divider"></div>
+                <div class="dropdown-divider mb-4"></div>
 
                 <!-- amenities -->
                 <div class="amenities">
@@ -90,7 +92,7 @@
 
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="save-changes btn btn-primary"
                   @click="queryDatabase"
                   data-dismiss="modal"
                 >
@@ -337,6 +339,17 @@ ul {
     display: block;
     border-bottom: 1px solid $boolean-blue;
     width: 100%;
+  }
+}
+
+.save-changes{
+  background-color: $boolean-blue;
+  color: $boolean-green;
+  border: none;
+
+  &:hover{
+    background-color: $boolean-green;
+    color: $boolean-blue;
   }
 }
 
