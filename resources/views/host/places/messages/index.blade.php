@@ -10,7 +10,7 @@
                 <th>Sender Email</th>
                 <th>Object</th>
                 <th>Date</th>
-                <th>Read</th>
+                {{-- <th>Read</th> --}}
                 <th colspan="2">Actions</th>
             </thead>
 
@@ -21,14 +21,14 @@
                         <td>{{ $msg->sender_email }}</td>
                         <td>{{ $msg->object }}</td>
                         <td>{{ $msg->formattedDate() }}</td>
-                        <td>
-                            {{-- //TODO tasto interattivo --}}
+                        {{-- //TODO tasto interattivo --}}
+                        {{-- <td>
                             @if ( !$msg->read)
                                 {{ 'No' }}
                             @else
                                 {{ 'Yes' }}
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
                             <a class="btn btn-info" href="{{ route('host.places.messages.show', [$place, $msg] ) }}"> See Details</a>
                         </td>
