@@ -27,13 +27,15 @@ class SearchAreaController extends Controller
         $range = Arr::pull($filters, 'range', DEFAULT_RANGE);
         
         // $place inside area?
-        $places = Place::with('amenities')
+        $places = Place::with('amenities', 'sponsorships')
             ->where('visible',true)
-            // TODO ->orderby() sponsored first
-            ->cursor()
+            // ->orderBy()
+            ->get()
             ->filter(function($place) use ($lat, $lon, $range) {
-            return $place->inArea($lat, $lon, $range);
-        });
+                return $place->inArea($lat, $lon, $range);
+            });
+
+        
 
         // optional filters (rooms, beds, bathrooms)
         if (!empty($filters)) {
@@ -59,6 +61,16 @@ class SearchAreaController extends Controller
                 return $has_selected_amenities;
             });
         }
+
+        // riordiniamo le places secondo la distanza dal punto
+        $sorted = $places->mapToGroups(function($place) use ($lat, $lon, $range) {
+            return [$place->inArea($lat, $lon, $range) => $place];
+        })->all();
+
+        uksort($sorted, function($a, $b) {
+            return $a - $b;
+        });
+        // dd($sorted, $filters);
 
         return response()->json([
             'success' => true,
