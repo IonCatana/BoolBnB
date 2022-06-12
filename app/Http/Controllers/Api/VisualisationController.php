@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Visualisation;
+use Carbon\Carbon;
 
 class VisualisationsìController extends Controller
 {
@@ -41,6 +43,7 @@ class VisualisationsìController extends Controller
         
         $visualisation->fill($data);
         $visualisation->visitor = $request->ip();
+        $visualisation->visit_date = Carbon::now();
         // dd($data);
 
         // dd($visualisation);

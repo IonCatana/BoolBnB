@@ -94,7 +94,7 @@ export default {
     return {
       amenities: [],
       host: "",
-      place_id: "",
+      place_id: int,
     };
   },
 
@@ -112,12 +112,14 @@ export default {
 
     // axios call, method post, sending ip to visualisation controller
     sendVisualisation() { 
-      axios.post("/api/visualisations/store",{
-        place_id : this.place.id,
+      axios.post("/api/visualisation/store",{
+        'place_id': this.place_id,
       })
       .then(function (response) {
         console.log('visualizzazioni', response);
       })
+
+      console.log('place', this.place_id);
     },
   },
 
