@@ -6,6 +6,7 @@ use App\User;
 use App\Place;
 use App\Amenity;
 use App\Sponsorship;
+use Carbon\Carbon;
 
 class PlaceSeeder extends Seeder
 {
@@ -22,9 +23,9 @@ class PlaceSeeder extends Seeder
         $amenities = Amenity::all();
         $amenityId = $amenities->pluck('id')->all();
         $sponsorships = Sponsorship::all();
-        $sponsorshipId = $sponsorships->pluck('id')->all();
+        // $sponsorshipId = $sponsorships->pluck('id')->all();
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $new_place = new Place();
 
             $new_place->user_id = random_int(1,4); //superusers
@@ -46,8 +47,13 @@ class PlaceSeeder extends Seeder
 
             // 1 place su 5 deve essere sponsorizzata al momento del seeding
             if (lcg_value() < .2) {
-                $random_sponsorship = $faker->randomElement($sponsorshipId);
-                $new_place->sponsorships()->attach($random_sponsorship);
+                $random_sponsorship = $sponsorships->random();
+                $new_place->sponsorships()->attach($random_sponsorship, [
+                    'end_time' => Carbon::now()->addHours($random_sponsorship->duration)
+                ]);
+
+                $new_place->visible = true;
+                $new_place->update();
             }
         }
     }
