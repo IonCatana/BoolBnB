@@ -109,13 +109,27 @@ export default {
       });
     },
     //TODO metter il catch error
+
+    // axios call, method post, sending ip to visualisation controller
+    sendVisualisation() { 
+      axios.post("/api/visualisations/store",{
+        place_id : this.place.id,
+      })
+      .then(function (response) {
+        console.log('visualizzazioni', response);
+      })
+    },
   },
 
   beforeMount() {
     this.fetchPlace();
     console.log(this.place);
   },
-};
+
+  mounted() {
+    this.sendVisualisation();
+  },
+}
 </script>
 
 <style lang="scss" scoped>

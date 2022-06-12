@@ -1,6 +1,6 @@
 <template>
     <div class="card mx-2 mb-4" style="width: 19rem;">
-        <figure class="img-wrapper mb-0">
+        <figure class="img-wrapper mb-1">
             <img
             v-if="place.img == null"
             class="place-img w-100"
@@ -48,7 +48,8 @@
     border: 1px solid gainsboro;
 
     .img-wrapper{
-        height: 65%;
+        // height: 65%;
+        // border: 1px solid red;
 
         .place-img {
             padding: 15px;
@@ -58,22 +59,32 @@
         }
     }
 
-    .card-text{
-        color: gray;
-    }
+    .card-body{
+        position: relative;
+        
+        .card-text{
+            color: gray;
+        }
 
-    .detail{
-        border: none;
-        background-color: $boolean-green;
-        color: $boolean-blue;
-        padding: 8px 10px;
-        transition: 200ms;
+        .detail{
+            border: none;
+            background-color: $boolean-green;
+            color: $boolean-blue;
+            padding: 8px 10px;
+            transition: 200ms;
+            position: absolute;
+            bottom: 8%; 
+            left: 50%; 
+            transform: translate( -50%);
 
-        &:hover{
-            color: $boolean-green;
-            background-color: $boolean-blue;
-            text-decoration: none;
+            &:hover{
+                color: $boolean-green;
+                background-color: $boolean-blue;
+                text-decoration: none;
+            }
         }
     }
+
+
 }
 </style>
