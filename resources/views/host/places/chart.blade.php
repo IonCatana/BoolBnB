@@ -6,33 +6,37 @@
 
     <form action="{{ route('host.chart.index', $place) }}">
         <div class="select d-flex justify-content-between align-self-center">
-            <div class="align-self-center"><h3 class="pl-4 m-0">Total Visualisation:</h3></div>
+            <div class="align-self-center">
+                <h3 class="pl-4 m-0">Total Visualisation:</h3>
+            </div>
             <div class=" d-flex">
                 <h3 class="pr-4 m-0">Select Year:</h3>
                 <select name="year" id="choose-year">
-                @foreach ($years as $year)
-                <option {{ $year == $selected_year ? 'selected' : ''}} value="{{ $year }}">{{ $year }}</option>
-                @endforeach
-            </select>
+                    @foreach ($years as $year)
+                    <option {{ $year == $selected_year ? 'selected' : ''}} value="{{ $year }}">{{ $year }}</option>
+                    @endforeach
+                </select>
             </div>
-            
-            
         </div>
     </form>
 
-    <div class="row">
-
+    @if (!empty($monthly_visualisations))
         {{-- Grafic Visualisations --}}
-        <div class="grafico col-12 mt-5" style="width:80%; height:80%">
+        <div class="grafico mt-5" style="width:80%; height:80%">
             <canvas id="myChartViews"></canvas>
         </div>
 
         {{-- Grafic Messagges --}}
-        <div class="grafico col-12 mt-5 mb-5" style="width:80%; height:80%">
+        <div class="grafico mt-5 mb-5" style="width:80%; height:80%">
             <canvas id="myChartMessages"></canvas>
         </div>
-        <a href="{{ route('host.places.index', $place->slug) }}">Back to places</a>
+    @else
+    <div class="mt-5">
+        <h4>This place has no visualisations nor messages yet.</h4>
     </div>
+    @endif
+
+    <a href="{{ route('host.places.index', $place->slug) }}">Back to places</a>
 </div>
 
 {{-- Script Grafic Visualisations --}}
@@ -45,18 +49,18 @@
             datasets: [{
                 label: 'Visualisations',
                 data: [
-                    {{count($monthlyViews[1])}}, 
-                    {{count($monthlyViews[2])}}, 
-                    {{count($monthlyViews[3])}}, 
-                    {{count($monthlyViews[4])}}, 
-                    {{count($monthlyViews[5])}}, 
-                    {{count($monthlyViews[6])}}, 
-                    {{count($monthlyViews[7])}}, 
-                    {{count($monthlyViews[8])}}, 
-                    {{count($monthlyViews[9])}}, 
-                    {{count($monthlyViews[10])}}, 
-                    {{count($monthlyViews[11])}}, 
-                    {{count($monthlyViews[12])}}
+                    {{ $monthly_visualisations[1] }}, 
+                    {{ $monthly_visualisations[2] }}, 
+                    {{ $monthly_visualisations[3] }}, 
+                    {{ $monthly_visualisations[4] }}, 
+                    {{ $monthly_visualisations[5] }}, 
+                    {{ $monthly_visualisations[6] }}, 
+                    {{ $monthly_visualisations[7] }}, 
+                    {{ $monthly_visualisations[8] }}, 
+                    {{ $monthly_visualisations[9] }}, 
+                    {{ $monthly_visualisations[10] }}, 
+                    {{ $monthly_visualisations[11] }}, 
+                    {{ $monthly_visualisations[12] }}
                 ],
                 backgroundColor: [
                     '#03DF6B' //blueBoolean
@@ -96,7 +100,7 @@
             labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
             datasets: [{
                 label: 'Messagges',
-                data: [{{count($monthlyMessages[1])}}, {{count($monthlyMessages[2])}}, {{count($monthlyMessages[3])}}, {{count($monthlyMessages[4])}}, {{count($monthlyMessages[5])}}, {{count($monthlyMessages[6])}}, {{count($monthlyMessages[7])}}, {{count($monthlyMessages[8])}}, {{count($monthlyMessages[9])}}, {{count($monthlyMessages[10])}}, {{count($monthlyMessages[11])}}, {{count($monthlyMessages[12])}}],
+                data: [{{ $monthly_messages[1] }}, {{ $monthly_messages[2] }}, {{ $monthly_messages[3] }}, {{ $monthly_messages[4] }}, {{ $monthly_messages[5] }}, {{ $monthly_messages[6] }}, {{ $monthly_messages[7] }}, {{ $monthly_messages[8] }}, {{ $monthly_messages[9] }}, {{ $monthly_messages[10] }}, {{ $monthly_messages[11] }}, {{ $monthly_messages[12] }}],
                 backgroundColor: [
                     '#03DF6B', //greenBoolean
                 ],

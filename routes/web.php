@@ -44,7 +44,7 @@ Route::prefix('host')
         // Route::post('/place/{place}/payment/{sponsorship}', 'BraintreeController@nonce')
         //     ->name('payment.nonce');
 
-        Route::get('places/{place:slug}/chart', 'ChartController@index')->name('chart.index');
+        Route::get('places/{place:slug}/chart', 'ChartController')->name('chart.index');
     });
 
 Route::get('/{any?}', function(){ 
