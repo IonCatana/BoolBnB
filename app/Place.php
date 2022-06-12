@@ -83,6 +83,7 @@ class Place extends Model
     /**
      * Calculate great-circle distance between 2 points and returns wether it is smaller than $range
      * using the Vincenty formula
+     * @return float $distance || @return false (when search result isn't in the area)
      */
     public function inArea($latitude, $longitude, $radius) {
         $earthRadius = 6371000; // metri
@@ -99,7 +100,9 @@ class Place extends Model
         $angle = atan2(sqrt($a), $b);
         $distance = $angle * $earthRadius;
 
-        return $distance < $radius;
+        if ($distance > $radius) return false;
+
+        return $distance;
     }
 
     /**

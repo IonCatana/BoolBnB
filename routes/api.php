@@ -24,6 +24,7 @@ Route::namespace('Api')->group(function() {
 
     Route::get('/amenities', 'AmenityController@index');
     Route::post('/message/store', 'MessageController@store');
+    Route::post('/visualisations/store', 'VisualisationController@store');
 
     Route::get('/search_area', 'SearchAreaController');
 });

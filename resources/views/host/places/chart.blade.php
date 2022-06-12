@@ -138,7 +138,7 @@
     });
 </script>
 
-<style lang="scss" scoped>
+<style>
     
     select{
         border-radius: 5px;
