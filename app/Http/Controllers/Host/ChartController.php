@@ -16,119 +16,66 @@ class ChartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Place $place)
+    public function __invoke(Request $request, Place $place)
     {   
-        // dump($request->has('year'));
-        $monthlyViews = [];
-        $monthlyMessages = [];
+        $current_year = Carbon::now()->year;
 
+        // filtriamo le query per anno
         $selected_year = null;
         if ($request->has('year')) {
             $selected_year = $request->input('year');
         } else {
-            $selected_year = Carbon::now()->year; //current year
+            $selected_year = $current_year; //current year
         }
 
+        // contiamo per ogni mese
         $visualisations = $place->visualisations;
+        $monthly_visualisations = [];
+        if (!empty($visualisations)) {
+            for ($month = 1; $month <= 12; $month++){
+                $monthly_visualisations[$month] = $visualisations->filter(function($vis) use ($selected_year, $month) {
+                    $visited = $vis->visit_date;
+                    return $visited->year == $selected_year && $visited->month == $month;
+                })->countBy(function($vis) {
+                    return $vis->visitor;
+                })->count();
+            }
+        }
+
         $messages = $place->messages;
-        
-        for ($month = 1; $month <= 12; $month++){
-
-            $monthlyViews[$month] = $visualisations->filter(function($vis) use ($selected_year, $month) {
-                $visited = $vis->visit_date;
-                return $visited->year == $selected_year && $visited->month == $month;
-            })->countBy(function($vis) {
-                return $vis->visitor;
-            });
-            dump("views {$month}", $monthlyViews[$month]);
-
-            $monthlyMessages[$month] = $messages->filter(function($mess) use ($selected_year, $month) {
-                $sent = $mess->send_date;
-                return $sent->year == $selected_year && $sent->month == $month;
-            })->count();
-            dump("messages {$month}", $monthlyMessages[$month]);
+        $monthly_messages = [];
+        if (!empty($messages)) {
+            for ($month = 1; $month <= 12; $month++){
+                $monthly_messages[$month] = $messages->filter(function($mess) use ($selected_year, $month) {
+                    $sent = $mess->send_date;
+                    return $sent->year == $selected_year && $sent->month == $month;
+                })->count();
+            }
         }
 
+        // reucuperiamo la prima visualizzazznione per capire su quanti anni dare la possibilita di chiamare le statistiche
+        if (!empty($visualisations->all())) {
+            $oldest_visualisation = Visualisation::where('place_id', $place->id)
+                ->oldest('visit_date')
+                ->first();
+            // dump($visualisations);
+            // dd('oldest', $oldest_visualisation);
 
-        // reucuperiamo la prima visualizzazznione
-        $oldest_visualisation = Visualisation::where('place_id', $place->id)
-            ->oldest('visit_date')
-            ->first();
+            // componiamo l'array degli anni
+            $year_one = $oldest_visualisation->visit_date->year;
+            $years = [];
+            for($y = $current_year; $y >= $year_one; $y--) {
+                $years[] = $y;
+            }
+        } else {
+            $years[] = $current_year;
+            $selected_year = $current_year;
 
-        $year_one = $oldest_visualisation->visit_date->year;
-        $current_year = Carbon::now()->year;
-        $years = [];
-        for($y = $current_year; $y >= $year_one; $y--) {
-            $years[] = $y;
+            // facciamo risultare vuoti questi array bidimensionali (array di collection?)
+            $monthly_visualisations = null;
+            $monthly_messages = null;
         }
 
-        // passiamo anche $year per poter visualizzare nella select l'anno selezionato
-        return view('host.places.chart', compact('monthlyViews', 'monthlyMessages', 'place', 'years', 'selected_year'));   
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Place $place)
-    {
-        //return view('host.places.chart.show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('host.places.chart', compact('monthly_visualisations', 'monthly_messages', 'place', 'years', 'selected_year'));   
     }
 }

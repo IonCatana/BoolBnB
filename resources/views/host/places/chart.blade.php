@@ -14,17 +14,29 @@
         </div>
     </form>
 
-    <div class="row">
+    <div class="container">
 
         {{-- Grafic Visualisations --}}
-        <div class="grafico col-12 mt-5" style="width:80%; height:80%">
+        @if (!empty($monthly_visualisations))
+        <div class="grafico mt-5" style="width:80%; height:80%">
             <canvas id="myChartViews"></canvas>
         </div>
+        @else
+        <div class="mt-5">
+            <h4>This place hasn't been visualised yet.</h4>
+        </div>
+        @endif
 
         {{-- Grafic Messagges --}}
-        <div class="grafico col-12 mt-5 mb-5" style="width:80%; height:80%">
+        @if (!empty($monthly_messages))
+        <div class="grafico mt-5 mb-5" style="width:80%; height:80%">
             <canvas id="myChartMessages"></canvas>
         </div>
+        @else
+        <div class="mt-5">
+            <h4>You haven't received any messages for this place yet.</h4>
+        </div>
+        @endif
     </div>
 </div>
 
@@ -38,18 +50,18 @@
             datasets: [{
                 label: 'Visualisations',
                 data: [
-                    {{ $monthlyViews[1] }}, 
-                    {{ $monthlyViews[2] }}, 
-                    {{ $monthlyViews[3] }}, 
-                    {{ $monthlyViews[4] }}, 
-                    {{ $monthlyViews[5] }}, 
-                    {{ $monthlyViews[6] }}, 
-                    {{ $monthlyViews[7] }}, 
-                    {{ $monthlyViews[8] }}, 
-                    {{ $monthlyViews[9] }}, 
-                    {{ $monthlyViews[10] }}, 
-                    {{ $monthlyViews[11] }}, 
-                    {{ $monthlyViews[12] }}
+                    {{ $monthly_visualisations[1] }}, 
+                    {{ $monthly_visualisations[2] }}, 
+                    {{ $monthly_visualisations[3] }}, 
+                    {{ $monthly_visualisations[4] }}, 
+                    {{ $monthly_visualisations[5] }}, 
+                    {{ $monthly_visualisations[6] }}, 
+                    {{ $monthly_visualisations[7] }}, 
+                    {{ $monthly_visualisations[8] }}, 
+                    {{ $monthly_visualisations[9] }}, 
+                    {{ $monthly_visualisations[10] }}, 
+                    {{ $monthly_visualisations[11] }}, 
+                    {{ $monthly_visualisations[12] }}
                 ],
                 backgroundColor: [
                     'rgba(0,0,0,0)'
@@ -90,7 +102,7 @@
             labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
             datasets: [{
                 label: 'Messagges',
-                data: [{{ $monthlyMessages[1] }}, {{ $monthlyMessages[2] }}, {{ $monthlyMessages[3] }}, {{ $monthlyMessages[4] }}, {{ $monthlyMessages[5] }}, {{ $monthlyMessages[6] }}, {{ $monthlyMessages[7] }}, {{ $monthlyMessages[8] }}, {{ $monthlyMessages[9] }}, {{ $monthlyMessages[10] }}, {{ $monthlyMessages[11] }}, {{ $monthlyMessages[12] }}],
+                data: [{{ $monthly_messages[1] }}, {{ $monthly_messages[2] }}, {{ $monthly_messages[3] }}, {{ $monthly_messages[4] }}, {{ $monthly_messages[5] }}, {{ $monthly_messages[6] }}, {{ $monthly_messages[7] }}, {{ $monthly_messages[8] }}, {{ $monthly_messages[9] }}, {{ $monthly_messages[10] }}, {{ $monthly_messages[11] }}, {{ $monthly_messages[12] }}],
                 backgroundColor: [
                     '#ff385c',
                 ],
