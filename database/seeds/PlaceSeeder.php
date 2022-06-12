@@ -24,10 +24,10 @@ class PlaceSeeder extends Seeder
         $sponsorships = Sponsorship::all();
         $sponsorshipId = $sponsorships->pluck('id')->all();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $new_place = new Place();
 
-            $new_place->user_id = random_int(1,4);
+            $new_place->user_id = random_int(1,4); //superusers
             $new_place->title =  $faker->colorName();
             $new_place->slug = Place::getUniqueSlug($new_place->title);
             $new_place->rooms = $faker->numberBetween(1, 10);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\Message;
 use App\Visualisation;
+use Carbon\Carbon;
 
 class ChartController extends Controller
 {
@@ -15,22 +16,55 @@ class ChartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Place $place)
+    public function index(Request $request, Place $place)
     {   
-        $place_title = $place->title;
+        // dump($request->has('year'));
         $monthlyViews = [];
         $monthlyMessages = [];
-        $places = Place::where('id', $place->id)->first();
-        for ($i = 0; $i < 12; $i++){
 
-            $ViewsV = Visualisation::whereMonth('visit_date', $i)->where('place_id', $place->id)->get();
-            $monthlyViews[$i] = $ViewsV;
-
-            $ViewsM = Message::whereMonth('send_date', $i)->where('place_id', $place->id)->get(); 
-            $monthlyMessages[$i] = $ViewsM;    
+        $selected_year = null;
+        if ($request->has('year')) {
+            $selected_year = $request->input('year');
+        } else {
+            $selected_year = Carbon::now()->year; //current year
         }
-        //dd($monthlyMessages[7]);
-        return view('host.places.chart', compact('place_title', 'monthlyViews', 'monthlyMessages', 'place'));
+
+        // TODO refactor con una sola query usando $place->load()
+
+        for ($month = 1; $month <= 12; $month++){
+            $monthlyViews[$month] = $place->monthlyViews($month, $selected_year);
+
+            $ViewsM = Message::whereYear('send_date', $selected_year)
+                ->whereMonth('send_date', $month)
+                ->where('place_id', $place->id)
+                ->get(); 
+            $monthlyMessages[$month] = $ViewsM;    
+        }
+
+
+        // reucuperiamo la prima visualizzazznione
+        $oldest_visualisation = Visualisation::where('place_id', $place->id)
+            ->oldest('visit_date')
+            ->first();
+
+        $year_one = $oldest_visualisation->visit_date->year;
+        $current_year = Carbon::now()->year;
+        $years = [];
+        for($y = $current_year; $y >= $year_one; $y--) {
+            $years[] = $y;
+        }
+
+        // passiamo anche $year per poter visualizzare nella select l'anno selezionato
+        return view('host.places.chart', compact('monthlyViews', 'monthlyMessages', 'place', 'years', 'selected_year'));
+
+        // $place->load(['visualisations', 'messages']);
+        // dump('load vis', $place->visualisations->first(), $place->visualisations->count());
+        // dump('load mess', $place->messages->first(), $place->messages->count());
+
+        // $visual = Visualisation::where('place_id', $place->id)->count();
+        // dump('query vis', $visual);
+        // $mess = Message::where('place_id', $place->id)->count();
+        // dump('query mess', $mess);
         
     }
 

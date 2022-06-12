@@ -7,9 +7,9 @@
     <form action="{{ route('host.chart.index', $place) }}">
         <div class="d-flex justify-content-end">
             <select name="year" id="choose-year">
-                <option {{  }} value="2022">2022</option>
-                <option {{  }} value="2021">2021</option>
-                <option {{  }} value="2020">2020</option>
+                @foreach ($years as $year)
+                <option {{ $year == $selected_year ? 'selected' : ''}} value="{{ $year }}">{{ $year }}</option>
+                @endforeach
             </select>
         </div>
     </form>
