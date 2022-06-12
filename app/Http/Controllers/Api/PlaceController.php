@@ -18,6 +18,7 @@ class PlaceController extends Controller
     {
         $places = Place::where('visible', true)
             ->with('amenities', 'sponsorships')
+            ->latest()
             ->get();
 
         // TODO pagination
