@@ -1,7 +1,7 @@
 <template>
     <div class="footbar position-fixed fixed-bottom">
         <div class="container d-flex justify-content-between p-3">
-            <span>© 2022 BoolBnB, Inc.</span>
+            <span>© 2022 BoolBnB by TEAM7 Inc.</span>
             
             <span><a class="text-dark" href="#">
                     International Version (EN)<i class="fas fa-globe mr-4 ml-2"></i>
