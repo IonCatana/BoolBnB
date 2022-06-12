@@ -38,18 +38,18 @@
             datasets: [{
                 label: 'Visualisations',
                 data: [
-                    {{count($monthlyViews[1])}}, 
-                    {{count($monthlyViews[2])}}, 
-                    {{count($monthlyViews[3])}}, 
-                    {{count($monthlyViews[4])}}, 
-                    {{count($monthlyViews[5])}}, 
-                    {{count($monthlyViews[6])}}, 
-                    {{count($monthlyViews[7])}}, 
-                    {{count($monthlyViews[8])}}, 
-                    {{count($monthlyViews[9])}}, 
-                    {{count($monthlyViews[10])}}, 
-                    {{count($monthlyViews[11])}}, 
-                    {{count($monthlyViews[12])}}
+                    {{ $monthlyViews[1] }}, 
+                    {{ $monthlyViews[2] }}, 
+                    {{ $monthlyViews[3] }}, 
+                    {{ $monthlyViews[4] }}, 
+                    {{ $monthlyViews[5] }}, 
+                    {{ $monthlyViews[6] }}, 
+                    {{ $monthlyViews[7] }}, 
+                    {{ $monthlyViews[8] }}, 
+                    {{ $monthlyViews[9] }}, 
+                    {{ $monthlyViews[10] }}, 
+                    {{ $monthlyViews[11] }}, 
+                    {{ $monthlyViews[12] }}
                 ],
                 backgroundColor: [
                     'rgba(0,0,0,0)'
@@ -90,7 +90,7 @@
             labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
             datasets: [{
                 label: 'Messagges',
-                data: [{{count($monthlyMessages[1])}}, {{count($monthlyMessages[2])}}, {{count($monthlyMessages[3])}}, {{count($monthlyMessages[4])}}, {{count($monthlyMessages[5])}}, {{count($monthlyMessages[6])}}, {{count($monthlyMessages[7])}}, {{count($monthlyMessages[8])}}, {{count($monthlyMessages[9])}}, {{count($monthlyMessages[10])}}, {{count($monthlyMessages[11])}}, {{count($monthlyMessages[12])}}],
+                data: [{{ $monthlyMessages[1] }}, {{ $monthlyMessages[2] }}, {{ $monthlyMessages[3] }}, {{ $monthlyMessages[4] }}, {{ $monthlyMessages[5] }}, {{ $monthlyMessages[6] }}, {{ $monthlyMessages[7] }}, {{ $monthlyMessages[8] }}, {{ $monthlyMessages[9] }}, {{ $monthlyMessages[10] }}, {{ $monthlyMessages[11] }}, {{ $monthlyMessages[12] }}],
                 backgroundColor: [
                     '#ff385c',
                 ],

@@ -29,16 +29,24 @@ class ChartController extends Controller
             $selected_year = Carbon::now()->year; //current year
         }
 
-        // TODO refactor con una sola query usando $place->load()
-
+        $visualisations = $place->visualisations;
+        $messages = $place->messages;
+        
         for ($month = 1; $month <= 12; $month++){
-            $monthlyViews[$month] = $place->monthlyViews($month, $selected_year);
 
-            $ViewsM = Message::whereYear('send_date', $selected_year)
-                ->whereMonth('send_date', $month)
-                ->where('place_id', $place->id)
-                ->get(); 
-            $monthlyMessages[$month] = $ViewsM;    
+            $monthlyViews[$month] = $visualisations->filter(function($vis) use ($selected_year, $month) {
+                $visited = $vis->visit_date;
+                return $visited->year == $selected_year && $visited->month == $month;
+            })->countBy(function($vis) {
+                return $vis->visitor;
+            });
+            dump("views {$month}", $monthlyViews[$month]);
+
+            $monthlyMessages[$month] = $messages->filter(function($mess) use ($selected_year, $month) {
+                $sent = $mess->send_date;
+                return $sent->year == $selected_year && $sent->month == $month;
+            })->count();
+            dump("messages {$month}", $monthlyMessages[$month]);
         }
 
 
@@ -55,17 +63,7 @@ class ChartController extends Controller
         }
 
         // passiamo anche $year per poter visualizzare nella select l'anno selezionato
-        return view('host.places.chart', compact('monthlyViews', 'monthlyMessages', 'place', 'years', 'selected_year'));
-
-        // $place->load(['visualisations', 'messages']);
-        // dump('load vis', $place->visualisations->first(), $place->visualisations->count());
-        // dump('load mess', $place->messages->first(), $place->messages->count());
-
-        // $visual = Visualisation::where('place_id', $place->id)->count();
-        // dump('query vis', $visual);
-        // $mess = Message::where('place_id', $place->id)->count();
-        // dump('query mess', $mess);
-        
+        return view('host.places.chart', compact('monthlyViews', 'monthlyMessages', 'place', 'years', 'selected_year'));   
     }
 
     /**
