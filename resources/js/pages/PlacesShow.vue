@@ -88,12 +88,13 @@ export default {
     Map,
   },
   props: {
-    place: Object,
+    // place: Object,
   },
   data() {
     return {
       amenities: [],
       host: "",
+      place: null,
       place_id: int,
     };
   },
@@ -103,33 +104,33 @@ export default {
       axios.get(`/api/places/${this.$route.params.slug}`).then((res) => {
         const { place } = res.data;
         this.place = place;
-        this.place_id = res.data.place.id;
         this.amenities = res.data.place.amenities;
         this.host = res.data.place.user.name;
+        console.log('host', this.host);
+        console.log('place', this.place);
       });
     },
     //TODO metter il catch error
 
     // axios call, method post, sending ip to visualisation controller
     sendVisualisation() { 
-      axios.post("/api/visualisation/store",{
-        'place_id': this.place_id,
+      axios.post("/api/visualisations/store",{
+        'place_id': this.place.id,
       })
       .then(function (response) {
         console.log('visualizzazioni', response);
       })
-
       console.log('place', this.place_id);
     },
   },
 
   beforeMount() {
     this.fetchPlace();
-    console.log(this.place);
   },
 
   mounted() {
     this.sendVisualisation();
+    console.log('mounted', this.place_id);
   },
 }
 </script>

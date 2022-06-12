@@ -17,7 +17,7 @@ const routes = [
     path: '/places_show/:slug',
     name: 'places.show',
     component: PlacesShow,
-    props: true,
+    // props: true,
   },
   {
     path: '/advanced_search/:address',
