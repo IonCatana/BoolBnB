@@ -28,7 +28,7 @@ class ChartController extends Controller
         } else {
             $selected_year = Carbon::now()->year; //current year
         }
-
+        
         // TODO refactor con una sola query usando $place->load()
 
         for ($month = 1; $month <= 12; $month++){
