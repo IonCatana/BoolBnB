@@ -57,7 +57,7 @@
         .place-img {
             padding: 15px;
             border-radius: 20px;
-            height: 100%;
+            height: 220px;
             object-fit: cover;
         }
     }
