@@ -16,11 +16,14 @@
         </figure>
 
         <div class="card-body py-0 pb-5">
-            <h5 class="card-title mb-2">{{ place.title }}</h5>
-            <p class="card-text mb-2">{{ place.address }}</p>
-            <div class="d-flex mb-4 justify-content-center">
-                <span class="card-text mr-2 text-dark" v-for="amenity in place.amenities" :key="amenity.id"><i :class="amenity.icon"></i></span>
+            <div class="card-text-wrapper">
+                <h5 class="card-title mb-2">{{ place.title }}</h5>
+                <p class="card-text mb-2">{{ place.address }}</p>
+                <div class="d-flex mb-4 justify-content-center">
+                    <span class="card-text mr-2 text-dark" v-for="amenity in place.amenities" :key="amenity.id"><i :class="amenity.icon"></i></span>
+                </div>
             </div>
+
             <div class="text-center">
                 <router-link :to="{ name:'places.show', params:{ slug: place.slug, place } }" class="detail">Show this place!</router-link>
             </div>
@@ -60,11 +63,20 @@
     }
 
     .card-body{
-        position: relative;
-        
-        .card-text{
-            color: gray;
+        // position: relative;
+        // height: 40%;
+        // border: 1px solid red;
+
+        .card-text-wrapper{
+            // border: 1px solid blue;
+            height: 80%;
+            margin-bottom: 20px;
+
+            .card-text{
+                color: gray;
+            }
         }
+        
 
         .detail{
             border: none;
@@ -72,10 +84,6 @@
             color: $boolean-blue;
             padding: 8px 10px;
             transition: 200ms;
-            position: absolute;
-            bottom: 8%; 
-            left: 50%; 
-            transform: translate( -50%);
 
             &:hover{
                 color: $boolean-green;
