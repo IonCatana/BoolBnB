@@ -1,5 +1,5 @@
 <template>
-    <div class="card mx-2 mb-4" style="width: 19rem;">
+    <div class="card mx-2 mb-4 mt-4" style="width: 19rem;">
         <figure class="img-wrapper mb-0">
             <img
             v-if="place.img == null"
