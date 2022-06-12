@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Message;
 use App\Place;
+use Carbon\Carbon;
 
 class MessageController extends Controller
 {
@@ -64,7 +65,7 @@ class MessageController extends Controller
         $new_msg = new Message();
 
         $new_msg->fill($data);       
-        
+        $new_msg->send_date = Carbon::now();
         $new_msg->save();
 
         return response()->json([
