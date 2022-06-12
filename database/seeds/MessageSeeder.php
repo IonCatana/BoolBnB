@@ -17,7 +17,7 @@ class MessageSeeder extends Seeder
         $places = Place::all();
         $place_ids = $places->pluck('id')->all();
 
-        for ($i = 0; $i < 2000; $i++) {
+        for ($i = 0; $i < 8000; $i++) {
             $new_message = new Message();
 
             $new_message->place_id = $faker->randomElement($place_ids);
