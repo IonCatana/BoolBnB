@@ -1,6 +1,6 @@
 <template>
     <div class="footbar position-fixed fixed-bottom">
-        <div class="container d-flex justify-content-between p-3">
+        <div class="container d-flex justify-content-between p-2">
             <span>© 2022 BoolBnB by TEAM7 Inc.</span>
             
             <span><a class="text-dark" href="#">

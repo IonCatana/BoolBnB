@@ -1,5 +1,5 @@
 <template>
-    <div class="card-wrapper d-flex flex-wrap justify-content-center pb-5">
+    <div class="card-wrapper d-flex flex-wrap justify-content-center pb-4">
         <PlacesCard tag="div" v-for="place in places" :key="place.id" :place="place"/>
     </div>
 </template>
