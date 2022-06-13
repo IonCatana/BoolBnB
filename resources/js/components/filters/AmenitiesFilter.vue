@@ -27,7 +27,6 @@
 
         methods: {
             returnValue: function() {
-                console.log('checked', this.checkedAmenities);
                 this.$emit('pick-filter', this.checkedAmenities);
             },
 

@@ -105,16 +105,12 @@
       </div>
     </div>
 
-    <div
-      v-if="!loading"
-      class="card-wrapper d-flex flex-wrap justify-content-center"
-    >
-      <PlacesCard
-        tag="div"
-        v-for="place in places"
-        :key="place.id"
-        :place="place"
-      />
+    <div v-if="loading">
+      <!-- TODO loader -->
+      Loading...
+    </div>
+    <div v-else class="card-wrapper d-flex flex-wrap justify-content-center">
+      <places-card tag="div" v-for="place in places" :key="place.id" :place="place"/>
     </div>
   </div>
 </template>
@@ -134,6 +130,11 @@ export default {
     PlacesCard,
   },
 
+  props: {
+    lat: Number,
+    lon: Number,
+  },
+
   data() {
     return {
       amenities: [],
@@ -144,26 +145,24 @@ export default {
 
       // i filtri, per popolare la query
       activeFilters: new Map(),
-      checkedAmenities: [],
 
       // la risposta del server alla chiamata api/search_area
       // TODO se places è vuoto: recupera query da $route e rifai chiamata -> watch: places????
-      places: [],
+      places: null,
       loading: false,
     };
   },
 
+  created() {
+    this.fetchAmenities();
+    this.fetchPlaces();
+  },
+
   watch: {
-    activeFilters: {
-      handler(newValue, oldValue) {
-        console.log(newValue, oldValue);
-        // this.updateQuery(newValue);
-      },
-      deep: true,
+    $route() {
+      console.log(this.params)
+      this.fetchPlaces();
     }
-  //   $route(to, from) {
-  //     this.queryDatabase();
-  //   }
   },
 
   methods: {
@@ -173,81 +172,72 @@ export default {
       });
     },
 
-    // warning: function () {
-    //   if (this.value > 1) {
-    //     return {
-    //       color: "#e74c3c",
-    //       animation: "anim .3s ease-in 1 alternate",
-    //     };
-    //   }
-    // },
-
     selectItem: function (i) {
       this.activeItem = i;
     },
 
-    queryDatabase() {
-      this.params = this.prepareDBCall();
-      console.log('this params', this.params)
+    fetchPlaces() {
+      this.prepareParams();
+      console.log('params', this.params)
+
+      this.places = null;
+      this.loading = true;
 
       axios
         .get("/api/search_area", { params: this.params })
         .then((res) => {
-          this.loading = true;
           this.places = res.data.places;
+          console.log('places', this.places);
           this.loading = false;
-
-          console.log("data", res);
-          console.log("places", this.places);
-          console.log("route", this.$route);
         })
         .catch((err) => {
           console.warn(err);
         });
     },
 
-    prepareDBCall() {
-      const { lat, lon } = this.$route.params.result.position;
+    prepareParams() {   
+      this.params = null;
       
-      let filters;
+      let lat = this.lat;
+      let lon = this.lon;
+
+      // check url query if not found
+      if (!this.lat) {
+        lat = this.$route.query.lat;
+        lon = this.$route.query.lon;
+        console.log(lat, lon)
+      }
+
+      let filters = {};
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
-  
-      const params = { lat, lon,
-       ...filters
-       };
-      return params;
+
+      // check url query if not found
+      if (Object.keys(filters).length === 0) {
+        const array = Object.entries(this.$route.query);
+
+        const amenititesAsArray = array.filter(([key, value]) => {
+          return key === 'amenities'
+        });
+        console.log('am as arr', amenititesAsArray)
+
+        let filtersAsArray = array.filter(([key, value]) => {
+          console.table('keys', key, value)
+          return key !== 'lat' && key !== 'lon' && key !== 'amenities';
+        });
+
+        filters = Object.fromEntries(filtersAsArray);
+        console.log('filters', filters)
+
+      }
+      this.params = { lat, lon, ...filters };
+      console.log('post', this.params)
     },
 
     updateUrl() {
       let filters;
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
 
-      this.$router.replace( { query: { ...filters } });
-
-        // console.log('filters', this.activeFilters)
-        // console.log('query', this.query)
-    },
-
-    composeAddress(address) {
-      let {
-        freeformAddress,
-        countrySubdivision,
-        countrySecondarySubdivision,
-        country,
-        municipality,
-      } = address;
-      let str = "";
-
-      if (freeformAddress != null) str += freeformAddress;
-      if (countrySubdivision != null) str += ", " + countrySubdivision;
-      if (
-        countrySecondarySubdivision != null &&
-        countrySecondarySubdivision !== municipality
-      )
-        str += ", " + countrySecondarySubdivision;
-      if (country != null) str += ", " + country;
-
-      return str;
+      this.$router.replace({ params: { lat: this.lat, lon: this.lon }, query: { lat: this.lat, lon: this.lon, ...filters } });
     },
 
     addFilter(filter) {
@@ -263,11 +253,6 @@ export default {
       if (array.length === 0) this.activeFilters.delete('amenities');
       this.activeFilters.set('amenities', array);
     },
-  },
-
-  beforeMount() {
-    this.fetchAmenities();
-    this.queryDatabase();
   },
 };
 // Slider Range Km

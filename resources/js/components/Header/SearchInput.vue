@@ -43,7 +43,6 @@ export default {
       searchResults: [],
       visible: true,
       // TODO da vedere
-      choise: '',
       params: null,
     };
   },
@@ -97,16 +96,24 @@ export default {
     },
 
     navigateToAdvancedSearch(r) {
+      const { lat, lon } = r.position;
 
       this.params = {
-        result: r,
+        lat, 
+        lon,
         address: this.slugify(r.address.freeformAddress)
       };
 
       this.$router.push({ 
         name: 'places.advanced.search', 
         params: this.params, 
-        })
+      });
+      // TODO alternativa da provare
+      // this.$router.push({ 
+      //   name: 'places.advanced.search', 
+      //   params: { address: this.slugify(r.address.freeformAddress) },
+      //   query: { lat, lon }
+      // });
     },
   },
 };
