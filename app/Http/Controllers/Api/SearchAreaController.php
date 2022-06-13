@@ -17,7 +17,7 @@ class SearchAreaController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // dd($request->query());
+        // dd($address);
         $filters = $request->query();
         $lat = Arr::pull($filters, 'lat');
         $lon = Arr::pull($filters, 'lon');

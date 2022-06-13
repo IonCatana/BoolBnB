@@ -93,8 +93,8 @@
                 <button
                   type="button"
                   class="save-changes btn btn-primary"
-                  @click="queryDatabase"
                   data-dismiss="modal"
+                  @click="updateUrl"
                 >
                   Save changes
                 </button>
@@ -140,6 +140,8 @@ export default {
       // value: "0",
       activeItem: null,
 
+      params: null,
+
       // i filtri, per popolare la query
       activeFilters: new Map(),
       checkedAmenities: [],
@@ -151,11 +153,18 @@ export default {
     };
   },
 
-  // watch: {
+  watch: {
+    activeFilters: {
+      handler(newValue, oldValue) {
+        console.log(newValue, oldValue);
+        // this.updateQuery(newValue);
+      },
+      deep: true,
+    }
   //   $route(to, from) {
   //     this.queryDatabase();
   //   }
-  // },
+  },
 
   methods: {
     fetchAmenities() {
@@ -178,11 +187,11 @@ export default {
     },
 
     queryDatabase() {
-      // this.updateRoute();
-      const params = this.prepareParams();
+      this.params = this.prepareDBCall();
+      console.log('this params', this.params)
 
       axios
-        .get("/api/search_area", { params })
+        .get("/api/search_area", { params: this.params })
         .then((res) => {
           this.loading = true;
           this.places = res.data.places;
@@ -197,35 +206,26 @@ export default {
         });
     },
 
-    prepareParams() {
+    prepareDBCall() {
       const { lat, lon } = this.$route.params.result.position;
       
-      let filters, amenities;
+      let filters;
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
-
-      const params = { lat, lon, ...filters};
-      console.log('params', params)
+  
+      const params = { lat, lon,
+       ...filters
+       };
       return params;
     },
 
-    // prepareQuery() {
+    updateUrl() {
+      let filters;
+      if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
 
-    // },
+      this.$router.replace( { query: { ...filters } });
 
-    updateRoute() {
-      if (!_.isEmpty(this.activeFilters)) {
-        this.activeFilters.forEach((value, filter) => {
-          if (filter === "amenities") {
-            value.forEach((amenityId, index) => {
-              this.query.set(`amenity[${index}]`, amenityId);
-            });
-          } else {
-            this.query.set(filter, value);
-          }
-        });
-      }
-      // console.log('filters', this.activeFilters)
-      // console.log('query', this.query)
+        // console.log('filters', this.activeFilters)
+        // console.log('query', this.query)
     },
 
     composeAddress(address) {
