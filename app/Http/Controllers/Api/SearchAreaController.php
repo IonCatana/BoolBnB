@@ -62,15 +62,14 @@ class SearchAreaController extends Controller
             });
         }
 
+        // TODO ottimizzare
         // riordiniamo le places secondo la distanza dal punto
-        $sorted = $places->mapToGroups(function($place) use ($lat, $lon, $range) {
-            return [$place->inArea($lat, $lon, $range) => $place];
-        })->all();
-
-        uksort($sorted, function($a, $b) {
-            return $a - $b;
-        });
-        // dd($sorted, $filters);
+        $places = $places->mapWithKeys(function($place) use ($lat, $lon, $range) {
+            $distance = $place->inArea($lat, $lon, $range);
+            if ($place->activeSponsorship() == null) $distance += 30000; // max-range
+            return [$distance => $place->title];
+        })->sortKeys()
+        ->values();
 
         return response()->json([
             'success' => true,
