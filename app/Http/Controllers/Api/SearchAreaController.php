@@ -67,7 +67,7 @@ class SearchAreaController extends Controller
         $places = $places->mapWithKeys(function($place) use ($lat, $lon, $range) {
             $distance = $place->inArea($lat, $lon, $range);
             if ($place->activeSponsorship() == null) $distance += 30000; // max-range
-            return [$distance => $place->title];
+            return [$distance => $place];
         })->sortKeys()
         ->values();
 
