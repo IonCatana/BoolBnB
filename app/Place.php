@@ -106,12 +106,13 @@ class Place extends Model
     }
 
     /**
-     * Retreives the model instance of the active sponsorship or null of $place isn't currently sponsored
+     * Retreives the model instance of the active sponsorship or null if $place isn't currently sponsored
      */
     public function activeSponsorship() {
         if ($this->sponsorships->isEmpty()) return null;
 
         // find active sponsorship
+        $active_spons = null;
         $active_spons = $this->sponsorships->first(function($spons) {
             return $spons->isActive();
         });
