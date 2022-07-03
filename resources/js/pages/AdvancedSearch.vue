@@ -131,8 +131,8 @@ export default {
   },
 
   props: {
-    lat: Number,
-    lon: Number,
+    // lat: Number,
+    // lon: Number,
   },
 
   data() {
@@ -160,7 +160,6 @@ export default {
 
   watch: {
     $route() {
-      console.log(this.params)
       this.fetchPlaces();
     }
   },
@@ -196,48 +195,38 @@ export default {
     },
 
     prepareParams() {   
+      // gets all params from url
       this.params = null;
       
-      let lat = this.lat;
-      let lon = this.lon;
+      const queryParams = new URLSearchParams(this.$route.query);
 
-      // check url query if not found
-      if (!this.lat) {
-        lat = this.$route.query.lat;
-        lon = this.$route.query.lon;
-        console.log(lat, lon)
+      const lat = queryParams.get('lat');
+      const lon = queryParams.get('lon');
+      console.log('coord', lat, lon)
+
+      // get filters from url instead of thios.activeFilters
+      const filters = {}
+
+      const filtersAsArray = [];
+      for (const entry of queryParams) {
+        if (entry[0] !== 'lat' && entry[0] !== 'lon') filters[entry[0]] = entry[1];
       }
-
-      let filters = {};
-      if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
-
-      // check url query if not found
-      if (Object.keys(filters).length === 0) {
-        const array = Object.entries(this.$route.query);
-
-        const amenititesAsArray = array.filter(([key, value]) => {
-          return key === 'amenities'
-        });
-        console.log('am as arr', amenititesAsArray)
-
-        let filtersAsArray = array.filter(([key, value]) => {
-          console.table('keys', key, value)
-          return key !== 'lat' && key !== 'lon' && key !== 'amenities';
-        });
-
-        filters = Object.fromEntries(filtersAsArray);
-        console.log('filters', filters)
-
-      }
+      // filters = Object.fromEntries(filtersAsArray);
+      console.log('filters',filters)
+      
       this.params = { lat, lon, ...filters };
-      console.log('post', this.params)
     },
 
     updateUrl() {
+      const oldQuery = new URLSearchParams(this.$route.query);
+
+      const lat = oldQuery.get('lat');
+      const lon = oldQuery.get('lon');
+
       let filters;
       if (this.activeFilters.size !== 0) filters = Object.fromEntries(this.activeFilters);
 
-      this.$router.replace({ params: { lat: this.lat, lon: this.lon }, query: { lat: this.lat, lon: this.lon, ...filters } });
+      this.$router.replace({ query: { lat, lon, ...filters } });
     },
 
     addFilter(filter) {

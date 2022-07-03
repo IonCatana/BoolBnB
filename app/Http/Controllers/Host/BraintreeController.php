@@ -25,6 +25,7 @@ class BraintreeController extends Controller
             'privateKey' => env("BRAINTREE_PRIVATE_KEY")
         ]);
 
+        // qui entra la seconda volta, quando ha gia il token
         if($request->has('nonce')){
             // se l'utente sta pagando entra qui
             $nonceFromTheClient = $request->input('nonce');
@@ -47,6 +48,7 @@ class BraintreeController extends Controller
                 'end_time' => Carbon::now()->addHours($chosen_sponsorship->duration)
             ]);
 
+            // TODO payment success view
             return redirect()->route('host.places.index');
         }
 

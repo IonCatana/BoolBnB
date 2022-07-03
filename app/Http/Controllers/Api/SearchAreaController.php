@@ -23,6 +23,7 @@ class SearchAreaController extends Controller
         define('MAX_RANGE', 30000); // metri
 
         $filters = $request->query();
+        dump($filters);
         $lat = Arr::pull($filters, 'lat');
         $lon = Arr::pull($filters, 'lon');
         $amenities = Arr::pull($filters, 'amenities');
@@ -46,7 +47,7 @@ class SearchAreaController extends Controller
                 });
             }
         }
-        
+
         // filter by selected amenities
         if (!empty($amenities)) {
             $places = $places->filter(function($place) use ($amenities) {
@@ -61,8 +62,8 @@ class SearchAreaController extends Controller
             });
         }
 
-        // TODO ottimizzare
         // riordiniamo le places secondo la distanza dal punto
+        // TODO commentare bene
         $places = $places->mapWithKeys(function($place) use ($lat, $lon, $range) {
             $distance = $place->inArea($lat, $lon, $range);
             if ($place->activeSponsorship() == null) $distance += MAX_RANGE; // max-range

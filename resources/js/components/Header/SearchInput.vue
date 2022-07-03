@@ -1,5 +1,6 @@
 <template>
   <div class="search-wrapper form-inline d-flex">
+    <!-- @change ?? -->
     <input
       id="searchbox"
       class="border-0 form-control mr-sm-2"
@@ -104,16 +105,16 @@ export default {
         address: this.slugify(r.address.freeformAddress)
       };
 
-      this.$router.push({ 
-        name: 'places.advanced.search', 
-        params: this.params, 
-      });
-      // TODO alternativa da provare
       // this.$router.push({ 
       //   name: 'places.advanced.search', 
-      //   params: { address: this.slugify(r.address.freeformAddress) },
-      //   query: { lat, lon }
+      //   params: this.params, 
       // });
+      // TODO alternativa da provare
+      this.$router.push({ 
+        name: 'places.advanced.search', 
+        params: { address: this.slugify(r.address.freeformAddress) },
+        query: { lat, lon }
+      });
     },
   },
 };

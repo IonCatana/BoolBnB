@@ -25,7 +25,7 @@ class ChartController extends Controller
         if ($request->has('year')) {
             $selected_year = $request->input('year');
         } else {
-            $selected_year = $current_year; //current year
+            $selected_year = $current_year; 
         }
 
         // contiamo per ogni mese
@@ -58,8 +58,6 @@ class ChartController extends Controller
             $oldest_visualisation = Visualisation::where('place_id', $place->id)
                 ->oldest('visit_date')
                 ->first();
-            // dump($visualisations);
-            // dd('oldest', $oldest_visualisation);
 
             // componiamo l'array degli anni
             $year_one = $oldest_visualisation->visit_date->year;
